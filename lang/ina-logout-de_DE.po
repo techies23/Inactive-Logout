@@ -1,0 +1,144 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Inactive Logout\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Tue Jan 17 2017 15:34:56 GMT+0545 (NPT)\n"
+"PO-Revision-Date: Tue Jan 17 2017 15:40:45 GMT+0545 (NPT)\n"
+"Last-Translator: admin <dpen.connectify@gmail.com>\n"
+"Language-Team: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
+"Language: German\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Loco-Target-Locale: de_DE\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Poedit-SearchPath-0: .."
+
+#: ../views/tpl-inactive-logout-dialog.php:13
+#: ../views/tpl-inactive-logout-dialog.
+msgid "Continue"
+msgstr "Fortsetzen"
+
+#: ../views/tpl-inactive-logout-dialog.php:21
+msgid "Session Timeout"
+msgstr "Session-Timeout"
+
+#: ../views/tpl-inactive-logout-settings.php:2
+#: ../src/inactive-logout-admin-views.
+msgid "Inactive User Logout Settings"
+msgstr "Inaktive Benutzer-Abmeldeeinstellungen"
+
+#: ../views/tpl-inactive-logout-settings.php:4
+msgid "Updated !"
+msgstr "Aktualisiert !"
+
+#: ../views/tpl-inactive-logout-settings.php:4
+msgid "Dismiss this notice."
+msgstr "Ignoriere die Nachricht."
+
+#: ../views/tpl-inactive-logout-settings.php:11
+msgid "Idle Timeout"
+msgstr "Leerlaufzeitüberschreitung"
+
+#: ../views/tpl-inactive-logout-settings.php:14
+msgid "Minute(s)"
+msgstr "Minute"
+
+#: ../views/tpl-inactive-logout-settings.php:18
+msgid "Idle Message Content"
+msgstr "Leerlauf-Nachrichteninhalt"
+
+#: ../views/tpl-inactive-logout-settings.php:30
+msgid "Message to be shown when idle timeout screen shows."
+msgstr "Diese Meldung wird angezeigt, wenn die Leerlaufzeitanzeige angezeigt wird."
+
+#: ../views/tpl-inactive-logout-settings.php:34
+msgid "Disable Timeout Countdown"
+msgstr "Timeout-Countdown deaktivieren"
+
+#: ../views/tpl-inactive-logout-settings.php:37
+msgid ""
+"When timeout popup is shown user is not logged out instantly. It gives user "
+"a chance to keep using or logout for 10 seconds. Remove this feature and "
+"directly log out after inactive."
+msgstr ""
+"Wenn das Zeitlimit-Popup angezeigt wird, wird der Benutzer nicht sofort "
+"abgemeldet. Es gibt Benutzer eine Wahrscheinlichkeit, Gebrauch oder "
+"Abmeldung für 10 Sekunden zu halten. Entfernen Sie diese Funktion und melden "
+"Sie sich nach dem Neustart automatisch ab."
+
+#: ../views/tpl-inactive-logout-settings.php:41
+msgid "Show Warn Message Only"
+msgstr "Nur Warnmeldung anzeigen"
+
+#: ../views/tpl-inactive-logout-settings.php:44
+msgid "Will show warn message without logout url but user will not log out."
+msgstr ""
+"Wird eine Warnmeldung ohne Abmeldung anzeigen, aber der Benutzer wird sich "
+"nicht abmelden."
+
+#: ../views/tpl-inactive-logout-settings.php:48
+msgid "Warn Message Content"
+msgstr "Warnmeldung Inhalt"
+
+#: ../views/tpl-inactive-logout-settings.php:60
+msgid ""
+"Use {wakup_timout} to show minutes. This is message that will be shown when "
+"inactive."
+msgstr ""
+"Verwenden Sie {wakup_timout}, um die Minuten anzuzeigen. Dies ist eine "
+"Nachricht, die bei Inaktivität angezeigt wird."
+
+#: ../views/tpl-inactive-logout-settings.php:65
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#. Name of the plugin
+msgid "Inactive Logout"
+msgstr "Inaktive Abmeldung"
+
+#. URI of the plugin
+msgid "http://www.deepenbajracharya.com.np"
+msgstr "http://www.deepenbajracharya.com.np"
+
+#. Description of the plugin
+msgid ""
+"Inactive logout provides functionality to log out any idle users defined "
+"specified time showing a message. Works for frontend as well."
+msgstr ""
+"Inaktive Abmeldung bietet Funktionalität zum Abmelden von Leerlauf-Benutzer "
+"definierten Zeit mit einer Nachricht. Funktioniert auch für Frontend."
+
+#. Author of the plugin
+msgid "Deepen Bajracharya"
+msgstr "Deepen Bajracharya"
+
+#: ../src/inactive-logout-functions.php:43
+msgid "You have been logged out because of inactivity."
+msgstr "Sie wurden aufgrund von Inaktivität abgemeldet."
+
+#: ../src/inactive-logout-main.php:182
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
+"your WordPress install."
+msgstr ""
+"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
+"your WordPress install."
+
+#: ../src/inactive-logout-main.php:186
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
+"about moving you to a newer version of PHP."
+msgstr ""
+"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
+"about moving you to a newer version of PHP."

@@ -1,0 +1,63 @@
+/* The Modal (background) */
+.ina-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 99999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.ina-modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* The Close Button */
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 16px;
+}
+
+.ina-modal-header {
+    padding: 22px 22px 0px 16px;
+}
+.ina-modal-header h3 { margin:0px;padding-bottom: 10px;border-bottom: 1px solid #eee; }
+.ina-modal-body {padding: 2px 16px;}
+.ina-modal-body p {margin: 10px 0px;}
+.ina_stay_logged_in {
+    padding: 10px;
+    background: #008ec2;
+    border-color: #006799;
+    color: #fff;
+}
+.btn-timeout {
+    padding: 10px;
+    background: #008ec2;
+    border-color: #006799;
+    color: #fff;
+}
+.ina_stay_logged_in:hover {
+    color: #fff;
+}
+.ina-btn-container {
+    padding: 10px 0px;
+}
+.ina-wakeup h3{
+    margin:0px;padding-bottom: 10px;border-bottom: 1px solid #eee; font-size: 26px;padding-top: 26px;
+}
