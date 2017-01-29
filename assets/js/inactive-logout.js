@@ -54,6 +54,23 @@ function showTimeoutMessage() {
   var ina_disable_countdown = jQuery('meta[name=ina_disable_countdown]').attr('content');
   var ina_warn_message_enabled = jQuery('meta[name=ina_warn_message_enabled]').attr('content');
   jQuery(function($) {
+    document.onkeydown = function (evt) {
+      var keycode = evt.charCode || evt.keyCode;
+      //Disable all keys except F5
+      if(keycode != 116) return false;
+    }
+
+    //Disable Right Click
+    window.oncontextmenu = function () {
+      return false;
+    }
+
+    var ina_popup_bg_enalbed = $('.ina_popup_bg').data('bgenabled');
+    if( ina_popup_bg_enalbed ) {
+      var ina_popup_bg = $('.ina_popup_bg').data('bg');
+      $('#ina_logout_message_box').css('background', ina_popup_bg);
+    }
+
     messageBox = 1;
     if( ina_warn_message_enabled ) {
       //Only show message
@@ -92,6 +109,8 @@ function showTimeoutMessage() {
       }, 1000);
 
       $('.ina_stay_logged_in').click(function() {
+        document.onkeydown = function (evt) { return true; }
+        window.oncontextmenu = null;
         clearTimeout(setting_countdown);
         countdown = 10;
         messageBox = 0;
@@ -99,8 +118,6 @@ function showTimeoutMessage() {
         $('.ina_countdown').text('');
       });
     }
-
-    
   });
 }
 
@@ -110,19 +127,3 @@ function showTimeoutMessage() {
 function goActive() {
   startTimer();
 }
-
-jQuery(function($) {
-  if( $('#ina_show_warn_message_only').is(":checked") ) {
-    $('.show_on_warn_message_enabled').show();
-  } else {
-    $('.show_on_warn_message_enabled').hide();
-  }
-
-  $('#ina_show_warn_message_only').click(function() {
-    if( $( this ).prop( "checked" )) {
-      $('.show_on_warn_message_enabled').show();
-    } else {
-      $('.show_on_warn_message_enabled').hide();
-    }
-  });
-});

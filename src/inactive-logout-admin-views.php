@@ -43,6 +43,13 @@ class Inactive__Logout_adminViews {
 			$idle_disable_countdown = filter_input(INPUT_POST, 'idle_disable_countdown', FILTER_SANITIZE_NUMBER_INT);
 			$ina_show_warn_message_only = filter_input(INPUT_POST, 'ina_show_warn_message_only', FILTER_SANITIZE_NUMBER_INT);
 			$ina_show_warn_message = wp_kses_post( filter_input(INPUT_POST, 'ina_show_warn_message') );
+			$ina_disable_multiple_login = filter_input(INPUT_POST, 'ina_disable_multiple_login', FILTER_SANITIZE_NUMBER_INT);
+
+			$ina_background_popup = trim( filter_input( INPUT_POST, 'ina_color_picker' ) );
+			$ina_background_popup = strip_tags( stripslashes( $ina_background_popup ) );
+
+			$ina_full_overlay = filter_input(INPUT_POST, 'ina_full_overlay', FILTER_SANITIZE_NUMBER_INT);
+
 			$save_minutes = $idle_timeout * 60; //Minutes
 			if($idle_timeout) {
 				update_option( '__ina_logout_time', $save_minutes );
@@ -50,9 +57,11 @@ class Inactive__Logout_adminViews {
 				update_option( '__ina_disable_countdown', $idle_disable_countdown );
 				update_option( '__ina_warn_message_enabled', $ina_show_warn_message_only );
 				update_option( '__ina_warn_message', $ina_show_warn_message );
+				update_option( '__ina_concurrent_login', $ina_disable_multiple_login );
+				update_option( '__ina_full_overlay', $ina_full_overlay );
+				update_option( '__ina_popup_overlay_color', $ina_background_popup );
 
 				$saved = true;
-
 				$helper = Inactive__logout__Helpers::instance();
 				$helper->ina_reload();
 			}
@@ -61,6 +70,14 @@ class Inactive__Logout_adminViews {
 		$time = get_option( '__ina_logout_time' );
 		$countdown_enable = get_option( '__ina_disable_countdown' );
 		$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' );
+		$ina_concurrent = get_option( '__ina_concurrent_login' );
+		$ina_full_overlay = get_option( '__ina_full_overlay' );
+		$ina_popup_overlay_color = get_option( '__ina_popup_overlay_color' );
+
+		// Css rules for Color Picker
+		wp_enqueue_style( 'wp-color-picker' );
+
+		//Include Template
 		require_once INACTIVE_LOGOUT_VIEWS . '/tpl-inactive-logout-settings.php';
 	}
 

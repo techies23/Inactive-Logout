@@ -3,10 +3,10 @@ msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Tue Jan 17 2017 15:34:56 GMT+0545 (NPT)\n"
-"PO-Revision-Date: Sun Jan 29 2017 16:01:24 GMT+0545 (NPT)\n"
-"Last-Translator: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
+"PO-Revision-Date: Sun Jan 29 2017 16:01:04 GMT+0545 (NPT)\n"
+"Last-Translator: Björn Granberg <write@maskinmedia.se>\n"
 "Language-Team: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
-"Language: English\n"
+"Language: Swedish\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +18,7 @@ msgstr ""
 "_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
-"X-Loco-Target-Locale: en_US\n"
+"X-Loco-Target-Locale: sv_SE\n"
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Poedit-SearchPath-0: .."
 
@@ -31,6 +31,8 @@ msgid ""
 "Choose a background color to hide after logout. Enabling this option will "
 "remove tranparency."
 msgstr ""
+"Välj en bakgrundsfärg för att dölja efter utloggning. Aktiverar det här "
+"alternativet tar bort öppenhet."
 
 #: ../views/tpl-inactive-logout-settings.php:41
 msgid "Popup Background Color"
@@ -38,57 +40,57 @@ msgstr ""
 
 #: ../views/tpl-inactive-logout-settings.php:44
 msgid "Choose a popup background color."
-msgstr ""
+msgstr "Välj en popup bakgrundsfärg ."
 
 #: ../views/tpl-inactive-logout-settings.php:78
 msgid "Disable Concurrent Logins"
-msgstr ""
+msgstr "Inaktivera Samtidiga inloggningar"
 
 #: ../views/tpl-inactive-logout-settings.php:81
 msgid "This will unable user to login using same account in different places."
-msgstr ""
+msgstr "Detta kommer inte användaren att logga in med samma konto på olika platser."
 
 #: ../views/tpl-inactive-logout-dialog.php:18 ../views/tpl-inactive-logout-dialog.
 #: php:31
 msgid "Continue"
-msgstr "Continue"
+msgstr "Fortsätt"
 
 #: ../views/tpl-inactive-logout-dialog.php:26
 msgid "Session Timeout"
-msgstr "Session Timeout"
+msgstr "Systemmeddelande"
 
 #: ../views/tpl-inactive-logout-settings.php:2 ../src/inactive-logout-admin-views.
 #: php:24
 msgid "Inactive User Logout Settings"
-msgstr "Inactive User Logout Settings"
+msgstr "Inactive Logout inställningar"
 
 #: ../views/tpl-inactive-logout-settings.php:4
 msgid "Updated !"
-msgstr "Updated !"
+msgstr "Uppdaterad !"
 
 #: ../views/tpl-inactive-logout-settings.php:4
 msgid "Dismiss this notice."
-msgstr "Dismiss this notice."
+msgstr "Avfärda denna notis."
 
 #: ../views/tpl-inactive-logout-settings.php:11
 msgid "Idle Timeout"
-msgstr "Idle Timeout"
+msgstr "Logga ut inaktiv efter"
 
 #: ../views/tpl-inactive-logout-settings.php:14
 msgid "Minute(s)"
-msgstr "Minute(s)"
+msgstr "Minut(er)"
 
 #: ../views/tpl-inactive-logout-settings.php:18
 msgid "Idle Message Content"
-msgstr "Idle Message Content"
+msgstr "Meddelande vid inaktivitet"
 
 #: ../views/tpl-inactive-logout-settings.php:30
 msgid "Message to be shown when idle timeout screen shows."
-msgstr "Message to be shown when idle timeout screen shows."
+msgstr "Meddelande som visas i timeout-popup."
 
 #: ../views/tpl-inactive-logout-settings.php:48
 msgid "Disable Timeout Countdown"
-msgstr "Disable Timeout Countdown"
+msgstr "Inaktivera nedräkning"
 
 #: ../views/tpl-inactive-logout-settings.php:51
 msgid ""
@@ -96,33 +98,36 @@ msgid ""
 "a chance to keep using or logout for 10 seconds. Remove this feature and "
 "directly log out after inactive."
 msgstr ""
-"When timeout popup is shown user is not logged out instantly. It gives user "
-"a chance to keep using or logout for 10 seconds. Remove this feature and "
-"directly log out after inactive."
+"När timeout-popup visas fortsätter användaren vara inloggad. Det ger "
+"användaren möjlighet att fortsätta vara aktiv eller logga ut i tio sekunder. "
+"Avaktivera denna funktion för att logga ut direkt när perioden för "
+"inaktivitet passerats."
 
 #: ../views/tpl-inactive-logout-settings.php:55
 msgid "Show Warn Message Only"
-msgstr "Show Warn Message Only"
+msgstr "Visa enbart varningsmeddelande"
 
 #: ../views/tpl-inactive-logout-settings.php:58
 msgid "Will show warn message without logout url but user will not log out."
-msgstr "Will show warn message without logout url but user will not log out."
+msgstr ""
+"Visar varningsmeddelande utan uttloggningslänk. Användaren kommer inte att "
+"loggas ut."
 
 #: ../views/tpl-inactive-logout-settings.php:62
 msgid "Warn Message Content"
-msgstr "Warn Message Content"
+msgstr "Varningsmeddelandets innehåll"
 
 #: ../views/tpl-inactive-logout-settings.php:74
 msgid ""
 "Use {wakup_timout} to show minutes. This is message that will be shown when "
 "inactive."
 msgstr ""
-"Use {wakup_timout} to show minutes. This is message that will be shown when "
-"inactive."
+"Använd {wakup_timout} för att visa minuter. Detta meddelande visas vid "
+"inaktivitet."
 
 #: ../views/tpl-inactive-logout-settings.php:86
 msgid "Save Changes"
-msgstr "Save Changes"
+msgstr "Spara ändringar"
 
 #. Name of the plugin
 msgid "Inactive Logout"
@@ -137,8 +142,9 @@ msgid ""
 "Inactive logout provides functionality to log out any idle users defined "
 "specified time showing a message. Works for frontend as well."
 msgstr ""
-"Inactive logout provides functionality to log out any idle users defined "
-"specified time showing a message. Works for frontend as well."
+"Inactive logout gör det möjligt att automatisk logga ut passiva användare "
+"efter en viss tid. innan utloggning visas ett varningsmeddelande. Fungerar "
+"för både fram- och baksida."
 
 #. Author of the plugin
 msgid "Deepen Bajracharya"
@@ -146,7 +152,7 @@ msgstr "Deepen Bajracharya"
 
 #: ../src/inactive-logout-functions.php:43
 msgid "You have been logged out because of inactivity."
-msgstr "You have been logged out because of inactivity."
+msgstr "Din session har gått ut. Logga in för att fortsätta där du slutade."
 
 #: ../src/inactive-logout-main.php:197
 #, php-format
@@ -154,8 +160,8 @@ msgid ""
 "Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
 "your WordPress install."
 msgstr ""
-"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
-"your WordPress install."
+"Tyvärr kräver Inactive User Logout Wordpress %s eller högre. Uppgradera din "
+"Wordpressinstallation."
 
 #: ../src/inactive-logout-main.php:201
 #, php-format

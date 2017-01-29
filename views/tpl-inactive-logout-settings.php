@@ -3,7 +3,7 @@
 	<?php if( $saved ) { ?>
 	<div id="message" class="updated notice is-dismissible"><p><?php _e("Updated !", "ina-logout"); ?></p><button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php _e("Dismiss this notice.", "ina-logout"); ?></span></button></div>
 	<?php } ?>
-	<form method="post" action="?page=inactive-logout">
+	<form method="post" action="?page=inactive-logout&tab=inactive-logout-basic">
 		<?php wp_nonce_field( '_nonce_action_save_timeout_settings', '_save_timeout_settings' ); ?>
 		<table class="form-table">
 			<tbody>
@@ -28,6 +28,20 @@
 						wp_editor( $content, 'idle_message_text', $settings );
 						?>
 						<p class="description"><?php _e("Message to be shown when idle timeout screen shows.", "ina-logout"); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="ina_full_overlay"><?php _e("Popup Background", "ina-logout"); ?></label></th>
+					<td>
+						<input name="ina_full_overlay" type="checkbox" <?php echo !empty($ina_full_overlay) ? "checked" : false; ?> value="1" >
+						<p class="description"><?php _e("Choose a background color to hide after logout. Enabling this option will remove tranparency.", "ina-logout"); ?></p>
+					</td>
+				</tr>
+				<tr class="ina_colorpicker_show">
+					<th scope="row"><label for="ina_color_picker"><?php _e("Popup Background Color", "ina-logout"); ?></label></th>
+					<td>
+						<input type="text" name="ina_color_picker" value="<?php echo !empty($ina_popup_overlay_color) ? $ina_popup_overlay_color : ""; ?>" class="ina_color_picker" >
+						<p class="description"><?php _e("Choose a popup background color.", "ina-logout"); ?></p>
 					</td>
 				</tr>
 				<tr>
@@ -58,6 +72,13 @@
 						wp_editor( $content_warn_message, 'ina_show_warn_message', $settings_warn );
 						?>
 						<p class="description"><?php _e("Use {wakup_timout} to show minutes. This is message that will be shown when inactive.", "ina-logout"); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="ina_disable_multiple_login"><?php _e("Disable Concurrent Logins", "ina-logout"); ?></label></th>
+					<td>
+						<input name="ina_disable_multiple_login" type="checkbox" id="ina_disable_multiple_login" <?php echo !empty($ina_concurrent) ? "checked" : false; ?> value="1" >
+						<p class="description"><?php _e("This will unable user to login using same account in different places.", "ina-logout"); ?></p>
 					</td>
 				</tr>
 			</tbody>

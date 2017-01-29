@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.0.0';
+	const INA_VERSION = '1.1.0';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -36,6 +36,7 @@ final class Inactive__Logout_Main {
 		$this->pluginDir  = $this->plugin_dir = trailingslashit( basename( $this->plugin_path ) );
 		$this->pluginUrl  = $this->plugin_url = plugins_url( $this->plugin_dir );
 
+		add_action( 'init', array( $this, 'ina_loadTextDomain' ) );
 		$this->ina_plugins_loaded();
 	}
 
@@ -64,11 +65,14 @@ final class Inactive__Logout_Main {
 
 		//Load Necessary Components after activation
 		self::instance()->ina_plugins_loaded();
+
+		Inactive__ConcurrentLogins_functions::ina_destroy_all_old_sessions();
 	}
 
 	protected function _ina_activate_multisite() {
 		$time = 15 * 60; //15 Minutes
 		update_option( '__ina_logout_time', $time );
+		update_option( '__ina_popup_overlay_color', '#000000' );
 		update_option( '__ina_logout_message', '<p>You are being timed-out out due to inactivity. Please choose to stay signed in or to logoff.</p><p>Otherwise, you will be logged off automatically.</p>' );
 		update_option( '__ina_warn_message', '<h3>Wakeup !</h3><p>You have been inactive for {wakup_timout}. Press continue to continue browsing.</p>' );
 	}
@@ -95,8 +99,11 @@ final class Inactive__Logout_Main {
 	}
 
 	protected function ina_plugins_loaded() {
-		add_action( 'init', array( $this, 'ina_loadTextDomain' ) );
-
+		$popup_overlay = get_option( '__ina_popup_overlay_color' );
+		if(!$popup_overlay) {
+			update_option( '__ina_popup_overlay_color', '#000000' );
+		}
+		
 		if( is_user_logged_in() ) {
 			if ( $this->ina_supportedVersion( 'wordpress' ) && $this->ina_supportedVersion( 'php' ) ) {
 				$this->ina_addHooks();
@@ -130,8 +137,13 @@ final class Inactive__Logout_Main {
 
 		//Loading Admin Views
 		require_once $this->plugin_path . 'src/inactive-logout-admin-views.php';
-
 		require_once $this->plugin_path . 'src/inactive-logout-functions.php';
+
+		$concurrent = get_option( '__ina_concurrent_login' );
+		if($concurrent == 1) {
+			require_once $this->plugin_path . 'src/inactive-logout-concurrent-functions.php';
+		}
+		
 	}
 
 	/**
@@ -145,9 +157,12 @@ final class Inactive__Logout_Main {
 	/**
 	 * Loading Backend Scripts
 	 */
-	public function ina_adminScripts() {
+	public function ina_adminScripts($hook_suffix) {
 		if( is_user_logged_in() ) {
 			wp_enqueue_script( INACTIVE_LOGOUT_SLUG . '-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout.js', array('jquery'), time(), true );
+			if( $hook_suffix == 'settings_page_inactive-logout' ) {
+				wp_enqueue_script( INACTIVE_LOGOUT_SLUG . '-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout-other.js', array('jquery', 'wp-color-picker'), time(), true );
+			}
 			wp_enqueue_style( INACTIVE_LOGOUT_SLUG, INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.css' , false, time() );
 
 			wp_localize_script( INACTIVE_LOGOUT_SLUG .'-js', 'ina_ajax', array( 'ajaxurl' => admin_url('admin-ajax.php'), 'ina_security' => wp_create_nonce( "_checklastSession" ) ));
@@ -191,8 +206,10 @@ final class Inactive__Logout_Main {
 	/**
 	* Load the text domain.
 	*/
-	public function ina_loadTextDomain() {
-		load_plugin_textdomain( 'ina-logout', false, $this->plugin_dir . 'lang/' );
+	public function ina_loadTextDomain() {	
+		$domain = 'ina-logout';
+		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+		load_plugin_textdomain( $domain, false, $this->plugin_dir . 'lang/' );
 	}
 
 }

@@ -1,6 +1,11 @@
 <!--START INACTIVE LOGOUT MODAL CONTENT-->
-<?php $ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' ); 
-if( $ina_warn_message_enabled == 1 ) { ?>
+<?php 
+$ina_full_overlay = get_option( '__ina_full_overlay' );
+$ina_popup_overlay_color = get_option( '__ina_popup_overlay_color' );
+$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' ); 
+$bg = isset($ina_warn_message_enabled) ? $ina_popup_overlay_color : FALSE; ?>
+<span data-bg="<?php echo $bg; ?>" class="ina_popup_bg" data-bgenabled="<?php echo $ina_full_overlay; ?>"></span>
+<?php if( $ina_warn_message_enabled == 1 ) { ?>
 <div id="ina_logout_message_box" class="ina-modal">
 	<div class="ina-modal-content">
 		<div class="ina-modal-body ina-wakeup">
@@ -28,5 +33,4 @@ if( $ina_warn_message_enabled == 1 ) { ?>
 	</div>
 </div>
 <?php } ?>
-
 <!--END INACTIVE LOGOUT MODAL CONTENT-->

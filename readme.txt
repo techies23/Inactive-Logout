@@ -1,6 +1,6 @@
 === Inactive Logout ===
 Contributors: j__3rk
-Tags: idle, idle logout, idle user, auto logout, autologout, inactive, inactive user, inactive, logout, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite
+Tags: idle, idle logout, idle user, auto logout, autologout, inactive, inactive user, inactive, logout, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
 Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.5.2
 Tested up to: 4.7
@@ -22,14 +22,15 @@ Simple but works efficiently. Nothing much to explain on plugin use. As its simp
 2. Count down of 10 seconds before actual logout. You can remove this feature if you dont want it.
 3. Add only **Wake Up!** message where user will not logout but instead a wakeup message will be shown upon inactive.
 4. Custom Popup Message.
+5. Choose to use concurrent logout functionality derived from [prevent concurrent logins](https://wordpress.org/plugins/prevent-concurrent-logins/ "Prevent Concurrent Logins") by Frankie Jarrett. Thumbs up here too !
 
 In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
 
 **See the [Inactive Logout](https://deepenbajracharya.com.np/wp-inactive-logout/ "Inactive Logout") homepage for further information. Contact Developer for those who need to write plugins.**
 
-**There's a [GIT repository](https://github.com/techies23/Inactive-Logout.git "Github Inactive Repository") too if you want to contribute a patch.**
+**There's a [GIT repository](https://github.com/techies23/Inactive-Logout.git "Github Inactive Repository") too if you want to contribute a patch. Please check issues. Pull requests are welcomed.**
 
-**Please do give credit and rate the plugin if you use it and liked it. Thanx.**
+**Please consider giving a [5 star thumbs up](https://wordpress.org/support/plugin/inactive-logout/reviews/#new-post "5 star thumbs up") if you fond this useful.**
 
 == Installation ==
 
@@ -42,6 +43,13 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 3. Session going to logout if continue is clicked then session will not end.
 
 == Changelog ==
+
+= 1.1.0 =
+* Added Concurrent Login Functionality referencing from prevent concurrent logins by Frankie Jarrett
+* Fixed Translation Errors
+* Added Swedish Translation thanks to @nijen
+* Added Popup Solid Background Feature
+* Few Bug Fixes
 
 = 1.0 =
 * Initial Release
