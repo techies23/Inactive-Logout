@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.1.2';
+	const INA_VERSION = '1.1.3';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -77,7 +77,7 @@ final class Inactive__Logout_Main {
 		update_option( '__ina_warn_message', '<h3>Wakeup !</h3><p>You have been inactive for {wakup_timout}. Press continue to continue browsing.</p>' );
 	}
 
-	public function ina_deactivate() {
+	public static function ina_deactivate() {
 		if (function_exists('is_multisite') && is_multisite()) {
 			global $wpdb;
 			$old_blog = $wpdb->blogid;
@@ -103,7 +103,7 @@ final class Inactive__Logout_Main {
 		if(!$popup_overlay) {
 			update_option( '__ina_popup_overlay_color', '#000000' );
 		}
-		
+
 		if( is_user_logged_in() ) {
 			if ( $this->ina_supportedVersion( 'wordpress' ) && $this->ina_supportedVersion( 'php' ) ) {
 				$this->ina_addHooks();
@@ -114,7 +114,7 @@ final class Inactive__Logout_Main {
 				$this->ina_display_notSupportedError();
 			}
 		}
-		
+
 	}
 
 	/**
@@ -140,10 +140,10 @@ final class Inactive__Logout_Main {
 		require_once $this->plugin_path . 'src/inactive-logout-functions.php';
 
 		$concurrent = get_option( '__ina_concurrent_login' );
-		if($concurrent == 1) {
+		if( isset($concurrent) == 1) {
 			require_once $this->plugin_path . 'src/inactive-logout-concurrent-functions.php';
 		}
-		
+
 	}
 
 	/**
@@ -152,7 +152,7 @@ final class Inactive__Logout_Main {
 	protected function ina_addHooks() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'ina_adminScripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'ina_adminScripts' ) );
-	}	
+	}
 
 	/**
 	 * Loading Backend Scripts
@@ -206,7 +206,7 @@ final class Inactive__Logout_Main {
 	/**
 	* Load the text domain.
 	*/
-	public function ina_loadTextDomain() {	
+	public function ina_loadTextDomain() {
 		$domain = 'ina-logout';
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 		load_plugin_textdomain( $domain, false, $this->plugin_dir . 'lang/' );

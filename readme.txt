@@ -12,7 +12,7 @@ Logs out users within defined time when inactive. Modify to show only wake up me
 
 == Description ==
 
-Make your WP account secure from snoopers, friends to protect your data by assuring auto log out system within a certain defined time. This will help you keep safe from any users using same machine to access your account in case you are away and forgot to logout and kept your site logged open. 
+Make your WP account secure from snoopers, friends to protect your data by assuring auto log out system within a certain defined time. This will help you keep safe from any users using same machine to access your account in case you are away and forgot to logout and kept your site logged open.
 
 Simple but works efficiently. Nothing much to explain on plugin use. As its simple to use. You can find inactive settings under settings menu in admin dashboard.
 
@@ -44,6 +44,9 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 
 == Changelog ==
 
+= 1.1.3 =
+* Bug: Activation Bug Fix
+
 = 1.1.2 =
 * Corrected Swedish Translation. Thanks to @nijen
 
@@ -60,3 +63,8 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 
 = 1.0 =
 * Initial Release
+
+== Upgrade Notice ==
+
+= 1.1.3 =
+Crucial Upgrade. Contains fix for activation Error. Please upgrade.
