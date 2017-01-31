@@ -44,6 +44,9 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 
 == Changelog ==
 
+= 1.1.2 =
+* Corrected Swedish Translation. Thanks to @nijen
+
 = 1.1.1 =
 * Corrected German Translation. Thanx to Roland Dietz.
 * Corrected Localization String in Helper Class.

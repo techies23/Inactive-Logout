@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: Tue Jan 17 2017 15:34:56 GMT+0545 (NPT)\n"
-"PO-Revision-Date: Sun Jan 29 2017 16:01:04 GMT+0545 (NPT)\n"
+"POT-Creation-Date: 2017-01-29 20:28+0100\n"
+"PO-Revision-Date: 2017-01-31 05:53+0100\n"
 "Last-Translator: Björn Granberg <write@maskinmedia.se>\n"
 "Language-Team: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
-"Language: Swedish\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
+"Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
@@ -18,40 +18,12 @@ msgstr ""
 "_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
-"X-Loco-Target-Locale: sv_SE\n"
-"X-Generator: Loco - https://localise.biz/\n"
-"X-Poedit-SearchPath-0: .."
+"X-Loco-Target-Locale: en_US\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: ../views/tpl-inactive-logout-settings.php:34
-msgid "Popup Background"
-msgstr ""
-
-#: ../views/tpl-inactive-logout-settings.php:37
-msgid ""
-"Choose a background color to hide after logout. Enabling this option will "
-"remove tranparency."
-msgstr ""
-"Välj en bakgrundsfärg för att dölja efter utloggning. Aktiverar det här "
-"alternativet tar bort öppenhet."
-
-#: ../views/tpl-inactive-logout-settings.php:41
-msgid "Popup Background Color"
-msgstr ""
-
-#: ../views/tpl-inactive-logout-settings.php:44
-msgid "Choose a popup background color."
-msgstr "Välj en popup bakgrundsfärg ."
-
-#: ../views/tpl-inactive-logout-settings.php:78
-msgid "Disable Concurrent Logins"
-msgstr "Inaktivera Samtidiga inloggningar"
-
-#: ../views/tpl-inactive-logout-settings.php:81
-msgid "This will unable user to login using same account in different places."
-msgstr "Detta kommer inte användaren att logga in med samma konto på olika platser."
-
-#: ../views/tpl-inactive-logout-dialog.php:18 ../views/tpl-inactive-logout-dialog.
-#: php:31
+#: ../views/tpl-inactive-logout-dialog.php:18
+#: ../views/tpl-inactive-logout-dialog. php:31
 msgid "Continue"
 msgstr "Fortsätt"
 
@@ -59,8 +31,8 @@ msgstr "Fortsätt"
 msgid "Session Timeout"
 msgstr "Systemmeddelande"
 
-#: ../views/tpl-inactive-logout-settings.php:2 ../src/inactive-logout-admin-views.
-#: php:24
+#: ../views/tpl-inactive-logout-settings.php:2
+#: ../src/inactive-logout-admin-views. php:24
 msgid "Inactive User Logout Settings"
 msgstr "Inactive Logout inställningar"
 
@@ -74,11 +46,11 @@ msgstr "Avfärda denna notis."
 
 #: ../views/tpl-inactive-logout-settings.php:11
 msgid "Idle Timeout"
-msgstr "Logga ut inaktiv efter"
+msgstr "Logga ut efter"
 
 #: ../views/tpl-inactive-logout-settings.php:14
 msgid "Minute(s)"
-msgstr "Minut(er)"
+msgstr "Minut(er) av inaktivitet."
 
 #: ../views/tpl-inactive-logout-settings.php:18
 msgid "Idle Message Content"
@@ -88,9 +60,29 @@ msgstr "Meddelande vid inaktivitet"
 msgid "Message to be shown when idle timeout screen shows."
 msgstr "Meddelande som visas i timeout-popup."
 
+#: ../views/tpl-inactive-logout-settings.php:34
+msgid "Popup Background"
+msgstr "Popup-bakgrund"
+
+#: ../views/tpl-inactive-logout-settings.php:37
+msgid ""
+"Choose a background color to hide after logout. Enabling this option will "
+"remove tranparency."
+msgstr ""
+"Välj bakgrundsfärg för att dölja sidans innehåll efter utloggning. "
+"Aktivering av detta alternativ tar bort bakgrundens transparens."
+
+#: ../views/tpl-inactive-logout-settings.php:41
+msgid "Popup Background Color"
+msgstr "Popupens bakgrundsfärg"
+
+#: ../views/tpl-inactive-logout-settings.php:44
+msgid "Choose a popup background color."
+msgstr "Välj bakgrundsfärg till popupen."
+
 #: ../views/tpl-inactive-logout-settings.php:48
 msgid "Disable Timeout Countdown"
-msgstr "Inaktivera nedräkning"
+msgstr "Avaktivera nedräkning"
 
 #: ../views/tpl-inactive-logout-settings.php:51
 msgid ""
@@ -98,24 +90,22 @@ msgid ""
 "a chance to keep using or logout for 10 seconds. Remove this feature and "
 "directly log out after inactive."
 msgstr ""
-"När timeout-popup visas fortsätter användaren vara inloggad. Det ger "
-"användaren möjlighet att fortsätta vara aktiv eller logga ut i tio sekunder. "
-"Avaktivera denna funktion för att logga ut direkt när perioden för "
+"När timeout-popupen visas fortsätter användaren vara inloggad i tio "
+"sekunder. Det ger användaren möjlighet att förhindra utloggning. Markera "
+"detta alternativ för att istället logga ut direkt när perioden för "
 "inaktivitet passerats."
 
 #: ../views/tpl-inactive-logout-settings.php:55
 msgid "Show Warn Message Only"
-msgstr "Visa enbart varningsmeddelande"
+msgstr "Endast meddelande"
 
 #: ../views/tpl-inactive-logout-settings.php:58
 msgid "Will show warn message without logout url but user will not log out."
-msgstr ""
-"Visar varningsmeddelande utan uttloggningslänk. Användaren kommer inte att "
-"loggas ut."
+msgstr "Visar ett meddelande med knapp ”Fortsätt”. Användaren loggas INTE ut."
 
 #: ../views/tpl-inactive-logout-settings.php:62
 msgid "Warn Message Content"
-msgstr "Varningsmeddelandets innehåll"
+msgstr "Meddelande"
 
 #: ../views/tpl-inactive-logout-settings.php:74
 msgid ""
@@ -124,6 +114,16 @@ msgid ""
 msgstr ""
 "Använd {wakup_timout} för att visa minuter. Detta meddelande visas vid "
 "inaktivitet."
+
+#: ../views/tpl-inactive-logout-settings.php:78
+msgid "Disable Concurrent Logins"
+msgstr "Förhindra samtidiga inloggningar"
+
+#: ../views/tpl-inactive-logout-settings.php:81
+msgid "This will unable user to login using same account in different places."
+msgstr ""
+"Hindrar användaren från att vara att inloggad på sitt konto från mer än en "
+"enhet i taget."
 
 #: ../views/tpl-inactive-logout-settings.php:86
 msgid "Save Changes"
