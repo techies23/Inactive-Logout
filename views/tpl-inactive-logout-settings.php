@@ -14,11 +14,11 @@
 						<i><?php _e("Minute(s)", "ina-logout"); ?></i>
 					</td>
 				</tr>
-				<tr>
+				<tr class="ina_hide_message_content">
 					<th scope="row"><label for="idle_timeout"><?php _e("Idle Message Content", "ina-logout"); ?></label></th>
 					<td>
-						<?php 
-						$settings = array( 
+						<?php
+						$settings = array(
 							'media_buttons' => false,
 							'teeny' => true,
 							'textarea_rows' => 15
@@ -61,8 +61,8 @@
 				<tr class="show_on_warn_message_enabled">
 					<th scope="row"><label for="ina_show_warn_message"><?php _e("Warn Message Content", "ina-logout"); ?></label></th>
 					<td>
-						<?php 
-						$settings_warn = array( 
+						<?php
+						$settings_warn = array(
 							'media_buttons' => false,
 							'teeny' => true,
 							'textarea_rows' => 15
@@ -81,8 +81,49 @@
 						<p class="description"><?php _e("This will unable user to login using same account in different places.", "ina-logout"); ?></p>
 					</td>
 				</tr>
-			</tbody>
-		</table>
-		<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e("Save Changes", "ina-logout"); ?>"></p>
-	</form>
+				<tr>
+					<th scope="row"><label for="ina_enable_redirect_link"><?php _e("Enable Redirect", "ina-logout"); ?></label></th>
+					<td>
+						<input name="ina_enable_redirect_link" type="checkbox" <?php echo !empty($ina_enable_redirect) ? "checked" : false; ?> id="ina_enable_redirect_link" value="1" >
+						<p class="description"><?php _e("If not checked then user will be logged out to login screen after timeout.", "ina-logout"); ?></p>
+					</td>
+				</tr>
+				<tr class="show_on_enable_redirect_link" style="display:none;">
+					<th scope="row"><label for="ina_redirect_page"><?php _e("Redirect Page", "ina-logout"); ?></label></th>
+					<td>
+						<select name="ina_redirect_page" class="regular-text ina-hacking-select">
+							<?php
+							$posts = Inactive__Logout_functions::ina_get_all_pages_posts();
+							if( $posts ) { ?>
+							<optgroup label="Posts">
+								<?php	foreach( $posts as $post ) {
+									if( $post['post_type'] == 'post' ) { ?>
+									<option <?php echo $ina_redirect_page_link == $post['ID'] ? 'selected' : NULL; ?> value="<?php echo $post['ID']; ?>"><?php echo $post['title']; ?></option>
+									<?php }
+								}
+								?>
+							</optgroup>
+							<optgroup label="Pages">
+								<?php	foreach( $posts as $post ) {
+									if( $post['post_type'] == 'page' ) { ?>
+									<option <?php echo $ina_redirect_page_link == $post['ID'] ? 'selected' : NULL; ?> value="<?php echo $post['ID']; ?>"><?php echo $post['title']; ?></option>
+									<?php }
+								}
+								?>
+							</optgroup>
+							<?php
+						} else {
+							?>
+							<option value=""><?php _e("No Posts Found.", "ina-logout"); ?></option>
+							<?php
+						}
+						?>
+					</select>
+					<p class="description"><?php _e("Select a page to redirect to after session timeout and clicking OK.", "ina-logout"); ?></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e("Save Changes", "ina-logout"); ?>"></p>
+</form>
 </div>

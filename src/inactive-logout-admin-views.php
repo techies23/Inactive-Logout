@@ -17,24 +17,24 @@ class Inactive__Logout_adminViews {
 	}
 
 	/**
-	 * Add a Menu Option in settings 
+	 * Add a Menu Option in settings
 	 */
 	public function ina_create_options_menu() {
-		add_options_page( 
+		add_options_page(
 			__("Inactive User Logout Settings", "ina-logout"),
 			__("Inactive Logout", "ina-logout"),
-			'manage_options', 
+			'manage_options',
 			'inactive-logout',
 			array( $this, 'ina__render_options' )
 			);
 	}
 
 	/** Rendering the output */
-	public function ina__render_options() {	
+	public function ina__render_options() {
 		if( isset($_POST['submit']) && ! wp_verify_nonce( $_POST['_save_timeout_settings'], '_nonce_action_save_timeout_settings' ) ) {
 			wp_die("Not Allowed");
 			exit;
-		} 
+		}
 
 		$saved = false;
 		if( isset($_POST['submit']) ) {
@@ -49,6 +49,8 @@ class Inactive__Logout_adminViews {
 			$ina_background_popup = strip_tags( stripslashes( $ina_background_popup ) );
 
 			$ina_full_overlay = filter_input(INPUT_POST, 'ina_full_overlay', FILTER_SANITIZE_NUMBER_INT);
+			$ina_enable_redirect_link = filter_input(INPUT_POST, 'ina_enable_redirect_link', FILTER_SANITIZE_NUMBER_INT);
+			$ina_redirect_page = filter_input(INPUT_POST, 'ina_redirect_page');
 
 			$save_minutes = $idle_timeout * 60; //Minutes
 			if($idle_timeout) {
@@ -60,6 +62,8 @@ class Inactive__Logout_adminViews {
 				update_option( '__ina_concurrent_login', $ina_disable_multiple_login );
 				update_option( '__ina_full_overlay', $ina_full_overlay );
 				update_option( '__ina_popup_overlay_color', $ina_background_popup );
+				update_option( '__ina_enable_redirect', $ina_enable_redirect_link );
+				update_option( '__ina_redirect_page_link', $ina_redirect_page );
 
 				$saved = true;
 				$helper = Inactive__logout__Helpers::instance();
@@ -73,6 +77,8 @@ class Inactive__Logout_adminViews {
 		$ina_concurrent = get_option( '__ina_concurrent_login' );
 		$ina_full_overlay = get_option( '__ina_full_overlay' );
 		$ina_popup_overlay_color = get_option( '__ina_popup_overlay_color' );
+		$ina_enable_redirect = get_option( '__ina_enable_redirect' );
+		$ina_redirect_page_link = get_option( '__ina_redirect_page_link' );
 
 		// Css rules for Color Picker
 		wp_enqueue_style( 'wp-color-picker' );
@@ -83,4 +89,3 @@ class Inactive__Logout_adminViews {
 
 }
 new Inactive__Logout_adminViews();
-

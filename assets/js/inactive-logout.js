@@ -47,7 +47,7 @@ function goInactive() {
   }
 }
 
-//Show timeout Message Now 
+//Show timeout Message Now
 function showTimeoutMessage() {
   var countdown = 10;
   var t;
@@ -86,7 +86,11 @@ function showTimeoutMessage() {
       var postData = { action: 'ina_checklastSession', do: 'ina_logout', security: ina_ajax.ina_security };
       $.post( ina_ajax.ajaxurl, postData).done(function(response) {
         var op = $.parseJSON(response);
-        $('#ina_logout_message_box .ina-modal-body').html( '<p>' + op.msg + '<p><p class="ina-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>' );
+        if( op.redirect_url ) {
+          window.location = op.redirect_url;
+        } else {
+          $('#ina_logout_message_box .ina-modal-body').html( '<p>' + op.msg + '<p><p class="ina-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>' );
+        }
         return false;
       });
     } else {
@@ -102,7 +106,11 @@ function showTimeoutMessage() {
           var postData = { action: 'ina_checklastSession', do: 'ina_logout', security: ina_ajax.ina_security };
           $.post( ina_ajax.ajaxurl, postData).done(function(response) {
             var op = $.parseJSON(response);
-            $('#ina_logout_message_box .ina-modal-body').html( '<p>' + op.msg + '<p><p class="ina-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>' );
+            if( op.redirect_url ) {
+              window.location = op.redirect_url;
+            } else {
+              $('#ina_logout_message_box .ina-modal-body').html( '<p>' + op.msg + '<p><p class="ina-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>' );
+            }
             return false;
           });
         }

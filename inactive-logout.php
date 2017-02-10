@@ -7,9 +7,9 @@
 * Plugin Name:       Inactive Logout
 * Plugin URI:        http://www.deepenbajracharya.com.np
 * Description:       Inactive logout provides functionality to log out any idle users defined specified time showing a message. Works for frontend as well.
-* Version:           1.1.3
+* Version:           1.2.0
 * Author:            Deepen Bajracharya
-* Author URI:        http://www.deepenbajracharya.com.np
+* Author URI:        https://www.deepenbajracharya.com.np
 * License:           GPL-2.0+
 * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
 * Text Domain:       ina-logout

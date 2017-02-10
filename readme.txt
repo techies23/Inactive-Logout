@@ -23,6 +23,7 @@ Simple but works efficiently. Nothing much to explain on plugin use. As its simp
 3. Add only **Wake Up!** message where user will not logout but instead a wakeup message will be shown upon inactive.
 4. Custom Popup Message.
 5. Choose to use concurrent logout functionality derived from [prevent concurrent logins](https://wordpress.org/plugins/prevent-concurrent-logins/ "Prevent Concurrent Logins") by Frankie Jarrett. Thumbs up here too !
+6. Redirect to a Different Page instead of Popup box. Create a page such as timeout page and add your content there by creating a blank template or style it as you wish according to your theme.
 
 In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
 
@@ -43,6 +44,10 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 3. Session going to logout if continue is clicked then session will not end.
 
 == Changelog ==
+
+= 1.2.0 =
+* Feature: Added Redirection to different page after logout functionality.
+* Bug: Minor bug fixes.
 
 = 1.1.3 =
 * Bug: Activation Bug Fix
@@ -65,6 +70,9 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Added Redirect to Custom Page functionality.
 
 = 1.1.3 =
 Crucial Upgrade. Contains fix for activation Error. Please upgrade.

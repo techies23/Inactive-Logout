@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.1.3';
+	const INA_VERSION = '1.2.0';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -88,6 +88,8 @@ final class Inactive__Logout_Main {
 				delete_option( '__ina_logout_time' );
 				delete_option( '__ina_logout_message' );
 				delete_option( '__ina_warn_message' );
+				delete_option( '__ina_enable_redirect' );
+				delete_option( '__ina_redirect_page_link' );
 			}
 			switch_to_blog($old_blog);
 			return;
@@ -95,6 +97,8 @@ final class Inactive__Logout_Main {
 			delete_option( '__ina_logout_time' );
 			delete_option( '__ina_logout_message' );
 			delete_option( '__ina_warn_message' );
+			delete_option( '__ina_enable_redirect' );
+			delete_option( '__ina_redirect_page_link' );
 		}
 	}
 
@@ -162,6 +166,9 @@ final class Inactive__Logout_Main {
 			wp_enqueue_script( INACTIVE_LOGOUT_SLUG . '-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout.js', array('jquery'), time(), true );
 			if( $hook_suffix == 'settings_page_inactive-logout' ) {
 				wp_enqueue_script( INACTIVE_LOGOUT_SLUG . '-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout-other.js', array('jquery', 'wp-color-picker'), time(), true );
+				wp_enqueue_script( INACTIVE_LOGOUT_SLUG . '-inactive-select-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/select2.min.js', array('jquery'), time(), true );
+
+				wp_enqueue_style( INACTIVE_LOGOUT_SLUG . '-inactive-select', INACTIVE_LOGOUT_ASSETS_URL . 'css/select2.min.css' , false, time() );
 			}
 			wp_enqueue_style( INACTIVE_LOGOUT_SLUG, INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.css' , false, time() );
 

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-29 20:28+0100\n"
-"PO-Revision-Date: 2017-01-31 05:53+0100\n"
-"Last-Translator: Björn Granberg <write@maskinmedia.se>\n"
-"Language-Team: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
-"Language: sv_SE\n"
+"POT-Creation-Date: 2017-02-09 11:45+0000\n"
+"PO-Revision-Date: 2017-02-09 11:45+0000\n"
+"Last-Translator: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
+"Language-Team: Swedish\n"
+"Language: sv-SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
@@ -19,52 +19,104 @@ msgstr ""
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Loco-Target-Locale: en_US\n"
-"X-Generator: Poedit 1.8.11\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Poedit-SearchPath-0: .."
 
-#: ../views/tpl-inactive-logout-dialog.php:18
-#: ../views/tpl-inactive-logout-dialog. php:31
-msgid "Continue"
-msgstr "Fortsätt"
+#: views/tpl-inactive-logout-settings.php:85
+msgid "Enable Redirect"
+msgstr "aktivera omdirigering"
 
-#: ../views/tpl-inactive-logout-dialog.php:26
-msgid "Session Timeout"
-msgstr "Systemmeddelande"
+#: views/tpl-inactive-logout-settings.php:88
+msgid ""
+"If not checked then user will be logged out to login screen after timeout."
+msgstr ""
 
-#: ../views/tpl-inactive-logout-settings.php:2
-#: ../src/inactive-logout-admin-views. php:24
+#: views/tpl-inactive-logout-settings.php:92
+msgid "Redirect Page"
+msgstr "Omdirigeringssida"
+
+#: views/tpl-inactive-logout-settings.php:103
+msgid "No Posts Found."
+msgstr "Inga inlägg hittades."
+
+#: views/tpl-inactive-logout-settings.php:108
+msgid "Select a page to redirect to after session timeout and clicking OK."
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.deepenbajracharya.com.np"
+msgstr "https://www.deepenbajracharya.com.np"
+
+#: src/inactive-logout-admin-views.php:24
+#: views/tpl-inactive-logout-settings.php:2
 msgid "Inactive User Logout Settings"
 msgstr "Inactive Logout inställningar"
 
-#: ../views/tpl-inactive-logout-settings.php:4
-msgid "Updated !"
-msgstr "Uppdaterad !"
+#. Name of the plugin
+#: src/inactive-logout-admin-views.php:25
+msgid "Inactive Logout"
+msgstr "Inactive Logout"
 
-#: ../views/tpl-inactive-logout-settings.php:4
-msgid "Dismiss this notice."
-msgstr "Avfärda denna notis."
+#: src/inactive-logout-functions.php:49
+msgid "You have been logged out because of inactivity."
+msgstr "Din session har gått ut. Logga in för att fortsätta där du slutade."
 
-#: ../views/tpl-inactive-logout-settings.php:11
-msgid "Idle Timeout"
-msgstr "Logga ut efter"
-
-#: ../views/tpl-inactive-logout-settings.php:14
+#: src/inactive-logout-helpers.php:39 views/tpl-inactive-logout-settings.php:14
 msgid "Minute(s)"
 msgstr "Minut(er) av inaktivitet."
 
-#: ../views/tpl-inactive-logout-settings.php:18
+#: src/inactive-logout-main.php:204
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
+"your WordPress install."
+msgstr ""
+"Tyvärr kräver Inactive User Logout Wordpress %s eller högre. Uppgradera din "
+"Wordpressinstallation."
+
+#: src/inactive-logout-main.php:208
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
+"about moving you to a newer version of PHP."
+msgstr ""
+"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
+"about moving you to a newer version of PHP."
+
+#: views/tpl-inactive-logout-dialog.php:18
+#: views/tpl-inactive-logout-dialog.php:31
+msgid "Continue"
+msgstr "Fortsätt"
+
+#: views/tpl-inactive-logout-dialog.php:26
+msgid "Session Timeout"
+msgstr "Systemmeddelande"
+
+#: views/tpl-inactive-logout-settings.php:4
+msgid "Updated !"
+msgstr "Uppdaterad !"
+
+#: views/tpl-inactive-logout-settings.php:4
+msgid "Dismiss this notice."
+msgstr "Avfärda denna notis."
+
+#: views/tpl-inactive-logout-settings.php:11
+msgid "Idle Timeout"
+msgstr "Logga ut efter"
+
+#: views/tpl-inactive-logout-settings.php:18
 msgid "Idle Message Content"
 msgstr "Meddelande vid inaktivitet"
 
-#: ../views/tpl-inactive-logout-settings.php:30
+#: views/tpl-inactive-logout-settings.php:30
 msgid "Message to be shown when idle timeout screen shows."
 msgstr "Meddelande som visas i timeout-popup."
 
-#: ../views/tpl-inactive-logout-settings.php:34
+#: views/tpl-inactive-logout-settings.php:34
 msgid "Popup Background"
 msgstr "Popup-bakgrund"
 
-#: ../views/tpl-inactive-logout-settings.php:37
+#: views/tpl-inactive-logout-settings.php:37
 msgid ""
 "Choose a background color to hide after logout. Enabling this option will "
 "remove tranparency."
@@ -72,42 +124,42 @@ msgstr ""
 "Välj bakgrundsfärg för att dölja sidans innehåll efter utloggning. "
 "Aktivering av detta alternativ tar bort bakgrundens transparens."
 
-#: ../views/tpl-inactive-logout-settings.php:41
+#: views/tpl-inactive-logout-settings.php:41
 msgid "Popup Background Color"
 msgstr "Popupens bakgrundsfärg"
 
-#: ../views/tpl-inactive-logout-settings.php:44
+#: views/tpl-inactive-logout-settings.php:44
 msgid "Choose a popup background color."
 msgstr "Välj bakgrundsfärg till popupen."
 
-#: ../views/tpl-inactive-logout-settings.php:48
+#: views/tpl-inactive-logout-settings.php:48
 msgid "Disable Timeout Countdown"
 msgstr "Avaktivera nedräkning"
 
-#: ../views/tpl-inactive-logout-settings.php:51
+#: views/tpl-inactive-logout-settings.php:51
 msgid ""
 "When timeout popup is shown user is not logged out instantly. It gives user "
 "a chance to keep using or logout for 10 seconds. Remove this feature and "
 "directly log out after inactive."
 msgstr ""
-"När timeout-popupen visas fortsätter användaren vara inloggad i tio "
-"sekunder. Det ger användaren möjlighet att förhindra utloggning. Markera "
-"detta alternativ för att istället logga ut direkt när perioden för "
-"inaktivitet passerats."
+"När timeout-popupen visas fortsätter användaren vara inloggad i tio sekunder."
+" Det ger användaren möjlighet att förhindra utloggning. Markera detta "
+"alternativ för att istället logga ut direkt när perioden för inaktivitet "
+"passerats."
 
-#: ../views/tpl-inactive-logout-settings.php:55
+#: views/tpl-inactive-logout-settings.php:55
 msgid "Show Warn Message Only"
 msgstr "Endast meddelande"
 
-#: ../views/tpl-inactive-logout-settings.php:58
+#: views/tpl-inactive-logout-settings.php:58
 msgid "Will show warn message without logout url but user will not log out."
 msgstr "Visar ett meddelande med knapp ”Fortsätt”. Användaren loggas INTE ut."
 
-#: ../views/tpl-inactive-logout-settings.php:62
+#: views/tpl-inactive-logout-settings.php:62
 msgid "Warn Message Content"
 msgstr "Meddelande"
 
-#: ../views/tpl-inactive-logout-settings.php:74
+#: views/tpl-inactive-logout-settings.php:74
 msgid ""
 "Use {wakup_timout} to show minutes. This is message that will be shown when "
 "inactive."
@@ -115,27 +167,19 @@ msgstr ""
 "Använd {wakup_timout} för att visa minuter. Detta meddelande visas vid "
 "inaktivitet."
 
-#: ../views/tpl-inactive-logout-settings.php:78
+#: views/tpl-inactive-logout-settings.php:78
 msgid "Disable Concurrent Logins"
 msgstr "Förhindra samtidiga inloggningar"
 
-#: ../views/tpl-inactive-logout-settings.php:81
+#: views/tpl-inactive-logout-settings.php:81
 msgid "This will unable user to login using same account in different places."
 msgstr ""
 "Hindrar användaren från att vara att inloggad på sitt konto från mer än en "
 "enhet i taget."
 
-#: ../views/tpl-inactive-logout-settings.php:86
+#: views/tpl-inactive-logout-settings.php:113
 msgid "Save Changes"
 msgstr "Spara ändringar"
-
-#. Name of the plugin
-msgid "Inactive Logout"
-msgstr "Inactive Logout"
-
-#. URI of the plugin
-msgid "http://www.deepenbajracharya.com.np"
-msgstr "http://www.deepenbajracharya.com.np"
 
 #. Description of the plugin
 msgid ""
@@ -146,28 +190,10 @@ msgstr ""
 "efter en viss tid. innan utloggning visas ett varningsmeddelande. Fungerar "
 "för både fram- och baksida."
 
+#. URI of the plugin
+msgid "http://www.deepenbajracharya.com.np"
+msgstr "http://www.deepenbajracharya.com.np"
+
 #. Author of the plugin
 msgid "Deepen Bajracharya"
 msgstr "Deepen Bajracharya"
-
-#: ../src/inactive-logout-functions.php:43
-msgid "You have been logged out because of inactivity."
-msgstr "Din session har gått ut. Logga in för att fortsätta där du slutade."
-
-#: ../src/inactive-logout-main.php:197
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
-"your WordPress install."
-msgstr ""
-"Tyvärr kräver Inactive User Logout Wordpress %s eller högre. Uppgradera din "
-"Wordpressinstallation."
-
-#: ../src/inactive-logout-main.php:201
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
-"about moving you to a newer version of PHP."
-msgstr ""
-"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
-"about moving you to a newer version of PHP."

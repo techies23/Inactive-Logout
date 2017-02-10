@@ -1,4 +1,6 @@
 jQuery(function($) {
+  $('.ina-hacking-select').select2();
+
   if( $('#ina_show_warn_message_only').is(":checked") ) {
     $('.show_on_warn_message_enabled').show();
   } else {
@@ -27,6 +29,24 @@ jQuery(function($) {
       $('.ina_colorpicker_show').show();
     } else {
       $('.ina_colorpicker_show').hide();
+    }
+  });
+
+  if( $('#ina_enable_redirect_link').is(":checked") ) {
+    $('.show_on_enable_redirect_link').show();
+    $('.ina_hide_message_content').hide();
+  } else {
+    $('.show_on_enable_redirect_link').hide();
+    $('.ina_hide_message_content').show();
+  }
+
+  $('#ina_enable_redirect_link').click(function() {
+    if( $( this ).prop( "checked" )) {
+      $('.show_on_enable_redirect_link').show();
+      $('.ina_hide_message_content').hide();
+    } else {
+      $('.show_on_enable_redirect_link').hide();
+      $('.ina_hide_message_content').show();
     }
   });
 });
