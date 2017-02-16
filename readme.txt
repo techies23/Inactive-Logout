@@ -45,6 +45,12 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 
 == Changelog ==
 
+= 1.2.1 =
+* Changes: Classes changes in order to avoid any conflict with JS issues.
+* Added: Spanish translation. Thanx to Miguel Arroyo.
+* Updated: Swedish translation. Thanx to Björn Granberg.
+* Minor bug fixes.
+
 = 1.2.0 =
 * Feature: Added Redirection to different page after logout functionality.
 * Bug: Minor bug fixes.

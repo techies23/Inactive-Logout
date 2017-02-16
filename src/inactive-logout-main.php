@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.2.0';
+	const INA_VERSION = '1.2.1';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 

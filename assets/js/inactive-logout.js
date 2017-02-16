@@ -65,22 +65,24 @@ function showTimeoutMessage() {
       return false;
     }
 
-    var ina_popup_bg_enalbed = $('.ina_popup_bg').data('bgenabled');
+    var ina_popup_bg_enalbed = $('.ina__no_confict_popup_bg').data('bgenabled');
     if( ina_popup_bg_enalbed ) {
-      var ina_popup_bg = $('.ina_popup_bg').data('bg');
-      $('#ina_logout_message_box').css('background', ina_popup_bg);
+      var ina_popup_bg = $('.ina__no_confict_popup_bg').data('bg');
+      $('#ina__dp_logout_message_box').css('background', ina_popup_bg);
     }
 
     messageBox = 1;
     if( ina_warn_message_enabled ) {
       //Only show message
-      $('#ina_logout_message_box').show();
+      $('#ina__dp_logout_message_box').show();
       $('.ina_stay_logged_in').click(function() {
-        $('#ina_logout_message_box').hide();
+        document.onkeydown = function (evt) { return true; }
+        window.oncontextmenu = null;
+        $('#ina__dp_logout_message_box').hide();
         messageBox = 0;
       });
     } else if(ina_disable_countdown) {
-      $('#ina_logout_message_box').show();
+      $('#ina__dp_logout_message_box').show();
 
       //Disabled Countdown but directly logout
       var postData = { action: 'ina_checklastSession', do: 'ina_logout', security: ina_ajax.ina_security };
@@ -89,12 +91,12 @@ function showTimeoutMessage() {
         if( op.redirect_url ) {
           window.location = op.redirect_url;
         } else {
-          $('#ina_logout_message_box .ina-modal-body').html( '<p>' + op.msg + '<p><p class="ina-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>' );
+          $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html( '<p>' + op.msg + '<p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>' );
         }
         return false;
       });
     } else {
-      $('#ina_logout_message_box').show();
+      $('#ina__dp_logout_message_box').show();
       setting_countdown = setInterval(function() {
         if( countdown >= 0 ) {
           t = countdown--;
@@ -109,7 +111,7 @@ function showTimeoutMessage() {
             if( op.redirect_url ) {
               window.location = op.redirect_url;
             } else {
-              $('#ina_logout_message_box .ina-modal-body').html( '<p>' + op.msg + '<p><p class="ina-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>' );
+              $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html( '<p>' + op.msg + '<p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>' );
             }
             return false;
           });
@@ -122,7 +124,7 @@ function showTimeoutMessage() {
         clearTimeout(setting_countdown);
         countdown = 10;
         messageBox = 0;
-        $('#ina_logout_message_box').hide();
+        $('#ina__dp_logout_message_box').hide();
         $('.ina_countdown').text('');
       });
     }

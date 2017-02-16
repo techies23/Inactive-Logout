@@ -1,5 +1,5 @@
 /* The Modal (background) */
-.ina-modal {
+.ina-dp-noflict-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 99999; /* Sit on top */
@@ -12,7 +12,7 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 /* Modal Content */
-.ina-modal-content {
+.ina-dp-noflict-modal-content {
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -37,8 +37,8 @@
     padding: 22px 22px 0px 16px;
 }
 .ina-modal-header h3 { margin:0px;padding-bottom: 10px;border-bottom: 1px solid #eee; }
-.ina-modal-body {padding: 2px 16px;}
-.ina-modal-body p {margin: 10px 0px;}
+.ina-dp-noflict-modal-body {padding: 2px 16px;}
+.ina-dp-noflict-modal-body p {margin: 10px 0px;}
 .ina_stay_logged_in {
     padding: 10px;
     background: #008ec2;
@@ -54,10 +54,10 @@
 .ina_stay_logged_in:hover {
     color: #fff;
 }
-.ina-btn-container {
+.ina-dp-noflict-btn-container {
     padding: 10px 0px;
 }
-.ina-wakeup h3{
+.ina-dp-noflict-wakeup h3{
     margin:0px;padding-bottom: 10px;border-bottom: 1px solid #eee; font-size: 26px;padding-top: 26px;
 }
 .ina_colorpicker_show {
