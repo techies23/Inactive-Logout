@@ -1,16 +1,17 @@
 /* The Modal (background) */
 .ina-dp-noflict-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 99999; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    padding-top: 100px;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
+
 /* Modal Content */
 .ina-dp-noflict-modal-content {
     position: relative;
@@ -62,4 +63,27 @@
 }
 .ina_colorpicker_show {
     display: none;
+}
+.button-reset-ina {
+    background: #944a4a !important;
+    border: none !important;
+    text-shadow: none !important;
+}
+.ina-warn-info {
+    color:red !important;
+}
+#ina-cover-loading {
+    background: url("../img/ajax-loader.gif") no-repeat scroll center center #f1f1f1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.5;
+}
+.ina-disable-timeout-selector-msg {
+    color: red;
+}
+.ina-highlight {
+    color:#000;
+    font-size:16px;
 }

@@ -45,4 +45,42 @@ class Inactive__logout__Helpers {
 		<?php
 	}
 
+	public function ina_get_all_roles() {
+		$roles = get_editable_roles();
+		foreach( $roles as $role => $role_name ) {
+			$result[$role] = $role_name['name'];
+		}
+
+		return $result;
+	}
+
+	public function ina_check_role_enabledfor_multiuser($role = NULL) {
+		if( !empty($role) ) {
+			$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+			foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
+				if( in_array( $role, $ina_multiuser_setting ) ) {
+					$selected = true;
+				}
+			}
+
+			return $selected;
+		}
+	}
+
+	public function ina_check_user_role() {
+		$user = wp_get_current_user();
+		$ina_roles = get_option( '__ina_multiusers_settings' );
+		$result = false;
+		if( $ina_roles ) {
+			foreach( $ina_roles as $role ) {
+				if( $role['disabled_feature'] == 1 ) {
+					if ( in_array( $role['role'], (array) $user->roles ) ) {
+						$result = true;
+					}
+				}
+			}
+		}
+
+		return $result;
+	}
 }

@@ -2,11 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: Tue Jan 17 2017 15:34:56 GMT+0545 (NPT)\n"
-"PO-Revision-Date: Sun Jan 29 2017 16:01:24 GMT+0545 (NPT)\n"
+"POT-Creation-Date: 2017-02-23 09:41+0000\n"
+"PO-Revision-Date: 2017-02-23 09:41+0000\n"
 "Last-Translator: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
-"Language-Team: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
-"Language: English\n"
+"Language-Team: English (United States)\n"
+"Language: en-US\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,115 +22,233 @@ msgstr ""
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Poedit-SearchPath-0: .."
 
-#: ../views/tpl-inactive-logout-settings.php:34
+#: src/inactive-logout-functions.php:114
+msgid "Reset advanced settings successfull."
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:7
+msgid "Basic Management"
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:8
+msgid "Advanced Management"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:8
+msgid "Multi-Role Timeout"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:11
+msgid "This will enable multi-user role timeout functionality."
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:15
+msgid "Enable Multi-User Feature"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:27
+msgid ""
+"This will allow you to define different timeout constraint according to "
+"different selected user roles."
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:35
+msgid "User Role"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:36
+msgid "Timeout (In Minutes)"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:37
+#: views/tabs/tpl-inactive-logout-basic.php:88
+msgid "Redirect Page"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:38
+#: views/tabs/tpl-inactive-logout-advanced.php:84
+msgid "Disable"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:50
+msgid "Set Global Redirect Page"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:73
+#: views/tabs/tpl-inactive-logout-basic.php:113
+msgid "No Posts Found."
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:85
+#, php-format
+msgid ""
+"Note: %s is used for disabling inactive logout functionality to that "
+"specific user."
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:87
+msgid ""
+"Are you sure you want to erase all advanced settings. This cannot be undone !"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:87
+msgid "Reset Advanced Settings !"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-basic.php:29
 msgid "Popup Background"
 msgstr ""
 
-#: ../views/tpl-inactive-logout-settings.php:37
+#: views/tabs/tpl-inactive-logout-basic.php:32
 msgid ""
 "Choose a background color to hide after logout. Enabling this option will "
 "remove tranparency."
 msgstr ""
 
-#: ../views/tpl-inactive-logout-settings.php:41
+#: views/tabs/tpl-inactive-logout-basic.php:36
 msgid "Popup Background Color"
 msgstr ""
 
-#: ../views/tpl-inactive-logout-settings.php:44
+#: views/tabs/tpl-inactive-logout-basic.php:39
 msgid "Choose a popup background color."
 msgstr ""
 
-#: ../views/tpl-inactive-logout-settings.php:78
+#: views/tabs/tpl-inactive-logout-basic.php:54
+msgid ""
+"Please note ! Multi role timeout feature will not work when this setting is "
+"enabled. Similarly, idle Message Content will be ignored and replaced with "
+"this content."
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-basic.php:74
 msgid "Disable Concurrent Logins"
 msgstr ""
 
-#: ../views/tpl-inactive-logout-settings.php:81
+#: views/tabs/tpl-inactive-logout-basic.php:77
 msgid "This will unable user to login using same account in different places."
 msgstr ""
 
-#: ../views/tpl-inactive-logout-dialog.php:18 ../views/tpl-inactive-logout-dialog.
-#: php:31
-msgid "Continue"
-msgstr "Continue"
+#: views/tabs/tpl-inactive-logout-basic.php:81
+msgid "Enable Redirect"
+msgstr ""
 
-#: ../views/tpl-inactive-logout-dialog.php:26
-msgid "Session Timeout"
-msgstr "Session Timeout"
+#: views/tabs/tpl-inactive-logout-basic.php:84
+msgid ""
+"If not checked then user will be logged out to login screen after timeout."
+msgstr ""
 
-#: ../views/tpl-inactive-logout-settings.php:2 ../src/inactive-logout-admin-views.
-#: php:24
+#: views/tabs/tpl-inactive-logout-basic.php:118
+msgid "Select a page to redirect to after session timeout and clicking OK."
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.deepenbajracharya.com.np"
+msgstr ""
+
+#: src/inactive-logout-admin-views.php:31
+#: views/tpl-inactive-logout-settings.php:1
 msgid "Inactive User Logout Settings"
 msgstr "Inactive User Logout Settings"
 
-#: ../views/tpl-inactive-logout-settings.php:4
-msgid "Updated !"
-msgstr "Updated !"
-
-#: ../views/tpl-inactive-logout-settings.php:4
-msgid "Dismiss this notice."
-msgstr "Dismiss this notice."
-
-#: ../views/tpl-inactive-logout-settings.php:11
-msgid "Idle Timeout"
-msgstr "Idle Timeout"
-
-#: ../views/tpl-inactive-logout-settings.php:14
-msgid "Minute(s)"
-msgstr "Minute(s)"
-
-#: ../views/tpl-inactive-logout-settings.php:18
-msgid "Idle Message Content"
-msgstr "Idle Message Content"
-
-#: ../views/tpl-inactive-logout-settings.php:30
-msgid "Message to be shown when idle timeout screen shows."
-msgstr "Message to be shown when idle timeout screen shows."
-
-#: ../views/tpl-inactive-logout-settings.php:48
-msgid "Disable Timeout Countdown"
-msgstr "Disable Timeout Countdown"
-
-#: ../views/tpl-inactive-logout-settings.php:51
-msgid ""
-"When timeout popup is shown user is not logged out instantly. It gives user "
-"a chance to keep using or logout for 10 seconds. Remove this feature and "
-"directly log out after inactive."
-msgstr ""
-"When timeout popup is shown user is not logged out instantly. It gives user "
-"a chance to keep using or logout for 10 seconds. Remove this feature and "
-"directly log out after inactive."
-
-#: ../views/tpl-inactive-logout-settings.php:55
-msgid "Show Warn Message Only"
-msgstr "Show Warn Message Only"
-
-#: ../views/tpl-inactive-logout-settings.php:58
-msgid "Will show warn message without logout url but user will not log out."
-msgstr "Will show warn message without logout url but user will not log out."
-
-#: ../views/tpl-inactive-logout-settings.php:62
-msgid "Warn Message Content"
-msgstr "Warn Message Content"
-
-#: ../views/tpl-inactive-logout-settings.php:74
-msgid ""
-"Use {wakup_timout} to show minutes. This is message that will be shown when "
-"inactive."
-msgstr ""
-"Use {wakup_timout} to show minutes. This is message that will be shown when "
-"inactive."
-
-#: ../views/tpl-inactive-logout-settings.php:86
-msgid "Save Changes"
-msgstr "Save Changes"
-
 #. Name of the plugin
+#: src/inactive-logout-admin-views.php:32
 msgid "Inactive Logout"
 msgstr "Inactive Logout"
 
-#. URI of the plugin
-msgid "http://www.deepenbajracharya.com.np"
-msgstr "http://www.deepenbajracharya.com.np"
+#: src/inactive-logout-functions.php:69
+msgid "You have been logged out because of inactivity."
+msgstr "You have been logged out because of inactivity."
+
+#: src/inactive-logout-helpers.php:39
+#: views/tabs/tpl-inactive-logout-basic.php:9
+msgid "Minute(s)"
+msgstr "Minute(s)"
+
+#: src/inactive-logout-main.php:210
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
+"your WordPress install."
+msgstr ""
+"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
+"your WordPress install."
+
+#: src/inactive-logout-main.php:214
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
+"about moving you to a newer version of PHP."
+msgstr ""
+"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
+"about moving you to a newer version of PHP."
+
+#: views/tpl-inactive-logout-dialog.php:28
+#: views/tpl-inactive-logout-dialog.php:41
+msgid "Continue"
+msgstr "Continue"
+
+#: views/tpl-inactive-logout-dialog.php:36
+msgid "Session Timeout"
+msgstr "Session Timeout"
+
+#: views/tpl-inactive-logout-settings.php:3
+msgid "Updated !"
+msgstr "Updated !"
+
+#: views/tpl-inactive-logout-settings.php:3
+msgid "Dismiss this notice."
+msgstr "Dismiss this notice."
+
+#: views/tabs/tpl-inactive-logout-advanced.php:87
+#: views/tabs/tpl-inactive-logout-basic.php:123
+msgid "Save Changes"
+msgstr "Save Changes"
+
+#: views/tabs/tpl-inactive-logout-basic.php:6
+msgid "Idle Timeout"
+msgstr "Idle Timeout"
+
+#: views/tabs/tpl-inactive-logout-basic.php:13
+msgid "Idle Message Content"
+msgstr "Idle Message Content"
+
+#: views/tabs/tpl-inactive-logout-basic.php:25
+msgid "Message to be shown when idle timeout screen shows."
+msgstr "Message to be shown when idle timeout screen shows."
+
+#: views/tabs/tpl-inactive-logout-basic.php:43
+msgid "Disable Timeout Countdown"
+msgstr "Disable Timeout Countdown"
+
+#: views/tabs/tpl-inactive-logout-basic.php:46
+msgid ""
+"When timeout popup is shown user is not logged out instantly. It gives user "
+"a chance to keep using or logout for 10 seconds. Remove this feature and "
+"directly log out after inactive."
+msgstr ""
+"When timeout popup is shown user is not logged out instantly. It gives user "
+"a chance to keep using or logout for 10 seconds. Remove this feature and "
+"directly log out after inactive."
+
+#: views/tabs/tpl-inactive-logout-basic.php:50
+msgid "Show Warn Message Only"
+msgstr "Show Warn Message Only"
+
+#: views/tabs/tpl-inactive-logout-basic.php:53
+msgid "Will show warn message without logout url but user will not log out."
+msgstr "Will show warn message without logout url but user will not log out."
+
+#: views/tabs/tpl-inactive-logout-basic.php:58
+msgid "Warn Message Content"
+msgstr "Warn Message Content"
+
+#: views/tabs/tpl-inactive-logout-basic.php:70
+msgid ""
+"Use {wakup_timout} to show minutes. This is message that will be shown when "
+"inactive."
+msgstr ""
+"Use {wakup_timout} to show minutes. This is message that will be shown when "
+"inactive."
 
 #. Description of the plugin
 msgid ""
@@ -140,28 +258,10 @@ msgstr ""
 "Inactive logout provides functionality to log out any idle users defined "
 "specified time showing a message. Works for frontend as well."
 
+#. URI of the plugin
+msgid "http://www.deepenbajracharya.com.np"
+msgstr "http://www.deepenbajracharya.com.np"
+
 #. Author of the plugin
 msgid "Deepen Bajracharya"
 msgstr "Deepen Bajracharya"
-
-#: ../src/inactive-logout-functions.php:43
-msgid "You have been logged out because of inactivity."
-msgstr "You have been logged out because of inactivity."
-
-#: ../src/inactive-logout-main.php:197
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
-"your WordPress install."
-msgstr ""
-"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
-"your WordPress install."
-
-#: ../src/inactive-logout-main.php:201
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
-"about moving you to a newer version of PHP."
-msgstr ""
-"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
-"about moving you to a newer version of PHP."

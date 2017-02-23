@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-12 06:44+0000\n"
-"PO-Revision-Date: 2017-02-12 06:44+0000\n"
-"Last-Translator: Roland Dietz <roland.dietz@gmail.com>\n"
+"POT-Creation-Date: 2017-02-23 09:41+0000\n"
+"PO-Revision-Date: 2017-02-23 09:41+0000\n"
+"Last-Translator: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
 "Language-Team: German\n"
 "Language: de-DE\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,242 @@ msgstr ""
 "X-Loco-Target-Locale: de_DE\n"
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Poedit-SearchPath-0: .."
+
+#: src/inactive-logout-functions.php:114
+msgid "Reset advanced settings successfull."
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:7
+msgid "Basic Management"
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:8
+msgid "Advanced Management"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:8
+msgid "Multi-Role Timeout"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:11
+msgid "This will enable multi-user role timeout functionality."
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:15
+msgid "Enable Multi-User Feature"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:27
+msgid ""
+"This will allow you to define different timeout constraint according to "
+"different selected user roles."
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:35
+msgid "User Role"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:36
+msgid "Timeout (In Minutes)"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:38
+#: views/tabs/tpl-inactive-logout-advanced.php:84
+msgid "Disable"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:50
+msgid "Set Global Redirect Page"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:85
+#, php-format
+msgid ""
+"Note: %s is used for disabling inactive logout functionality to that "
+"specific user."
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:87
+msgid ""
+"Are you sure you want to erase all advanced settings. This cannot be undone !"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:87
+msgid "Reset Advanced Settings !"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-basic.php:54
+msgid ""
+"Please note ! Multi role timeout feature will not work when this setting is "
+"enabled. Similarly, idle Message Content will be ignored and replaced with "
+"this content."
+msgstr ""
+
+#: src/inactive-logout-admin-views.php:31
+#: views/tpl-inactive-logout-settings.php:1
+msgid "Inactive User Logout Settings"
+msgstr "„Abmeldung inaktiver Benutzer“-Einstellungen"
+
+#: src/inactive-logout-admin-views.php:32
+msgid "Inactive Logout"
+msgstr "Abmeldung inaktiver Benutzer"
+
+#: src/inactive-logout-functions.php:69
+msgid "You have been logged out because of inactivity."
+msgstr "Sie wurden aufgrund von Inaktivität abgemeldet."
+
+#: src/inactive-logout-helpers.php:39
+#: views/tabs/tpl-inactive-logout-basic.php:9
+msgid "Minute(s)"
+msgstr "Minute(n)"
+
+#: src/inactive-logout-main.php:210
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
+"your WordPress install."
+msgstr ""
+"Sorry, „Abmeldung inaktiver Benutzer“ benötigt WordPress Version %s oder "
+"höher. Bitte aktualisieren Sie Ihre WordPress-Installation."
+
+#: src/inactive-logout-main.php:214
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
+"about moving you to a newer version of PHP."
+msgstr ""
+"Sorry, „Abmeldung inaktiver Benutzer“ benötigt PHP Version %s oder höher. "
+"Bitte wenden Sie sich an Ihren Webhoster, um eine neuere PHP-Version zu "
+"installieren."
+
+#: views/tpl-inactive-logout-dialog.php:28
+#: views/tpl-inactive-logout-dialog.php:41
+msgid "Continue"
+msgstr "Fortsetzen"
+
+#: views/tpl-inactive-logout-dialog.php:36
+msgid "Session Timeout"
+msgstr "Session-Timeout"
+
+#: views/tpl-inactive-logout-settings.php:3
+msgid "Updated !"
+msgstr "Aktualisiert!"
+
+#: views/tpl-inactive-logout-settings.php:3
+msgid "Dismiss this notice."
+msgstr "Diese Nachricht ausblenden."
+
+#: views/tabs/tpl-inactive-logout-advanced.php:37
+#: views/tabs/tpl-inactive-logout-basic.php:88
+msgid "Redirect Page"
+msgstr "Umleitungsseite wählen"
+
+#: views/tabs/tpl-inactive-logout-advanced.php:73
+#: views/tabs/tpl-inactive-logout-basic.php:113
+msgid "No Posts Found."
+msgstr "Keine Einträge gefunden."
+
+#: views/tabs/tpl-inactive-logout-advanced.php:87
+#: views/tabs/tpl-inactive-logout-basic.php:123
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#: views/tabs/tpl-inactive-logout-basic.php:6
+msgid "Idle Timeout"
+msgstr "Leerlaufzeit-Überschreitung"
+
+#: views/tabs/tpl-inactive-logout-basic.php:13
+msgid "Idle Message Content"
+msgstr "Text der Leerlaufzeit-Nachricht"
+
+#: views/tabs/tpl-inactive-logout-basic.php:25
+msgid "Message to be shown when idle timeout screen shows."
+msgstr ""
+"Diese Meldung wird ausgegeben, wenn die Leerlaufzeit-Nachricht angezeigt "
+"wird."
+
+#: views/tabs/tpl-inactive-logout-basic.php:29
+msgid "Popup Background"
+msgstr "Hintergrund der Benachrichtigung"
+
+#: views/tabs/tpl-inactive-logout-basic.php:32
+msgid ""
+"Choose a background color to hide after logout. Enabling this option will "
+"remove tranparency."
+msgstr "Das Aktivieren dieser Option entfernt die Transparenz."
+
+#: views/tabs/tpl-inactive-logout-basic.php:36
+msgid "Popup Background Color"
+msgstr "Hintergrundfarbe der Benachrichtigung"
+
+#: views/tabs/tpl-inactive-logout-basic.php:39
+msgid "Choose a popup background color."
+msgstr "Wählen Sie die Hintergrundfarbe der Benachrichtigung."
+
+#: views/tabs/tpl-inactive-logout-basic.php:43
+msgid "Disable Timeout Countdown"
+msgstr "Leerlaufzeit-Countdown deaktivieren"
+
+#: views/tabs/tpl-inactive-logout-basic.php:46
+msgid ""
+"When timeout popup is shown user is not logged out instantly. It gives user "
+"a chance to keep using or logout for 10 seconds. Remove this feature and "
+"directly log out after inactive."
+msgstr ""
+"Der Benutzer nicht unverzüglich abgemeldet, wenn die Zeitlimit-"
+"Benachrichtigung angezeigt wird. Er hat 10 Sekunden lang die Möglichkeit "
+"sich zu entscheiden, ob er angemeldet bleiben möchte oder sich abzumelden. "
+"Hiermit deaktivieren Sie diese Funktion und der Benutzer wird nach Ablauf "
+"des Leerlaufzeit-Limits unverzüglich abgemeldet."
+
+#: views/tabs/tpl-inactive-logout-basic.php:50
+msgid "Show Warn Message Only"
+msgstr "Nur Warnhinweis anzeigen"
+
+#: views/tabs/tpl-inactive-logout-basic.php:53
+msgid "Will show warn message without logout url but user will not log out."
+msgstr ""
+"Dem Benutzer wird ein Warnhinweis (ohne Abmelde-Link) angezeigt, er wird "
+"aber nicht abgemeldet."
+
+#: views/tabs/tpl-inactive-logout-basic.php:58
+msgid "Warn Message Content"
+msgstr "Text der Warnhinweises"
+
+#: views/tabs/tpl-inactive-logout-basic.php:70
+msgid ""
+"Use {wakup_timout} to show minutes. This is message that will be shown when "
+"inactive."
+msgstr ""
+"Diese Nachricht wird bei Inaktivität angezeigt. Verwenden Sie {wakup_timout},"
+" um die Dauer in Minuten anzuzeigen."
+
+#: views/tabs/tpl-inactive-logout-basic.php:74
+msgid "Disable Concurrent Logins"
+msgstr "Mehrfach-Anmeldungen verhindern"
+
+#: views/tabs/tpl-inactive-logout-basic.php:77
+msgid "This will unable user to login using same account in different places."
+msgstr ""
+"Dies verhindert, dass sich ein Benutzer von unterschiedlichen Stellen unter "
+"Verwendung der gleichen Kontodaten mehrfach anmeldet."
+
+#: views/tabs/tpl-inactive-logout-basic.php:81
+msgid "Enable Redirect"
+msgstr "Umleitung aktivieren"
+
+#: views/tabs/tpl-inactive-logout-basic.php:84
+msgid ""
+"If not checked then user will be logged out to login screen after timeout."
+msgstr ""
+"Wenn dieses Auswahlkästchen deaktiviert ist wird der Benutzer wird nach dem "
+"Abmelden zur Login-Seite umgeleitet."
+
+#: views/tabs/tpl-inactive-logout-basic.php:118
+msgid "Select a page to redirect to after session timeout and clicking OK."
+msgstr ""
+"Wählen Sie die Seite, zu der der Benutzer nach dem Abmelden umgeleitet "
+"werden soll."
 
 #. Description of the plugin
 msgid ""
@@ -41,165 +277,3 @@ msgstr "Deepen Bajracharya"
 #. Author URI of the plugin
 msgid "https://www.deepenbajracharya.com.np"
 msgstr "https://www.deepenbajracharya.com.np"
-
-#: src/inactive-logout-admin-views.php:24
-#: views/tpl-inactive-logout-settings.php:2
-msgid "Inactive User Logout Settings"
-msgstr "„Abmeldung inaktiver Benutzer“-Einstellungen"
-
-#: src/inactive-logout-admin-views.php:25
-msgid "Inactive Logout"
-msgstr "Abmeldung inaktiver Benutzer"
-
-#: src/inactive-logout-functions.php:49
-msgid "You have been logged out because of inactivity."
-msgstr "Sie wurden aufgrund von Inaktivität abgemeldet."
-
-#: src/inactive-logout-helpers.php:39 views/tpl-inactive-logout-settings.php:14
-msgid "Minute(s)"
-msgstr "Minute(n)"
-
-#: src/inactive-logout-main.php:204
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
-"your WordPress install."
-msgstr ""
-"Sorry, „Abmeldung inaktiver Benutzer“ benötigt WordPress Version %s oder "
-"höher. Bitte aktualisieren Sie Ihre WordPress-Installation."
-
-#: src/inactive-logout-main.php:208
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
-"about moving you to a newer version of PHP."
-msgstr ""
-"Sorry, „Abmeldung inaktiver Benutzer“ benötigt PHP Version %s oder höher. "
-"Bitte wenden Sie sich an Ihren Webhoster, um eine neuere PHP-Version zu "
-"installieren."
-
-#: views/tpl-inactive-logout-dialog.php:18
-#: views/tpl-inactive-logout-dialog.php:31
-msgid "Continue"
-msgstr "Fortsetzen"
-
-#: views/tpl-inactive-logout-dialog.php:26
-msgid "Session Timeout"
-msgstr "Session-Timeout"
-
-#: views/tpl-inactive-logout-settings.php:4
-msgid "Updated !"
-msgstr "Aktualisiert!"
-
-#: views/tpl-inactive-logout-settings.php:4
-msgid "Dismiss this notice."
-msgstr "Diese Nachricht ausblenden."
-
-#: views/tpl-inactive-logout-settings.php:11
-msgid "Idle Timeout"
-msgstr "Leerlaufzeit-Überschreitung"
-
-#: views/tpl-inactive-logout-settings.php:18
-msgid "Idle Message Content"
-msgstr "Text der Leerlaufzeit-Nachricht"
-
-#: views/tpl-inactive-logout-settings.php:30
-msgid "Message to be shown when idle timeout screen shows."
-msgstr ""
-"Diese Meldung wird ausgegeben, wenn die Leerlaufzeit-Nachricht angezeigt "
-"wird."
-
-#: views/tpl-inactive-logout-settings.php:34
-msgid "Popup Background"
-msgstr "Hintergrund der Benachrichtigung"
-
-#: views/tpl-inactive-logout-settings.php:37
-msgid ""
-"Choose a background color to hide after logout. Enabling this option will "
-"remove tranparency."
-msgstr "Das Aktivieren dieser Option entfernt die Transparenz."
-
-#: views/tpl-inactive-logout-settings.php:41
-msgid "Popup Background Color"
-msgstr "Hintergrundfarbe der Benachrichtigung"
-
-#: views/tpl-inactive-logout-settings.php:44
-msgid "Choose a popup background color."
-msgstr "Wählen Sie die Hintergrundfarbe der Benachrichtigung."
-
-#: views/tpl-inactive-logout-settings.php:48
-msgid "Disable Timeout Countdown"
-msgstr "Leerlaufzeit-Countdown deaktivieren"
-
-#: views/tpl-inactive-logout-settings.php:51
-msgid ""
-"When timeout popup is shown user is not logged out instantly. It gives user "
-"a chance to keep using or logout for 10 seconds. Remove this feature and "
-"directly log out after inactive."
-msgstr ""
-"Der Benutzer nicht unverzüglich abgemeldet, wenn die Zeitlimit-"
-"Benachrichtigung angezeigt wird. Er hat 10 Sekunden lang die Möglichkeit "
-"sich zu entscheiden, ob er angemeldet bleiben möchte oder sich abzumelden. "
-"Hiermit deaktivieren Sie diese Funktion und der Benutzer wird nach Ablauf "
-"des Leerlaufzeit-Limits unverzüglich abgemeldet."
-
-#: views/tpl-inactive-logout-settings.php:55
-msgid "Show Warn Message Only"
-msgstr "Nur Warnhinweis anzeigen"
-
-#: views/tpl-inactive-logout-settings.php:58
-msgid "Will show warn message without logout url but user will not log out."
-msgstr ""
-"Dem Benutzer wird ein Warnhinweis (ohne Abmelde-Link) angezeigt, er wird "
-"aber nicht abgemeldet."
-
-#: views/tpl-inactive-logout-settings.php:62
-msgid "Warn Message Content"
-msgstr "Text der Warnhinweises"
-
-#: views/tpl-inactive-logout-settings.php:74
-msgid ""
-"Use {wakup_timout} to show minutes. This is message that will be shown when "
-"inactive."
-msgstr ""
-"Diese Nachricht wird bei Inaktivität angezeigt. Verwenden Sie {wakup_timout},"
-" um die Dauer in Minuten anzuzeigen."
-
-#: views/tpl-inactive-logout-settings.php:78
-msgid "Disable Concurrent Logins"
-msgstr "Mehrfach-Anmeldungen verhindern"
-
-#: views/tpl-inactive-logout-settings.php:81
-msgid "This will unable user to login using same account in different places."
-msgstr ""
-"Dies verhindert, dass sich ein Benutzer von unterschiedlichen Stellen unter "
-"Verwendung der gleichen Kontodaten mehrfach anmeldet."
-
-#: views/tpl-inactive-logout-settings.php:85
-msgid "Enable Redirect"
-msgstr "Umleitung aktivieren"
-
-#: views/tpl-inactive-logout-settings.php:88
-msgid ""
-"If not checked then user will be logged out to login screen after timeout."
-msgstr ""
-"Wenn dieses Auswahlkästchen deaktiviert ist wird der Benutzer wird nach dem "
-"Abmelden zur Login-Seite umgeleitet."
-
-#: views/tpl-inactive-logout-settings.php:92
-msgid "Redirect Page"
-msgstr "Umleitungsseite wählen"
-
-#: views/tpl-inactive-logout-settings.php:103
-msgid "No Posts Found."
-msgstr "Keine Einträge gefunden."
-
-#: views/tpl-inactive-logout-settings.php:108
-msgid "Select a page to redirect to after session timeout and clicking OK."
-msgstr ""
-"Wählen Sie die Seite, zu der der Benutzer nach dem Abmelden umgeleitet "
-"werden soll."
-
-#: views/tpl-inactive-logout-settings.php:113
-msgid "Save Changes"
-msgstr "Änderungen speichern"

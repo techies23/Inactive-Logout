@@ -21,6 +21,13 @@ class Inactive__Logout_functions {
 		//Ajax for checking last session
 		add_action( 'wp_ajax_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
 		add_action( 'wp_ajax_nopriv_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
+
+		//Ajax for resetting
+		add_action( 'wp_ajax_ina_reset_adv_settings', array( $this, 'ina_reset_adv_settings' ) );
+
+		//Ajax for User Roles only
+		add_action( 'wp_ajax_ina_save_disabled_roles', array( $this, 'ina_save_disabled_roles' ) );
+		add_action( 'wp_ajax_ina_get_enabled_roles', array( $this, 'ina_get_enabled_roles' ) );
 	}
 
 	/**
@@ -40,8 +47,21 @@ class Inactive__Logout_functions {
 				case 'ina_logout':
 				$ina_enable_redirect = get_option( '__ina_enable_redirect' );
 				$ina_redirect_page_link = get_option( '__ina_redirect_page_link' );
+				//Enabled Multi user Timeout
+				$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+
 				if( !empty($ina_enable_redirect) ) {
 					$redirect_link = get_the_permalink($ina_redirect_page_link);
+				}
+
+				if($ina_multiuser_timeout_enabled) {
+					global $current_user;
+					$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+					foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
+						if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
+							$redirect_link = get_the_permalink($ina_multiuser_setting['redirect_page']);
+						}
+					}
 				}
 
 				//Logout Current Users
@@ -57,6 +77,11 @@ class Inactive__Logout_functions {
 		wp_die();
 	}
 
+	/**
+	 * Get All PAges and Posts
+	 * @since  1.2.0
+	 * @return $object
+	 */
 	public static function ina_get_all_pages_posts() {
 		$result = array();
 		$pages = get_posts( array(
@@ -76,9 +101,39 @@ class Inactive__Logout_functions {
 	}
 
 	/**
+	 * Reset Advanced Settings
+	 * @since  1.3.0
+	 * @return $object
+	 */
+	public function ina_reset_adv_settings() {
+		check_ajax_referer( '_ina_nonce_security', 'security' );
+		delete_option( '__ina_roles' );
+		delete_option( '__ina_enable_timeout_multiusers' );
+		delete_option( '__ina_multiusers_settings' );
+
+		wp_send_json( array('code' => 1, 'msg' => __("Reset advanced settings successfull.", "ina-logout") ) );
+		wp_die();
+	}
+
+	/**
 	* Add a Timeout Defined Meta tag for JS
 	*/
 	public function ina_adding_meta_tag() {
+		global $current_user;
+
+		$ina_logout_time = get_option( '__ina_logout_time' ) ? get_option( '__ina_logout_time' ) : NULL;
+		$idle_disable_countdown = get_option( '__ina_disable_countdown' ) ? get_option( '__ina_disable_countdown' ) : NULL;
+		$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' ) ? get_option( '__ina_warn_message_enabled' ) : NULL;
+
+		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+		if($ina_multiuser_timeout_enabled) {
+			$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+			foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
+				if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
+					$ina_logout_time = $ina_multiuser_setting['timeout'] * 60; //Seconds
+				}
+			}
+		}
 		require_once INACTIVE_LOGOUT_VIEWS . '/add-meta.php';
 	}
 
