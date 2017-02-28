@@ -48,6 +48,12 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 
 == Changelog ==
 
+= 1.3.2 =
+* Updated: German translation. Compatible to version 1.3 Thanks to Roland Dietz
+
+= 1.3.1 =
+* Updated: Swedish translation. Compatible to version 1.3 Thanks to @nijen
+
 = 1.3.0 =
 * Added: Basic and Advanced configuration features
 * Minor Bug Fixes
