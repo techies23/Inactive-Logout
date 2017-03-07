@@ -48,6 +48,9 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 
 == Changelog ==
 
+= 1.3.3 =
+* Updated: Spanish translation. Compatible to version 1.3. Thanx to Miguel Arroyo.
+
 = 1.3.2 =
 * Updated: German translation. Compatible to version 1.3 Thanks to Roland Dietz
 
