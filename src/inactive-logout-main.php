@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.3.3';
+	const INA_VERSION = '1.3.5';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -185,17 +185,17 @@ final class Inactive__Logout_Main {
 	/**
 	* Test PHP and WordPress versions for compatibility
 	*
-	* @param string $system - system to be tested such as 'php' or 'wordpress'
+	* @param string $checking - checking to be tested such as 'php' or 'wordpress'
 	*
-	* @return boolean - is the existing version of the system supported?
+	* @return boolean - is the existing version of the checking supported?
 	*/
-	public function ina_supportedVersion( $system ) {
-		switch ( strtolower( $system ) ) {
+	public function ina_supportedVersion( $checking ) {
+		switch ( strtolower( $checking ) ) {
 			case 'wordpress':
 			$supported = version_compare( get_bloginfo( 'version' ), '4.0', '>=' );
 			break;
 			case 'php':
-			$supported = version_compare( phpversion(), '5.4', '>=' );
+			$supported = version_compare( phpversion(), '5.2', '>=' );
 			break;
 		}
 

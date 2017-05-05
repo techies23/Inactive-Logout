@@ -1,7 +1,7 @@
 === Inactive Logout ===
 Contributors: j__3rk
 Tags: idle, idle logout, idle user, auto logout, autologout, inactive, inactive user, inactive, logout, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
-Donate link: https://deepenbajracharya.com.np/donate-via-paypal/
+Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.5.2
 Tested up to: 4.7
 Stable tag: 4.7
@@ -39,6 +39,17 @@ In order to style dialog boxes you can use css classes. Also, works in **fronten
 
 Upload the plugin to your blog, Activate it, Load...and You're done!
 
+== Frequently Asked Questions ==
+
+= Plugin Conflicts =
+
+Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 might find conflict issue with colorpicker javascript library. This conflict was identified by [psn](https://wordpress.org/support/users/psn/ "PSN") and has been fixed in later versions of slim stat analytics.
+
+= Popup Modal Customization HTML Render Elements =
+
+* For Default popup customization: [Code](https://gist.github.com/techies23/e9b54467b05f25f189ed5ff52375ef41 "Default popup code")
+* For Wakeup popup customization: [Code](https://gist.github.com/techies23/546b9a85eda645207704cb9cf1cf8a9a "Wakeup popup code")
+
 == Screenshots ==
 
 1. Showing Inactive Logout Settings Page.
@@ -47,6 +58,14 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.3.5 =
+* Updated: Updated Sweedish translation.
+* Change: Small fix regarding php version compatibility.
+* Removed: Beta Version for advanced management
+
+= 1.3.4 =
+* Security: Fixed a non-security though a security issue. Where a variable named system is changed because virustotal was showing it was a threat.
 
 = 1.3.3 =
 * Updated: Spanish translation. Compatible to version 1.3. Thanx to Miguel Arroyo.

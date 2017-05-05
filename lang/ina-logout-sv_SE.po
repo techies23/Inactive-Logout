@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 09:17+0100\n"
-"PO-Revision-Date: 2017-02-24 09:44+0100\n"
+"POT-Creation-Date: 2017-05-04 08:49+0200\n"
+"PO-Revision-Date: 2017-05-04 09:22+0200\n"
 "Last-Translator: Björn Granberg <write@maskinmedia.se>\n"
 "Language-Team: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
 "Language: sv_SE\n"
@@ -19,7 +19,7 @@ msgstr ""
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Loco-Target-Locale: en_US\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: src/inactive-logout-admin-views.php:31
@@ -43,7 +43,7 @@ msgstr "Avancerade inställningar har återställts."
 #: src/inactive-logout-helpers.php:39
 #: views/tabs/tpl-inactive-logout-basic.php:9
 msgid "Minute(s)"
-msgstr "Minut(er) av inaktivitet."
+msgstr "Minut(er)"
 
 #: src/inactive-logout-main.php:210
 #, php-format
@@ -74,7 +74,7 @@ msgstr "Systemmeddelande"
 
 #: views/tpl-inactive-logout-settings.php:3
 msgid "Updated !"
-msgstr "Uppdaterad !"
+msgstr "Inställningarna sparades!"
 
 #: views/tpl-inactive-logout-settings.php:3
 msgid "Dismiss this notice."
@@ -94,7 +94,7 @@ msgstr "Rollvis timeout"
 
 #: views/tabs/tpl-inactive-logout-advanced.php:11
 msgid "This will enable multi-user role timeout functionality."
-msgstr "Gör det möjligt att ställa in time-out per användarroll"
+msgstr "Gör det möjligt att ställa in time-out per användarroll."
 
 #: views/tabs/tpl-inactive-logout-advanced.php:15
 msgid "Enable Multi-User Feature"
@@ -126,7 +126,7 @@ msgstr "Inaktivera"
 
 #: views/tabs/tpl-inactive-logout-advanced.php:50
 msgid "Set Global Redirect Page"
-msgstr "Välj global utloggningssida"
+msgstr "Välj utloggningssida"
 
 #: views/tabs/tpl-inactive-logout-advanced.php:73
 #: views/tabs/tpl-inactive-logout-basic.php:113
@@ -155,7 +155,7 @@ msgstr ""
 
 #: views/tabs/tpl-inactive-logout-advanced.php:87
 msgid "Reset Advanced Settings !"
-msgstr "Återställ avancerade inställningar"
+msgstr "Återställ avancerade inställningar!"
 
 #: views/tabs/tpl-inactive-logout-basic.php:6
 msgid "Idle Timeout"
@@ -231,8 +231,8 @@ msgid ""
 "Use {wakup_timout} to show minutes. This is message that will be shown when "
 "inactive."
 msgstr ""
-"Använd {wakup_timout} för att visa minuter. Detta meddelande visas vid "
-"inaktivitet."
+"Använd {wakup_timout} för att visa antal minuter i det meddelande som kommer "
+"upp vid inaktivitet."
 
 #: views/tabs/tpl-inactive-logout-basic.php:74
 msgid "Disable Concurrent Logins"
