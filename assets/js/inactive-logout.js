@@ -1,4 +1,5 @@
 var timeoutID;
+var tabID;
 var timeoutMessage;
 var ina_timeout = jQuery('meta[name=ina_timeout]').attr('content');
 var timeout_defined = ina_timeout * 1000; //Minutes
@@ -11,11 +12,20 @@ function setup() {
   this.addEventListener("mousewheel", resetTimer, false);
   this.addEventListener("touchmove", resetTimer, false);
   this.addEventListener("MSPointerMove", resetTimer, false);
+
+  //First get the broswer id
+  tabID = sessionStorage.tabID && sessionStorage.closedLastTab !== '2' ? sessionStorage.tabID : sessionStorage.tabID = Math.random();
+  sessionStorage.closedLastTab = '2';
+  jQuery(window).on('unload beforeunload', function() {
+    sessionStorage.closedLastTab = '1';
+  });
+  localStorage.setItem("ina__browserTabID", tabID);
+
   startTimer();
 }
 setup();
 
-//Starting timeout timer to go into inactive state after 10 seconds if any event like mousemove is not triggered
+//Starting timeout timer to go into inactive state after 15 seconds if any event like mousemove is not triggered
 function startTimer() {
   timeoutID = window.setTimeout(goInactive, 15000);
 }
@@ -24,6 +34,7 @@ function startTimer() {
 function resetTimer(e) {
   window.clearTimeout(timeoutID);
   window.clearTimeout(timeoutMessage);
+  localStorage.setItem("ina__browserTabID", tabID);
   goActive();
 }
 
@@ -40,10 +51,12 @@ function goInactive() {
       var postData = { action: 'ina_checklastSession', do: 'ina_updateLastSession', security: ina_ajax.ina_security, timestamp: timestamp };
       $.post( ina_ajax.ajaxurl, postData ).done(function(response) {
         console.log("Last Active on: " + Date.now());
+        var browserTabID = localStorage.getItem("ina__browserTabID");
+        if( browserTabID == tabID ) {
+          timeoutMessage = window.setTimeout(showTimeoutMessage, timeout_defined);
+        }
       });
     });
-
-    timeoutMessage = window.setTimeout(showTimeoutMessage, timeout_defined);
   }
 }
 

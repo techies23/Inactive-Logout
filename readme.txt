@@ -26,8 +26,14 @@ Simple but works efficiently. Nothing much to explain on plugin use. As its simp
 4. Custom Popup Message.
 5. Choose to use concurrent logout functionality derived from [prevent concurrent logins](https://wordpress.org/plugins/prevent-concurrent-logins/ "Prevent Concurrent Logins") by Frankie Jarrett. Thumbs up here too !
 6. Redirect to a Different Page instead of Popup box. Create a page such as timeout page and add your content there by creating a blank template or style it as you wish according to your theme.
+7. Multiple User Role Confiurations for individual timeout and redirects.
+8. Clean UI
+9. Simple to use
+10. Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
 
 In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
+
+Lemme know if there are any bugs and problems or enhancements you want to make..
 
 **See the [Inactive Logout](https://deepenbajracharya.com.np/wp-inactive-logout/ "Inactive Logout") homepage for further information. Contact Developer for those who need to write plugins.**
 
@@ -58,6 +64,9 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.4.0 =
+* Change: Added constant login functionality for all browser tabs which means even if the user has multiple browser tabs opened. Until the user is active plugin will not show any popups or logout the user. The timeout will only show in the last active tab window.
 
 = 1.3.5 =
 * Updated: Updated Sweedish translation.
@@ -116,6 +125,9 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.4.0 =
+Please upgrade to get new feature.
 
 = 1.3.0 =
 Please upgrade to get latest features.
