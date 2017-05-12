@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.4.0';
+	const INA_VERSION = '1.4.1';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -113,6 +113,7 @@ final class Inactive__Logout_Main {
 				$this->ina_addHooks();
 				$this->ina_loadDependencies();
 				$this->ina_define_them_constants();
+				$this->ina_check_session();
 			} else {
 				// Either PHP or WordPress version is inadequate so we simply return an error.
 				$this->ina_display_notSupportedError();
@@ -223,6 +224,21 @@ final class Inactive__Logout_Main {
 		$domain = 'ina-logout';
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 		load_plugin_textdomain( $domain, false, $this->plugin_dir . 'lang/' );
+	}
+
+	/**
+	 * Check Last Session. Logout if seesion is old
+	 */
+	public function ina_check_session() {
+		$user_session = get_user_meta( get_current_user_id(), '__ina_last_active_session', true );
+		$logout_minutes = get_option( '__ina_logout_time' );
+		if( !empty($user_session) ) {
+			$logout = $user_session + $logout_minutes;
+			if( time() >= $logout ) {
+				wp_logout();
+				delete_user_meta( get_current_user_id(), '__ina_last_active_session' );
+			}
+		}
 	}
 
 }

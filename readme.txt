@@ -1,6 +1,6 @@
 === Inactive Logout ===
 Contributors: j__3rk
-Tags: idle, idle logout, idle user, auto logout, autologout, inactive, inactive user, inactive, logout, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
+Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologout, inactive, inactive, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
 Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.5.2
 Tested up to: 4.7
@@ -16,7 +16,7 @@ Make your WP account secure from snoopers, friends to protect your data by assur
 
 Simple but works efficiently. Nothing much to explain on plugin use. As its simple to use. You can find inactive settings under settings menu in admin dashboard.
 
-**Please check [changelog](https://wordpress.org/plugins/inactive-logout/changelog/ "Change Log") to see what is added from version 1.3.0**
+**Please check [changelog](https://wordpress.org/plugins/inactive-logout/#developers "Change Log") to see what is added from version 1.3.0**
 
 **Some Feature Highlights**.
 
@@ -30,6 +30,7 @@ Simple but works efficiently. Nothing much to explain on plugin use. As its simp
 8. Clean UI
 9. Simple to use
 10. Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
+11. Logs out the session even after the browser tab is closed.
 
 In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
 
@@ -64,6 +65,9 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.4.1 =
+* Added: Logout session even after the browser is cold.
 
 = 1.4.0 =
 * Change: Added constant login functionality for all browser tabs which means even if the user has multiple browser tabs opened. Until the user is active plugin will not show any popups or logout the user. The timeout will only show in the last active tab window.
