@@ -57,6 +57,10 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 * For Default popup customization: [Code](https://gist.github.com/techies23/e9b54467b05f25f189ed5ff52375ef41 "Default popup code")
 * For Wakeup popup customization: [Code](https://gist.github.com/techies23/546b9a85eda645207704cb9cf1cf8a9a "Wakeup popup code")
 
+= Old users upgrading to version 1.4.1 =
+
+Users might face logout after activating or deactivating the plugin. Try to login again. If this does not work out then download the latest plugin by deleting the old version.
+
 == Screenshots ==
 
 1. Showing Inactive Logout Settings Page.
@@ -66,8 +70,14 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 
 == Changelog ==
 
+= 1.4.3 =
+* Bug Fix: Fixed logout caused when plugin is activated.
+
+= 1.4.2 =
+* Bug Fix: Fixed logout when plugin is deactivated.
+
 = 1.4.1 =
-* Added: Logout session even after the browser is cold.
+* Added: Logout session even after the browser is closed.
 
 = 1.4.0 =
 * Change: Added constant login functionality for all browser tabs which means even if the user has multiple browser tabs opened. Until the user is active plugin will not show any popups or logout the user. The timeout will only show in the last active tab window.
@@ -129,6 +139,9 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.4.3 =
+Please read FAQ section for old users.
 
 = 1.4.0 =
 Please upgrade to get new feature.
