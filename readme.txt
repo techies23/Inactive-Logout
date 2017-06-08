@@ -3,8 +3,8 @@ Contributors: j__3rk
 Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologout, inactive, inactive, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
 Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.5.2
-Tested up to: 4.7
-Stable tag: 4.7
+Tested up to: 4.8
+Stable tag: 1.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,13 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.4.7 =
+* WordPress 4.8 compatible
+
+= 1.4.4 - 1.4.5 =
+* Removed Functionality: Removed auto logout added in v1.4.1 - 1.4.3 due to logout bug.
+* Minor Bug Fixes
 
 = 1.4.3 =
 * Bug Fix: Fixed logout caused when plugin is activated.
@@ -139,6 +146,9 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.4.5 =
+Please read FAQ section for old users.
 
 = 1.4.3 =
 Please read FAQ section for old users.

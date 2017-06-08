@@ -55,6 +55,7 @@ class Inactive__logout__Helpers {
 	}
 
 	public function ina_check_role_enabledfor_multiuser($role = NULL) {
+		$selected = false;
 		if( !empty($role) ) {
 			$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
 			foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {

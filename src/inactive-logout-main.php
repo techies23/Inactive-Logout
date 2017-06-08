@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.4.3';
+	const INA_VERSION = '1.4.7';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -75,20 +75,9 @@ final class Inactive__Logout_Main {
 		update_option( '__ina_popup_overlay_color', '#000000' );
 		update_option( '__ina_logout_message', '<p>You are being timed-out out due to inactivity. Please choose to stay signed in or to logoff.</p><p>Otherwise, you will be logged off automatically.</p>' );
 		update_option( '__ina_warn_message', '<h3>Wakeup !</h3><p>You have been inactive for {wakup_timout}. Press continue to continue browsing.</p>' );
-
-		//Deelete all old seesssion data
-		$all_users = get_users();
-		foreach( $all_users as $user ) {
-			delete_user_meta( $user->ID, '__ina_last_active_session' );
-		}
 	}
 
 	public static function ina_deactivate() {
-		$all_users = get_users();
-		foreach( $all_users as $user ) {
-			delete_user_meta( $user->ID, '__ina_last_active_session' );
-		}
-
 		if (function_exists('is_multisite') && is_multisite()) {
 			global $wpdb;
 			$old_blog = $wpdb->blogid;
@@ -124,7 +113,6 @@ final class Inactive__Logout_Main {
 				$this->ina_addHooks();
 				$this->ina_loadDependencies();
 				$this->ina_define_them_constants();
-				$this->ina_check_session();
 			} else {
 				// Either PHP or WordPress version is inadequate so we simply return an error.
 				$this->ina_display_notSupportedError();
@@ -236,20 +224,4 @@ final class Inactive__Logout_Main {
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 		load_plugin_textdomain( $domain, false, $this->plugin_dir . 'lang/' );
 	}
-
-	/**
-	 * Check Last Session. Logout if seesion is old
-	 */
-	public function ina_check_session() {
-		$user_session = get_user_meta( get_current_user_id(), '__ina_last_active_session', true );
-		$logout_minutes = get_option( '__ina_logout_time' );
-		if( !empty($user_session) ) {
-			$logout = $user_session + $logout_minutes;
-			if( time() >= $logout ) {
-				wp_logout();
-				delete_user_meta( get_current_user_id(), '__ina_last_active_session' );
-			}
-		}
-	}
-
 }

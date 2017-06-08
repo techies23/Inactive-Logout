@@ -20,7 +20,7 @@
             foreach ($result_roles as $k => $role) {
               $selected = $this->helper->ina_check_role_enabledfor_multiuser($k);
               ?>
-              <option value="<?php echo $k; ?>" <?php echo $selected ? 'selected' : FALSE; ?>><?php echo $role; ?></option>
+              <option value="<?php echo $k; ?>" <?php echo !empty($selected) ? 'selected' : FALSE; ?>><?php echo $role; ?></option>
               <?php
             }
             ?>
