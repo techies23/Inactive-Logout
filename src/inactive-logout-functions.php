@@ -51,7 +51,12 @@ class Inactive__Logout_functions {
 				$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
 
 				if( !empty($ina_enable_redirect) ) {
-					$redirect_link = get_the_permalink($ina_redirect_page_link);
+					if( $ina_redirect_page_link == "custom-page-redirect" ) {
+						$ina_redirect_page_link = get_option( '__ina_custom_redirect_text_field' );
+						$redirect_link = $ina_redirect_page_link;
+					} else {
+						$redirect_link = get_the_permalink($ina_redirect_page_link);
+					}
 				}
 
 				if($ina_multiuser_timeout_enabled) {

@@ -64,6 +64,12 @@ class Inactive__Logout_adminViews {
 			$ina_popup_overlay_color = get_option( '__ina_popup_overlay_color' );
 			$ina_enable_redirect = get_option( '__ina_enable_redirect' );
 			$ina_redirect_page_link = get_option( '__ina_redirect_page_link' );
+
+			//IF redirect is custom page link
+			if( $ina_redirect_page_link == "custom-page-redirect" ) {
+				$custom_redirect_text_field = get_option( '__ina_custom_redirect_text_field' );
+			}
+
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-basic.php';
 		} else {
 			//ADVANCED
@@ -97,6 +103,10 @@ class Inactive__Logout_adminViews {
 		$ina_enable_redirect_link = filter_input(INPUT_POST, 'ina_enable_redirect_link', FILTER_SANITIZE_NUMBER_INT);
 		$ina_redirect_page = filter_input(INPUT_POST, 'ina_redirect_page');
 
+		if( $ina_redirect_page == "custom-page-redirect" ) {
+			$ina_custom_redirect_text_field = filter_input(INPUT_POST, 'custom_redirect_text_field');
+		}
+
 		$save_minutes = $idle_timeout * 60; //60 minutes
 		if($idle_timeout) {
 			update_option( '__ina_logout_time', $save_minutes );
@@ -109,6 +119,10 @@ class Inactive__Logout_adminViews {
 			update_option( '__ina_popup_overlay_color', $ina_background_popup );
 			update_option( '__ina_enable_redirect', $ina_enable_redirect_link );
 			update_option( '__ina_redirect_page_link', $ina_redirect_page );
+
+			if( $ina_redirect_page == "custom-page-redirect" ) {
+				update_option( '__ina_custom_redirect_text_field', $ina_custom_redirect_text_field );
+			}
 
 			return true;
 		}
@@ -129,7 +143,7 @@ class Inactive__Logout_adminViews {
 		$container_multi_user_arr = array();
 		if($ina_multiuser_roles) {
 			foreach( $ina_multiuser_roles as $k => $ina_multiuser_role ) {
-				$user_timeout_minutes = !empty($ina_individual_user_timeout[$k]) ? $ina_individual_user_timeout[$k] : NULL;
+				$user_timeout_minutes = !empty($ina_individual_user_timeout[$k]) ? $ina_individual_user_timeout[$k] : 15;
 				$multi_userredirect_page_link = !empty($ina_redirect_page_individual_user[$k]) ? $ina_redirect_page_individual_user[$k] : NULL;
 				$disabled_for_user = !empty($ina_disable_inactive_logout[$k]) ? $ina_disable_inactive_logout[$k] : NULL;
 				$container_multi_user_arr[] = array( 'role' => $ina_multiuser_role, 'timeout' => $user_timeout_minutes, 'redirect_page' => $multi_userredirect_page_link, 'disabled_feature' => $disabled_for_user );

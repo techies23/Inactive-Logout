@@ -72,6 +72,15 @@ jQuery(function($) {
     }
   });
 
+  //Select the custom page redirect then show a custom url text field
+  $('select[name=ina_redirect_page]').change(function() {
+    if( $(this).val() == "custom-page-redirect" ) {
+      $('.show_cutom_redirect_textfield').show();
+    } else {
+      $('.show_cutom_redirect_textfield').hide();
+    }
+  });
+
   /**
    * Reset all Advanced Data
    * @since  1.3.0

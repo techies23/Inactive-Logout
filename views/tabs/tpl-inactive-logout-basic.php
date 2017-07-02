@@ -88,6 +88,7 @@
         <th scope="row"><label for="ina_redirect_page"><?php _e("Redirect Page", "ina-logout"); ?></label></th>
         <td>
           <select name="ina_redirect_page" class="regular-text ina-hacking-select">
+            <option value="custom-page-redirect"><?php _e("External Page Redirect", "ina-logout"); ?></option>
             <?php
             $posts = Inactive__Logout_functions::ina_get_all_pages_posts();
             if( $posts ) { ?>
@@ -116,6 +117,13 @@
           ?>
         </select>
         <p class="description"><?php _e("Select a page to redirect to after session timeout and clicking OK.", "ina-logout"); ?></p>
+      </td>
+    </tr>
+    <tr class="show_cutom_redirect_textfield" <?php echo (!empty($ina_redirect_page_link) && $ina_redirect_page_link == "custom-page-redirect") ? false : 'style="display:none;"'; ?> >
+      <th scope="row"><label for="custom_redirect_text_field"><?php _e("Idle Timeout", "ina-logout"); ?></label></th>
+      <td>
+        <input name="custom_redirect_text_field" type="url" id="custom_redirect_text_field" class="regular-text code" value="<?php echo !empty($custom_redirect_text_field) ? $custom_redirect_text_field : false; ?>">
+        <p class="description"><?php printf( __("Link to custom url redirect. Ex: %s", "ina-logout"), 'https://deepenbajracharya.com.np/' ); ?></p>
       </td>
     </tr>
   </tbody>

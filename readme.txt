@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.5.2
 Tested up to: 4.8
-Stable tag: 1.4.7
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,10 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.5.0 =
+* Added External Page Redirect. Select from "Redirect Page" and choose option "External Page redirect". Available only for Basic settings.
+* Major Bug Fixes
 
 = 1.4.7 =
 * WordPress 4.8 compatible
@@ -147,20 +151,17 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 
 == Upgrade Notice ==
 
+= 1.5.0 =
+* Major improvements and fix updates, verify change log for upgrade.
 = 1.4.5 =
 Please read FAQ section for old users.
-
 = 1.4.3 =
 Please read FAQ section for old users.
-
 = 1.4.0 =
 Please upgrade to get new feature.
-
 = 1.3.0 =
 Please upgrade to get latest features.
-
 = 1.2.0 =
 Added Redirect to Custom Page functionality.
-
 = 1.1.3 =
 Crucial Upgrade. Contains fix for activation Error. Please upgrade.

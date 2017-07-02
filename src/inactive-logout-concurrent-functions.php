@@ -1,5 +1,5 @@
 <?php
-//Not Permission to agree more or less then given
+//Not Permission to agree more or less than given
 if( !defined('ABSPATH') ) {
 	die( '-1' );
 }
