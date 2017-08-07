@@ -107,6 +107,8 @@ class Inactive__Logout_adminViews {
 			$ina_custom_redirect_text_field = filter_input(INPUT_POST, 'custom_redirect_text_field');
 		}
 
+		do_action( 'ina_before_update_basic_settings' );
+
 		$save_minutes = $idle_timeout * 60; //60 minutes
 		if($idle_timeout) {
 			update_option( '__ina_logout_time', $save_minutes );
@@ -126,6 +128,8 @@ class Inactive__Logout_adminViews {
 
 			return true;
 		}
+
+		do_action( 'ina_after_update_basic_settings' );
 	}
 
 	public function ina__process_adv_settings() {
@@ -150,10 +154,14 @@ class Inactive__Logout_adminViews {
 			}
 		}
 
+		do_action( 'ina_before_update_adv_settings', $container_multi_user_arr );
+
 		update_option( '__ina_enable_timeout_multiusers', $ina_enable_different_role_timeout );
 		if( $ina_enable_different_role_timeout ) {
 			update_option( '__ina_multiusers_settings', $container_multi_user_arr );
 		}
+
+		do_action( 'ina_after_update_adv_settings' );
 
 		$this->helper->ina_reload();
 	}
