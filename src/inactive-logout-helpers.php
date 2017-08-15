@@ -68,6 +68,11 @@ class Inactive__logout__Helpers {
 		}
 	}
 
+	/**
+	 * Check to disable the Inactive for certain user role
+	 * @author  Deepen
+	 * @return BOOL
+	 */
 	public function ina_check_user_role() {
 		$user = wp_get_current_user();
 		$ina_roles = get_option( '__ina_multiusers_settings' );
@@ -75,6 +80,29 @@ class Inactive__logout__Helpers {
 		if( $ina_roles ) {
 			foreach( $ina_roles as $role ) {
 				if( $role['disabled_feature'] == 1 ) {
+					if ( in_array( $role['role'], (array) $user->roles ) ) {
+						$result = true;
+					}
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Check to disable the Inactive for certain user role
+	 * @author  Deepen
+	 * @since  1.6.0
+	 * @return BOOL
+	 */
+	public function ina_check_user_role_concurrent_login() {
+		$user = wp_get_current_user();
+		$ina_roles = get_option( '__ina_multiusers_settings' );
+		$result = false;
+		if( $ina_roles ) {
+			foreach( $ina_roles as $role ) {
+				if( $role['disabled_concurrent_login'] == 1 ) {
 					if ( in_array( $role['role'], (array) $user->roles ) ) {
 						$result = true;
 					}

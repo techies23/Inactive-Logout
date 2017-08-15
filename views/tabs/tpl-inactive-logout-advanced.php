@@ -33,10 +33,11 @@
   <?php if( !empty($ina_multiuser_settings) ) { ?>
   <table class="ina-form-tbl ina-multi-role-table wp-list-table widefat fixed striped pages">
     <thead>
-      <th class="manage-column" width="20%"><?php _e("User Role", "ina-logout"); ?></th>
+      <th class="manage-column" width="10%"><?php _e("User Role", "ina-logout"); ?></th>
       <th class="manage-column" width="15%"><?php _e("Timeout (In Minutes)", "ina-logout"); ?></th>
       <th class="manage-column" width="40%"><?php _e("Redirect Page", "ina-logout"); ?></th>
       <th class="manage-column" width="10%"><?php _e("Disable", "ina-logout"); ?></th>
+      <th class="manage-column" width="20%"><?php _e("Disable Concurrent Login", "ina-logout"); ?></th>
     </thead>
     <tbody>
       <?php
@@ -77,7 +78,8 @@
             ?>
           </select>
         </td>
-        <td><input type="checkbox" name="ina_disable_inactive_logout[]" <?php echo !empty($ina_multiuser_setting['disabled_feature']) ? 'checked' : false; ?> value="1"></td>
+        <td><input type="checkbox" name="ina_disable_inactive_logout[<?php echo $role; ?>]" <?php echo !empty($ina_multiuser_setting['disabled_feature']) ? 'checked' : false; ?> value="1"></td>
+        <td><input type="checkbox" name="ina_disable_inactive_concurrent_login[<?php echo $role; ?>]" <?php echo !empty($ina_multiuser_setting['disabled_concurrent_login']) ? 'checked' : false; ?> value="1"></td>
       </tr>
       <?php }  ?>
     </tbody>

@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.5.1';
+	const INA_VERSION = '1.6.0';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -144,10 +144,23 @@ final class Inactive__Logout_Main {
 		require_once $this->plugin_path . 'src/inactive-logout-functions.php';
 
 		$concurrent = get_option( '__ina_concurrent_login' );
-		if( isset($concurrent) == 1) {
-			require_once $this->plugin_path . 'src/inactive-logout-concurrent-functions.php';
-		}
 
+		//Checking if advanced settings are enabled
+		//@added from 1.6.0
+		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+		if( !empty($ina_multiuser_timeout_enabled) ) {
+			$settings = get_option( '__ina_multiusers_settings' );
+
+			$helper = Inactive__logout__Helpers::instance();
+			$disable_concurrent_login = $helper->ina_check_user_role_concurrent_login();
+			if( ! $disable_concurrent_login ) {
+				require_once $this->plugin_path . 'src/inactive-logout-concurrent-functions.php';
+			}
+		} else {
+			if( isset($concurrent) == 1 ) {
+				require_once $this->plugin_path . 'src/inactive-logout-concurrent-functions.php';
+			}
+		}
 	}
 
 	/**

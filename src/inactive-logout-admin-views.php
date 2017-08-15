@@ -143,14 +143,16 @@ class Inactive__Logout_adminViews {
 		$ina_individual_user_timeout = filter_input( INPUT_POST, 'ina_individual_user_timeout', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
 		$ina_redirect_page_individual_user = filter_input( INPUT_POST, 'ina_redirect_page_individual_user', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
 		$ina_disable_inactive_logout = filter_input( INPUT_POST, 'ina_disable_inactive_logout', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
+		$ina_disable_inactive_concurrent_login = filter_input( INPUT_POST, 'ina_disable_inactive_concurrent_login', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
 
 		$container_multi_user_arr = array();
 		if($ina_multiuser_roles) {
 			foreach( $ina_multiuser_roles as $k => $ina_multiuser_role ) {
 				$user_timeout_minutes = !empty($ina_individual_user_timeout[$k]) ? $ina_individual_user_timeout[$k] : 15;
 				$multi_userredirect_page_link = !empty($ina_redirect_page_individual_user[$k]) ? $ina_redirect_page_individual_user[$k] : NULL;
-				$disabled_for_user = !empty($ina_disable_inactive_logout[$k]) ? $ina_disable_inactive_logout[$k] : NULL;
-				$container_multi_user_arr[] = array( 'role' => $ina_multiuser_role, 'timeout' => $user_timeout_minutes, 'redirect_page' => $multi_userredirect_page_link, 'disabled_feature' => $disabled_for_user );
+				$disabled_for_user = !empty($ina_disable_inactive_logout[$ina_multiuser_role]) ? 1 : NULL;
+				$disabled_for_user_concurent_login = !empty($ina_disable_inactive_concurrent_login[$ina_multiuser_role]) ? 1 : NULL;
+				$container_multi_user_arr[] = array( 'role' => $ina_multiuser_role, 'timeout' => $user_timeout_minutes, 'redirect_page' => $multi_userredirect_page_link, 'disabled_feature' => $disabled_for_user, 'disabled_concurrent_login' => $disabled_for_user_concurent_login );
 			}
 		}
 

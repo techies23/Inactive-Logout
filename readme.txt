@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.5.2
 Tested up to: 4.8
-Stable tag: 1.5.1
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,13 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.6.0 =
+* Added "Disable Concurrent Logins For Certain Roles" in advanced management settings.
+* Bug Fix: Major fix that happened to update unselected user roles when trying to check a box.
+* Bug Fix: Custom URL redirect fields showing UI
+* 3 Major bug fixes
+* 5 Minor bug fixes
 
 = 1.5.1 =
 * Minor Changes.
@@ -154,6 +161,8 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 
 == Upgrade Notice ==
 
+= 1.6.0 =
+* Major improvements and fix updates, upgrade to get latest stable version.
 = 1.5.0 =
 * Major improvements and fix updates, verify change log for upgrade.
 = 1.4.5 =

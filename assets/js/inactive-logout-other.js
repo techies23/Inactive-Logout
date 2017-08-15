@@ -42,18 +42,32 @@ jQuery(function($) {
   if( $('#ina_enable_redirect_link').is(":checked") ) {
     $('.show_on_enable_redirect_link').show();
     $('.ina_hide_message_content').hide();
+
+    if( $('select[name=ina_redirect_page]').val() == "custom-page-redirect" ) {
+      $('.show_cutom_redirect_textfield').show();
+    } else {
+      $('.show_cutom_redirect_textfield').hide();
+    }
   } else {
     $('.show_on_enable_redirect_link').hide();
     $('.ina_hide_message_content').show();
+    $('.show_cutom_redirect_textfield').hide();
   }
 
   $('#ina_enable_redirect_link').click(function() {
     if( $( this ).prop( "checked" )) {
       $('.show_on_enable_redirect_link').show();
       $('.ina_hide_message_content').hide();
+
+      if( $('select[name=ina_redirect_page]').val() == "custom-page-redirect" ) {
+        $('.show_cutom_redirect_textfield').show();
+      } else {
+        $('.show_cutom_redirect_textfield').hide();
+      }
     } else {
       $('.show_on_enable_redirect_link').hide();
       $('.ina_hide_message_content').show();
+      $('.show_cutom_redirect_textfield').hide();
     }
   });
 
@@ -82,11 +96,11 @@ jQuery(function($) {
   });
 
   /**
-   * Reset all Advanced Data
-   * @since  1.3.0
-   * @author  Deepen
-   */
-   $('#ina-reset-adv-data').click(function() {
+  * Reset all Advanced Data
+  * @since  1.3.0
+  * @author  Deepen
+  */
+  $('#ina-reset-adv-data').click(function() {
     var msg = confirm( $(this).data('msg') );
     if( msg ) {
       var send_data = { security: ina_other_ajax.ina_security, action: 'ina_reset_adv_settings' };
@@ -102,4 +116,4 @@ jQuery(function($) {
       return false;
     }
   });
- });
+});
