@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.6.0';
+	const INA_VERSION = '1.6.3';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -66,7 +66,7 @@ final class Inactive__Logout_Main {
 		//Load Necessary Components after activation
 		self::instance()->ina_plugins_loaded();
 
-		Inactive__ConcurrentLogins_functions::ina_destroy_all_old_sessions();
+		// Inactive__ConcurrentLogins_functions::ina_destroy_all_old_sessions();
 	}
 
 	protected function _ina_activate_multisite() {
@@ -149,15 +149,13 @@ final class Inactive__Logout_Main {
 		//@added from 1.6.0
 		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
 		if( !empty($ina_multiuser_timeout_enabled) ) {
-			$settings = get_option( '__ina_multiusers_settings' );
-
 			$helper = Inactive__logout__Helpers::instance();
 			$disable_concurrent_login = $helper->ina_check_user_role_concurrent_login();
-			if( ! $disable_concurrent_login ) {
+			if( $disable_concurrent_login ) {
 				require_once $this->plugin_path . 'src/inactive-logout-concurrent-functions.php';
 			}
 		} else {
-			if( isset($concurrent) == 1 ) {
+			if( isset($concurrent) && $concurrent == 1 ) {
 				require_once $this->plugin_path . 'src/inactive-logout-concurrent-functions.php';
 			}
 		}
@@ -175,23 +173,45 @@ final class Inactive__Logout_Main {
 	 * Loading Backend Scripts
 	 */
 	public function ina_adminScripts($hook_suffix) {
+		global $current_user;
+
 		if( is_user_logged_in() ) {
+			$ina_logout_time = get_option( '__ina_logout_time' ) ? get_option( '__ina_logout_time' ) : NULL;
+			$idle_disable_countdown = get_option( '__ina_disable_countdown' ) ? get_option( '__ina_disable_countdown' ) : NULL;
+			$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' ) ? get_option( '__ina_warn_message_enabled' ) : NULL;
+
+			$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+			if($ina_multiuser_timeout_enabled) {
+				$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+				foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
+					if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
+						$ina_logout_time = $ina_multiuser_setting['timeout'] * 60; //Seconds
+					}
+				}
+			}
+
+			$ina_meta_data = array();
+			$ina_meta_data['ina_timeout'] = isset($ina_logout_time) ? $ina_logout_time : 15 * 60;
+			$ina_meta_data['ina_disable_countdown'] = isset($idle_disable_countdown) && $idle_disable_countdown == 1 ? $idle_disable_countdown : false;
+			$ina_meta_data['ina_warn_message_enabled'] = isset($ina_warn_message_enabled) && $ina_warn_message_enabled == 1 ? $ina_warn_message_enabled : false;
+
 			$helper = Inactive__logout__Helpers::instance();
 			$disable_timeoutjs = $helper->ina_check_user_role();
 			if( !$disable_timeoutjs ) {
-				wp_enqueue_script( INACTIVE_LOGOUT_SLUG . '-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout.js', array('jquery'), time(), true );
+				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout.js', array('jquery'), time(), true );
+				wp_localize_script( 'ina-logout-js', 'ina_meta_data', $ina_meta_data );
 			}
 
 			if( $hook_suffix == 'settings_page_inactive-logout' ) {
-				wp_enqueue_script( INACTIVE_LOGOUT_SLUG . '-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout-other.js', array('jquery', 'wp-color-picker'), time(), true );
-				wp_enqueue_script( INACTIVE_LOGOUT_SLUG . '-inactive-select-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/select2.min.js', array('jquery'), time(), true );
+				wp_enqueue_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout-other.js', array('jquery', 'wp-color-picker'), time(), true );
+				wp_enqueue_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/select2.min.js', array('jquery'), time(), true );
 
-				wp_enqueue_style( INACTIVE_LOGOUT_SLUG . '-inactive-select', INACTIVE_LOGOUT_ASSETS_URL . 'css/select2.min.css' , false, time() );
-				wp_localize_script( INACTIVE_LOGOUT_SLUG . '-inactive-logoutonly-js', 'ina_other_ajax', array( 'ajaxurl' => admin_url('admin-ajax.php'), 'ina_security' => wp_create_nonce( "_ina_nonce_security" ) ));
+				wp_enqueue_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_ASSETS_URL . 'css/select2.min.css' , false, time() );
+				wp_localize_script( 'ina-logout-inactive-logoutonly-js', 'ina_other_ajax', array( 'ajaxurl' => admin_url('admin-ajax.php'), 'ina_security' => wp_create_nonce( "_ina_nonce_security" ) ));
 			}
-			wp_enqueue_style( INACTIVE_LOGOUT_SLUG, INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.css' , false, time() );
+			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.css' , false, time() );
 
-			wp_localize_script( INACTIVE_LOGOUT_SLUG .'-js', 'ina_ajax', array( 'ajaxurl' => admin_url('admin-ajax.php'), 'ina_security' => wp_create_nonce( "_checklastSession" ) ));
+			wp_localize_script( 'ina-logout-js', 'ina_ajax', array( 'ajaxurl' => admin_url('admin-ajax.php'), 'ina_security' => wp_create_nonce( "_checklastSession" ) ));
 		}
 	}
 

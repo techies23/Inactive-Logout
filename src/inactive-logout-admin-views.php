@@ -41,6 +41,13 @@ class Inactive__Logout_adminViews {
 		$saved = false;
 		if( isset($_POST['submit']) ) {
 			$saved = $this->ina__process_basic_settings();
+			if( $saved ) {
+				?>
+				<script type="text/javascript">
+					document.location.reload(true);
+				</script>
+				<?php
+			}
 		}
 
 		if( isset($_POST['adv_submit']) ) {

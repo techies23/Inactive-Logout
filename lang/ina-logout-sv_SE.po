@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-04 08:49+0200\n"
-"PO-Revision-Date: 2017-05-04 09:22+0200\n"
-"Last-Translator: Björn Granberg <write@maskinmedia.se>\n"
-"Language-Team: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
-"Language: sv_SE\n"
+"POT-Creation-Date: 2017-08-31 14:13+0000\n"
+"PO-Revision-Date: 2017-08-31 14:19+0000\n"
+"Last-Translator: admin <dpen.connectify@gmail.com>\n"
+"Language-Team: Swedish\n"
+"Language: sv-SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
@@ -19,8 +19,46 @@ msgstr ""
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Loco-Target-Locale: en_US\n"
-"X-Generator: Poedit 2.0.1\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Poedit-SearchPath-0: .."
+
+#: views/tpl-inactive-logout-settings.php:5
+msgid "Like this plugin ?"
+msgstr "Gilla den här plugin?"
+
+#: views/tpl-inactive-logout-settings.php:5
+#, php-format
+msgid "Please consider giving a %s if you found this useful at wordpress.org."
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:10
+msgid "Support"
+msgstr "Stöd"
+
+#: views/tpl-inactive-logout-settings.php:11
+msgid "Contribute !"
+msgstr "Bidra "
+
+#: views/tabs/tpl-inactive-logout-advanced.php:40
+msgid "Disable Concurrent Login"
+msgstr "Inaktivera samtidig inloggning"
+
+#: views/tabs/tpl-inactive-logout-basic.php:91
+msgid "External Page Redirect"
+msgstr "Extern sida omdirigering"
+
+#: views/tabs/tpl-inactive-logout-basic.php:123
+msgid "Custom URL Redirect"
+msgstr "Anpassad URL-omdirigering"
+
+#: views/tabs/tpl-inactive-logout-basic.php:126
+#, php-format
+msgid "Link to custom url redirect. Ex: %s"
+msgstr "Länk till anpassad URL-omdirigering. Ex: %s"
+
+#. Author URI of the plugin
+msgid "https://www.deepenbajracharya.com.np"
+msgstr "https://www.deepenbajracharya.com.np"
 
 #: src/inactive-logout-admin-views.php:31
 #: views/tpl-inactive-logout-settings.php:1
@@ -32,11 +70,11 @@ msgstr "Inactive Logout inställningar"
 msgid "Inactive Logout"
 msgstr "Inactive Logout"
 
-#: src/inactive-logout-functions.php:69
+#: src/inactive-logout-functions.php:72
 msgid "You have been logged out because of inactivity."
 msgstr "Din session har gått ut. Logga in för att fortsätta där du slutade."
 
-#: src/inactive-logout-functions.php:114
+#: src/inactive-logout-functions.php:117
 msgid "Reset advanced settings successfull."
 msgstr "Avancerade inställningar har återställts."
 
@@ -45,7 +83,7 @@ msgstr "Avancerade inställningar har återställts."
 msgid "Minute(s)"
 msgstr "Minut(er)"
 
-#: src/inactive-logout-main.php:210
+#: src/inactive-logout-main.php:243
 #, php-format
 msgid ""
 "Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
@@ -54,7 +92,7 @@ msgstr ""
 "Inactive User Logout kräver Wordpress %s eller senare. Vänligen uppgradera "
 "din Wordpressinstallation."
 
-#: src/inactive-logout-main.php:214
+#: src/inactive-logout-main.php:247
 #, php-format
 msgid ""
 "Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
@@ -77,63 +115,64 @@ msgid "Updated !"
 msgstr "Inställningarna sparades!"
 
 #: views/tpl-inactive-logout-settings.php:3
+#: views/tpl-inactive-logout-settings.php:5
 msgid "Dismiss this notice."
 msgstr "Avfärda denna notis."
 
-#: views/tpl-inactive-logout-settings.php:7
+#: views/tpl-inactive-logout-settings.php:8
 msgid "Basic Management"
 msgstr "Inställningar"
 
-#: views/tpl-inactive-logout-settings.php:8
+#: views/tpl-inactive-logout-settings.php:9
 msgid "Advanced Management"
 msgstr "Avancerat"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:8
+#: views/tabs/tpl-inactive-logout-advanced.php:9
 msgid "Multi-Role Timeout"
 msgstr "Rollvis timeout"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:11
+#: views/tabs/tpl-inactive-logout-advanced.php:12
 msgid "This will enable multi-user role timeout functionality."
 msgstr "Gör det möjligt att ställa in time-out per användarroll."
 
-#: views/tabs/tpl-inactive-logout-advanced.php:15
+#: views/tabs/tpl-inactive-logout-advanced.php:16
 msgid "Enable Multi-User Feature"
 msgstr "Aktivera roller"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:27
+#: views/tabs/tpl-inactive-logout-advanced.php:28
 msgid ""
 "This will allow you to define different timeout constraint according to "
 "different selected user roles."
 msgstr "Välj de användarroller du vill kontrollera timeout på."
 
-#: views/tabs/tpl-inactive-logout-advanced.php:35
+#: views/tabs/tpl-inactive-logout-advanced.php:36
 msgid "User Role"
 msgstr "Användarroll"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:36
+#: views/tabs/tpl-inactive-logout-advanced.php:37
 msgid "Timeout (In Minutes)"
 msgstr "Timeout (minuter)"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:37
+#: views/tabs/tpl-inactive-logout-advanced.php:38
 #: views/tabs/tpl-inactive-logout-basic.php:88
 msgid "Redirect Page"
 msgstr "Omdirigeringssida"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:38
-#: views/tabs/tpl-inactive-logout-advanced.php:84
+#: views/tabs/tpl-inactive-logout-advanced.php:39
+#: views/tabs/tpl-inactive-logout-advanced.php:87
 msgid "Disable"
 msgstr "Inaktivera"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:50
+#: views/tabs/tpl-inactive-logout-advanced.php:52
 msgid "Set Global Redirect Page"
 msgstr "Välj utloggningssida"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:73
-#: views/tabs/tpl-inactive-logout-basic.php:113
+#: views/tabs/tpl-inactive-logout-advanced.php:75
+#: views/tabs/tpl-inactive-logout-basic.php:114
 msgid "No Posts Found."
 msgstr "Hittade inga inlägg."
 
-#: views/tabs/tpl-inactive-logout-advanced.php:85
+#: views/tabs/tpl-inactive-logout-advanced.php:88
 #, php-format
 msgid ""
 "Note: %s is used for disabling inactive logout functionality to that "
@@ -141,19 +180,19 @@ msgid ""
 msgstr ""
 "Obs: %s används för att inaktivera automatisk utloggning för vald roll."
 
-#: views/tabs/tpl-inactive-logout-advanced.php:87
-#: views/tabs/tpl-inactive-logout-basic.php:123
+#: views/tabs/tpl-inactive-logout-advanced.php:90
+#: views/tabs/tpl-inactive-logout-basic.php:131
 msgid "Save Changes"
 msgstr "Spara ändringar"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:87
+#: views/tabs/tpl-inactive-logout-advanced.php:90
 msgid ""
 "Are you sure you want to erase all advanced settings. This cannot be undone !"
 msgstr ""
 "Är du säker på att du vill radera dina avancerade inställningar? Detta kan "
 "inte ångras!"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:87
+#: views/tabs/tpl-inactive-logout-advanced.php:90
 msgid "Reset Advanced Settings !"
 msgstr "Återställ avancerade inställningar!"
 
@@ -199,10 +238,10 @@ msgid ""
 "a chance to keep using or logout for 10 seconds. Remove this feature and "
 "directly log out after inactive."
 msgstr ""
-"När timeout-popupen visas fortsätter användaren vara inloggad i tio "
-"sekunder. Det ger användaren möjlighet att förhindra utloggning. Markera "
-"detta alternativ för att istället logga ut direkt när perioden för "
-"inaktivitet passerats."
+"När timeout-popupen visas fortsätter användaren vara inloggad i tio sekunder."
+" Det ger användaren möjlighet att förhindra utloggning. Markera detta "
+"alternativ för att istället logga ut direkt när perioden för inaktivitet "
+"passerats."
 
 #: views/tabs/tpl-inactive-logout-basic.php:50
 msgid "Show Warn Message Only"
@@ -255,7 +294,7 @@ msgstr ""
 "Kryssas rutan ej i kommer användaren omdirigeras till inloggningssidan efter "
 "timeout."
 
-#: views/tabs/tpl-inactive-logout-basic.php:118
+#: views/tabs/tpl-inactive-logout-basic.php:119
 msgid "Select a page to redirect to after session timeout and clicking OK."
 msgstr ""
 "Välj en sida att omdirigera till efter timeout och klicka på Spara ändringar."
@@ -269,14 +308,6 @@ msgstr ""
 "efter en viss tid. innan utloggning visas ett varningsmeddelande. Fungerar "
 "för både fram- och baksida."
 
-#. URI of the plugin
-msgid "http://www.deepenbajracharya.com.np"
-msgstr "http://www.deepenbajracharya.com.np"
-
 #. Author of the plugin
 msgid "Deepen Bajracharya"
 msgstr "Deepen Bajracharya"
-
-#. Author URI of the plugin
-msgid "https://www.deepenbajracharya.com.np"
-msgstr ""

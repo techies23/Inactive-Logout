@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-23 09:40+0000\n"
+"POT-Creation-Date: 2017-08-31 14:12+0000\n"
 "POT-Revision-Date: Sun Jan 29 2017 16:00:11 GMT+0545 (NPT)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
@@ -34,11 +34,11 @@ msgstr ""
 msgid "Inactive Logout"
 msgstr ""
 
-#: src/inactive-logout-functions.php:69
+#: src/inactive-logout-functions.php:72
 msgid "You have been logged out because of inactivity."
 msgstr ""
 
-#: src/inactive-logout-functions.php:114
+#: src/inactive-logout-functions.php:117
 msgid "Reset advanced settings successfull."
 msgstr ""
 
@@ -47,14 +47,14 @@ msgstr ""
 msgid "Minute(s)"
 msgstr ""
 
-#: src/inactive-logout-main.php:210
+#: src/inactive-logout-main.php:243
 #, php-format
 msgid ""
 "Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
 "your WordPress install."
 msgstr ""
 
-#: src/inactive-logout-main.php:214
+#: src/inactive-logout-main.php:247
 #, php-format
 msgid ""
 "Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
@@ -75,80 +75,102 @@ msgid "Updated !"
 msgstr ""
 
 #: views/tpl-inactive-logout-settings.php:3
+#: views/tpl-inactive-logout-settings.php:5
 msgid "Dismiss this notice."
 msgstr ""
 
-#: views/tpl-inactive-logout-settings.php:7
-msgid "Basic Management"
+#: views/tpl-inactive-logout-settings.php:5
+msgid "Like this plugin ?"
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:5
+#, php-format
+msgid "Please consider giving a %s if you found this useful at wordpress.org."
 msgstr ""
 
 #: views/tpl-inactive-logout-settings.php:8
+msgid "Basic Management"
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:9
 msgid "Advanced Management"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:8
+#: views/tpl-inactive-logout-settings.php:10
+msgid "Support"
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:11
+msgid "Contribute !"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:9
 msgid "Multi-Role Timeout"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:11
+#: views/tabs/tpl-inactive-logout-advanced.php:12
 msgid "This will enable multi-user role timeout functionality."
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:15
+#: views/tabs/tpl-inactive-logout-advanced.php:16
 msgid "Enable Multi-User Feature"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:27
+#: views/tabs/tpl-inactive-logout-advanced.php:28
 msgid ""
 "This will allow you to define different timeout constraint according to "
 "different selected user roles."
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:35
+#: views/tabs/tpl-inactive-logout-advanced.php:36
 msgid "User Role"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:36
+#: views/tabs/tpl-inactive-logout-advanced.php:37
 msgid "Timeout (In Minutes)"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:37
+#: views/tabs/tpl-inactive-logout-advanced.php:38
 #: views/tabs/tpl-inactive-logout-basic.php:88
 msgid "Redirect Page"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:38
-#: views/tabs/tpl-inactive-logout-advanced.php:84
+#: views/tabs/tpl-inactive-logout-advanced.php:39
+#: views/tabs/tpl-inactive-logout-advanced.php:87
 msgid "Disable"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:50
+#: views/tabs/tpl-inactive-logout-advanced.php:40
+msgid "Disable Concurrent Login"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-advanced.php:52
 msgid "Set Global Redirect Page"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:73
-#: views/tabs/tpl-inactive-logout-basic.php:113
+#: views/tabs/tpl-inactive-logout-advanced.php:75
+#: views/tabs/tpl-inactive-logout-basic.php:114
 msgid "No Posts Found."
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:85
+#: views/tabs/tpl-inactive-logout-advanced.php:88
 #, php-format
 msgid ""
 "Note: %s is used for disabling inactive logout functionality to that "
 "specific user."
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:87
-#: views/tabs/tpl-inactive-logout-basic.php:123
+#: views/tabs/tpl-inactive-logout-advanced.php:90
+#: views/tabs/tpl-inactive-logout-basic.php:131
 msgid "Save Changes"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:87
+#: views/tabs/tpl-inactive-logout-advanced.php:90
 msgid ""
 "Are you sure you want to erase all advanced settings. This cannot be undone !"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-advanced.php:87
+#: views/tabs/tpl-inactive-logout-advanced.php:90
 msgid "Reset Advanced Settings !"
 msgstr ""
 
@@ -235,8 +257,21 @@ msgid ""
 "If not checked then user will be logged out to login screen after timeout."
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-basic.php:118
+#: views/tabs/tpl-inactive-logout-basic.php:91
+msgid "External Page Redirect"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-basic.php:119
 msgid "Select a page to redirect to after session timeout and clicking OK."
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-basic.php:123
+msgid "Custom URL Redirect"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-basic.php:126
+#, php-format
+msgid "Link to custom url redirect. Ex: %s"
 msgstr ""
 
 #. Description of the plugin
@@ -245,14 +280,10 @@ msgid ""
 "specified time showing a message. Works for frontend as well."
 msgstr ""
 
-#. URI of the plugin
-msgid "http://www.deepenbajracharya.com.np"
+#. Author URI of the plugin
+msgid "https://www.deepenbajracharya.com.np"
 msgstr ""
 
 #. Author of the plugin
 msgid "Deepen Bajracharya"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://www.deepenbajracharya.com.np"
 msgstr ""

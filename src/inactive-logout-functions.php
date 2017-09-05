@@ -13,8 +13,6 @@ if( !defined('ABSPATH') ) {
 class Inactive__Logout_functions {
 
 	public function __construct() {
-		add_action( 'wp_head', array( $this, 'ina_adding_meta_tag') );
-		add_action( 'admin_head', array( $this, 'ina_adding_meta_tag') );
 		add_action( 'wp_footer', array( $this, 'ina_logout_dialog_modal') );
 		add_action( 'admin_footer', array( $this, 'ina_logout_dialog_modal') );
 
@@ -118,28 +116,6 @@ class Inactive__Logout_functions {
 
 		wp_send_json( array('code' => 1, 'msg' => __("Reset advanced settings successfull.", "ina-logout") ) );
 		wp_die();
-	}
-
-	/**
-	* Add a Timeout Defined Meta tag for JS
-	*/
-	public function ina_adding_meta_tag() {
-		global $current_user;
-
-		$ina_logout_time = get_option( '__ina_logout_time' ) ? get_option( '__ina_logout_time' ) : NULL;
-		$idle_disable_countdown = get_option( '__ina_disable_countdown' ) ? get_option( '__ina_disable_countdown' ) : NULL;
-		$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' ) ? get_option( '__ina_warn_message_enabled' ) : NULL;
-
-		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
-		if($ina_multiuser_timeout_enabled) {
-			$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
-			foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
-				if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
-					$ina_logout_time = $ina_multiuser_setting['timeout'] * 60; //Seconds
-				}
-			}
-		}
-		require_once INACTIVE_LOGOUT_VIEWS . '/add-meta.php';
 	}
 
 	/**

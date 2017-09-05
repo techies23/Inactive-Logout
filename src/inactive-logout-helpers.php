@@ -102,7 +102,7 @@ class Inactive__logout__Helpers {
 		$result = false;
 		if( $ina_roles ) {
 			foreach( $ina_roles as $role ) {
-				if( $role['disabled_concurrent_login'] == 1 ) {
+				if( !empty($role['disabled_concurrent_login']) && $role['disabled_concurrent_login'] == 1 ) {
 					if ( in_array( $role['role'], (array) $user->roles ) ) {
 						$result = true;
 					}

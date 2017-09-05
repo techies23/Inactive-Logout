@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.5.2
 Tested up to: 4.8
-Stable tag: 1.6.0
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,8 @@ Logs out users within defined time when inactive. Modify to show only wake up me
 Make your WP account secure from snoopers, friends to protect your data by assuring auto log out system within a certain defined time. This will help you keep safe from any users using same machine to access your account in case you are away and forgot to logout and kept your site logged open.
 
 Simple but works efficiently. Nothing much to explain on plugin use. As its simple to use. You can find inactive settings under settings menu in admin dashboard.
+
+Please refer to FAQ section if you have trouble activating plugin from version 1.6.0
 
 **Please check [changelog](https://wordpress.org/plugins/inactive-logout/#developers "Change Log") to see what is added from version 1.3.0**
 
@@ -48,6 +50,10 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 
 == Frequently Asked Questions ==
 
+= Stable version of 1.5.1 =
+
+If you are getting activation errors when activating the plugin from 1.6.0. Then temporarily you can use the stable 1.5.1 version. Download it from [here](https://deepenbajracharya.com.np/plugins/inactive-logout.1.5.1.zip "Plugin version 1.5.").
+
 = Plugin Conflicts =
 
 Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 might find conflict issue with colorpicker javascript library. This conflict was identified by [psn](https://wordpress.org/support/users/psn/ "PSN") and has been fixed in later versions of slim stat analytics.
@@ -69,6 +75,14 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.6.3 =
+* Changes: Code Optimization
+* Major Bug Fixes
+* Locale Update
+
+= 1.6.1 =
+* Fixed: Activation Error Feeds
 
 = 1.6.0 =
 * Added "Disable Concurrent Logins For Certain Roles" in advanced management settings.
@@ -161,6 +175,8 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 
 == Upgrade Notice ==
 
+= 1.6.1 - 1.6.2 =
+* Fixed activation error, upgrade to get latest stable version.
 = 1.6.0 =
 * Major improvements and fix updates, upgrade to get latest stable version.
 = 1.5.0 =

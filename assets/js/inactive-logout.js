@@ -1,7 +1,7 @@
 var timeoutID;
 var tabID;
 var timeoutMessage;
-var ina_timeout = jQuery('meta[name=ina_timeout]').attr('content');
+var ina_timeout = ina_meta_data.ina_timeout;
 var timeout_defined = ina_timeout * 1000; //Minutes
 var messageBox = 0;
 function setup() {
@@ -64,8 +64,8 @@ function goInactive() {
 function showTimeoutMessage() {
   var countdown = 10;
   var t;
-  var ina_disable_countdown = jQuery('meta[name=ina_disable_countdown]').attr('content');
-  var ina_warn_message_enabled = jQuery('meta[name=ina_warn_message_enabled]').attr('content');
+  var ina_disable_countdown = ina_meta_data.ina_disable_countdown;
+  var ina_warn_message_enabled = ina_meta_data.ina_warn_message_enabled;
   jQuery(function($) {
     document.onkeydown = function (evt) {
       var keycode = evt.charCode || evt.keyCode;
