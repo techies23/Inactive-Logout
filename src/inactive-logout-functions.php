@@ -43,33 +43,62 @@ class Inactive__Logout_functions {
 				break;
 
 				case 'ina_logout':
-				$ina_enable_redirect = get_option( '__ina_enable_redirect' );
-				$ina_redirect_page_link = get_option( '__ina_redirect_page_link' );
-				//Enabled Multi user Timeout
-				$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
 
-				if( !empty($ina_enable_redirect) ) {
-					if( $ina_redirect_page_link == "custom-page-redirect" ) {
-						$ina_redirect_page_link = get_option( '__ina_custom_redirect_text_field' );
-						$redirect_link = $ina_redirect_page_link;
-					} else {
-						$redirect_link = get_the_permalink($ina_redirect_page_link);
+				$override = is_multisite() ? get_site_option( '__ina_overrideby_multisite_setting' ) : false;
+				//Check in case of Multisite Active
+				if( !empty($override) ) {
+					$ina_enable_redirect = get_site_option( '__ina_enable_redirect' );
+					$ina_redirect_page_link = get_site_option( '__ina_redirect_page_link' );
+					//Enabled Multi user Timeout
+					$ina_multiuser_timeout_enabled = get_site_option( '__ina_enable_timeout_multiusers' );
+
+					if( !empty($ina_enable_redirect) ) {
+						if( $ina_redirect_page_link == "custom-page-redirect" ) {
+							$ina_redirect_page_link = get_site_option( '__ina_custom_redirect_text_field' );
+							$redirect_link = $ina_redirect_page_link;
+						} else {
+							$redirect_link = get_the_permalink($ina_redirect_page_link);
+						}
 					}
-				}
 
-				if($ina_multiuser_timeout_enabled) {
-					global $current_user;
-					$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
-					foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
-						if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
-							$redirect_link = get_the_permalink($ina_multiuser_setting['redirect_page']);
+					if($ina_multiuser_timeout_enabled) {
+						global $current_user;
+						$ina_multiuser_settings = get_site_option( '__ina_multiusers_settings' );
+						foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
+							if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
+								$redirect_link = get_the_permalink($ina_multiuser_setting['redirect_page']);
+							}
+						}
+					}
+				} else {
+					$ina_enable_redirect = get_option( '__ina_enable_redirect' );
+					$ina_redirect_page_link = get_option( '__ina_redirect_page_link' );
+					//Enabled Multi user Timeout
+					$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+
+					if( !empty($ina_enable_redirect) ) {
+						if( $ina_redirect_page_link == "custom-page-redirect" ) {
+							$ina_redirect_page_link = get_option( '__ina_custom_redirect_text_field' );
+							$redirect_link = $ina_redirect_page_link;
+						} else {
+							$redirect_link = get_the_permalink($ina_redirect_page_link);
+						}
+					}
+
+					if($ina_multiuser_timeout_enabled) {
+						global $current_user;
+						$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+						foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
+							if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
+								$redirect_link = get_the_permalink($ina_multiuser_setting['redirect_page']);
+							}
 						}
 					}
 				}
 
 				//Logout Current Users
 				wp_logout();
-				echo json_encode( array( 'msg' => __('You have been logged out because of inactivity.', 'ina-logout'), 'redirect_url' => isset($redirect_link) ? $redirect_link : false ) );
+				echo json_encode( array( 'msg' => __('You have been logged out because of inactivity.', 'inactive-logout'), 'redirect_url' => isset($redirect_link) ? $redirect_link : false ) );
 				break;
 
 				default:
@@ -93,8 +122,8 @@ class Inactive__Logout_functions {
 			'post_type' => array(
 				'post',
 				'page'
-				)
-			) );
+			)
+		) );
 
 		foreach ( $pages as $page ) {
 			$result[] = array( 'ID' => $page->ID, 'title' => $page->post_title, 'permalink' => get_the_permalink($page->ID), 'post_type' => $page->post_type );
@@ -114,7 +143,13 @@ class Inactive__Logout_functions {
 		delete_option( '__ina_enable_timeout_multiusers' );
 		delete_option( '__ina_multiusers_settings' );
 
-		wp_send_json( array('code' => 1, 'msg' => __("Reset advanced settings successfull.", "ina-logout") ) );
+		if( is_network_admin() && is_multisite() ) {
+			delete_site_option( '__ina_roles' );
+			delete_site_option( '__ina_enable_timeout_multiusers' );
+			delete_site_option( '__ina_multiusers_settings' );
+		}
+
+		wp_send_json( array('code' => 1, 'msg' => __("Reset advanced settings successfull.", "inactive-logout") ) );
 		wp_die();
 	}
 

@@ -17,6 +17,9 @@ class Inactive__Logout_adminViews {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'ina_create_options_menu' ) );
 
+		//Add Menu for multisite network
+		add_action( 'network_admin_menu', array( $this, 'ina_menu_multisite_network' ) );
+
 		add_action( 'ina_before_settings_wrapper', array( $this, 'ina_before_settings_wrap' ) );
 		add_action( 'ina_after_settings_wrapper', array( $this, 'ina_after_settings_wrap' ) );
 
@@ -28,12 +31,22 @@ class Inactive__Logout_adminViews {
 	 */
 	public function ina_create_options_menu() {
 		add_options_page(
-			__("Inactive User Logout Settings", "ina-logout"),
-			__("Inactive Logout", "ina-logout"),
+			__("Inactive User Logout Settings", "inactive-logout"),
+			__("Inactive Logout", "inactive-logout"),
 			'manage_options',
 			'inactive-logout',
 			array( $this, 'ina__render_options' )
-			);
+		);
+	}
+
+	function ina_menu_multisite_network() {
+		add_menu_page(
+			__("Inactive User Logout Settings", "inactive-logout"),
+			__("Inactive Logout", "inactive-logout"),
+			'manage_options',
+			'inactive-logout',
+			array( $this, 'ina__render_options' )
+		);
 	}
 
 	/** Rendering the output */
@@ -63,6 +76,7 @@ class Inactive__Logout_adminViews {
 		require_once INACTIVE_LOGOUT_VIEWS . '/tpl-inactive-logout-settings.php';
 		if( $active_tab == 'ina-basic' ) {
 			//BASIC
+			$idle_overrideby_multisite_setting = get_option( '__ina_overrideby_multisite_setting' );
 			$time = get_option( '__ina_logout_time' );
 			$countdown_enable = get_option( '__ina_disable_countdown' );
 			$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' );
@@ -116,6 +130,30 @@ class Inactive__Logout_adminViews {
 
 		do_action( 'ina_before_update_basic_settings' );
 
+		//If Mulisite is Active then Add these settings to mulsite option table as well
+		if( is_network_admin() && is_multisite() ) {
+			$idle_overrideby_multisite_setting = filter_input( INPUT_POST, 'idle_overrideby_multisite_setting', FILTER_SANITIZE_NUMBER_INT );
+			update_site_option( '__ina_overrideby_multisite_setting', $idle_overrideby_multisite_setting );
+
+			$save_minutes = $idle_timeout * 60; //60 minutes
+			if($idle_timeout) {
+				update_site_option( '__ina_logout_time', $save_minutes );
+				update_site_option( '__ina_logout_message', $idle_timeout_message );
+				update_site_option( '__ina_disable_countdown', $idle_disable_countdown );
+				update_site_option( '__ina_warn_message_enabled', $ina_show_warn_message_only );
+				update_site_option( '__ina_warn_message', $ina_show_warn_message );
+				update_site_option( '__ina_concurrent_login', $ina_disable_multiple_login );
+				update_site_option( '__ina_full_overlay', $ina_full_overlay );
+				update_site_option( '__ina_popup_overlay_color', $ina_background_popup );
+				update_site_option( '__ina_enable_redirect', $ina_enable_redirect_link );
+				update_site_option( '__ina_redirect_page_link', $ina_redirect_page );
+
+				if( $ina_redirect_page == "custom-page-redirect" ) {
+					update_site_option( '__ina_custom_redirect_text_field', $ina_custom_redirect_text_field );
+				}
+			}
+		}
+
 		$save_minutes = $idle_timeout * 60; //60 minutes
 		if($idle_timeout) {
 			update_option( '__ina_logout_time', $save_minutes );
@@ -164,6 +202,13 @@ class Inactive__Logout_adminViews {
 		}
 
 		do_action( 'ina_before_update_adv_settings', $container_multi_user_arr );
+
+		if( is_network_admin() && is_multisite() ) {
+			update_site_option( '__ina_enable_timeout_multiusers', $ina_enable_different_role_timeout );
+			if( $ina_enable_different_role_timeout ) {
+				update_site_option( '__ina_multiusers_settings', $container_multi_user_arr );
+			}
+		}
 
 		update_option( '__ina_enable_timeout_multiusers', $ina_enable_different_role_timeout );
 		if( $ina_enable_different_role_timeout ) {

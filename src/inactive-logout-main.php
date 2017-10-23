@@ -12,7 +12,7 @@ if( !defined('ABSPATH') ) {
  */
 final class Inactive__Logout_Main {
 
-	const INA_VERSION = '1.6.3';
+	const INA_VERSION = '1.7.0';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -127,7 +127,7 @@ final class Inactive__Logout_Main {
 	public function ina_define_them_constants() {
 		$ina_helpers = Inactive__logout__Helpers::instance();
 		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_VERSION', self::INA_VERSION );
-		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_SLUG', 'ina-logout' );
+		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_SLUG', 'inactive-logout' );
 		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_VIEWS', $this->plugin_path . 'views' );
 		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_ASSETS_URL', $this->plugin_url . 'assets/' );
 	}
@@ -176,16 +176,34 @@ final class Inactive__Logout_Main {
 		global $current_user;
 
 		if( is_user_logged_in() ) {
-			$ina_logout_time = get_option( '__ina_logout_time' ) ? get_option( '__ina_logout_time' ) : NULL;
-			$idle_disable_countdown = get_option( '__ina_disable_countdown' ) ? get_option( '__ina_disable_countdown' ) : NULL;
-			$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' ) ? get_option( '__ina_warn_message_enabled' ) : NULL;
+			//Check if multisite
+			$override = is_multisite() ? get_site_option( '__ina_overrideby_multisite_setting' ) : false;
+			if( !empty($override) ) {
+				$ina_logout_time = get_site_option( '__ina_logout_time' ) ? get_site_option( '__ina_logout_time' ) : NULL;
+				$idle_disable_countdown = get_site_option( '__ina_disable_countdown' ) ? get_site_option( '__ina_disable_countdown' ) : NULL;
+				$ina_warn_message_enabled = get_site_option( '__ina_warn_message_enabled' ) ? get_site_option( '__ina_warn_message_enabled' ) : NULL;
 
-			$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
-			if($ina_multiuser_timeout_enabled) {
-				$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
-				foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
-					if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
-						$ina_logout_time = $ina_multiuser_setting['timeout'] * 60; //Seconds
+				$ina_multiuser_timeout_enabled = get_site_option( '__ina_enable_timeout_multiusers' );
+				if($ina_multiuser_timeout_enabled) {
+					$ina_multiuser_settings = get_site_option( '__ina_multiusers_settings' );
+					foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
+						if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
+							$ina_logout_time = $ina_multiuser_setting['timeout'] * 60; //Seconds
+						}
+					}
+				}
+			} else {
+				$ina_logout_time = get_option( '__ina_logout_time' ) ? get_option( '__ina_logout_time' ) : NULL;
+				$idle_disable_countdown = get_option( '__ina_disable_countdown' ) ? get_option( '__ina_disable_countdown' ) : NULL;
+				$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' ) ? get_option( '__ina_warn_message_enabled' ) : NULL;
+
+				$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+				if($ina_multiuser_timeout_enabled) {
+					$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+					foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
+						if( in_array($ina_multiuser_setting['role'], $current_user->roles ) ) {
+							$ina_logout_time = $ina_multiuser_setting['timeout'] * 60; //Seconds
+						}
 					}
 				}
 			}
@@ -202,7 +220,7 @@ final class Inactive__Logout_Main {
 				wp_localize_script( 'ina-logout-js', 'ina_meta_data', $ina_meta_data );
 			}
 
-			if( $hook_suffix == 'settings_page_inactive-logout' ) {
+			if( $hook_suffix == 'settings_page_inactive-logout' || $hook_suffix == "toplevel_page_inactive-logout" ) {
 				wp_enqueue_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout-other.js', array('jquery', 'wp-color-picker'), time(), true );
 				wp_enqueue_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/select2.min.js', array('jquery'), time(), true );
 
@@ -240,11 +258,11 @@ final class Inactive__Logout_Main {
 	*/
 	public function ina_display_notSupportedError() {
 		if ( ! $this->ina_supportedVersion( 'wordpress' ) ) {
-			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade your WordPress install.', 'ina-logout' ), '4.0' ) . '</p>';
+			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade your WordPress install.', 'inactive-logout' ), '4.0' ) . '</p>';
 			exit;
 		}
 		if ( ! $this->ina_supportedVersion( 'php' ) ) {
-			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host about moving you to a newer version of PHP.', 'ina-logout' ), '5.4' ) . '</p>';
+			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host about moving you to a newer version of PHP.', 'inactive-logout' ), '5.4' ) . '</p>';
 			exit;
 		}
 	}
@@ -253,7 +271,7 @@ final class Inactive__Logout_Main {
 	* Load the text domain.
 	*/
 	public function ina_loadTextDomain() {
-		$domain = 'ina-logout';
+		$domain = 'inactive-logout';
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 		load_plugin_textdomain( $domain, false, $this->plugin_dir . 'lang/' );
 	}

@@ -36,7 +36,7 @@ class Inactive__logout__Helpers {
 
 	public function ina_convertToMinutes( $value ) {
 		$minutes = floor($value / 60);
-		return $minutes . ' ' . __( "Minute(s)", "ina-logout");
+		return $minutes . ' ' . __( "Minute(s)", "inactive-logout");
 	}
 
 	public function ina_reload() {
@@ -58,9 +58,11 @@ class Inactive__logout__Helpers {
 		$selected = false;
 		if( !empty($role) ) {
 			$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
-			foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
-				if( in_array( $role, $ina_multiuser_setting ) ) {
-					$selected = true;
+			if( !empty($ina_multiuser_settings) ) {
+				foreach( $ina_multiuser_settings as $ina_multiuser_setting ) {
+					if( in_array( $role, $ina_multiuser_setting ) ) {
+						$selected = true;
+					}
 				}
 			}
 

@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.5.2
 Tested up to: 4.8
-Stable tag: 1.6.3
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,7 @@ Please refer to FAQ section if you have trouble activating plugin from version 1
 9. Simple to use
 10. Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
 11. Logs out the session even after the browser tab is closed.
+12. Multisite Support: Override all sites with one setting.
 
 In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
 
@@ -75,6 +76,12 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.7.0 =
+* Major Bug Fixes
+* Added Full Support for Multisite: Users can override one setting for all sites
+* Added Finnish Translation. Thanks to daniel
+* Changed Translation text domain
 
 = 1.6.3 =
 * Changes: Code Optimization
@@ -175,6 +182,8 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 
 == Upgrade Notice ==
 
+= 1.7.0 =
+Upgrade to get latest stable version.
 = 1.6.1 - 1.6.2 =
 * Fixed activation error, upgrade to get latest stable version.
 = 1.6.0 =
