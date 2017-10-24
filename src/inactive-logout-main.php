@@ -55,7 +55,7 @@ final class Inactive__Logout_Main {
 			$blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
 			foreach ($blogids as $blog_id) {
 				switch_to_blog($blog_id);
-				self::_ina_activate_multisite();
+				self::instance()->_ina_activate_multisite();
 			}
 			switch_to_blog($old_blog);
 			return;
@@ -90,6 +90,13 @@ final class Inactive__Logout_Main {
 				delete_option( '__ina_warn_message' );
 				delete_option( '__ina_enable_redirect' );
 				delete_option( '__ina_redirect_page_link' );
+
+				delete_site_option( '__ina_overrideby_multisite_setting' );
+				delete_site_option( '__ina_logout_time' );
+				delete_site_option( '__ina_logout_message' );
+				delete_site_option( '__ina_warn_message' );
+				delete_site_option( '__ina_enable_redirect' );
+				delete_site_option( '__ina_redirect_page_link' );
 			}
 			switch_to_blog($old_blog);
 			return;
