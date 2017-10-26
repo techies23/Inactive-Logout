@@ -35,7 +35,7 @@ class Inactive_Logout_Helpers {
 
 	public function ina_convertToMinutes( $value ) {
 		$minutes = floor( $value / 60 );
-		return $minutes . ' ' . __( 'Minute(s)', 'inactive-logout' );
+		return $minutes . ' ' .esc_html__( 'Minute(s)', 'inactive-logout' );
 	}
 
 	public function ina_reload() {

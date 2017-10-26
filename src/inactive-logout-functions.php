@@ -98,7 +98,7 @@ class Inactive_Logout_Functions {
 					wp_logout();
 					echo json_encode(
 						array(
-							'msg' => __( 'You have been logged out because of inactivity.', 'inactive-logout' ),
+							'msg' =>esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' ),
 							'redirect_url' => isset( $redirect_link ) ? $redirect_link : false,
 						)
 					);
@@ -164,7 +164,7 @@ class Inactive_Logout_Functions {
 		wp_send_json(
 			array(
 				'code' => 1,
-				'msg' => __( 'Reset advanced settings successfull.', 'inactive-logout' ),
+				'msg' =>esc_html__( 'Reset advanced settings successfull.', 'inactive-logout' ),
 			)
 		);
 		wp_die();

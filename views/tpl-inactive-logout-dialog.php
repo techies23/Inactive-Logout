@@ -50,7 +50,7 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 			$replaced_content = str_replace( '{wakup_timout}', $ina_helpers->ina_convertToMinutes( $time ), $message_content );
 			echo apply_filters( 'the_content', $replaced_content );
 			?>
-			<p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php _e( 'Continue', 'inactive-logout' ); ?></a></p>
+			<p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php esc_html_e( 'Continue', 'inactive-logout' ); ?></a></p>
 		</div>
 	</div>
 </div>
@@ -58,7 +58,7 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 <div id="ina__dp_logout_message_box" class="ina-dp-noflict-modal">
 	<div class="ina-dp-noflict-modal-content">
 		<div class="ina-modal-header">
-			<h3><?php _e( 'Session Timeout', 'inactive-logout' ); ?></h3>
+			<h3><?php esc_html_e( 'Session Timeout', 'inactive-logout' ); ?></h3>
 		</div>
 		<div class="ina-dp-noflict-modal-body">
 			<?php
@@ -69,7 +69,7 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 			}
 			?>
 			<?php echo apply_filters( 'the_content', $message_content ); ?>
-			<p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php _e( 'Continue', 'inactive-logout' ); ?> <span class="ina_countdown"></span></a></p>
+			<p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php esc_html_e( 'Continue', 'inactive-logout' ); ?> <span class="ina_countdown"></span></a></p>
 		</div>
 	</div>
 </div>
