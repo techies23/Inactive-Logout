@@ -1,41 +1,46 @@
 <?php
-//Not Permission to agree more or less then given
-if( !defined('ABSPATH') ) {
+// Not Permission to agree more or less then given
+if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
 /**
- * Admin Viws Class
+ * Admin Views Class
  *
  * @since  1.0.0
  * @author  Deepen
  */
-class Inactive__Logout_adminViews {
+class Inactive_Logout_Admin_Views {
 
+	/**
+	 * Helper.
+	 *
+	 * @var Inactive_Logout_Helpers
+	 */
 	public $helper;
 
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'ina_create_options_menu' ) );
 
-		//Add Menu for multisite network
+		// Add Menu for multisite network
 		add_action( 'network_admin_menu', array( $this, 'ina_menu_multisite_network' ) );
 
 		add_action( 'ina_before_settings_wrapper', array( $this, 'ina_before_settings_wrap' ) );
 		add_action( 'ina_after_settings_wrapper', array( $this, 'ina_after_settings_wrap' ) );
 
-		$this->helper = Inactive__logout__Helpers::instance();
+		$this->helper = Inactive_Logout_Helpers::instance();
 	}
 
 	/**
 	 * Add a Menu Option in settings
 	 */
 	public function ina_create_options_menu() {
-		if( is_multisite() ) {
+		if ( is_multisite() ) {
 			$idle_overrideby_multisite_setting = get_site_option( '__ina_overrideby_multisite_setting' );
-			if( empty($idle_overrideby_multisite_setting) ) {
+			if ( empty( $idle_overrideby_multisite_setting ) ) {
 				add_options_page(
-					__("Inactive User Logout Settings", "inactive-logout"),
-					__("Inactive Logout", "inactive-logout"),
+					__( 'Inactive User Logout Settings', 'inactive-logout' ),
+					__( 'Inactive Logout', 'inactive-logout' ),
 					'manage_options',
 					'inactive-logout',
 					array( $this, 'ina__render_options' )
@@ -43,8 +48,8 @@ class Inactive__Logout_adminViews {
 			}
 		} else {
 			add_options_page(
-				__("Inactive User Logout Settings", "inactive-logout"),
-				__("Inactive Logout", "inactive-logout"),
+				__( 'Inactive User Logout Settings', 'inactive-logout' ),
+				__( 'Inactive Logout', 'inactive-logout' ),
 				'manage_options',
 				'inactive-logout',
 				array( $this, 'ina__render_options' )
@@ -54,8 +59,8 @@ class Inactive__Logout_adminViews {
 
 	function ina_menu_multisite_network() {
 		add_menu_page(
-			__("Inactive User Logout Settings", "inactive-logout"),
-			__("Inactive Logout", "inactive-logout"),
+			__( 'Inactive User Logout Settings', 'inactive-logout' ),
+			__( 'Inactive Logout', 'inactive-logout' ),
 			'manage_options',
 			'inactive-logout',
 			array( $this, 'ina__render_options' )
@@ -65,9 +70,9 @@ class Inactive__Logout_adminViews {
 	/** Rendering the output */
 	public function ina__render_options() {
 		$saved = false;
-		if( isset($_POST['submit']) ) {
+		if ( isset( $_POST['submit'] ) ) {
 			$saved = $this->ina__process_basic_settings();
-			if( $saved ) {
+			if ( $saved ) {
 				?>
 				<script type="text/javascript">
 					document.location.reload(true);
@@ -76,20 +81,20 @@ class Inactive__Logout_adminViews {
 			}
 		}
 
-		if( isset($_POST['adv_submit']) ) {
+		if ( isset( $_POST['adv_submit'] ) ) {
 			$saved = $this->ina__process_adv_settings();
 		}
 
 		// Css rules for Color Picker
 		wp_enqueue_style( 'wp-color-picker' );
-		$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'ina-basic';
+		$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'ina-basic';
 
-		//Include Template
+		// Include Template
 		do_action( 'ina_before_settings_wrapper' );
 		require_once INACTIVE_LOGOUT_VIEWS . '/tpl-inactive-logout-settings.php';
-		if( $active_tab == 'ina-basic' ) {
-			//BASIC
-			if( is_network_admin() && is_multisite() ) {
+		if ( $active_tab == 'ina-basic' ) {
+			// BASIC
+			if ( is_network_admin() && is_multisite() ) {
 				$idle_overrideby_multisite_setting = get_site_option( '__ina_overrideby_multisite_setting' );
 			}
 
@@ -102,16 +107,16 @@ class Inactive__Logout_adminViews {
 			$ina_enable_redirect = get_option( '__ina_enable_redirect' );
 			$ina_redirect_page_link = get_option( '__ina_redirect_page_link' );
 
-			//IF redirect is custom page link
-			if( $ina_redirect_page_link == "custom-page-redirect" ) {
+			// IF redirect is custom page link
+			if ( $ina_redirect_page_link == 'custom-page-redirect' ) {
 				$custom_redirect_text_field = get_option( '__ina_custom_redirect_text_field' );
 			}
 
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-basic.php';
 		} else {
-			//ADVANCED
+			// ADVANCED
 			$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
-			if( $ina_multiuser_timeout_enabled ) {
+			if ( $ina_multiuser_timeout_enabled ) {
 				$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
 			}
 
@@ -121,38 +126,38 @@ class Inactive__Logout_adminViews {
 	}
 
 	public function ina__process_basic_settings() {
-		if( isset($_POST['submit']) && ! wp_verify_nonce( $_POST['_save_timeout_settings'], '_nonce_action_save_timeout_settings' ) ) {
-			wp_die("Not Allowed");
+		if ( isset( $_POST['submit'] ) && ! wp_verify_nonce( $_POST['_save_timeout_settings'], '_nonce_action_save_timeout_settings' ) ) {
+			wp_die( 'Not Allowed' );
 			return;
 		}
 
 		$idle_timeout = filter_input( INPUT_POST, 'idle_timeout', FILTER_SANITIZE_NUMBER_INT );
-		$idle_timeout_message = wp_kses_post( filter_input(INPUT_POST, 'idle_message_text') );
-		$idle_disable_countdown = filter_input(INPUT_POST, 'idle_disable_countdown', FILTER_SANITIZE_NUMBER_INT);
-		$ina_show_warn_message_only = filter_input(INPUT_POST, 'ina_show_warn_message_only', FILTER_SANITIZE_NUMBER_INT);
-		$ina_show_warn_message = wp_kses_post( filter_input(INPUT_POST, 'ina_show_warn_message') );
-		$ina_disable_multiple_login = filter_input(INPUT_POST, 'ina_disable_multiple_login', FILTER_SANITIZE_NUMBER_INT);
+		$idle_timeout_message = wp_kses_post( filter_input( INPUT_POST, 'idle_message_text' ) );
+		$idle_disable_countdown = filter_input( INPUT_POST, 'idle_disable_countdown', FILTER_SANITIZE_NUMBER_INT );
+		$ina_show_warn_message_only = filter_input( INPUT_POST, 'ina_show_warn_message_only', FILTER_SANITIZE_NUMBER_INT );
+		$ina_show_warn_message = wp_kses_post( filter_input( INPUT_POST, 'ina_show_warn_message' ) );
+		$ina_disable_multiple_login = filter_input( INPUT_POST, 'ina_disable_multiple_login', FILTER_SANITIZE_NUMBER_INT );
 
 		$ina_background_popup = trim( filter_input( INPUT_POST, 'ina_color_picker' ) );
 		$ina_background_popup = strip_tags( stripslashes( $ina_background_popup ) );
 
-		$ina_full_overlay = filter_input(INPUT_POST, 'ina_full_overlay', FILTER_SANITIZE_NUMBER_INT);
-		$ina_enable_redirect_link = filter_input(INPUT_POST, 'ina_enable_redirect_link', FILTER_SANITIZE_NUMBER_INT);
-		$ina_redirect_page = filter_input(INPUT_POST, 'ina_redirect_page');
+		$ina_full_overlay = filter_input( INPUT_POST, 'ina_full_overlay', FILTER_SANITIZE_NUMBER_INT );
+		$ina_enable_redirect_link = filter_input( INPUT_POST, 'ina_enable_redirect_link', FILTER_SANITIZE_NUMBER_INT );
+		$ina_redirect_page = filter_input( INPUT_POST, 'ina_redirect_page' );
 
-		if( $ina_redirect_page == "custom-page-redirect" ) {
-			$ina_custom_redirect_text_field = filter_input(INPUT_POST, 'custom_redirect_text_field');
+		if ( $ina_redirect_page == 'custom-page-redirect' ) {
+			$ina_custom_redirect_text_field = filter_input( INPUT_POST, 'custom_redirect_text_field' );
 		}
 
 		do_action( 'ina_before_update_basic_settings' );
 
-		//If Mulisite is Active then Add these settings to mulsite option table as well
-		if( is_network_admin() && is_multisite() ) {
+		// If Mulisite is Active then Add these settings to mulsite option table as well
+		if ( is_network_admin() && is_multisite() ) {
 			$idle_overrideby_multisite_setting = filter_input( INPUT_POST, 'idle_overrideby_multisite_setting', FILTER_SANITIZE_NUMBER_INT );
 			update_site_option( '__ina_overrideby_multisite_setting', $idle_overrideby_multisite_setting );
 
-			$save_minutes = $idle_timeout * 60; //60 minutes
-			if($idle_timeout) {
+			$save_minutes = $idle_timeout * 60; // 60 minutes
+			if ( $idle_timeout ) {
 				update_site_option( '__ina_logout_time', $save_minutes );
 				update_site_option( '__ina_logout_message', $idle_timeout_message );
 				update_site_option( '__ina_disable_countdown', $idle_disable_countdown );
@@ -164,14 +169,14 @@ class Inactive__Logout_adminViews {
 				update_site_option( '__ina_enable_redirect', $ina_enable_redirect_link );
 				update_site_option( '__ina_redirect_page_link', $ina_redirect_page );
 
-				if( $ina_redirect_page == "custom-page-redirect" ) {
+				if ( $ina_redirect_page == 'custom-page-redirect' ) {
 					update_site_option( '__ina_custom_redirect_text_field', $ina_custom_redirect_text_field );
 				}
 			}
 		}
 
-		$save_minutes = $idle_timeout * 60; //60 minutes
-		if($idle_timeout) {
+		$save_minutes = $idle_timeout * 60; // 60 minutes
+		if ( $idle_timeout ) {
 			update_option( '__ina_logout_time', $save_minutes );
 			update_option( '__ina_logout_message', $idle_timeout_message );
 			update_option( '__ina_disable_countdown', $idle_disable_countdown );
@@ -183,7 +188,7 @@ class Inactive__Logout_adminViews {
 			update_option( '__ina_enable_redirect', $ina_enable_redirect_link );
 			update_option( '__ina_redirect_page_link', $ina_redirect_page );
 
-			if( $ina_redirect_page == "custom-page-redirect" ) {
+			if ( $ina_redirect_page == 'custom-page-redirect' ) {
 				update_option( '__ina_custom_redirect_text_field', $ina_custom_redirect_text_field );
 			}
 
@@ -194,8 +199,8 @@ class Inactive__Logout_adminViews {
 	}
 
 	public function ina__process_adv_settings() {
-		if( isset($_POST['adv_submit']) && ! wp_verify_nonce( $_POST['_save_timeout_adv_settings'], '_nonce_action_save_timeout_adv_settings' ) ) {
-			wp_die("Not Allowed");
+		if ( isset( $_POST['adv_submit'] ) && ! wp_verify_nonce( $_POST['_save_timeout_adv_settings'], '_nonce_action_save_timeout_adv_settings' ) ) {
+			wp_die( 'Not Allowed' );
 			return;
 		}
 
@@ -207,27 +212,33 @@ class Inactive__Logout_adminViews {
 		$ina_disable_inactive_concurrent_login = filter_input( INPUT_POST, 'ina_disable_inactive_concurrent_login', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
 
 		$container_multi_user_arr = array();
-		if($ina_multiuser_roles) {
-			foreach( $ina_multiuser_roles as $k => $ina_multiuser_role ) {
-				$user_timeout_minutes = !empty($ina_individual_user_timeout[$k]) ? $ina_individual_user_timeout[$k] : 15;
-				$multi_userredirect_page_link = !empty($ina_redirect_page_individual_user[$k]) ? $ina_redirect_page_individual_user[$k] : NULL;
-				$disabled_for_user = !empty($ina_disable_inactive_logout[$ina_multiuser_role]) ? 1 : NULL;
-				$disabled_for_user_concurent_login = !empty($ina_disable_inactive_concurrent_login[$ina_multiuser_role]) ? 1 : NULL;
-				$container_multi_user_arr[] = array( 'role' => $ina_multiuser_role, 'timeout' => $user_timeout_minutes, 'redirect_page' => $multi_userredirect_page_link, 'disabled_feature' => $disabled_for_user, 'disabled_concurrent_login' => $disabled_for_user_concurent_login );
+		if ( $ina_multiuser_roles ) {
+			foreach ( $ina_multiuser_roles as $k => $ina_multiuser_role ) {
+				$user_timeout_minutes = ! empty( $ina_individual_user_timeout[ $k ] ) ? $ina_individual_user_timeout[ $k ] : 15;
+				$multi_userredirect_page_link = ! empty( $ina_redirect_page_individual_user[ $k ] ) ? $ina_redirect_page_individual_user[ $k ] : null;
+				$disabled_for_user = ! empty( $ina_disable_inactive_logout[ $ina_multiuser_role ] ) ? 1 : null;
+				$disabled_for_user_concurent_login = ! empty( $ina_disable_inactive_concurrent_login[ $ina_multiuser_role ] ) ? 1 : null;
+				$container_multi_user_arr[] = array(
+					'role' => $ina_multiuser_role,
+					'timeout' => $user_timeout_minutes,
+					'redirect_page' => $multi_userredirect_page_link,
+					'disabled_feature' => $disabled_for_user,
+					'disabled_concurrent_login' => $disabled_for_user_concurent_login,
+				);
 			}
 		}
 
 		do_action( 'ina_before_update_adv_settings', $container_multi_user_arr );
 
-		if( is_network_admin() && is_multisite() ) {
+		if ( is_network_admin() && is_multisite() ) {
 			update_site_option( '__ina_enable_timeout_multiusers', $ina_enable_different_role_timeout );
-			if( $ina_enable_different_role_timeout ) {
+			if ( $ina_enable_different_role_timeout ) {
 				update_site_option( '__ina_multiusers_settings', $container_multi_user_arr );
 			}
 		}
 
 		update_option( '__ina_enable_timeout_multiusers', $ina_enable_different_role_timeout );
-		if( $ina_enable_different_role_timeout ) {
+		if ( $ina_enable_different_role_timeout ) {
 			update_option( '__ina_multiusers_settings', $container_multi_user_arr );
 		}
 
@@ -244,4 +255,4 @@ class Inactive__Logout_adminViews {
 		echo '</div>';
 	}
 }
-new Inactive__Logout_adminViews();
+new Inactive_Logout_Admin_Views();
