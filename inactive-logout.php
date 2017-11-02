@@ -24,6 +24,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 // the main plugin class
 require_once dirname( __FILE__ ) . '/src/inactive-logout-main.php';
 
-add_action( 'plugins_loaded', array( 'Inactive__Logout_Main', 'instance' ) );
+add_action( 'plugins_loaded', array( 'Inactive_Logout_Main', 'instance' ) );
 register_activation_hook( __FILE__, array( 'Inactive_Logout_Main', 'ina_activate' ) );
 register_deactivation_hook( __FILE__, array( 'Inactive_Logout_Main', 'ina_deactivate' ) );
