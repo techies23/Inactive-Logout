@@ -258,8 +258,11 @@ final class Inactive_Logout_Main {
 	 * @return boolean - is the existing version of the checking supported?
 	 */
 	public function ina_supportedVersion( $checking ) {
+
+		$supported = false;
+
 		switch ( strtolower( $checking ) ) {
-			case 'WordPress':
+			case 'wordpress':
 				$supported = version_compare( get_bloginfo( 'version' ), '4.0', '>=' );
 				break;
 			case 'php':
