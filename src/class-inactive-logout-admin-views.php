@@ -1,5 +1,11 @@
 <?php
-// Not Permission to agree more or less then given
+/**
+ * File contains class related to Admin views.
+ *
+ * @package inactive-logout
+ */
+
+// Not Permission to agree more or less then given.
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
@@ -19,10 +25,13 @@ class Inactive_Logout_Admin_Views {
 	 */
 	public $helper;
 
+	/**
+	 * Inactive_Logout_Admin_Views constructor.
+	 */
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'ina_create_options_menu' ) );
 
-		// Add Menu for multisite network
+		// Add Menu for multisite network.
 		add_action( 'network_admin_menu', array( $this, 'ina_menu_multisite_network' ) );
 
 		add_action( 'ina_before_settings_wrapper', array( $this, 'ina_before_settings_wrap' ) );
@@ -57,6 +66,9 @@ class Inactive_Logout_Admin_Views {
 		}
 	}
 
+	/**
+	 * Add menu page.
+	 */
 	function ina_menu_multisite_network() {
 		add_menu_page(
 			__( 'Inactive User Logout Settings', 'inactive-logout' ),
@@ -67,10 +79,15 @@ class Inactive_Logout_Admin_Views {
 		);
 	}
 
-	/** Rendering the output */
+	/**
+	 * Rendering the output.
+	 */
 	public function ina__render_options() {
 		$saved = false;
-		if ( isset( $_POST['submit'] ) ) {
+
+		$submit = filter_input( INPUT_POST, 'submit', FILTER_SANITIZE_STRING );
+
+		if ( isset( $submit ) ) {
 			$saved = $this->ina__process_basic_settings();
 			if ( $saved ) {
 				?>
@@ -81,19 +98,22 @@ class Inactive_Logout_Admin_Views {
 			}
 		}
 
-		if ( isset( $_POST['adv_submit'] ) ) {
+		$adv_submit = filter_input( INPUT_POST, 'adv_submit', FILTER_SANITIZE_STRING );
+
+		if ( isset( $adv_submit ) ) {
 			$saved = $this->ina__process_adv_settings();
 		}
 
-		// Css rules for Color Picker
+		// Css rules for Color Picker.
 		wp_enqueue_style( 'wp-color-picker' );
-		$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'ina-basic';
+		$tab = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_STRING );
+		$active_tab = isset( $tab ) ? $tab : 'ina-basic';
 
-		// Include Template
+		// Include Template.
 		do_action( 'ina_before_settings_wrapper' );
 		require_once INACTIVE_LOGOUT_VIEWS . '/tpl-inactive-logout-settings.php';
-		if ( $active_tab == 'ina-basic' ) {
-			// BASIC
+		if ( 'ina-basic' === $active_tab ) {
+			// BASIC.
 			if ( is_network_admin() && is_multisite() ) {
 				$idle_overrideby_multisite_setting = get_site_option( '__ina_overrideby_multisite_setting' );
 			}
@@ -107,14 +127,14 @@ class Inactive_Logout_Admin_Views {
 			$ina_enable_redirect = get_option( '__ina_enable_redirect' );
 			$ina_redirect_page_link = get_option( '__ina_redirect_page_link' );
 
-			// IF redirect is custom page link
-			if ( $ina_redirect_page_link == 'custom-page-redirect' ) {
+			// IF redirect is custom page link.
+			if ( 'custom-page-redirect' === $ina_redirect_page_link ) {
 				$custom_redirect_text_field = get_option( '__ina_custom_redirect_text_field' );
 			}
 
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-basic.php';
 		} else {
-			// ADVANCED
+			// ADVANCED.
 			$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
 			if ( $ina_multiuser_timeout_enabled ) {
 				$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
@@ -125,8 +145,18 @@ class Inactive_Logout_Admin_Views {
 		do_action( 'ina_after_settings_wrapper' );
 	}
 
+	/**
+	 * Manages Basic settings.
+	 *
+	 * @return bool|void
+	 */
 	public function ina__process_basic_settings() {
-		if ( isset( $_POST['submit'] ) && ! wp_verify_nonce( $_POST['_save_timeout_settings'], '_nonce_action_save_timeout_settings' ) ) {
+
+		$sm_nonce = filter_input( INPUT_POST, '_save_timeout_settings', FILTER_SANITIZE_STRING );
+		$nonce = isset( $sm_nonce ) ? $sm_nonce : '';
+		$submit = filter_input( INPUT_POST, 'submit', FILTER_SANITIZE_STRING );
+
+		if ( isset( $submit ) && ! wp_verify_nonce( $nonce, '_nonce_action_save_timeout_settings' ) ) {
 			wp_die( 'Not Allowed' );
 			return;
 		}
@@ -145,13 +175,13 @@ class Inactive_Logout_Admin_Views {
 		$ina_enable_redirect_link = filter_input( INPUT_POST, 'ina_enable_redirect_link', FILTER_SANITIZE_NUMBER_INT );
 		$ina_redirect_page = filter_input( INPUT_POST, 'ina_redirect_page' );
 
-		if ( $ina_redirect_page == 'custom-page-redirect' ) {
+		if ( 'custom-page-redirect' === $ina_redirect_page ) {
 			$ina_custom_redirect_text_field = filter_input( INPUT_POST, 'custom_redirect_text_field' );
 		}
 
 		do_action( 'ina_before_update_basic_settings' );
 
-		// If Mulisite is Active then Add these settings to mulsite option table as well
+		// If Mulisite is Active then Add these settings to mulsite option table as well.
 		if ( is_network_admin() && is_multisite() ) {
 			$idle_overrideby_multisite_setting = filter_input( INPUT_POST, 'idle_overrideby_multisite_setting', FILTER_SANITIZE_NUMBER_INT );
 			update_site_option( '__ina_overrideby_multisite_setting', $idle_overrideby_multisite_setting );
@@ -169,7 +199,7 @@ class Inactive_Logout_Admin_Views {
 				update_site_option( '__ina_enable_redirect', $ina_enable_redirect_link );
 				update_site_option( '__ina_redirect_page_link', $ina_redirect_page );
 
-				if ( $ina_redirect_page == 'custom-page-redirect' ) {
+				if ( 'custom-page-redirect' === $ina_redirect_page ) {
 					update_site_option( '__ina_custom_redirect_text_field', $ina_custom_redirect_text_field );
 				}
 			}
@@ -188,7 +218,7 @@ class Inactive_Logout_Admin_Views {
 			update_option( '__ina_enable_redirect', $ina_enable_redirect_link );
 			update_option( '__ina_redirect_page_link', $ina_redirect_page );
 
-			if ( $ina_redirect_page == 'custom-page-redirect' ) {
+			if ( 'custom-page-redirect' === $ina_redirect_page ) {
 				update_option( '__ina_custom_redirect_text_field', $ina_custom_redirect_text_field );
 			}
 
@@ -198,8 +228,18 @@ class Inactive_Logout_Admin_Views {
 		do_action( 'ina_after_update_basic_settings' );
 	}
 
+	/**
+	 * Manages Advance settings.
+	 *
+	 * @return bool|void
+	 */
 	public function ina__process_adv_settings() {
-		if ( isset( $_POST['adv_submit'] ) && ! wp_verify_nonce( $_POST['_save_timeout_adv_settings'], '_nonce_action_save_timeout_adv_settings' ) ) {
+
+		$sm_nonce = filter_input( INPUT_POST, '_save_timeout_adv_settings', FILTER_SANITIZE_STRING );
+		$nonce = isset( $sm_nonce ) ? $sm_nonce : '';
+		$adv_submit = filter_input( INPUT_POST, 'adv_submit', FILTER_SANITIZE_STRING );
+
+		if ( isset( $adv_submit ) && ! wp_verify_nonce( $nonce, '_nonce_action_save_timeout_adv_settings' ) ) {
 			wp_die( 'Not Allowed' );
 			return;
 		}
@@ -247,10 +287,16 @@ class Inactive_Logout_Admin_Views {
 		$this->helper->ina_reload();
 	}
 
+	/**
+	 * Settings wrapper html element.
+	 */
 	public function ina_before_settings_wrap() {
 		echo '<div id="ina-cover-loading" style="display: none;"></div><div class="wrap">';
 	}
 
+	/**
+	 * Settings wrapper html element.
+	 */
 	public function ina_after_settings_wrap() {
 		echo '</div>';
 	}

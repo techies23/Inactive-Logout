@@ -1,5 +1,14 @@
+<?php
+/**
+ * Template for Basic settings page.
+ *
+ * @package inactive-logout
+ */
+
+?>
+
 <form method="post" action="?page=inactive-logout&tab=ina-basic">
-  <?php wp_nonce_field( '_nonce_action_save_timeout_settings', '_save_timeout_settings' ); ?>
+	<?php wp_nonce_field( '_nonce_action_save_timeout_settings', '_save_timeout_settings' ); ?>
   <table class="ina-form-tbl form-table">
 	<tbody>
 		<?php if ( is_network_admin() ) { ?>
@@ -14,7 +23,7 @@
 	  <tr>
 		<th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Idle Timeout', 'inactive-logout' ); ?></label></th>
 		<td>
-		  <input name="idle_timeout" min="1" type="number" id="idle_timeout" value="<?php echo isset( $time ) ? $time / 60 : 30; ?>" >
+		  <input name="idle_timeout" min="1" type="number" id="idle_timeout" value="<?php echo ( isset( $time ) ) ? esc_attr( $time / 60 ) : 30; ?>" >
 		  <i><?php esc_html_e( 'Minute(s)', 'inactive-logout' ); ?></i>
 		</td>
 	  </tr>
@@ -44,7 +53,7 @@
 	  <tr class="ina_colorpicker_show">
 		<th scope="row"><label for="ina_color_picker"><?php esc_html_e( 'Popup Background Color', 'inactive-logout' ); ?></label></th>
 		<td>
-		  <input type="text" name="ina_color_picker" value="<?php echo ! empty( $ina_popup_overlay_color ) ? $ina_popup_overlay_color : ''; ?>" class="ina_color_picker" >
+		  <input type="text" name="ina_color_picker" value="<?php echo ( ! empty( $ina_popup_overlay_color ) ) ? esc_attr( $ina_popup_overlay_color ) : ''; ?>" class="ina_color_picker" >
 		  <p class="description"><?php esc_html_e( 'Choose a popup background color.', 'inactive-logout' ); ?></p>
 		</td>
 	  </tr>
@@ -105,9 +114,12 @@
 			<optgroup label="Posts">
 				<?php
 				foreach ( $posts as $post ) {
-					if ( $post['post_type'] == 'post' ) {
+					if ( 'post' === $post['post_type'] ) {
 					?>
-					<option <?php echo $ina_redirect_page_link == $post['ID'] ? 'selected' : null; ?> value="<?php echo $post['ID']; ?>"><?php echo $post['title']; ?></option>
+					<option <?php echo ( intval( $ina_redirect_page_link ) === $post['ID'] ) ? esc_attr( 'selected' ) : ''; ?>
+						value="<?php echo esc_attr( $post['ID'] ); ?>">
+							<?php echo esc_html( $post['title'] ); ?>
+					</option>
 					<?php
 					}
 				}
@@ -116,9 +128,12 @@
 			<optgroup label="Pages">
 				<?php
 				foreach ( $posts as $post ) {
-					if ( $post['post_type'] == 'page' ) {
+					if ( 'page' === $post['post_type'] ) {
 					?>
-					<option <?php echo $ina_redirect_page_link == $post['ID'] ? 'selected' : null; ?> value="<?php echo $post['ID']; ?>"><?php echo $post['title']; ?></option>
+					<option <?php echo ( intval( $ina_redirect_page_link ) === $post['ID'] ) ? esc_attr( 'selected' ) : ''; ?>
+						value="<?php echo esc_attr( $post['ID'] ); ?>">
+						<?php echo esc_html( $post['title'] ); ?>
+					</option>
 					<?php
 					}
 				}
@@ -135,15 +150,19 @@
 		<p class="description"><?php esc_html_e( 'Select a page to redirect to after session timeout and clicking OK.', 'inactive-logout' ); ?></p>
 	  </td>
 	</tr>
-	<tr class="show_cutom_redirect_textfield" <?php echo ( ! empty( $ina_redirect_page_link ) && $ina_redirect_page_link == 'custom-page-redirect') ? false : 'style=display:none;'; ?> >
+	<tr class="show_cutom_redirect_textfield" <?php echo ( ( ! empty( $ina_redirect_page_link ) && 'custom-page-redirect' === $ina_redirect_page_link ) ) ? false : 'style=display:none;'; ?> >
 	  <th scope="row"><label for="custom_redirect_text_field"><?php esc_html_e( 'Custom URL Redirect', 'inactive-logout' ); ?></label></th>
 	  <td>
-		<input name="custom_redirect_text_field" type="url" id="custom_redirect_text_field" class="regular-text code" value="<?php echo ! empty( $custom_redirect_text_field ) ? $custom_redirect_text_field : false; ?>">
-		<p class="description"><?php printf(esc_html__( 'Link to custom url redirect. Ex: %s', 'inactive-logout' ), 'https://deepenbajracharya.com.np/' ); ?></p>
+		<input name="custom_redirect_text_field" type="url" id="custom_redirect_text_field" class="regular-text code" value="<?php echo ( ! empty( $custom_redirect_text_field ) ) ? esc_attr( $custom_redirect_text_field ) : false; ?>">
+			<p class="description">
+			<?php
+			// translators: Url.
+			printf( esc_html__( 'Link to custom url redirect. Ex: %s', 'inactive-logout' ), esc_url( 'https://deepenbajracharya.com.np/' ) );
+			?>
+			</p>
 	  </td>
 	</tr>
   </tbody>
 </table>
-<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_attr( 'Save Changes', 'inactive-logout' ); ?>"></p>
+<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>"></p>
 </form>
-

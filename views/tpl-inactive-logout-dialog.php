@@ -1,4 +1,12 @@
-<!--START INACTIVE LOGOUT MODAL CONTENT-->
+<?php
+/**
+ * Template for Modal.
+ *
+ * @package inactive-logout
+ */
+
+?>
+
 <?php
 $override = is_multisite() ? get_site_option( '__ina_overrideby_multisite_setting' ) : false;
 if ( ! empty( $override ) ) {
@@ -12,7 +20,9 @@ if ( ! empty( $override ) ) {
 }
 $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 ?>
-<span data-bg="<?php echo $bg; ?>" class="ina__no_confict_popup_bg" data-bgenabled="<?php echo $ina_full_overlay; ?>"></span>
+
+<!--START INACTIVE LOGOUT MODAL CONTENT-->
+<span data-bg="<?php echo esc_attr( $bg ); ?>" class="ina__no_confict_popup_bg" data-bgenabled="<?php echo esc_attr( $ina_full_overlay ); ?>"></span>
 <?php if ( absint( 1 ) === $ina_warn_message_enabled ) { ?>
 <div id="ina__dp_logout_message_box" class="ina-dp-noflict-modal">
 	<div class="ina-dp-noflict-modal-content">
@@ -26,7 +36,7 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 					global $current_user;
 					$ina_multiuser_settings = get_site_option( '__ina_multiusers_settings' );
 					foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
-						if ( in_array( $ina_multiuser_setting['role'], $current_user->roles ) ) {
+						if ( in_array( $ina_multiuser_setting['role'], $current_user->roles, true ) ) {
 							$time = $ina_multiuser_setting['timeout'] * 60;
 						}
 					}
@@ -39,7 +49,7 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 					global $current_user;
 					$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
 					foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
-						if ( in_array( $ina_multiuser_setting['role'], $current_user->roles ) ) {
+						if ( in_array( $ina_multiuser_setting['role'], $current_user->roles, true ) ) {
 							$time = $ina_multiuser_setting['timeout'] * 60;
 						}
 					}
@@ -47,8 +57,8 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 			}
 
 			$ina_helpers = Inactive_Logout_Helpers::instance();
-			$replaced_content = str_replace( '{wakup_timout}', $ina_helpers->ina_convertToMinutes( $time ), $message_content );
-			echo apply_filters( 'the_content', $replaced_content );
+			$replaced_content = str_replace( '{wakup_timout}', $ina_helpers->ina_convert_to_minutes( $time ), $message_content );
+			echo apply_filters( 'the_content', $replaced_content ); // WPCS: XSS ok.
 			?>
 			<p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php esc_html_e( 'Continue', 'inactive-logout' ); ?></a></p>
 		</div>
@@ -68,7 +78,7 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 				$message_content = get_option( '__ina_logout_message' );
 			}
 			?>
-			<?php echo apply_filters( 'the_content', $message_content ); ?>
+			<?php echo apply_filters( 'the_content', $message_content ); // WPCS: XSS ok. ?>
 			<p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php esc_html_e( 'Continue', 'inactive-logout' ); ?> <span class="ina_countdown"></span></a></p>
 		</div>
 	</div>

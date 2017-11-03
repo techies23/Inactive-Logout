@@ -1,5 +1,11 @@
 <?php
-// Not Permission to agree more or less than given
+/**
+ * File contains functions for Concurrent Login.
+ *
+ * @package inactive-logout
+ */
+
+// Not Permission to agree more or less than given.
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
@@ -13,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Inactive_Concurrent_Login_Functions {
 
+	/**
+	 * Inactive_Concurrent_Login_Functions constructor.
+	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'ina_concurrent_logins' ) );
 	}
@@ -64,7 +73,7 @@ class Inactive_Concurrent_Login_Functions {
 			return;
 		}
 
-		// Finding maximum value of all sessions available
+		// Finding maximum value of all sessions available.
 		$newest = max( wp_list_pluck( wp_get_all_sessions(), 'login' ) );
 		$session = $this->ina_get_current_session();
 		if ( $session['login'] === $newest ) {
@@ -81,13 +90,13 @@ class Inactive_Concurrent_Login_Functions {
 	 */
 	protected static function ina_get_users_with_sessions() {
 		$args = array(
-			'number'     => '', // All users
-		'blog_id'    => is_network_admin() ? 0 : get_current_blog_id(),
-		'fields'     => array( 'ID' ), // Only the ID field is needed
-		'meta_query' => array(
-			array(
-				'key'     => 'session_tokens',
-				'compare' => 'EXISTS',
+			'number'     => '', // All users.
+			'blog_id'    => is_network_admin() ? 0 : get_current_blog_id(),
+			'fields'     => array( 'ID' ), // Only the ID field is needed.
+			'meta_query' => array( // WPCS: slow query ok.
+				array(
+					'key'     => 'session_tokens',
+					'compare' => 'EXISTS',
 				),
 			),
 		);
@@ -109,21 +118,21 @@ class Inactive_Concurrent_Login_Functions {
 		foreach ( $users as $user ) {
 			$sessions = get_user_meta( $user->ID, 'session_tokens', true );
 
-			// Move along if this user only has one session
+			// Move along if this user only has one session.
 			if ( 1 === count( $sessions ) ) {
 				continue;
 			}
 
-			// Extract the login timestamps from all sessions
+			// Extract the login timestamps from all sessions.
 			$logins = array_values( wp_list_pluck( $sessions, 'login' ) );
 
-			// Sort by login timestamp DESC
+			// Sort by login timestamp DESC.
 			array_multisort( $logins, SORT_DESC, $sessions );
 
-			// Get the newest (top-most) session
+			// Get the newest (top-most) session.
 			$newest = array_slice( $sessions, 0, 1 );
 
-			// Keep only the newest session
+			// Keep only the newest session.
 			update_user_meta( $user->ID, 'session_tokens', $newest );
 		}
 	}
