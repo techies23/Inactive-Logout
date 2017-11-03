@@ -10,12 +10,12 @@
 <?php
 $override = is_multisite() ? get_site_option( '__ina_overrideby_multisite_setting' ) : false;
 if ( ! empty( $override ) ) {
-	$ina_full_overlay = get_site_option( '__ina_full_overlay' );
-	$ina_popup_overlay_color = get_site_option( '__ina_popup_overlay_color' );
+	$ina_full_overlay         = get_site_option( '__ina_full_overlay' );
+	$ina_popup_overlay_color  = get_site_option( '__ina_popup_overlay_color' );
 	$ina_warn_message_enabled = get_site_option( '__ina_warn_message_enabled' );
 } else {
-	$ina_full_overlay = get_option( '__ina_full_overlay' );
-	$ina_popup_overlay_color = get_option( '__ina_popup_overlay_color' );
+	$ina_full_overlay         = get_option( '__ina_full_overlay' );
+	$ina_popup_overlay_color  = get_option( '__ina_popup_overlay_color' );
 	$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' );
 }
 $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
@@ -29,8 +29,8 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 		<div class="ina-dp-noflict-modal-body ina-dp-noflict-wakeup">
 			<?php
 			if ( ! empty( $override ) ) {
-				$message_content = get_site_option( '__ina_warn_message' );
-				$time = get_site_option( '__ina_logout_time' );
+				$message_content               = get_site_option( '__ina_warn_message' );
+				$time                          = get_site_option( '__ina_logout_time' );
 				$ina_multiuser_timeout_enabled = get_site_option( '__ina_enable_timeout_multiusers' );
 				if ( $ina_multiuser_timeout_enabled ) {
 					global $current_user;
@@ -42,8 +42,8 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 					}
 				}
 			} else {
-				$message_content = get_option( '__ina_warn_message' );
-				$time = get_option( '__ina_logout_time' );
+				$message_content               = get_option( '__ina_warn_message' );
+				$time                          = get_option( '__ina_logout_time' );
 				$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
 				if ( $ina_multiuser_timeout_enabled ) {
 					global $current_user;
@@ -56,7 +56,7 @@ $bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
 				}
 			}
 
-			$ina_helpers = Inactive_Logout_Helpers::instance();
+			$ina_helpers      = Inactive_Logout_Helpers::instance();
 			$replaced_content = str_replace( '{wakup_timout}', $ina_helpers->ina_convert_to_minutes( $time ), $message_content );
 			echo apply_filters( 'the_content', $replaced_content ); // WPCS: XSS ok.
 			?>

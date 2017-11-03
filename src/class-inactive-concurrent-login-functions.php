@@ -74,7 +74,7 @@ class Inactive_Concurrent_Login_Functions {
 		}
 
 		// Finding maximum value of all sessions available.
-		$newest = max( wp_list_pluck( wp_get_all_sessions(), 'login' ) );
+		$newest  = max( wp_list_pluck( wp_get_all_sessions(), 'login' ) );
 		$session = $this->ina_get_current_session();
 		if ( $session['login'] === $newest ) {
 			wp_destroy_other_sessions();

@@ -106,7 +106,7 @@ class Inactive_Logout_Admin_Views {
 
 		// Css rules for Color Picker.
 		wp_enqueue_style( 'wp-color-picker' );
-		$tab = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_STRING );
+		$tab        = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_STRING );
 		$active_tab = isset( $tab ) ? $tab : 'ina-basic';
 
 		// Include Template.
@@ -118,14 +118,14 @@ class Inactive_Logout_Admin_Views {
 				$idle_overrideby_multisite_setting = get_site_option( '__ina_overrideby_multisite_setting' );
 			}
 
-			$time = get_option( '__ina_logout_time' );
-			$countdown_enable = get_option( '__ina_disable_countdown' );
+			$time                     = get_option( '__ina_logout_time' );
+			$countdown_enable         = get_option( '__ina_disable_countdown' );
 			$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' );
-			$ina_concurrent = get_option( '__ina_concurrent_login' );
-			$ina_full_overlay = get_option( '__ina_full_overlay' );
-			$ina_popup_overlay_color = get_option( '__ina_popup_overlay_color' );
-			$ina_enable_redirect = get_option( '__ina_enable_redirect' );
-			$ina_redirect_page_link = get_option( '__ina_redirect_page_link' );
+			$ina_concurrent           = get_option( '__ina_concurrent_login' );
+			$ina_full_overlay         = get_option( '__ina_full_overlay' );
+			$ina_popup_overlay_color  = get_option( '__ina_popup_overlay_color' );
+			$ina_enable_redirect      = get_option( '__ina_enable_redirect' );
+			$ina_redirect_page_link   = get_option( '__ina_redirect_page_link' );
 
 			// IF redirect is custom page link.
 			if ( 'custom-page-redirect' === $ina_redirect_page_link ) {
@@ -153,27 +153,27 @@ class Inactive_Logout_Admin_Views {
 	public function ina__process_basic_settings() {
 
 		$sm_nonce = filter_input( INPUT_POST, '_save_timeout_settings', FILTER_SANITIZE_STRING );
-		$nonce = isset( $sm_nonce ) ? $sm_nonce : '';
-		$submit = filter_input( INPUT_POST, 'submit', FILTER_SANITIZE_STRING );
+		$nonce    = isset( $sm_nonce ) ? $sm_nonce : '';
+		$submit   = filter_input( INPUT_POST, 'submit', FILTER_SANITIZE_STRING );
 
 		if ( isset( $submit ) && ! wp_verify_nonce( $nonce, '_nonce_action_save_timeout_settings' ) ) {
 			wp_die( 'Not Allowed' );
 			return;
 		}
 
-		$idle_timeout = filter_input( INPUT_POST, 'idle_timeout', FILTER_SANITIZE_NUMBER_INT );
-		$idle_timeout_message = wp_kses_post( filter_input( INPUT_POST, 'idle_message_text' ) );
-		$idle_disable_countdown = filter_input( INPUT_POST, 'idle_disable_countdown', FILTER_SANITIZE_NUMBER_INT );
+		$idle_timeout               = filter_input( INPUT_POST, 'idle_timeout', FILTER_SANITIZE_NUMBER_INT );
+		$idle_timeout_message       = wp_kses_post( filter_input( INPUT_POST, 'idle_message_text' ) );
+		$idle_disable_countdown     = filter_input( INPUT_POST, 'idle_disable_countdown', FILTER_SANITIZE_NUMBER_INT );
 		$ina_show_warn_message_only = filter_input( INPUT_POST, 'ina_show_warn_message_only', FILTER_SANITIZE_NUMBER_INT );
-		$ina_show_warn_message = wp_kses_post( filter_input( INPUT_POST, 'ina_show_warn_message' ) );
+		$ina_show_warn_message      = wp_kses_post( filter_input( INPUT_POST, 'ina_show_warn_message' ) );
 		$ina_disable_multiple_login = filter_input( INPUT_POST, 'ina_disable_multiple_login', FILTER_SANITIZE_NUMBER_INT );
 
 		$ina_background_popup = trim( filter_input( INPUT_POST, 'ina_color_picker' ) );
 		$ina_background_popup = strip_tags( stripslashes( $ina_background_popup ) );
 
-		$ina_full_overlay = filter_input( INPUT_POST, 'ina_full_overlay', FILTER_SANITIZE_NUMBER_INT );
+		$ina_full_overlay         = filter_input( INPUT_POST, 'ina_full_overlay', FILTER_SANITIZE_NUMBER_INT );
 		$ina_enable_redirect_link = filter_input( INPUT_POST, 'ina_enable_redirect_link', FILTER_SANITIZE_NUMBER_INT );
-		$ina_redirect_page = filter_input( INPUT_POST, 'ina_redirect_page' );
+		$ina_redirect_page        = filter_input( INPUT_POST, 'ina_redirect_page' );
 
 		if ( 'custom-page-redirect' === $ina_redirect_page ) {
 			$ina_custom_redirect_text_field = filter_input( INPUT_POST, 'custom_redirect_text_field' );
@@ -235,8 +235,8 @@ class Inactive_Logout_Admin_Views {
 	 */
 	public function ina__process_adv_settings() {
 
-		$sm_nonce = filter_input( INPUT_POST, '_save_timeout_adv_settings', FILTER_SANITIZE_STRING );
-		$nonce = isset( $sm_nonce ) ? $sm_nonce : '';
+		$sm_nonce   = filter_input( INPUT_POST, '_save_timeout_adv_settings', FILTER_SANITIZE_STRING );
+		$nonce      = isset( $sm_nonce ) ? $sm_nonce : '';
 		$adv_submit = filter_input( INPUT_POST, 'adv_submit', FILTER_SANITIZE_STRING );
 
 		if ( isset( $adv_submit ) && ! wp_verify_nonce( $nonce, '_nonce_action_save_timeout_adv_settings' ) ) {
@@ -244,25 +244,25 @@ class Inactive_Logout_Admin_Views {
 			return;
 		}
 
-		$ina_enable_different_role_timeout = filter_input( INPUT_POST, 'ina_enable_different_role_timeout' );
-		$ina_multiuser_roles = filter_input( INPUT_POST, 'ina_multiuser_roles', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
-		$ina_individual_user_timeout = filter_input( INPUT_POST, 'ina_individual_user_timeout', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
-		$ina_redirect_page_individual_user = filter_input( INPUT_POST, 'ina_redirect_page_individual_user', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
-		$ina_disable_inactive_logout = filter_input( INPUT_POST, 'ina_disable_inactive_logout', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
+		$ina_enable_different_role_timeout     = filter_input( INPUT_POST, 'ina_enable_different_role_timeout' );
+		$ina_multiuser_roles                   = filter_input( INPUT_POST, 'ina_multiuser_roles', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
+		$ina_individual_user_timeout           = filter_input( INPUT_POST, 'ina_individual_user_timeout', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
+		$ina_redirect_page_individual_user     = filter_input( INPUT_POST, 'ina_redirect_page_individual_user', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
+		$ina_disable_inactive_logout           = filter_input( INPUT_POST, 'ina_disable_inactive_logout', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
 		$ina_disable_inactive_concurrent_login = filter_input( INPUT_POST, 'ina_disable_inactive_concurrent_login', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY );
 
 		$container_multi_user_arr = array();
 		if ( $ina_multiuser_roles ) {
 			foreach ( $ina_multiuser_roles as $k => $ina_multiuser_role ) {
-				$user_timeout_minutes = ! empty( $ina_individual_user_timeout[ $k ] ) ? $ina_individual_user_timeout[ $k ] : 15;
-				$multi_userredirect_page_link = ! empty( $ina_redirect_page_individual_user[ $k ] ) ? $ina_redirect_page_individual_user[ $k ] : null;
-				$disabled_for_user = ! empty( $ina_disable_inactive_logout[ $ina_multiuser_role ] ) ? 1 : null;
+				$user_timeout_minutes              = ! empty( $ina_individual_user_timeout[ $k ] ) ? $ina_individual_user_timeout[ $k ] : 15;
+				$multi_userredirect_page_link      = ! empty( $ina_redirect_page_individual_user[ $k ] ) ? $ina_redirect_page_individual_user[ $k ] : null;
+				$disabled_for_user                 = ! empty( $ina_disable_inactive_logout[ $ina_multiuser_role ] ) ? 1 : null;
 				$disabled_for_user_concurent_login = ! empty( $ina_disable_inactive_concurrent_login[ $ina_multiuser_role ] ) ? 1 : null;
-				$container_multi_user_arr[] = array(
-					'role' => $ina_multiuser_role,
-					'timeout' => $user_timeout_minutes,
-					'redirect_page' => $multi_userredirect_page_link,
-					'disabled_feature' => $disabled_for_user,
+				$container_multi_user_arr[]        = array(
+					'role'                      => $ina_multiuser_role,
+					'timeout'                   => $user_timeout_minutes,
+					'redirect_page'             => $multi_userredirect_page_link,
+					'disabled_feature'          => $disabled_for_user,
 					'disabled_concurrent_login' => $disabled_for_user_concurent_login,
 				);
 			}

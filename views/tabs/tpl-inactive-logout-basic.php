@@ -31,13 +31,13 @@
 		<th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Idle Message Content', 'inactive-logout' ); ?></label></th>
 		<td>
 			<?php
-			$settings = array(
+			$settings        = array(
 				'media_buttons' => false,
-				'teeny' => true,
+				'teeny'         => true,
 				'textarea_rows' => 15,
 			);
 			$message_content = get_option( '__ina_logout_message' );
-			$content = $message_content ? $message_content : null;
+			$content         = $message_content ? $message_content : null;
 			wp_editor( $content, 'idle_message_text', $settings );
 			?>
 		  <p class="description"><?php esc_html_e( 'Message to be shown when idle timeout screen shows.', 'inactive-logout' ); ?></p>
@@ -76,12 +76,12 @@
 		<th scope="row"><label for="ina_show_warn_message"><?php esc_html_e( 'Warn Message Content', 'inactive-logout' ); ?></label></th>
 		<td>
 			<?php
-			$settings_warn = array(
+			$settings_warn        = array(
 				'media_buttons' => false,
-				'teeny' => true,
+				'teeny'         => true,
 				'textarea_rows' => 15,
 			);
-			$__ina_warn_message = get_option( '__ina_warn_message' );
+			$__ina_warn_message   = get_option( '__ina_warn_message' );
 			$content_warn_message = $__ina_warn_message ? $__ina_warn_message : null;
 			wp_editor( $content_warn_message, 'ina_show_warn_message', $settings_warn );
 			?>

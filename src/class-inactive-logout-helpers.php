@@ -119,9 +119,9 @@ class Inactive_Logout_Helpers {
 	 * @return BOOL
 	 */
 	public function ina_check_user_role() {
-		$user = wp_get_current_user();
+		$user      = wp_get_current_user();
 		$ina_roles = get_option( '__ina_multiusers_settings' );
-		$result = false;
+		$result    = false;
 		if ( $ina_roles ) {
 			foreach ( $ina_roles as $role ) {
 				if ( 1 === intval( $role['disabled_feature'] ) ) {
@@ -143,9 +143,9 @@ class Inactive_Logout_Helpers {
 	 * @return BOOL
 	 */
 	public function ina_check_user_role_concurrent_login() {
-		$user = wp_get_current_user();
+		$user      = wp_get_current_user();
 		$ina_roles = get_option( '__ina_multiusers_settings' );
-		$result = false;
+		$result    = false;
 		if ( $ina_roles ) {
 			foreach ( $ina_roles as $role ) {
 				if ( ! empty( $role['disabled_concurrent_login'] ) && 1 === intval( $role['disabled_concurrent_login'] ) ) {
