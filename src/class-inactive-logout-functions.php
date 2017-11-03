@@ -109,7 +109,7 @@ class Inactive_Logout_Functions {
 
 					// Logout Current Users.
 					wp_logout();
-					echo json_encode(
+					wp_send_json(
 						array(
 							'msg'          => esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' ),
 							'redirect_url' => isset( $redirect_link ) ? $redirect_link : false,
