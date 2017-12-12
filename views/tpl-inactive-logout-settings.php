@@ -9,7 +9,7 @@
 
 <h1><?php esc_html_e( 'Inactive User Logout Settings', 'inactive-logout' ); ?></h1>
 
-<div id="message" class="notice notice-warning is-dismissible">
+<div id="message" class="notice notice-warning">
 	<h3><?php esc_html_e( 'Like this plugin ?', 'inactive-logout' ); ?></h3>
 	<p>
 		<?php
@@ -17,8 +17,6 @@
 		printf( esc_html__( 'Please consider giving a %s if you found this useful at wordpress.org.', 'inactive-logout' ), '<a href="https://wordpress.org/support/plugin/inactive-logout/reviews/#new-post">5 star thumbs up</a>' );
 		?>
 	</p>
-	<button type="button" class="notice-dismiss"><span
-			class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'inactive-logout' ); ?></span></button>
 </div>
 
 <h2 class="nav-tab-wrapper">

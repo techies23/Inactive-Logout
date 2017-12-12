@@ -9,21 +9,16 @@
 
 <?php
 $override = is_multisite() ? get_site_option( '__ina_overrideby_multisite_setting' ) : false;
-if ( ! empty( $override ) ) {
-	$ina_full_overlay         = get_site_option( '__ina_full_overlay' );
-	$ina_popup_overlay_color  = get_site_option( '__ina_popup_overlay_color' );
-	$ina_warn_message_enabled = get_site_option( '__ina_warn_message_enabled' );
-} else {
-	$ina_full_overlay         = get_option( '__ina_full_overlay' );
-	$ina_popup_overlay_color  = get_option( '__ina_popup_overlay_color' );
-	$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' );
-}
-$bg = isset( $ina_warn_message_enabled ) ? $ina_popup_overlay_color : false;
+$ina_full_overlay         = get_option( '__ina_full_overlay' );
+$ina_popup_overlay_color  = get_option( '__ina_popup_overlay_color' );
+$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' );
+
+$bg = isset( $ina_popup_overlay_color ) ? $ina_popup_overlay_color : false;
 ?>
 
 <!--START INACTIVE LOGOUT MODAL CONTENT-->
 <span data-bg="<?php echo esc_attr( $bg ); ?>" class="ina__no_confict_popup_bg" data-bgenabled="<?php echo esc_attr( $ina_full_overlay ); ?>"></span>
-<?php if ( absint( 1 ) === $ina_warn_message_enabled ) { ?>
+<?php if ( absint(1) == $ina_warn_message_enabled ) { ?>
 <div id="ina__dp_logout_message_box" class="ina-dp-noflict-modal">
 	<div class="ina-dp-noflict-modal-content">
 		<div class="ina-dp-noflict-modal-body ina-dp-noflict-wakeup">

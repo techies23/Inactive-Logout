@@ -99,8 +99,7 @@ function showTimeoutMessage() {
 
       //Disabled Countdown but directly logout
       var postData = { action: 'ina_checklastSession', do: 'ina_logout', security: ina_ajax.ina_security };
-      $.post( ina_ajax.ajaxurl, postData).done(function(response) {
-        var op = $.parseJSON(response);
+      $.post( ina_ajax.ajaxurl, postData).done(function(op) {
         if( op.redirect_url ) {
           window.location = op.redirect_url;
         } else {
@@ -119,8 +118,7 @@ function showTimeoutMessage() {
         if( t == 0 ) {
           clearTimeout(setting_countdown);
           var postData = { action: 'ina_checklastSession', do: 'ina_logout', security: ina_ajax.ina_security };
-          $.post( ina_ajax.ajaxurl, postData).done(function(response) {
-            var op = $.parseJSON(response);
+          $.post( ina_ajax.ajaxurl, postData).done(function(op) {
             if( op.redirect_url ) {
               window.location = op.redirect_url;
             } else {
