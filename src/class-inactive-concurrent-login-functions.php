@@ -1,6 +1,12 @@
 <?php
-//Not Permission to agree more or less than given
-if( !defined('ABSPATH') ) {
+/**
+ * File contains functions for Concurrent Login.
+ *
+ * @package inactive-logout
+ */
+
+// Not Permission to agree more or less than given.
+if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
@@ -11,8 +17,11 @@ if( !defined('ABSPATH') ) {
  *
  * @since  1.1.0
  */
-class Inactive__ConcurrentLogins_functions {
+class Inactive_Concurrent_Login_Functions {
 
+	/**
+	 * Inactive_Concurrent_Login_Functions constructor.
+	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'ina_concurrent_logins' ) );
 	}
@@ -28,24 +37,24 @@ class Inactive__ConcurrentLogins_functions {
 	}
 
 	/**
-	* Get the user's current session array
-	*
-	* @return array
-	*/
+	 * Get the user's current session array
+	 *
+	 * @return array
+	 */
 	public function ina_get_current_session() {
 		$sessions = WP_Session_Tokens::get_instance( get_current_user_id() );
 		return $sessions->get( wp_get_session_token() );
 	}
 
 	/**
-	* Only allow one session per user
-	*
-	* If the current user's session has been taken over by a newer
-	* session then we will destroy their session automattically and
-	* they will have to login again to continue.
-	*
-	* @action init
-	*/
+	 * Only allow one session per user
+	 *
+	 * If the current user's session has been taken over by a newer
+	 * session then we will destroy their session automattically and
+	 * they will have to login again to continue.
+	 *
+	 * @action init
+	 */
 	public function ina_concurrent_logins() {
 		if ( ! $this->ina_user_has_multiple_sessions() ) {
 			return;
@@ -64,8 +73,8 @@ class Inactive__ConcurrentLogins_functions {
 			return;
 		}
 
-		//Finding maximum value of all sessions available
-		$newest = max( wp_list_pluck( wp_get_all_sessions(), 'login' ) );
+		// Finding maximum value of all sessions available.
+		$newest  = max( wp_list_pluck( wp_get_all_sessions(), 'login' ) );
 		$session = $this->ina_get_current_session();
 		if ( $session['login'] === $newest ) {
 			wp_destroy_other_sessions();
@@ -75,19 +84,19 @@ class Inactive__ConcurrentLogins_functions {
 	}
 
 	/**
-	* Get all users with active sessions
-	*
-	* @return WP_User_Query
-	*/
+	 * Get all users with active sessions
+	 *
+	 * @return WP_User_Query
+	 */
 	protected static function ina_get_users_with_sessions() {
 		$args = array(
-		'number'     => '', // All users
-		'blog_id'    => is_network_admin() ? 0 : get_current_blog_id(),
-		'fields'     => array( 'ID' ), // Only the ID field is needed
-		'meta_query' => array(
-			array(
-				'key'     => 'session_tokens',
-				'compare' => 'EXISTS',
+			'number'     => '', // All users.
+			'blog_id'    => is_network_admin() ? 0 : get_current_blog_id(),
+			'fields'     => array( 'ID' ), // Only the ID field is needed.
+			'meta_query' => array( // WPCS: slow query ok.
+				array(
+					'key'     => 'session_tokens',
+					'compare' => 'EXISTS',
 				),
 			),
 		);
@@ -97,36 +106,36 @@ class Inactive__ConcurrentLogins_functions {
 	}
 
 	/**
-	* Destroy old sessions for all users
-	*
-	* This function is meant to run on activation only so that old
-	* sessions can be cleaned up immediately rather than waiting for
-	* every user to login again.
-	*/
+	 * Destroy old sessions for all users
+	 *
+	 * This function is meant to run on activation only so that old
+	 * sessions can be cleaned up immediately rather than waiting for
+	 * every user to login again.
+	 */
 	public static function ina_destroy_all_old_sessions() {
 		$users = self::ina_get_users_with_sessions()->get_results();
 
 		foreach ( $users as $user ) {
 			$sessions = get_user_meta( $user->ID, 'session_tokens', true );
 
-			// Move along if this user only has one session
+			// Move along if this user only has one session.
 			if ( 1 === count( $sessions ) ) {
 				continue;
 			}
 
-			// Extract the login timestamps from all sessions
+			// Extract the login timestamps from all sessions.
 			$logins = array_values( wp_list_pluck( $sessions, 'login' ) );
 
-			// Sort by login timestamp DESC
+			// Sort by login timestamp DESC.
 			array_multisort( $logins, SORT_DESC, $sessions );
 
-			// Get the newest (top-most) session
+			// Get the newest (top-most) session.
 			$newest = array_slice( $sessions, 0, 1 );
 
-			// Keep only the newest session
+			// Keep only the newest session.
 			update_user_meta( $user->ID, 'session_tokens', $newest );
 		}
 	}
 }
 
-new Inactive__ConcurrentLogins_functions();
+new Inactive_Concurrent_Login_Functions();
