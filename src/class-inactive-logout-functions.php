@@ -25,9 +25,13 @@ class Inactive_Logout_Functions {
 		add_action( 'wp_footer', array( $this, 'ina_logout_dialog_modal' ) );
 		add_action( 'admin_footer', array( $this, 'ina_logout_dialog_modal' ) );
 
+		//Ajax for checking if a user is currently logged in
+		// add_action( 'wp_ajax_ina_is_user_logged_in', array( $this, 'ajax_check_user_logged_in' ) );
+		// add_action( 'wp_ajax_nopriv_ina_is_user_logged_in', array( $this, 'ajax_check_user_logged_in' ) );
+
 		// Ajax for checking last session.
-		add_action( 'wp_ajax_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
-		add_action( 'wp_ajax_nopriv_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
+		// add_action( 'wp_ajax_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
+		// add_action( 'wp_ajax_nopriv_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
 
 		// Ajax for resetting.
 		add_action( 'wp_ajax_ina_reset_adv_settings', array( $this, 'ina_reset_adv_settings' ) );
@@ -35,25 +39,39 @@ class Inactive_Logout_Functions {
 		// Ajax for User Roles only.
 		add_action( 'wp_ajax_ina_save_disabled_roles', array( $this, 'ina_save_disabled_roles' ) );
 		add_action( 'wp_ajax_ina_get_enabled_roles', array( $this, 'ina_get_enabled_roles' ) );
+
+    // Hook into the Heartbeat API
+    // This runs early so it can log users out before other actions
+    add_filter( 'heartbeat_received', array( $this, 'heartbeat' ), 1, 3 );
+    add_filter( 'heartbeat_nopriv_received', array( $this, 'heartbeat' ), 1, 3 );
 	}
 
-	/**
-	 * Check Last Session and Logout User
-	 */
-	public function ina_checking_last_session() {
-		check_ajax_referer( '_checklastSession', 'security' );
+  /**
+  * Heartbeat hook
+  */
+  public function heartbeat($response, $data, $screen_id) {
+    do_action('log', 'Heartbeat', $data);
 
-		$timestamp = filter_input( INPUT_POST, 'timestamp', FILTER_SANITIZE_STRING );
-		$timestamp = ( isset( $timestamp ) ) ? $timestamp : null;
+    // only if we're actively called.
+    if (!isset($data['inactive_logout'])) {
+      return $response;
+    }
 
-		$do = filter_input( INPUT_POST, 'do', FILTER_SANITIZE_STRING );
+    // SKIP THIS
+    // check_ajax_referer( '_checklastSession', 'security' );
+
+    $timestamp = filter_var( $data['inactive_logout']['timestamp'], FILTER_SANITIZE_STRING );
+    $timestamp = ( isset( $timestamp ) ) ? $timestamp : null;
+
+    $do = filter_var( $data['inactive_logout']['do'], FILTER_SANITIZE_STRING );
+
+    // update the timestamp all the time
+    if (!empty($timestamp)) {
+      update_user_meta( get_current_user_id(), '__ina_last_active_session', $timestamp );
+    }
 
 		if ( is_user_logged_in() ) {
 			switch ( $do ) {
-				case 'ina_updateLastSession':
-					update_user_meta( get_current_user_id(), '__ina_last_active_session', $timestamp );
-					break;
-
 				case 'ina_logout':
 					$override = is_multisite() ? get_site_option( '__ina_overrideby_multisite_setting' ) : false;
 					// Check in case of Multisite Active.
@@ -109,11 +127,10 @@ class Inactive_Logout_Functions {
 
 					// Logout Current Users.
 					wp_logout();
-					wp_send_json(
-						array(
-							'msg'          => esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' ),
-							'redirect_url' => isset( $redirect_link ) ? $redirect_link : false,
-						)
+          $response['inactive_logout'] = array(
+            'logged_out'    => true,
+						'msg'          => esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' ),
+						'redirect_url' => isset( $redirect_link ) ? $redirect_link : false,
 					);
 					break;
 
@@ -122,7 +139,7 @@ class Inactive_Logout_Functions {
 			}
 		}
 
-		wp_die();
+    return $response;
 	}
 
 	/**
