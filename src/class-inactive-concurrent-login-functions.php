@@ -43,6 +43,7 @@ class Inactive_Concurrent_Login_Functions {
 	 */
 	public function ina_get_current_session() {
 		$sessions = WP_Session_Tokens::get_instance( get_current_user_id() );
+
 		return $sessions->get( wp_get_session_token() );
 	}
 
@@ -63,12 +64,13 @@ class Inactive_Concurrent_Login_Functions {
 		$user_id = get_current_user_id();
 
 		/**
-		* Filter to allow certain users to have concurrent sessions when necessary
-		*
-		* @param bool $prevent
-		* @param int  $user_id ID of the current user
-		* @return bool
-		*/
+		 * Filter to allow certain users to have concurrent sessions when necessary
+		 *
+		 * @param bool $prevent
+		 * @param int  $user_id ID of the current user
+		 *
+		 * @return bool
+		 */
 		if ( false === (bool) apply_filters( 'ina_allow_multiple_sessions', true, $user_id ) ) {
 			return;
 		}
@@ -102,6 +104,7 @@ class Inactive_Concurrent_Login_Functions {
 		);
 
 		$users = new WP_User_Query( $args );
+
 		return $users;
 	}
 
