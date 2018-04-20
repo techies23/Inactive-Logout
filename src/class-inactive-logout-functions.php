@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Core Functions
  *
- * @since  1.0.0
+ * @since   1.0.0
  * @author  Deepen
  */
 class Inactive_Logout_Functions {
@@ -29,12 +29,24 @@ class Inactive_Logout_Functions {
 		add_action( 'wp_ajax_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
 		add_action( 'wp_ajax_nopriv_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
 
+		//Acutually Logging out here
+		add_action( 'wp_ajax_ina_logout_session', array( $this, 'logout_this_session' ) );
+		add_action( 'wp_ajax_nopriv_ina_logout_session', array( $this, 'logout_this_session' ) );
+
 		// Ajax for resetting.
 		add_action( 'wp_ajax_ina_reset_adv_settings', array( $this, 'ina_reset_adv_settings' ) );
 
 		// Ajax for User Roles only.
 		add_action( 'wp_ajax_ina_save_disabled_roles', array( $this, 'ina_save_disabled_roles' ) );
 		add_action( 'wp_ajax_ina_get_enabled_roles', array( $this, 'ina_get_enabled_roles' ) );
+	}
+
+	public function logout_this_session() {
+		check_ajax_referer( '_checklastSession', 'security' );
+
+		//Logout Now
+		wp_logout();
+		wp_die();
 	}
 
 	/**
@@ -108,10 +120,15 @@ class Inactive_Logout_Functions {
 					}
 
 					// Logout Current Users.
-					wp_logout();
+					if ( !empty( $redirect_link ) ) {
+						$message = esc_html__( 'You have been logged out because of inactivity. Please wait while we redirect you to a certain page...', 'inactive-logout' );
+					} else {
+						$message = esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' );
+					}
+
 					wp_send_json(
 						array(
-							'msg'          => esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' ),
+							'msg'          => $message,
 							'redirect_url' => isset( $redirect_link ) ? $redirect_link : false,
 						)
 					);
@@ -136,7 +153,7 @@ class Inactive_Logout_Functions {
 		$pages  = get_posts(
 			array(
 				'order'          => 'ASC',
-				'posts_per_page' => -1,
+				'posts_per_page' => - 1,
 				'post_type'      => array(
 					'post',
 					'page',
@@ -190,4 +207,5 @@ class Inactive_Logout_Functions {
 	}
 
 }
+
 new Inactive_Logout_Functions();

@@ -33,6 +33,7 @@ class Inactive_Logout_Helpers {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new static();
 		}
+
 		return self::$instance;
 	}
 
@@ -42,7 +43,7 @@ class Inactive_Logout_Helpers {
 	 * @param  string      $name  Constant name.
 	 * @param  string|bool $value Constant value.
 	 *
-	 * @since  2.0.0
+	 * @since   2.0.0
 	 *
 	 * @author  Deepen Bajracharya
 	 */
@@ -61,6 +62,7 @@ class Inactive_Logout_Helpers {
 	 */
 	public function ina_convert_to_minutes( $value ) {
 		$minutes = floor( $value / 60 );
+
 		return $minutes . ' ' . esc_html__( 'Minute(s)', 'inactive-logout' );
 	}
 
@@ -69,7 +71,7 @@ class Inactive_Logout_Helpers {
 	 */
 	public function ina_reload() {
 		?>
-		<script type="text/javascript">location.reload();</script>
+        <script type="text/javascript">location.reload();</script>
 		<?php
 	}
 
@@ -139,7 +141,7 @@ class Inactive_Logout_Helpers {
 	 * Check to disable the Inactive for certain user role
 	 *
 	 * @author  Deepen
-	 * @since  1.6.0
+	 * @since   1.6.0
 	 * @return BOOL
 	 */
 	public function ina_check_user_role_concurrent_login() {

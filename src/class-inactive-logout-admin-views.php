@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Admin Views Class
  *
- * @since  1.0.0
+ * @since   1.0.0
  * @author  Deepen
  */
 class Inactive_Logout_Admin_Views {
@@ -24,6 +24,10 @@ class Inactive_Logout_Admin_Views {
 	 * @var Inactive_Logout_Helpers
 	 */
 	public $helper;
+
+	public static $message = '';
+
+	public $settings;
 
 	/**
 	 * Inactive_Logout_Admin_Views constructor.
@@ -88,20 +92,13 @@ class Inactive_Logout_Admin_Views {
 		$submit = filter_input( INPUT_POST, 'submit', FILTER_SANITIZE_STRING );
 
 		if ( isset( $submit ) ) {
-			$saved = $this->ina__process_basic_settings();
-			if ( $saved ) {
-				?>
-				<script type="text/javascript">
-					document.location.reload(true);
-				</script>
-				<?php
-			}
+			$this->ina__process_basic_settings();
 		}
 
 		$adv_submit = filter_input( INPUT_POST, 'adv_submit', FILTER_SANITIZE_STRING );
 
 		if ( isset( $adv_submit ) ) {
-			$saved = $this->ina__process_adv_settings();
+			$this->ina__process_adv_settings();
 		}
 
 		// Css rules for Color Picker.
@@ -119,6 +116,7 @@ class Inactive_Logout_Admin_Views {
 			}
 
 			$time                     = get_option( '__ina_logout_time' );
+			$warn_time                = get_option( '__ina_warn_time' );
 			$countdown_enable         = get_option( '__ina_disable_countdown' );
 			$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' );
 			$ina_concurrent           = get_option( '__ina_concurrent_login' );
@@ -142,6 +140,7 @@ class Inactive_Logout_Admin_Views {
 
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-advanced.php';
 		}
+
 		do_action( 'ina_after_settings_wrapper' );
 	}
 
@@ -158,10 +157,12 @@ class Inactive_Logout_Admin_Views {
 
 		if ( isset( $submit ) && ! wp_verify_nonce( $nonce, '_nonce_action_save_timeout_settings' ) ) {
 			wp_die( 'Not Allowed' );
+
 			return;
 		}
 
 		$idle_timeout               = filter_input( INPUT_POST, 'idle_timeout', FILTER_SANITIZE_NUMBER_INT );
+		$idle_warn_time            = filter_input( INPUT_POST, 'idle_warn_time', FILTER_SANITIZE_NUMBER_INT );
 		$idle_timeout_message       = wp_kses_post( filter_input( INPUT_POST, 'idle_message_text' ) );
 		$idle_disable_countdown     = filter_input( INPUT_POST, 'idle_disable_countdown', FILTER_SANITIZE_NUMBER_INT );
 		$ina_show_warn_message_only = filter_input( INPUT_POST, 'ina_show_warn_message_only', FILTER_SANITIZE_NUMBER_INT );
@@ -189,6 +190,7 @@ class Inactive_Logout_Admin_Views {
 			$save_minutes = $idle_timeout * 60; // 60 minutes
 			if ( $idle_timeout ) {
 				update_site_option( '__ina_logout_time', $save_minutes );
+				update_site_option( '__ina_warn_time', $idle_warn_time );
 				update_site_option( '__ina_logout_message', $idle_timeout_message );
 				update_site_option( '__ina_disable_countdown', $idle_disable_countdown );
 				update_site_option( '__ina_warn_message_enabled', $ina_show_warn_message_only );
@@ -208,6 +210,7 @@ class Inactive_Logout_Admin_Views {
 		$save_minutes = $idle_timeout * 60; // 60 minutes
 		if ( $idle_timeout ) {
 			update_option( '__ina_logout_time', $save_minutes );
+			update_option( '__ina_warn_time', $idle_warn_time );
 			update_option( '__ina_logout_message', $idle_timeout_message );
 			update_option( '__ina_disable_countdown', $idle_disable_countdown );
 			update_option( '__ina_warn_message_enabled', $ina_show_warn_message_only );
@@ -221,11 +224,11 @@ class Inactive_Logout_Admin_Views {
 			if ( 'custom-page-redirect' === $ina_redirect_page ) {
 				update_option( '__ina_custom_redirect_text_field', $ina_custom_redirect_text_field );
 			}
-
-			return true;
 		}
 
 		do_action( 'ina_after_update_basic_settings' );
+
+		self::set_message( 'updated', 'Settings Saved !' );
 	}
 
 	/**
@@ -241,6 +244,7 @@ class Inactive_Logout_Admin_Views {
 
 		if ( isset( $adv_submit ) && ! wp_verify_nonce( $nonce, '_nonce_action_save_timeout_adv_settings' ) ) {
 			wp_die( 'Not Allowed' );
+
 			return;
 		}
 
@@ -284,7 +288,7 @@ class Inactive_Logout_Admin_Views {
 
 		do_action( 'ina_after_update_adv_settings' );
 
-		$this->helper->ina_reload();
+		self::set_message( 'updated', 'Settings Saved !' );
 	}
 
 	/**
@@ -300,5 +304,14 @@ class Inactive_Logout_Admin_Views {
 	public function ina_after_settings_wrap() {
 		echo '</div>';
 	}
+
+	static function get_message() {
+		return self::$message;
+	}
+
+	static function set_message( $class, $message ) {
+		self::$message = '<div class=' . $class . '><p>' . $message . '</p></div>';
+	}
 }
+
 new Inactive_Logout_Admin_Views();
