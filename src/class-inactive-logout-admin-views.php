@@ -87,6 +87,11 @@ class Inactive_Logout_Admin_Views {
 	 * Rendering the output.
 	 */
 	public function ina__render_options() {
+		//Enqueue Admin Scripts
+		wp_enqueue_script( "ina-logout-inactive-logoutonly-js" );
+		wp_enqueue_script( "ina-logout-inactive-select-js" );
+		wp_enqueue_style( "ina-logout-inactive-select" );
+
 		$saved = false;
 
 		$submit = filter_input( INPUT_POST, 'submit', FILTER_SANITIZE_STRING );

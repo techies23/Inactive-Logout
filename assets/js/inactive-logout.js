@@ -5,12 +5,12 @@
  *
  * This file contains core JS files for the plugin. Do not edit for you will be consumed by the dark side.
  */
-var timeoutID;
-var tabID;
-var timeoutMessage;
+var inactive_logout_timeoutID;
+var inactive_logout_tabID;
+var inactive_logout_timeoutMessage;
 var ina_timeout = ina_meta_data.ina_timeout;
-var timeout_defined = ina_timeout * 1000; //Minutes
-var messageBox = 0;
+var ina_timeout_defined = ina_timeout * 1000; //Minutes
+var ina_messageBox = 0;
 
 /**
  * Initial Plugin JS load
@@ -25,12 +25,12 @@ function ina__setup_theforce_awakens() {
     this.addEventListener("MSPointerMove", ina__resetTimer, false);
 
     //First get the broswer id
-    tabID = sessionStorage.tabID && sessionStorage.closedLastTab !== '2' ? sessionStorage.tabID : sessionStorage.tabID = Math.random();
+    inactive_logout_tabID = sessionStorage.inactive_logout_tabID && sessionStorage.closedLastTab !== '2' ? sessionStorage.inactive_logout_tabID : sessionStorage.inactive_logout_tabID = Math.random();
     sessionStorage.closedLastTab = '2';
     jQuery(window).on('unload beforeunload', function () {
         sessionStorage.closedLastTab = '1';
     });
-    localStorage.setItem("ina__browserTabID", tabID);
+    localStorage.setItem("ina__browserTabID", inactive_logout_tabID);
 
     ina__startTimer();
 }
@@ -40,14 +40,14 @@ ina__setup_theforce_awakens();
 
 //Starting timeout timer to go into inactive state after 15 seconds if any event like mousemove is not triggered
 function ina__startTimer() {
-    timeoutID = window.setTimeout(ina__goInactive, 15000);
+    inactive_logout_timeoutID = window.setTimeout(ina__goInactive, 15000);
 }
 
 //Resetting the timer
 function ina__resetTimer(e) {
-    window.clearTimeout(timeoutID);
-    window.clearTimeout(timeoutMessage);
-    localStorage.setItem("ina__browserTabID", tabID);
+    window.clearTimeout(inactive_logout_timeoutID);
+    window.clearTimeout(inactive_logout_timeoutMessage);
+    localStorage.setItem("ina__browserTabID", inactive_logout_tabID);
     ina__goActive();
 }
 
@@ -55,7 +55,7 @@ function ina__resetTimer(e) {
  * User is inactive now save last session activity time here
  */
 function ina__goInactive() {
-    if (messageBox == 0) {
+    if (ina_messageBox == 0) {
         var dateTime = Date.now();
         var timestamp = Math.floor(dateTime / 1000);
 
@@ -63,10 +63,18 @@ function ina__goInactive() {
             //Update Last Active Status
             var postData = {action: 'ina_checklastSession', do: 'ina_updateLastSession', security: ina_ajax.ina_security, timestamp: timestamp};
             $.post(ina_ajax.ajaxurl, postData).done(function (response) {
-                console.log("Last Active on: " + Date.now());
+                var elem = document.activeElement;
+                //IF ACTIVE ELEMENT is clicked inside an iframe then track this following and reset timer again. So, do not logout user from here.
+                if (elem && elem.tagName == 'IFRAME') {
+                    ina__resetTimer();
+                    console.log("You are browsing inside an IFRAME!");
+                } else {
+                    console.log("Last Active on: " + Date.now());
+                }
+
                 var browserTabID = localStorage.getItem("ina__browserTabID");
-                if (browserTabID == tabID) {
-                    timeoutMessage = window.setTimeout(ina__showTimeoutMessage, timeout_defined);
+                if (browserTabID == inactive_logout_tabID) {
+                    inactive_logout_timeoutMessage = window.setTimeout(ina__showTimeoutMessage, ina_timeout_defined);
                 }
             });
         });
@@ -97,7 +105,7 @@ function ina__showTimeoutMessage() {
             $('#ina__dp_logout_message_box').css('background', ina_popup_bg);
         }
 
-        messageBox = 1;
+        ina_messageBox = 1;
         if (ina_warn_message_enabled) {
             //Only show message
             $('#ina__dp_logout_message_box').show();
@@ -107,7 +115,7 @@ function ina__showTimeoutMessage() {
                 }
                 window.oncontextmenu = null;
                 $('#ina__dp_logout_message_box').hide();
-                messageBox = 0;
+                ina_messageBox = 0;
             });
         } else if (ina_disable_countdown) {
             //Disabled Countdown but directly logout
@@ -163,7 +171,7 @@ function ina__showTimeoutMessage() {
                 window.oncontextmenu = null;
                 clearTimeout(setting_countdown);
                 countdown = 10;
-                messageBox = 0;
+                ina_messageBox = 0;
                 $('#ina__dp_logout_message_box').hide();
                 $('.ina_countdown').text('');
             });

@@ -18,9 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.7.2';
-
-	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
+	const INA_VERSION = '1.7.3';
 
 	/**
 	 * Directory of plugin.
@@ -282,28 +280,27 @@ final class Inactive_Logout_Main {
 			if ( ! $disable_timeoutjs ) {
 				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout.js', array( 'jquery' ), time(), true );
 				wp_localize_script( 'ina-logout-js', 'ina_meta_data', $ina_meta_data );
-			}
 
-			if ( 'settings_page_inactive-logout' === $hook_suffix || 'toplevel_page_inactive-logout' === $hook_suffix ) {
-				wp_enqueue_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout-other.js', array( 'jquery', 'wp-color-picker' ), time(), true );
-				wp_enqueue_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/select2.min.js', array( 'jquery' ), time(), true );
-
-				wp_enqueue_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_ASSETS_URL . 'css/select2.min.css', false, time() );
 				wp_localize_script(
-					'ina-logout-inactive-logoutonly-js', 'ina_other_ajax', array(
+					'ina-logout-js', 'ina_ajax', array(
 						'ajaxurl'      => admin_url( 'admin-ajax.php' ),
-						'ina_security' => wp_create_nonce( '_ina_nonce_security' ),
+						'ina_security' => wp_create_nonce( '_checklastSession' ),
 					)
 				);
 			}
 
-			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.css', false, time() );
+			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout-other.js', array( 'jquery', 'wp-color-picker' ), time(), true );
+			wp_register_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/select2.min.js', array( 'jquery' ), time(), true );
+
+			wp_register_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_ASSETS_URL . 'css/select2.min.css', false, time() );
 			wp_localize_script(
-				'ina-logout-js', 'ina_ajax', array(
+				'ina-logout-inactive-logoutonly-js', 'ina_other_ajax', array(
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
-					'ina_security' => wp_create_nonce( '_checklastSession' ),
+					'ina_security' => wp_create_nonce( '_ina_nonce_security' ),
 				)
 			);
+
+			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.css', false, time() );
 		}
 	}
 
@@ -314,7 +311,10 @@ final class Inactive_Logout_Main {
 	 *
 	 * @return boolean - is the existing version of the checking supported?
 	 */
-	public function ina_supported_version( $checking ) {
+	public
+	function ina_supported_version(
+		$checking
+	) {
 
 		$supported = false;
 
@@ -333,7 +333,8 @@ final class Inactive_Logout_Main {
 	/**
 	 * Display a WordPress or PHP incompatibility error
 	 */
-	public function ina_display_not_supported_error() {
+	public
+	function ina_display_not_supported_error() {
 		if ( ! $this->ina_supported_version( 'WordPress' ) ) {
 			// translators: Minimum required WordPress version.
 			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade your WordPress install.', 'inactive-logout' ), '4.0' ) . '</p>';
@@ -349,7 +350,8 @@ final class Inactive_Logout_Main {
 	/**
 	 * Load the text domain.
 	 */
-	public function ina_load_text_domain() {
+	public
+	function ina_load_text_domain() {
 		$domain = 'inactive-logout';
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 		load_plugin_textdomain( $domain, false, $this->plugin_dir . 'lang/' );
