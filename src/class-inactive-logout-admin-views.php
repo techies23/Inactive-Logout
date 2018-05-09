@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Admin Views Class
  *
- * @since  1.0.0
+ * @since   1.0.0
  * @author  Deepen
  */
 class Inactive_Logout_Admin_Views {
@@ -24,6 +24,10 @@ class Inactive_Logout_Admin_Views {
 	 * @var Inactive_Logout_Helpers
 	 */
 	public $helper;
+
+	public static $message = '';
+
+	public $settings;
 
 	/**
 	 * Inactive_Logout_Admin_Views constructor.
@@ -88,20 +92,13 @@ class Inactive_Logout_Admin_Views {
 		$submit = filter_input( INPUT_POST, 'submit', FILTER_SANITIZE_STRING );
 
 		if ( isset( $submit ) ) {
-			$saved = $this->ina__process_basic_settings();
-			if ( $saved ) {
-				?>
-				<script type="text/javascript">
-					document.location.reload(true);
-				</script>
-				<?php
-			}
+			$this->ina__process_basic_settings();
 		}
 
 		$adv_submit = filter_input( INPUT_POST, 'adv_submit', FILTER_SANITIZE_STRING );
 
 		if ( isset( $adv_submit ) ) {
-			$saved = $this->ina__process_adv_settings();
+			$this->ina__process_adv_settings();
 		}
 
 		// Css rules for Color Picker.
@@ -142,6 +139,7 @@ class Inactive_Logout_Admin_Views {
 
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-advanced.php';
 		}
+
 		do_action( 'ina_after_settings_wrapper' );
 	}
 
@@ -158,6 +156,7 @@ class Inactive_Logout_Admin_Views {
 
 		if ( isset( $submit ) && ! wp_verify_nonce( $nonce, '_nonce_action_save_timeout_settings' ) ) {
 			wp_die( 'Not Allowed' );
+
 			return;
 		}
 
@@ -221,11 +220,11 @@ class Inactive_Logout_Admin_Views {
 			if ( 'custom-page-redirect' === $ina_redirect_page ) {
 				update_option( '__ina_custom_redirect_text_field', $ina_custom_redirect_text_field );
 			}
-
-			return true;
 		}
 
 		do_action( 'ina_after_update_basic_settings' );
+
+		self::set_message( 'updated', 'Settings Saved !' );
 	}
 
 	/**
@@ -241,6 +240,7 @@ class Inactive_Logout_Admin_Views {
 
 		if ( isset( $adv_submit ) && ! wp_verify_nonce( $nonce, '_nonce_action_save_timeout_adv_settings' ) ) {
 			wp_die( 'Not Allowed' );
+
 			return;
 		}
 
@@ -284,7 +284,7 @@ class Inactive_Logout_Admin_Views {
 
 		do_action( 'ina_after_update_adv_settings' );
 
-		$this->helper->ina_reload();
+		self::set_message( 'updated', 'Settings Saved !' );
 	}
 
 	/**
@@ -300,5 +300,14 @@ class Inactive_Logout_Admin_Views {
 	public function ina_after_settings_wrap() {
 		echo '</div>';
 	}
+
+	static function get_message() {
+		return self::$message;
+	}
+
+	static function set_message( $class, $message ) {
+		self::$message = '<div class=' . $class . '><p>' . $message . '</p></div>';
+	}
 }
+
 new Inactive_Logout_Admin_Views();

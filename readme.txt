@@ -2,9 +2,9 @@
 Contributors: j__3rk
 Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologout, inactive, inactive, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
 Donate link: https://deepenbajracharya.com.np/say-hello/
-Requires at least: 4.5.2
-Tested up to: 4.8
-Stable tag: 1.7.1
+Requires at least: 4.6.0
+Tested up to: 4.9
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,8 +32,7 @@ Please refer to FAQ section if you have trouble activating plugin from version 1
 8. Clean UI
 9. Simple to use
 10. Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
-11. Logs out the session even after the browser tab is closed.
-12. Multisite Support: Override all sites with one setting.
+11. Multisite Support: Override all sites with one setting.
 
 In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
 
@@ -76,6 +75,15 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.7.2 =
+* Bug Fixes
+* Bug Fix: Showing HTML output in gravity forms custom post type page.
+* Code Refactor
+
+= 1.7.1 =
+* Fixed a minor bug when saving settings in WP multisite network admin page.
+* Inactive setting menu hides when override option is checked for WP multisite network.
 
 = 1.7.0 =
 * Major Bug Fixes
@@ -182,6 +190,10 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 
 == Upgrade Notice ==
 
+= 1.7.2 =
+Upgrade to get latest stable version.
+= 1.7.1 =
+Upgrade to get latest stable version.
 = 1.7.0 =
 Upgrade to get latest stable version.
 = 1.6.1 - 1.6.2 =

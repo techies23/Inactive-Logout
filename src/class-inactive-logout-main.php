@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main Class Defined
  *
- * @since  1.0.0
+ * @since   1.0.0
  * @author  Deepen
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.7.0';
+	const INA_VERSION = '1.7.2';
 
 	const DEEPEN_URL = 'https://deepenbajracharya.com.np';
 
@@ -68,6 +68,7 @@ final class Inactive_Logout_Main {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new static();
 		}
+
 		return self::$instance;
 	}
 
@@ -100,6 +101,7 @@ final class Inactive_Logout_Main {
 				self::instance()->_ina_activate_multisite();
 			}
 			switch_to_blog( $old_blog );
+
 			return;
 		} else {
 			self::instance()->_ina_activate_multisite();
@@ -148,6 +150,7 @@ final class Inactive_Logout_Main {
 				delete_site_option( '__ina_redirect_page_link' );
 			}
 			switch_to_blog( $old_blog );
+
 			return;
 		} else {
 			delete_option( '__ina_logout_time' );
@@ -293,8 +296,8 @@ final class Inactive_Logout_Main {
 					)
 				);
 			}
-			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.css', false, time() );
 
+			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.css', false, time() );
 			wp_localize_script(
 				'ina-logout-js', 'ina_ajax', array(
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
