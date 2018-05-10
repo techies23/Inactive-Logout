@@ -31,7 +31,7 @@ class Inactive_Logout_Helpers {
 	 */
 	public static function instance() {
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new static();
+			self::$instance = new self;
 		}
 
 		return self::$instance;
@@ -86,6 +86,40 @@ class Inactive_Logout_Helpers {
 		$roles = get_editable_roles();
 		foreach ( $roles as $role => $role_name ) {
 			$result[ $role ] = $role_name['name'];
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Get All Pages and Posts
+	 *
+	 * @since  1.2.0
+	 * @return $object
+	 */
+	public function ina_get_all_pages_posts() {
+		$result = array();
+		$pages  = get_posts(
+			array(
+				'order'          => 'ASC',
+				'posts_per_page' => - 1,
+				'post_type'      => array(
+					'post',
+					'page',
+				),
+				'post_status'    => 'publish',
+			)
+		);
+
+		if ( ! empty( $pages ) ) {
+			foreach ( $pages as $page ) {
+				$result[] = array(
+					'ID'        => $page->ID,
+					'title'     => $page->post_title,
+					'permalink' => get_the_permalink( $page->ID ),
+					'post_type' => $page->post_type,
+				);
+			}
 		}
 
 		return $result;

@@ -108,8 +108,9 @@
                 <select name="ina_redirect_page" class="regular-text ina-hacking-select">
                     <option value="custom-page-redirect"><?php esc_html_e( 'External Page Redirect', 'inactive-logout' ); ?></option>
 					<?php
-					$posts = Inactive_Logout_Functions::ina_get_all_pages_posts();
-					if ( $posts ) {
+					$ina_helpers = Inactive_Logout_Helpers::instance();
+					$posts       = $ina_helpers->ina_get_all_pages_posts();
+					if ( ! empty( $posts ) ) {
 						?>
                         <optgroup label="Posts">
 							<?php

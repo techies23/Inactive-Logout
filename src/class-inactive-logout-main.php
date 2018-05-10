@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.7.3';
+	const INA_VERSION = '1.7.4';
 
 	/**
 	 * Directory of plugin.
@@ -64,7 +64,7 @@ final class Inactive_Logout_Main {
 	 */
 	public static function instance() {
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new static();
+			self::$instance = new self;
 		}
 
 		return self::$instance;
@@ -234,7 +234,7 @@ final class Inactive_Logout_Main {
 	 *
 	 * @param string $hook_suffix Suffix for hooks.
 	 */
-	public function ina_admin_scripts( $hook_suffix ) {
+	public function ina_admin_scripts() {
 		global $current_user;
 
 		if ( is_user_logged_in() ) {
@@ -311,11 +311,7 @@ final class Inactive_Logout_Main {
 	 *
 	 * @return boolean - is the existing version of the checking supported?
 	 */
-	public
-	function ina_supported_version(
-		$checking
-	) {
-
+	function ina_supported_version( $checking ) {
 		$supported = false;
 
 		switch ( strtolower( $checking ) ) {
@@ -333,7 +329,6 @@ final class Inactive_Logout_Main {
 	/**
 	 * Display a WordPress or PHP incompatibility error
 	 */
-	public
 	function ina_display_not_supported_error() {
 		if ( ! $this->ina_supported_version( 'WordPress' ) ) {
 			// translators: Minimum required WordPress version.
@@ -350,7 +345,6 @@ final class Inactive_Logout_Main {
 	/**
 	 * Load the text domain.
 	 */
-	public
 	function ina_load_text_domain() {
 		$domain = 'inactive-logout';
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );

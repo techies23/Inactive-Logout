@@ -120,7 +120,7 @@ class Inactive_Logout_Functions {
 					}
 
 					// Logout Current Users.
-					if ( !empty( $redirect_link ) ) {
+					if ( ! empty( $redirect_link ) ) {
 						$message = esc_html__( 'You have been logged out because of inactivity. Please wait while we redirect you to a certain page...', 'inactive-logout' );
 					} else {
 						$message = esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' );
@@ -140,37 +140,6 @@ class Inactive_Logout_Functions {
 		}
 
 		wp_die();
-	}
-
-	/**
-	 * Get All Pages and Posts
-	 *
-	 * @since  1.2.0
-	 * @return $object
-	 */
-	public static function ina_get_all_pages_posts() {
-		$result = array();
-		$pages  = get_posts(
-			array(
-				'order'          => 'ASC',
-				'posts_per_page' => - 1,
-				'post_type'      => array(
-					'post',
-					'page',
-				),
-			)
-		);
-
-		foreach ( $pages as $page ) {
-			$result[] = array(
-				'ID'        => $page->ID,
-				'title'     => $page->post_title,
-				'permalink' => get_the_permalink( $page->ID ),
-				'post_type' => $page->post_type,
-			);
-		}
-
-		return $result;
 	}
 
 	/**
