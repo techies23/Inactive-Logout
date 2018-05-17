@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.7.4';
+	const INA_VERSION = '1.7.5';
 
 	/**
 	 * Directory of plugin.
@@ -347,7 +347,7 @@ final class Inactive_Logout_Main {
 	 */
 	function ina_load_text_domain() {
 		$domain = 'inactive-logout';
-		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+		apply_filters( 'plugin_locale', get_locale(), $domain );
 		load_plugin_textdomain( $domain, false, $this->plugin_dir . 'lang/' );
 	}
 }

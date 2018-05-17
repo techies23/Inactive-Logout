@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.6.0
 Tested up to: 4.9
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,7 +28,7 @@ Please refer to FAQ section if you have trouble activating plugin from version 1
 4. Custom Popup Message.
 5. Choose to use concurrent logout functionality derived from [prevent concurrent logins](https://wordpress.org/plugins/prevent-concurrent-logins/ "Prevent Concurrent Logins") by Frankie Jarrett. Thumbs up here too !
 6. Redirect to a Different Page instead of Popup box. Create a page such as timeout page and add your content there by creating a blank template or style it as you wish according to your theme.
-7. Multiple User Role Confiurations for individual timeout and redirects.
+7. Multiple User Role Configurations for individual timeout and redirects.
 8. Clean UI
 9. Simple to use
 10. Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
@@ -75,6 +75,11 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.7.5 =
+* Fix on minor conflict issues
+* Code Refactor
+* Text hint changes
 
 = 1.7.4 =
 * Minor Changes

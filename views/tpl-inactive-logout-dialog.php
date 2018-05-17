@@ -53,7 +53,13 @@ $bg = isset( $ina_popup_overlay_color ) ? $ina_popup_overlay_color : false;
 
 				$ina_helpers      = Inactive_Logout_Helpers::instance();
 				$replaced_content = str_replace( '{wakup_timout}', $ina_helpers->ina_convert_to_minutes( $time ), $message_content );
-				echo apply_filters( 'the_content', $replaced_content ); // WPCS: XSS ok.
+
+				if ( function_exists( 'icl_register_string' ) ) {
+					icl_register_string( 'inactive-logout', 'inactive_logout_dynamic_wakeup_text', esc_html( $replaced_content ) );
+					echo wpautop( icl_t( 'inactive-logout', 'inactive_logout_dynamic_wakeup_text', $replaced_content ) );
+				} else {
+					echo wpautop( $replaced_content );
+				}
 				?>
                 <p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php esc_html_e( 'Continue', 'inactive-logout' ); ?></a></p>
             </div>
@@ -72,8 +78,14 @@ $bg = isset( $ina_popup_overlay_color ) ? $ina_popup_overlay_color : false;
 				} else {
 					$message_content = get_option( '__ina_logout_message' );
 				}
+
+				if ( function_exists( 'icl_register_string' ) ) {
+					icl_register_string( 'inactive-logout', 'inactive_logout_dynamic_popup_text', esc_html( $message_content ) );
+					echo wpautop( icl_t( 'inactive-logout', 'inactive_logout_dynamic_popup_text', $message_content ) );
+				} else {
+					echo wpautop( $message_content );
+				}
 				?>
-				<?php echo apply_filters( 'the_content', $message_content ); // WPCS: XSS ok. ?>
                 <p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php esc_html_e( 'Continue', 'inactive-logout' ); ?> <span class="ina_countdown"></span></a></p>
             </div>
         </div>

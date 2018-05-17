@@ -61,14 +61,14 @@
             <th scope="row"><label for="idle_disable_countdown"><?php esc_html_e( 'Disable Timeout Countdown', 'inactive-logout' ); ?></label></th>
             <td>
                 <input name="idle_disable_countdown" type="checkbox" id="idle_disable_countdown" <?php echo ! empty( $countdown_enable ) ? 'checked' : false; ?> value="1">
-                <p class="description"><?php esc_html_e( 'When timeout popup is shown user is not logged out instantly. It gives user a chance to keep using or logout for 10 seconds. Remove this feature and directly log out after inactive.', 'inactive-logout' ); ?></p>
+                <p class="description"><?php esc_html_e( 'When the timeout popup appears, the user is not logged out instantly. It allows the user the chance to continue, or a logout will occur within 10 seconds. Uncheck this feature to immediately logout the user after the chosen time of inactivity.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
         <tr>
             <th scope="row"><label for="ina_show_warn_message_only"><?php esc_html_e( 'Show Warn Message Only', 'inactive-logout' ); ?></label></th>
             <td>
                 <input name="ina_show_warn_message_only" type="checkbox" id="ina_show_warn_message_only" <?php echo ! empty( $ina_warn_message_enabled ) ? 'checked' : false; ?> value="1">
-                <p class="description"><?php esc_html_e( 'Will show warn message without logout url but user will not log out.', 'inactive-logout' ); ?></p>
+                <p class="description"><?php esc_html_e( 'This will show the warning message without the logout URL, but the user will not be logged out.', 'inactive-logout' ); ?></p>
                 <p class="description ina-warn-info"><strong><?php esc_html_e( 'Please note ! Multi role timeout feature will not work when this setting is enabled. Similarly, idle Message Content will be ignored and replaced with this content.', 'inactive-logout' ); ?></strong></p>
             </td>
         </tr>
@@ -92,7 +92,7 @@
             <th scope="row"><label for="ina_disable_multiple_login"><?php esc_html_e( 'Disable Concurrent Logins', 'inactive-logout' ); ?></label></th>
             <td>
                 <input name="ina_disable_multiple_login" type="checkbox" id="ina_disable_multiple_login" <?php echo ! empty( $ina_concurrent ) ? 'checked' : false; ?> value="1">
-                <p class="description"><?php esc_html_e( 'This will unable user to login using same account in different places.', 'inactive-logout' ); ?></p>
+                <p class="description"><?php esc_html_e( 'This will disable the user from logging in using the same account at different locations.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
         <tr>

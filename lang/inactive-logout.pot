@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-11 17:18+0000\n"
+"POT-Creation-Date: 2018-05-16 17:34+0000\n"
 "POT-Revision-Date: Sun Jan 29 2017 16:00:11 GMT+0545 (NPT)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
@@ -24,60 +24,11 @@ msgstr ""
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Poedit-SearchPath-0: .."
 
+#: views/tpl-inactive-logout-settings.php:10
 #: src/class-inactive-logout-admin-views.php:55
 #: src/class-inactive-logout-admin-views.php:64
 #: src/class-inactive-logout-admin-views.php:78
-#: views/tpl-inactive-logout-settings.php:10
 msgid "Inactive User Logout Settings"
-msgstr ""
-
-#. Name of the plugin
-#: src/class-inactive-logout-admin-views.php:56
-#: src/class-inactive-logout-admin-views.php:65
-#: src/class-inactive-logout-admin-views.php:79
-msgid "Inactive Logout"
-msgstr ""
-
-#: src/class-inactive-logout-functions.php:124
-msgid ""
-"You have been logged out because of inactivity. Please wait while we "
-"redirect you to a certain page..."
-msgstr ""
-
-#: src/class-inactive-logout-functions.php:126
-msgid "You have been logged out because of inactivity."
-msgstr ""
-
-#: src/class-inactive-logout-functions.php:196
-msgid "Reset advanced settings successful."
-msgstr ""
-
-#: src/class-inactive-logout-helpers.php:66
-#: views/tabs/tpl-inactive-logout-basic.php:27
-msgid "Minute(s)"
-msgstr ""
-
-#: src/class-inactive-logout-main.php:339
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
-"your WordPress install."
-msgstr ""
-
-#: src/class-inactive-logout-main.php:344
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
-"about moving you to a newer version of PHP."
-msgstr ""
-
-#: views/tpl-inactive-logout-dialog.php:58
-#: views/tpl-inactive-logout-dialog.php:77
-msgid "Continue"
-msgstr ""
-
-#: views/tpl-inactive-logout-dialog.php:66
-msgid "Session Timeout"
 msgstr ""
 
 #: views/tpl-inactive-logout-settings.php:13
@@ -103,6 +54,60 @@ msgstr ""
 
 #: views/tpl-inactive-logout-settings.php:39
 msgid "Contribute !"
+msgstr ""
+
+#: views/tpl-inactive-logout-dialog.php:58
+#: views/tpl-inactive-logout-dialog.php:77
+msgid "Continue"
+msgstr ""
+
+#: views/tpl-inactive-logout-dialog.php:66
+msgid "Session Timeout"
+msgstr ""
+
+#: views/tpl-inactive-logout-dialog.php:76
+#, php-format
+msgid "%s"
+msgstr ""
+
+#: src/class-inactive-logout-main.php:335
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
+"your WordPress install."
+msgstr ""
+
+#: src/class-inactive-logout-main.php:340
+#, php-format
+msgid ""
+"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
+"about moving you to a newer version of PHP."
+msgstr ""
+
+#: src/class-inactive-logout-functions.php:124
+msgid ""
+"You have been logged out because of inactivity. Please wait while we "
+"redirect you to a certain page..."
+msgstr ""
+
+#: src/class-inactive-logout-functions.php:126
+msgid "You have been logged out because of inactivity."
+msgstr ""
+
+#: src/class-inactive-logout-functions.php:165
+msgid "Reset advanced settings successful."
+msgstr ""
+
+#: src/class-inactive-logout-helpers.php:66
+#: views/tabs/tpl-inactive-logout-basic.php:27
+msgid "Minute(s)"
+msgstr ""
+
+#. Name of the plugin
+#: src/class-inactive-logout-admin-views.php:56
+#: src/class-inactive-logout-admin-views.php:65
+#: src/class-inactive-logout-admin-views.php:79
+msgid "Inactive Logout"
 msgstr ""
 
 #: views/tabs/tpl-inactive-logout-advanced.php:18
@@ -150,7 +155,7 @@ msgid "Set Global Redirect Page"
 msgstr ""
 
 #: views/tabs/tpl-inactive-logout-advanced.php:97
-#: views/tabs/tpl-inactive-logout-basic.php:145
+#: views/tabs/tpl-inactive-logout-basic.php:146
 msgid "No Posts Found."
 msgstr ""
 
@@ -162,7 +167,7 @@ msgid ""
 msgstr ""
 
 #: views/tabs/tpl-inactive-logout-advanced.php:118
-#: views/tabs/tpl-inactive-logout-basic.php:167
+#: views/tabs/tpl-inactive-logout-basic.php:168
 msgid "Save Changes"
 msgstr ""
 
@@ -272,15 +277,15 @@ msgstr ""
 msgid "External Page Redirect"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-basic.php:150
+#: views/tabs/tpl-inactive-logout-basic.php:151
 msgid "Select a page to redirect to after session timeout and clicking OK."
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-basic.php:154
+#: views/tabs/tpl-inactive-logout-basic.php:155
 msgid "Custom URL Redirect"
 msgstr ""
 
-#: views/tabs/tpl-inactive-logout-basic.php:160
+#: views/tabs/tpl-inactive-logout-basic.php:161
 #, php-format
 msgid "Link to custom url redirect. Ex: %s"
 msgstr ""
