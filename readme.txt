@@ -76,6 +76,9 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 
 == Changelog ==
 
+= 1.7.6 =
+* Bug Fix: Advanced Management Tab not showing save changes button.
+
 = 1.7.5 =
 * Fix on minor conflict issues
 * Code Refactor

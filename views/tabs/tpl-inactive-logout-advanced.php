@@ -60,7 +60,8 @@
                         <select name="ina_redirect_page_individual_user[]" class="regular-text ina-hacking-select">
                             <option value="0"><?php esc_html_e( 'Set Global Redirect Page', 'inactive-logout' ); ?></option>
 							<?php
-							$posts = Inactive_Logout_Functions::ina_get_all_pages_posts();
+							$ina_helpers = Inactive_Logout_Helpers::instance();
+							$posts       = $ina_helpers->ina_get_all_pages_posts();
 							if ( $posts ) {
 								?>
                                 <optgroup label="Posts">
