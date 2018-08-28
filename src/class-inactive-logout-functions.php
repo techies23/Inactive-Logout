@@ -22,12 +22,12 @@ class Inactive_Logout_Functions {
 	 * Inactive_Logout_Functions constructor.
 	 */
 	public function __construct() {
-		add_action( 'wp_footer', array( $this, 'ina_logout_dialog_modal' ) );
-		add_action( 'admin_footer', array( $this, 'ina_logout_dialog_modal' ) );
+		add_action( 'wp_footer', array( $this, 'dialog_modal' ) );
+		add_action( 'admin_footer', array( $this, 'dialog_modal' ) );
 
 		// Ajax for checking last session.
-		add_action( 'wp_ajax_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
-		add_action( 'wp_ajax_nopriv_ina_checklastSession', array( $this, 'ina_checking_last_session' ) );
+		add_action( 'wp_ajax_ina_checklastSession', array( $this, 'last_session' ) );
+		add_action( 'wp_ajax_nopriv_ina_checklastSession', array( $this, 'last_session' ) );
 
 		//Acutually Logging out here
 		add_action( 'wp_ajax_ina_logout_session', array( $this, 'logout_this_session' ) );
@@ -52,7 +52,7 @@ class Inactive_Logout_Functions {
 	/**
 	 * Check Last Session and Logout User
 	 */
-	public function ina_checking_last_session() {
+	public function last_session() {
 		check_ajax_referer( '_checklastSession', 'security' );
 
 		$timestamp = filter_input( INPUT_POST, 'timestamp', FILTER_SANITIZE_STRING );
@@ -121,9 +121,9 @@ class Inactive_Logout_Functions {
 
 					// Logout Current Users.
 					if ( ! empty( $redirect_link ) ) {
-						$message = esc_html__( 'You have been logged out because of inactivity. Please wait while we redirect you to a certain page...', 'inactive-logout' );
+						$message = apply_filters( 'ina__redirect_message', esc_html__( 'You have been logged out because of inactivity. Please wait while we redirect you to a certain page...', 'inactive-logout' ) );
 					} else {
-						$message = esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' );
+						$message = apply_filters( 'ina__logout_message', esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' ) );
 					}
 
 					wp_send_json(
@@ -171,7 +171,7 @@ class Inactive_Logout_Functions {
 	/**
 	 * Adding Dialog in footer
 	 */
-	public function ina_logout_dialog_modal() {
+	public function dialog_modal() {
 		require_once INACTIVE_LOGOUT_VIEWS . '/tpl-inactive-logout-dialog.php';
 	}
 

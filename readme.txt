@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/say-hello/
 Requires at least: 4.6.0
 Tested up to: 4.9
-Stable tag: 1.7.5
+Stable tag: 1.7.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,15 @@ Please refer to FAQ section if you have trouble activating plugin from version 1
 11. Multisite Support: Override all sites with one setting.
 
 In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
+
+**Filter Hooks**
+1. add_filter('ina__redirect_message', 'callback' );
+- For changing "You have been logged out because of inactivity. Please wait while we redirect you to a certain page..." this message.
+Reference: [GIST FILE](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "Check how to use this")
+
+2. add_filter('ina__logout_message', 'callback' );
+- For changing "You have been logged out because of inactivity."
+Reference: [GIST FILE](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "Check how to use this")
 
 Lemme know if there are any bugs and problems or enhancements you want to make..
 
@@ -75,6 +84,11 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.7.7 =
+* Filter Added: Two filters added for changing text when logout.
+* Removed debugger code from JS file.
+* Minor Bug Fixes
 
 = 1.7.6 =
 * Bug Fix: Advanced Management Tab not showing save changes button.
@@ -207,6 +221,8 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 
 == Upgrade Notice ==
 
+= 1.7.7 =
+Upgrade to get latest stable version.
 = 1.7.2 =
 Upgrade to get latest stable version.
 = 1.7.1 =

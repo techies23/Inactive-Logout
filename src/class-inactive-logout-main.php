@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.7.6';
+	const INA_VERSION = '1.7.7';
 
 	/**
 	 * Directory of plugin.
@@ -79,6 +79,8 @@ final class Inactive_Logout_Main {
 		$this->plugin_url  = plugins_url( $this->plugin_dir );
 
 		add_action( 'init', array( $this, 'ina_load_text_domain' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
 		$this->ina_plugins_loaded();
 	}
 
@@ -170,7 +172,6 @@ final class Inactive_Logout_Main {
 
 		if ( is_user_logged_in() ) {
 			if ( $this->ina_supported_version( 'WordPress' ) && $this->ina_supported_version( 'php' ) ) {
-				$this->ina_add_hooks();
 				$this->ina_load_dependencies();
 				$this->ina_define_them_constants();
 			} else {
@@ -222,19 +223,11 @@ final class Inactive_Logout_Main {
 	}
 
 	/**
-	 * Add filters and actions
-	 */
-	protected function ina_add_hooks() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'ina_admin_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'ina_admin_scripts' ) );
-	}
-
-	/**
 	 * Loading Backend Scripts.
 	 *
 	 * @param string $hook_suffix Suffix for hooks.
 	 */
-	public function ina_admin_scripts() {
+	public function load_scripts() {
 		global $current_user;
 
 		if ( is_user_logged_in() ) {

@@ -67,9 +67,9 @@ function ina__goInactive() {
                 //IF ACTIVE ELEMENT is clicked inside an iframe then track this following and reset timer again. So, do not logout user from here.
                 if (elem && elem.tagName == 'IFRAME') {
                     ina__resetTimer();
-                    console.log("You are browsing inside an IFRAME!");
+                    // console.log("You are browsing inside an IFRAME!");
                 } else {
-                    console.log("Last Active on: " + Date.now());
+                    // console.log("Last Active on: " + Date.now());
                 }
 
                 var browserTabID = localStorage.getItem("ina__browserTabID");
