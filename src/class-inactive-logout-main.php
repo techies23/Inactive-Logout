@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.7.7';
+	const INA_VERSION = '1.7.8';
 
 	/**
 	 * Directory of plugin.
@@ -80,7 +80,9 @@ final class Inactive_Logout_Main {
 
 		add_action( 'init', array( $this, 'ina_load_text_domain' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
+
+		//Load Finally
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ), 9999 );
 		$this->ina_plugins_loaded();
 	}
 
