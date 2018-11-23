@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.7.8';
+	const INA_VERSION = '1.7.9';
 
 	/**
 	 * Directory of plugin.

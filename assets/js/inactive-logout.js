@@ -38,9 +38,9 @@ function ina__setup_theforce_awakens() {
 //Call at DOM load
 ina__setup_theforce_awakens();
 
-//Starting timeout timer to go into inactive state after 15 seconds if any event like mousemove is not triggered
+//Starting timeout timer to go into inactive state after 11 seconds if any event like mousemove is not triggered
 function ina__startTimer() {
-    inactive_logout_timeoutID = window.setTimeout(ina__goInactive, 15000);
+    inactive_logout_timeoutID = window.setTimeout(ina__goInactive, 11000);
 }
 
 //Resetting the timer
