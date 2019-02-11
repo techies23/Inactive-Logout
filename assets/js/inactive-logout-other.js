@@ -5,10 +5,12 @@
 jQuery(function ($) {
     $('.ina-hacking-select').select2();
     $(".ina-hacking-multi-select").select2({width: '500px', placeholder: "Select Roles"});
+    const EDITOR_HEIGHT = "305px";
 
     //FOR SHOW WARN BOX CHECKBOX
     $('#ina_show_warn_message_only').click(function () {
         if ($(this).prop("checked")) {
+	        $('.show_on_warn_message_enabled iframe').css('height', EDITOR_HEIGHT);
             $('.show_on_warn_message_enabled').show();
         } else {
             $('.show_on_warn_message_enabled').hide();
@@ -39,6 +41,7 @@ jQuery(function ($) {
             }
         } else {
             $('.show_on_enable_redirect_link').hide();
+            $('.ina_hide_message_content iframe').css('height', EDITOR_HEIGHT);
             $('.ina_hide_message_content').show();
             $('.show_cutom_redirect_textfield').hide();
         }
