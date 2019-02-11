@@ -7,12 +7,6 @@ jQuery(function ($) {
     $(".ina-hacking-multi-select").select2({width: '500px', placeholder: "Select Roles"});
 
     //FOR SHOW WARN BOX CHECKBOX
-    if ($('#ina_show_warn_message_only').is(":checked")) {
-        $('.show_on_warn_message_enabled').show();
-    } else {
-        $('.show_on_warn_message_enabled').hide();
-    }
-
     $('#ina_show_warn_message_only').click(function () {
         if ($(this).prop("checked")) {
             $('.show_on_warn_message_enabled').show();
@@ -24,12 +18,6 @@ jQuery(function ($) {
     // Add Color Picker to all inputs that have 'color-field' class
     $('.ina_color_picker').wpColorPicker();
 
-    if ($('input[name="ina_full_overlay"]').is(":checked")) {
-        $('.ina_colorpicker_show').show();
-    } else {
-        $('.ina_colorpicker_show').hide();
-    }
-
     $('input[name="ina_full_overlay"]').click(function () {
         if ($(this).prop("checked")) {
             $('.ina_colorpicker_show').show();
@@ -39,21 +27,6 @@ jQuery(function ($) {
     });
 
     //FOR REDIRECT CHECKBOX
-    if ($('#ina_enable_redirect_link').is(":checked")) {
-        $('.show_on_enable_redirect_link').show();
-        $('.ina_hide_message_content').hide();
-
-        if ($('select[name=ina_redirect_page]').val() == "custom-page-redirect") {
-            $('.show_cutom_redirect_textfield').show();
-        } else {
-            $('.show_cutom_redirect_textfield').hide();
-        }
-    } else {
-        $('.show_on_enable_redirect_link').hide();
-        $('.ina_hide_message_content').show();
-        $('.show_cutom_redirect_textfield').hide();
-    }
-
     $('#ina_enable_redirect_link').click(function () {
         if ($(this).prop("checked")) {
             $('.show_on_enable_redirect_link').show();
@@ -72,12 +45,6 @@ jQuery(function ($) {
     });
 
     //FOR ADV SETTINGS MULTI ROLE ENABLE CHECKBOX
-    if ($('#ina_enable_different_role_timeout').is(":checked")) {
-        $('.ina-multi-role-table, .hide-description-ina').show();
-    } else {
-        $('.ina-multi-role-table, .hide-description-ina').hide();
-    }
-
     $('#ina_enable_different_role_timeout').click(function () {
         if ($(this).prop("checked")) {
             $('.ina-multi-role-table, .hide-description-ina').show();

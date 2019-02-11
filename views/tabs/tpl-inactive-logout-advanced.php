@@ -21,8 +21,8 @@
                 <p class="description"><?php esc_html_e( 'This will enable multi-user role timeout functionality.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
-        <tr class="ina-multi-role-table">
-            <th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Enable Multi-User Feature', 'inactive-logout' ); ?></label></th>
+        <tr class="ina-multi-role-table" style="<?php echo $this->helper->ina_set_element_display( $ina_multiuser_timeout_enabled ); ?>">
+	        <th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Enable Multi-User Feature', 'inactive-logout' ); ?></label></th>
             <td>
                 <select class="ina-hacking-multi-select" id="ina_definetime_specific_userroles" multiple="multiple" name="ina_multiuser_roles[]">
 					<?php
