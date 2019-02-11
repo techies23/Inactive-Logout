@@ -112,7 +112,7 @@
            style="float:right;">
 			<?php
 			// translators: Disable string.
-			printf( esc_html__( 'Note: %s is used for disabling inactive logout functionality to that specific user.', 'inactive-logout' ), esc_html( $bold_string ) );
+			printf( esc_html__( 'Note: %s is used for disabling inactive logout functionality to that specific user.', 'inactive-logout' ), $bold_string );
 			?>
         </p>
 	<?php } ?>
