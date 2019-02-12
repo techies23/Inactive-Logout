@@ -36,5 +36,5 @@
 		<?php esc_html_e( 'Advanced Management', 'inactive-logout' ); ?>
     </a>
     <a href="https://deepenbajracharya.com.np/say-hello/" target="_blank" class="nav-tab"><?php esc_html_e( 'Support', 'inactive-logout' ); ?></a>
-    <a href="https://github.com/techies23/Inactive-Logout" target="_blank" class="nav-tab"><?php esc_html_e( 'Contribute !', 'inactive-logout' ); ?></a>
+    <a href="https://deepenbajracharya.com.np/donate/" target="_blank" class="nav-tab"><?php esc_html_e( 'Donate !', 'inactive-logout' ); ?></a>
 </h2>

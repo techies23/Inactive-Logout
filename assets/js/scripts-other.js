@@ -3,8 +3,13 @@
 * @author  Deepen
 */
 jQuery(function ($) {
-    $('.ina-hacking-select').select2();
-    $(".ina-hacking-multi-select").select2({width: '500px', placeholder: "Select Roles"});
+    if( $('.ina-hacking-select').length >0 ) {
+        $('.ina-hacking-select').select2();
+    }
+
+    if( $(".ina-hacking-multi-select").length >0 ) {
+        $(".ina-hacking-multi-select").select2({width: '500px', placeholder: "Select Roles"});
+    }
 
     //FOR SHOW WARN BOX CHECKBOX
     if ($('#ina_show_warn_message_only').is(":checked")) {

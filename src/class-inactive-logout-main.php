@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.7.9';
+	const INA_VERSION = '1.8.2';
 
 	/**
 	 * Directory of plugin.
@@ -80,6 +80,9 @@ final class Inactive_Logout_Main {
 
 		add_action( 'init', array( $this, 'ina_load_text_domain' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
+
+		add_action( 'wp_login', array( $this, 'set_session' ), 10, 2 );
+		add_action( 'wp_logout', array( $this, 'logout_session' ) );
 
 		//Load Finally
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ), 9999 );
@@ -193,6 +196,7 @@ final class Inactive_Logout_Main {
 		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_SLUG', 'inactive-logout' );
 		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_VIEWS', $this->plugin_path . 'views' );
 		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_ASSETS_URL', $this->plugin_url . 'assets/' );
+		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_VENDOR_URL', $this->plugin_url . 'vendor/' );
 	}
 
 	/**
@@ -225,9 +229,26 @@ final class Inactive_Logout_Main {
 	}
 
 	/**
-	 * Loading Backend Scripts.
+	 * Set Session when user logs in
 	 *
-	 * @param string $hook_suffix Suffix for hooks.
+	 * @param int $user_login
+	 * @param array $user
+	 */
+	public function set_session( $user_login, $user ) {
+		//setting session of the user
+		update_user_meta( $user->ID, '__ina_last_active_session', time() );
+	}
+
+	/**
+	 * When a user logs out of the session destryo all sessions
+	 * @return void
+	 */
+	public function logout_session() {
+		update_user_meta( get_current_user_id(), '__ina_last_active_session', false );
+	}
+
+	/**
+	 * Loading Backend Scripts.
 	 */
 	public function load_scripts() {
 		global $current_user;
@@ -273,29 +294,25 @@ final class Inactive_Logout_Main {
 			$helper            = Inactive_Logout_Helpers::instance();
 			$disable_timeoutjs = $helper->ina_check_user_role();
 			if ( ! $disable_timeoutjs ) {
-				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout.js', array( 'jquery' ), time(), true );
+				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts.min.js', array( 'jquery' ), time(), true );
 				wp_localize_script( 'ina-logout-js', 'ina_meta_data', $ina_meta_data );
 
-				wp_localize_script(
-					'ina-logout-js', 'ina_ajax', array(
+				wp_localize_script( 'ina-logout-js', 'ina_ajax', array(
 						'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 						'ina_security' => wp_create_nonce( '_checklastSession' ),
-					)
-				);
+					) );
 			}
 
-			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/inactive-logout-other.js', array( 'jquery', 'wp-color-picker' ), time(), true );
-			wp_register_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/select2.min.js', array( 'jquery' ), time(), true );
+			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-other.min.js', array( 'jquery', 'wp-color-picker' ), time(), true );
+			wp_register_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_VENDOR_URL . 'select2/js/select2.min.js', array( 'jquery' ), time(), true );
 
-			wp_register_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_ASSETS_URL . 'css/select2.min.css', false, time() );
-			wp_localize_script(
-				'ina-logout-inactive-logoutonly-js', 'ina_other_ajax', array(
+			wp_register_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_VENDOR_URL . 'select2/css/select2.min.css', false, time() );
+			wp_localize_script( 'ina-logout-inactive-logoutonly-js', 'ina_other_ajax', array(
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 					'ina_security' => wp_create_nonce( '_ina_nonce_security' ),
-				)
-			);
+				) );
 
-			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.css', false, time() );
+			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.min.css', false, time() );
 		}
 	}
 
@@ -311,10 +328,10 @@ final class Inactive_Logout_Main {
 
 		switch ( strtolower( $checking ) ) {
 			case 'wordpress': // WPCS: spelling ok.
-				$supported = version_compare( get_bloginfo( 'version' ), '4.0', '>=' );
+				$supported = version_compare( get_bloginfo( 'version' ), '4.6.0', '>=' );
 				break;
 			case 'php':
-				$supported = version_compare( phpversion(), '5.2', '>=' );
+				$supported = version_compare( phpversion(), '5.6', '>=' );
 				break;
 		}
 
@@ -327,12 +344,12 @@ final class Inactive_Logout_Main {
 	function ina_display_not_supported_error() {
 		if ( ! $this->ina_supported_version( 'WordPress' ) ) {
 			// translators: Minimum required WordPress version.
-			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade your WordPress install.', 'inactive-logout' ), '4.0' ) . '</p>';
+			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade your WordPress install.', 'inactive-logout' ), '4.6.0' ) . '</p>';
 			exit;
 		}
 		if ( ! $this->ina_supported_version( 'php' ) ) {
 			// translators: Minimum required PHP version.
-			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host about moving you to a newer version of PHP.', 'inactive-logout' ), '5.4' ) . '</p>';
+			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host about moving you to a newer version of PHP.', 'inactive-logout' ), '5.6' ) . '</p>';
 			exit;
 		}
 	}

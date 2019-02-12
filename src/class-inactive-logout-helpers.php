@@ -95,7 +95,7 @@ class Inactive_Logout_Helpers {
 	 * Get All Pages and Posts
 	 *
 	 * @since  1.2.0
-	 * @return $object
+	 * @return array
 	 */
 	public function ina_get_all_pages_posts() {
 		$result = array();

@@ -23,6 +23,7 @@ function ina__setup_theforce_awakens() {
     this.addEventListener("mousewheel", ina__resetTimer, false);
     this.addEventListener("touchmove", ina__resetTimer, false);
     this.addEventListener("MSPointerMove", ina__resetTimer, false);
+    this.addEventListener("load", ina__heartbeatCustom, false);
 
     //First get the broswer id
     inactive_logout_tabID = sessionStorage.inactive_logout_tabID && sessionStorage.closedLastTab !== '2' ? sessionStorage.inactive_logout_tabID : sessionStorage.inactive_logout_tabID = Math.random();
@@ -97,7 +98,7 @@ function ina__showTimeoutMessage() {
         //Disable Right Click
         window.oncontextmenu = function () {
             return false;
-        }
+        };
 
         var ina_popup_bg_enalbed = $('.ina__no_confict_popup_bg').data('bgenabled');
         if (ina_popup_bg_enalbed) {
@@ -112,7 +113,7 @@ function ina__showTimeoutMessage() {
             $('.ina_stay_logged_in').click(function () {
                 document.onkeydown = function (evt) {
                     return true;
-                }
+                };
                 window.oncontextmenu = null;
                 $('#ina__dp_logout_message_box').hide();
                 ina_messageBox = 0;
@@ -138,7 +139,7 @@ function ina__showTimeoutMessage() {
             });
         } else {
             $('#ina__dp_logout_message_box').show();
-            setting_countdown = setInterval(function () {
+            var setting_countdown = setInterval(function () {
                 if (countdown >= 0) {
                     t = countdown--;
                     $(".ina_countdown").html('(' + t + ')');
@@ -167,7 +168,7 @@ function ina__showTimeoutMessage() {
             $('.ina_stay_logged_in').click(function () {
                 document.onkeydown = function (evt) {
                     return true;
-                }
+                };
                 window.oncontextmenu = null;
                 clearTimeout(setting_countdown);
                 countdown = 10;
@@ -202,3 +203,30 @@ function ina__logout_now(redirect_url) {
         console.log("Session Logged Out !!");
     });
 }
+
+/**
+ * Why do i use custom heartbeat when WP already has one ?
+ *
+ * Some people tend  to reduce the frequency of heartbeat API calls. So, to minimize this issue custom
+ * beat API is in place here
+ *
+ * If any developer visits here - Please sugges the best way :) - Happy to integrate your ideas
+ *
+ * @since 1.8.0
+ */
+/*
+function ina__heartbeatCustom() {
+    $ = jQuery;
+
+    //On load update the time after 2 seconds
+    setTimeout(function () {
+        $.post(ina_ajax.ajaxurl, {action: 'ina_heartbeat'}).done(function (response) {
+        });
+    }, 2000);
+
+    //Call ths function every 30 seconds
+    setInterval(function () {
+        $.post(ina_ajax.ajaxurl, {action: 'ina_heartbeat'}).done(function (response) {
+        });
+    }, 30000);
+}*/

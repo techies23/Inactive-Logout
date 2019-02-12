@@ -1,10 +1,10 @@
 === Inactive Logout ===
 Contributors: j__3rk
 Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologout, inactive, inactive, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
-Donate link: https://deepenbajracharya.com.np/say-hello/
+Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
-Tested up to: 4.9
-Stable tag: 1.7.9
+Tested up to: 5.0
+Stable tag: 1.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,7 @@ Please refer to FAQ section if you have trouble activating plugin from version 1
 9. Simple to use
 10. Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
 11. Multisite Support: Override all sites with one setting.
+12. Auto browser close logout after 2 minute of active session. ( in beta download from [here](https://deepenbajracharya.com.np/plugins/inactive-logout-182-bundled.zip "Download Inactive Logout") )
 
 In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
 
@@ -59,9 +60,9 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 
 == Frequently Asked Questions ==
 
-= Stable version of 1.5.1 =
+= Auto logut when browser close version ( in beta ) =
 
-If you are getting activation errors when activating the plugin from 1.6.0. Then temporarily you can use the stable 1.5.1 version. Download it from [here](https://deepenbajracharya.com.np/plugins/inactive-logout.1.5.1.zip "Plugin version 1.5.").
+If you need auto logout when browser tab is closed after 2 minutes - Download from [here](https://deepenbajracharya.com.np/plugins/inactive-logout-182-bundled.zip "Plugin version 1.5."). This is still in beta as users are facing trouble. Please report on the issue if found any.
 
 = Plugin Conflicts =
 
@@ -72,10 +73,6 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 * For Default popup customization: [Code](https://gist.github.com/techies23/e9b54467b05f25f189ed5ff52375ef41 "Default popup code")
 * For Wakeup popup customization: [Code](https://gist.github.com/techies23/546b9a85eda645207704cb9cf1cf8a9a "Wakeup popup code")
 
-= Old users upgrading to version 1.4.1 =
-
-Users might face logout after activating or deactivating the plugin. Try to login again. If this does not work out then download the latest plugin by deleting the old version.
-
 == Screenshots ==
 
 1. Showing Inactive Logout Settings Page.
@@ -84,6 +81,11 @@ Users might face logout after activating or deactivating the plugin. Try to logi
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.8.0/1.8.2 =
+* Added: Auto logout when browser is closed - follow link in the description to download beta plugin.
+* Major bug fixes
+* Code refactor
 
 = 1.7.9 =
 * Minor fixes
