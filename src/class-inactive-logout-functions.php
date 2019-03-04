@@ -25,8 +25,6 @@ class Inactive_Logout_Functions {
 		add_action( 'wp_footer', array( $this, 'dialog_modal' ) );
 		add_action( 'admin_footer', array( $this, 'dialog_modal' ) );
 
-		#add_action( 'init', array( $this, 'check_valid_session' ) );
-
 		// Ajax for checking last session.
 		add_action( 'wp_ajax_ina_checklastSession', array( $this, 'last_session' ) );
 
@@ -39,40 +37,6 @@ class Inactive_Logout_Functions {
 		// Ajax for User Roles only.
 		add_action( 'wp_ajax_ina_save_disabled_roles', array( $this, 'ina_save_disabled_roles' ) );
 		add_action( 'wp_ajax_ina_get_enabled_roles', array( $this, 'ina_get_enabled_roles' ) );
-
-		// Add filter to receive hook, and specify we need 2 parameters.
-		#add_action( 'wp_ajax_ina_heartbeat', array( $this, 'heartbeat_received' ) );
-	}
-
-	/**
-	 * Tick tok save the current timestamp
-	 */
-	function heartbeat_received() {
-		if ( is_user_logged_in() ) {
-			update_user_meta( get_current_user_id(), '__ina_last_active_session', time() );
-
-			wp_send_json( [
-				'time_check' => time()
-			] );
-		}
-
-		wp_die();
-	}
-
-	/**
-	 * Check if user session is still valid after browser is closed
-	 */
-	public function check_valid_session() {
-		if ( is_user_logged_in() ) {
-			$last_user_active = get_user_meta( get_current_user_id(), '__ina_last_active_session', true );
-			if ( ! empty( $last_user_active ) ) {
-				$last_user_active_threshold = $last_user_active + 300; // 5 minute add
-				if ( $last_user_active_threshold < time() ) {
-					//Logout the user if current time is greater than user last active defined time
-					wp_logout();
-				}
-			}
-		}
 	}
 
 	public function logout_this_session() {

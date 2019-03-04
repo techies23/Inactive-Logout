@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.8.2';
+	const INA_VERSION = '1.8.4';
 
 	/**
 	 * Directory of plugin.
@@ -79,10 +79,7 @@ final class Inactive_Logout_Main {
 		$this->plugin_url  = plugins_url( $this->plugin_dir );
 
 		add_action( 'init', array( $this, 'ina_load_text_domain' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
-
-		add_action( 'wp_login', array( $this, 'set_session' ), 10, 2 );
-		add_action( 'wp_logout', array( $this, 'logout_session' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ), 9999 );
 
 		//Load Finally
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ), 9999 );
@@ -176,13 +173,8 @@ final class Inactive_Logout_Main {
 		}
 
 		if ( is_user_logged_in() ) {
-			if ( $this->ina_supported_version( 'WordPress' ) && $this->ina_supported_version( 'php' ) ) {
-				$this->ina_load_dependencies();
-				$this->ina_define_them_constants();
-			} else {
-				// Either PHP or WordPress version is inadequate so we simply return an error.
-				$this->ina_display_not_supported_error();
-			}
+			$this->ina_load_dependencies();
+			$this->ina_define_them_constants();
 		}
 
 	}
@@ -226,25 +218,6 @@ final class Inactive_Logout_Main {
 				require_once $this->plugin_path . 'src/class-inactive-concurrent-login-functions.php';
 			}
 		}
-	}
-
-	/**
-	 * Set Session when user logs in
-	 *
-	 * @param int $user_login
-	 * @param array $user
-	 */
-	public function set_session( $user_login, $user ) {
-		//setting session of the user
-		update_user_meta( $user->ID, '__ina_last_active_session', time() );
-	}
-
-	/**
-	 * When a user logs out of the session destryo all sessions
-	 * @return void
-	 */
-	public function logout_session() {
-		update_user_meta( get_current_user_id(), '__ina_last_active_session', false );
 	}
 
 	/**
@@ -298,9 +271,9 @@ final class Inactive_Logout_Main {
 				wp_localize_script( 'ina-logout-js', 'ina_meta_data', $ina_meta_data );
 
 				wp_localize_script( 'ina-logout-js', 'ina_ajax', array(
-						'ajaxurl'      => admin_url( 'admin-ajax.php' ),
-						'ina_security' => wp_create_nonce( '_checklastSession' ),
-					) );
+					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
+					'ina_security' => wp_create_nonce( '_checklastSession' ),
+				) );
 			}
 
 			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-other.min.js', array( 'jquery', 'wp-color-picker' ), time(), true );
@@ -308,49 +281,11 @@ final class Inactive_Logout_Main {
 
 			wp_register_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_VENDOR_URL . 'select2/css/select2.min.css', false, time() );
 			wp_localize_script( 'ina-logout-inactive-logoutonly-js', 'ina_other_ajax', array(
-					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
-					'ina_security' => wp_create_nonce( '_ina_nonce_security' ),
-				) );
+				'ajaxurl'      => admin_url( 'admin-ajax.php' ),
+				'ina_security' => wp_create_nonce( '_ina_nonce_security' ),
+			) );
 
 			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.min.css', false, time() );
-		}
-	}
-
-	/**
-	 * Test PHP and WordPress versions for compatibility
-	 *
-	 * @param string $checking - checking to be tested such as 'php' or 'WordPress'.
-	 *
-	 * @return boolean - is the existing version of the checking supported?
-	 */
-	function ina_supported_version( $checking ) {
-		$supported = false;
-
-		switch ( strtolower( $checking ) ) {
-			case 'wordpress': // WPCS: spelling ok.
-				$supported = version_compare( get_bloginfo( 'version' ), '4.6.0', '>=' );
-				break;
-			case 'php':
-				$supported = version_compare( phpversion(), '5.6', '>=' );
-				break;
-		}
-
-		return $supported;
-	}
-
-	/**
-	 * Display a WordPress or PHP incompatibility error
-	 */
-	function ina_display_not_supported_error() {
-		if ( ! $this->ina_supported_version( 'WordPress' ) ) {
-			// translators: Minimum required WordPress version.
-			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade your WordPress install.', 'inactive-logout' ), '4.6.0' ) . '</p>';
-			exit;
-		}
-		if ( ! $this->ina_supported_version( 'php' ) ) {
-			// translators: Minimum required PHP version.
-			echo '<p>' . sprintf( esc_html__( 'Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host about moving you to a newer version of PHP.', 'inactive-logout' ), '5.6' ) . '</p>';
-			exit;
 		}
 	}
 
