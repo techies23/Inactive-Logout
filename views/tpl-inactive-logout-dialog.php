@@ -61,7 +61,7 @@ $bg = isset( $ina_popup_overlay_color ) ? $ina_popup_overlay_color : false;
 					echo wpautop( $replaced_content );
 				}
 				?>
-                <p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php esc_html_e( 'Continue', 'inactive-logout' ); ?></a></p>
+                <p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php echo apply_filters( 'ina__logout_dialog_button_text', esc_html__( 'Continue', 'inactive-logout' ) ); ?></a></p>
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@ $bg = isset( $ina_popup_overlay_color ) ? $ina_popup_overlay_color : false;
     <div id="ina__dp_logout_message_box" class="ina-dp-noflict-modal">
         <div class="ina-dp-noflict-modal-content">
             <div class="ina-modal-header">
-                <h3><?php esc_html_e( 'Session Timeout', 'inactive-logout' ); ?></h3>
+                <h3><?php echo apply_filters( 'ina__logout_dialog_title', esc_html_e( 'Session Timeout', 'inactive-logout' ); ); ?></h3>
             </div>
             <div class="ina-dp-noflict-modal-body">
 				<?php
@@ -86,7 +86,7 @@ $bg = isset( $ina_popup_overlay_color ) ? $ina_popup_overlay_color : false;
 					echo wpautop( $message_content );
 				}
 				?>
-                <p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php esc_html_e( 'Continue', 'inactive-logout' ); ?> <span class="ina_countdown"></span></a></p>
+                <p class="ina-dp-noflict-btn-container"><a class="button button-primary ina_stay_logged_in" href="javascript:void(0);"><?php echo apply_filters( 'ina__logout_dialog_button_text', esc_html__( 'Continue', 'inactive-logout' ) ); ?> <span class="ina_countdown"></span></a></p>
             </div>
         </div>
     </div>
