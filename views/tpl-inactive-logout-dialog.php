@@ -69,7 +69,7 @@ $bg = isset( $ina_popup_overlay_color ) ? $ina_popup_overlay_color : false;
     <div id="ina__dp_logout_message_box" class="ina-dp-noflict-modal">
         <div class="ina-dp-noflict-modal-content">
             <div class="ina-modal-header">
-                <h3><?php echo apply_filters( 'ina__logout_dialog_title', esc_html_e( 'Session Timeout', 'inactive-logout' ); ); ?></h3>
+                <h3><?php echo apply_filters( 'ina__logout_dialog_title', esc_html_e( 'Session Timeout', 'inactive-logout' ) ); ?></h3>
             </div>
             <div class="ina-dp-noflict-modal-body">
 				<?php
