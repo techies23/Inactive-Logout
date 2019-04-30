@@ -27,14 +27,21 @@
                 <i><?php esc_html_e( 'Minute(s)', 'inactive-logout' ); ?></i>
             </td>
         </tr>
-        <tr class="ina_hide_message_content">
+        <tr class="ina_hide_message_content" style="<?php echo $this->helper->ina_set_element_display( empty( $ina_enable_redirect ) ); ?>">
             <th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Idle Message Content', 'inactive-logout' ); ?></label></th>
             <td>
 				<?php
+				if( ! empty( $ina_enable_redirect ) ){
+					$msg_editor_style = "<style> .wp-idle_message_text-wrap iframe { display: none; }</style>";
+				} else {
+					$msg_editor_style = "";
+				}
+				
 				$settings        = array(
 					'media_buttons' => false,
 					'teeny'         => true,
 					'textarea_rows' => 15,
+					'editor_css' => $msg_editor_style,
 				);
 				$message_content = get_option( '__ina_logout_message' );
 				$content         = $message_content ? $message_content : null;
@@ -72,14 +79,21 @@
                 <p class="description ina-warn-info"><strong><?php esc_html_e( 'Please note ! Multi role timeout feature will not work when this setting is enabled. Similarly, idle Message Content will be ignored and replaced with this content.', 'inactive-logout' ); ?></strong></p>
             </td>
         </tr>
-        <tr class="show_on_warn_message_enabled">
+        <tr class="show_on_warn_message_enabled" style="<?php echo $this->helper->ina_set_element_display( $ina_warn_message_enabled ); ?>">
             <th scope="row"><label for="ina_show_warn_message"><?php esc_html_e( 'Warn Message Content', 'inactive-logout' ); ?></label></th>
             <td>
 				<?php
+				if( ! empty( $ina_warn_message_enabled ) ){
+					$warn_style = "<style> .wp-ina_show_warn_message-wrap iframe { display: none; }</style>";
+				} else {
+					$warn_style = "";
+				}
+				
 				$settings_warn        = array(
 					'media_buttons' => false,
 					'teeny'         => true,
 					'textarea_rows' => 15,
+					'editor_css' => $warn_style,
 				);
 				$__ina_warn_message   = get_option( '__ina_warn_message' );
 				$content_warn_message = $__ina_warn_message ? $__ina_warn_message : null;
@@ -102,10 +116,10 @@
                 <p class="description"><?php esc_html_e( 'If not checked then user will be logged out to login screen after timeout.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
-        <tr class="show_on_enable_redirect_link" style="display:none;">
+        <tr class="show_on_enable_redirect_link" style="<?php echo $this->helper->ina_set_element_display( $ina_enable_redirect ); ?>">
             <th scope="row"><label for="ina_redirect_page"><?php esc_html_e( 'Redirect Page', 'inactive-logout' ); ?></label></th>
             <td>
-                <select name="ina_redirect_page" class="regular-text ina-hacking-select">
+                <select name="ina_redirect_page" class="regular-text ina-hacking-select" style="appearance:none; -webkit-appearance:none; -moz-appearance:none;">
                     <option value="custom-page-redirect"><?php esc_html_e( 'External Page Redirect', 'inactive-logout' ); ?></option>
 					<?php
 					$ina_helpers = Inactive_Logout_Helpers::instance();
@@ -151,7 +165,7 @@
                 <p class="description"><?php esc_html_e( 'Select a page to redirect to after session timeout and clicking OK.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
-        <tr class="show_cutom_redirect_textfield" <?php echo ( ( ! empty( $ina_redirect_page_link ) && 'custom-page-redirect' === $ina_redirect_page_link ) ) ? false : 'style=display:none;'; ?> >
+        <tr class="show_cutom_redirect_textfield" <?php echo ( ! empty( $ina_enable_redirect ) && ( ! empty( $ina_redirect_page_link ) && 'custom-page-redirect' === $ina_redirect_page_link ) ) ? false : 'style=display:none;'; ?> >
             <th scope="row"><label for="custom_redirect_text_field"><?php esc_html_e( 'Custom URL Redirect', 'inactive-logout' ); ?></label></th>
             <td>
                 <input name="custom_redirect_text_field" type="url" id="custom_redirect_text_field" class="regular-text code" value="<?php echo ( ! empty( $custom_redirect_text_field ) ) ? esc_attr( $custom_redirect_text_field ) : false; ?>">
