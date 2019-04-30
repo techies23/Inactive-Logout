@@ -10,7 +10,7 @@
 <?php $result_roles = $this->helper->ina_get_all_roles(); ?>
 <div id="message" class="updated notice is-dismissible" style="display: none;"></div>
 
-<form method="post" action="?page=inactive-logout&tab=ina-advanced">
+<form method="post" class="ina-form" action="?page=inactive-logout&tab=ina-advanced">
 	<?php wp_nonce_field( '_nonce_action_save_timeout_adv_settings', '_save_timeout_adv_settings' ); ?>
     <table class="ina-form-tbl form-table">
         <tbody>
@@ -21,8 +21,8 @@
                 <p class="description"><?php esc_html_e( 'This will enable multi-user role timeout functionality.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
-        <tr class="ina-multi-role-table" style="<?php echo $this->helper->ina_set_element_display( $ina_multiuser_timeout_enabled ); ?>">
-	        <th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Enable Multi-User Feature', 'inactive-logout' ); ?></label></th>
+        <tr class="ina-multi-role-table" <?php echo ! empty( $ina_multiuser_timeout_enabled ) && (int) $ina_multiuser_timeout_enabled === 1 ? 'style="display:table-row;"' : 'style="display:none;"'; ?>>
+            <th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Enable Multi-User Feature', 'inactive-logout' ); ?></label></th>
             <td>
                 <select class="ina-hacking-multi-select" id="ina_definetime_specific_userroles" multiple="multiple" name="ina_multiuser_roles[]">
 					<?php
@@ -106,15 +106,17 @@
                 </tr>
 			<?php } ?>
             </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="5">
+					<?php $bold_string = '<span class="ina-highlight"><strong>"' . esc_html__( 'Disable', 'inactive-logout' ) . '"</strong></span>'; ?>
+                    <p class="description ina-warn-info" style="float:right;">
+						<?php printf( __( 'Note: %s is used for disabling inactive logout functionality to that specific user.', 'inactive-logout' ), $bold_string ); ?>
+                    </p>
+                </th>
+            </tr>
+            </tfoot>
         </table>
-		<?php $bold_string = '<span class="ina-highlight"><strong>"' . esc_html__( 'Disable', 'inactive-logout' ) . '"</strong></span>'; ?>
-        <p class="hide-description-ina description ina-warn-info"
-           style="float:right;">
-			<?php
-			// translators: Disable string.
-			printf( esc_html__( 'Note: %s is used for disabling inactive logout functionality to that specific user.', 'inactive-logout' ), $bold_string );
-			?>
-        </p>
 	<?php } ?>
     <p class="ina_adv_submit"><input type="submit" name="adv_submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>"> <a id="ina-reset-adv-data" class="button button-primary button-reset-ina" data-msg="<?php esc_html_e( 'Are you sure you want to erase all advanced settings. This cannot be undone !', 'inactive-logout' ); ?>"><?php esc_html_e( 'Reset Advanced Settings !', 'inactive-logout' ); ?></a></p>
 </form>

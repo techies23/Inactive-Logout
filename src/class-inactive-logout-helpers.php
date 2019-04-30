@@ -194,20 +194,4 @@ class Inactive_Logout_Helpers {
 
 		return $result;
 	}
-	/**
-	 * Handle display of wp-admin form elements if option is enabled/disabled on pageload
-	 *
-	 * @author  Patrick Strube
-	 * @since   1.7.9
-	 *
-	 * @param bool $option Checked or unchecked option to evaluate
-	 * @return string
-	 */
-	 public function ina_set_element_display( $option ){
-		if( !empty( $option ) ){
-			return "display:table-row;";
-		} else {
-			return "display:none;";
-		}
-	 }
 }

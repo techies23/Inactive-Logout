@@ -276,7 +276,7 @@ final class Inactive_Logout_Main {
 				) );
 			}
 
-			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-other.min.js', array( 'jquery', 'wp-color-picker' ), time(), true );
+			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-helper.min.js', array( 'jquery', 'wp-color-picker' ), time(), true );
 			wp_register_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_VENDOR_URL . 'select2/js/select2.min.js', array( 'jquery' ), time(), true );
 
 			wp_register_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_VENDOR_URL . 'select2/css/select2.min.css', false, time() );

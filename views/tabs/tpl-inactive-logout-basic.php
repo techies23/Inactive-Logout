@@ -7,7 +7,7 @@
 
 ?>
 
-<form method="post" action="?page=inactive-logout&tab=ina-basic">
+<form method="post" class="ina-form" action="?page=inactive-logout&tab=ina-basic">
 	<?php wp_nonce_field( '_nonce_action_save_timeout_settings', '_save_timeout_settings' ); ?>
     <table class="ina-form-tbl form-table">
         <tbody>
@@ -27,21 +27,14 @@
                 <i><?php esc_html_e( 'Minute(s)', 'inactive-logout' ); ?></i>
             </td>
         </tr>
-        <tr class="ina_hide_message_content" style="<?php echo $this->helper->ina_set_element_display( empty( $ina_enable_redirect ) ); ?>">
+        <tr class="ina_hide_message_content">
             <th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Idle Message Content', 'inactive-logout' ); ?></label></th>
             <td>
 				<?php
-				if( ! empty( $ina_enable_redirect ) ){
-					$msg_editor_style = "<style> .wp-idle_message_text-wrap iframe { display: none; }</style>";
-				} else {
-					$msg_editor_style = "";
-				}
-				
 				$settings        = array(
 					'media_buttons' => false,
 					'teeny'         => true,
 					'textarea_rows' => 15,
-					'editor_css' => $msg_editor_style,
 				);
 				$message_content = get_option( '__ina_logout_message' );
 				$content         = $message_content ? $message_content : null;
@@ -53,11 +46,11 @@
         <tr>
             <th scope="row"><label for="ina_full_overlay"><?php esc_html_e( 'Popup Background', 'inactive-logout' ); ?></label></th>
             <td>
-                <input name="ina_full_overlay" type="checkbox" <?php echo ! empty( $ina_full_overlay ) ? 'checked' : false; ?> value="1">
+                <input name="ina_full_overlay" class="ina_apply_background_color" type="checkbox" <?php echo ! empty( $ina_full_overlay ) ? 'checked' : false; ?> value="1">
                 <p class="description"><?php esc_html_e( 'Choose a background color to hide after logout. Enabling this option will remove tranparency.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
-        <tr class="ina_colorpicker_show">
+        <tr class="ina_colorpicker_show" <?php echo ! empty( $ina_full_overlay ) && (int) $ina_full_overlay === 1 ? 'style="display:table-row;"' : false; ?>>
             <th scope="row"><label for="ina_color_picker"><?php esc_html_e( 'Popup Background Color', 'inactive-logout' ); ?></label></th>
             <td>
                 <input type="text" name="ina_color_picker" value="<?php echo ( ! empty( $ina_popup_overlay_color ) ) ? esc_attr( $ina_popup_overlay_color ) : ''; ?>" class="ina_color_picker">
@@ -79,21 +72,14 @@
                 <p class="description ina-warn-info"><strong><?php esc_html_e( 'Please note ! Multi role timeout feature will not work when this setting is enabled. Similarly, idle Message Content will be ignored and replaced with this content.', 'inactive-logout' ); ?></strong></p>
             </td>
         </tr>
-        <tr class="show_on_warn_message_enabled" style="<?php echo $this->helper->ina_set_element_display( $ina_warn_message_enabled ); ?>">
+        <tr class="show_on_warn_message_enabled" <?php echo ! empty( $ina_warn_message_enabled ) && (int) $ina_warn_message_enabled === 1 ? 'style="display:table-row;"' : 'style="display:none;"'; ?>>
             <th scope="row"><label for="ina_show_warn_message"><?php esc_html_e( 'Warn Message Content', 'inactive-logout' ); ?></label></th>
             <td>
 				<?php
-				if( ! empty( $ina_warn_message_enabled ) ){
-					$warn_style = "<style> .wp-ina_show_warn_message-wrap iframe { display: none; }</style>";
-				} else {
-					$warn_style = "";
-				}
-				
 				$settings_warn        = array(
 					'media_buttons' => false,
 					'teeny'         => true,
 					'textarea_rows' => 15,
-					'editor_css' => $warn_style,
 				);
 				$__ina_warn_message   = get_option( '__ina_warn_message' );
 				$content_warn_message = $__ina_warn_message ? $__ina_warn_message : null;
@@ -116,10 +102,10 @@
                 <p class="description"><?php esc_html_e( 'If not checked then user will be logged out to login screen after timeout.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
-        <tr class="show_on_enable_redirect_link" style="<?php echo $this->helper->ina_set_element_display( $ina_enable_redirect ); ?>">
+        <tr class="show_on_enable_redirect_link" <?php echo ! empty( $ina_enable_redirect ) && (int) $ina_enable_redirect === 1 ? 'style="display:table-row;"' : 'style="display:none;"'; ?>>
             <th scope="row"><label for="ina_redirect_page"><?php esc_html_e( 'Redirect Page', 'inactive-logout' ); ?></label></th>
             <td>
-                <select name="ina_redirect_page" class="regular-text ina-hacking-select" style="appearance:none; -webkit-appearance:none; -moz-appearance:none;">
+                <select name="ina_redirect_page" class="ina_redirect_page" class="regular-text ina-hacking-select">
                     <option value="custom-page-redirect"><?php esc_html_e( 'External Page Redirect', 'inactive-logout' ); ?></option>
 					<?php
 					$ina_helpers = Inactive_Logout_Helpers::instance();
@@ -165,7 +151,7 @@
                 <p class="description"><?php esc_html_e( 'Select a page to redirect to after session timeout and clicking OK.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
-        <tr class="show_cutom_redirect_textfield" <?php echo ( ! empty( $ina_enable_redirect ) && ( ! empty( $ina_redirect_page_link ) && 'custom-page-redirect' === $ina_redirect_page_link ) ) ? false : 'style=display:none;'; ?> >
+        <tr class="show_cutom_redirect_textfield" <?php echo ( ( ! empty( $ina_redirect_page_link ) && 'custom-page-redirect' === $ina_redirect_page_link ) ) ? false : 'style=display:none;'; ?> >
             <th scope="row"><label for="custom_redirect_text_field"><?php esc_html_e( 'Custom URL Redirect', 'inactive-logout' ); ?></label></th>
             <td>
                 <input name="custom_redirect_text_field" type="url" id="custom_redirect_text_field" class="regular-text code" value="<?php echo ( ! empty( $custom_redirect_text_field ) ) ? esc_attr( $custom_redirect_text_field ) : false; ?>">
