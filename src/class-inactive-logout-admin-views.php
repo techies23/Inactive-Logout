@@ -296,7 +296,7 @@ class Inactive_Logout_Admin_Views {
 	 * Settings wrapper html element.
 	 */
 	public function ina_before_settings_wrap() {
-		echo '<div id="ina-cover-loading" style="display: none;"></div><div class="wrap">';
+		echo '<div class="wrap">';
 	}
 
 	/**
