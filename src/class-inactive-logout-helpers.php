@@ -40,7 +40,7 @@ class Inactive_Logout_Helpers {
 	/**
 	 * Define constant if not already set.
 	 *
-	 * @param  string      $name  Constant name.
+	 * @param  string $name Constant name.
 	 * @param  string|bool $value Constant value.
 	 *
 	 * @since   2.0.0
@@ -99,8 +99,7 @@ class Inactive_Logout_Helpers {
 	 */
 	public function ina_get_all_pages_posts() {
 		$result = array();
-		$pages  = get_posts(
-			array(
+		$pages  = get_posts( array(
 				'order'          => 'ASC',
 				'posts_per_page' => - 1,
 				'post_type'      => array(
@@ -108,8 +107,7 @@ class Inactive_Logout_Helpers {
 					'page',
 				),
 				'post_status'    => 'publish',
-			)
-		);
+			) );
 
 		if ( ! empty( $pages ) ) {
 			foreach ( $pages as $page ) {
@@ -195,3 +193,9 @@ class Inactive_Logout_Helpers {
 		return $result;
 	}
 }
+
+function ina_helpers() {
+	return Inactive_Logout_Helpers::instance();
+}
+
+ina_helpers();

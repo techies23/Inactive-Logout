@@ -95,6 +95,7 @@
                 <p class="description"><?php esc_html_e( 'This will disable the user from logging in using the same account at different locations.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
+		<?php do_action( 'ina__addon_form_elements' ); ?>
         <tr>
             <th scope="row"><label for="ina_enable_redirect_link"><?php esc_html_e( 'Enable Redirect', 'inactive-logout' ); ?></label></th>
             <td>
@@ -105,11 +106,10 @@
         <tr class="show_on_enable_redirect_link" <?php echo ! empty( $ina_enable_redirect ) && (int) $ina_enable_redirect === 1 ? 'style="display:table-row;"' : 'style="display:none;"'; ?>>
             <th scope="row"><label for="ina_redirect_page"><?php esc_html_e( 'Redirect Page', 'inactive-logout' ); ?></label></th>
             <td>
-                <select name="ina_redirect_page" class="ina_redirect_page" class="regular-text ina-hacking-select">
+                <select name="ina_redirect_page" class="ina_redirect_page regular-text">
                     <option value="custom-page-redirect"><?php esc_html_e( 'External Page Redirect', 'inactive-logout' ); ?></option>
 					<?php
-					$ina_helpers = Inactive_Logout_Helpers::instance();
-					$posts       = $ina_helpers->ina_get_all_pages_posts();
+					$posts       = ina_helpers()->ina_get_all_pages_posts();
 					if ( ! empty( $posts ) ) {
 						?>
                         <optgroup label="Posts">
@@ -151,7 +151,7 @@
                 <p class="description"><?php esc_html_e( 'Select a page to redirect to after session timeout and clicking OK.', 'inactive-logout' ); ?></p>
             </td>
         </tr>
-        <tr class="show_cutom_redirect_textfield" <?php echo ( ( ! empty( $ina_redirect_page_link ) && 'custom-page-redirect' === $ina_redirect_page_link ) ) ? false : 'style=display:none;'; ?> >
+        <tr class="show_cutom_redirect_textfield" <?php echo ! empty( $ina_enable_redirect ) ? false : 'style=display:none;'; ?> <?php echo ! empty( $ina_redirect_page_link ) && 'custom-page-redirect' === $ina_redirect_page_link ? false : 'style="display:none;"'; ?> >
             <th scope="row"><label for="custom_redirect_text_field"><?php esc_html_e( 'Custom URL Redirect', 'inactive-logout' ); ?></label></th>
             <td>
                 <input name="custom_redirect_text_field" type="url" id="custom_redirect_text_field" class="regular-text code" value="<?php echo ( ! empty( $custom_redirect_text_field ) ) ? esc_attr( $custom_redirect_text_field ) : false; ?>">

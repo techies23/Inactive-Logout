@@ -51,8 +51,7 @@ $bg = isset( $ina_popup_overlay_color ) ? $ina_popup_overlay_color : false;
 					}
 				}
 
-				$ina_helpers      = Inactive_Logout_Helpers::instance();
-				$replaced_content = str_replace( '{wakup_timout}', $ina_helpers->ina_convert_to_minutes( $time ), $message_content );
+				$replaced_content = str_replace( '{wakup_timout}', ina_helpers()->ina_convert_to_minutes( $time ), $message_content );
 
 				if ( function_exists( 'icl_register_string' ) ) {
 					icl_register_string( 'inactive-logout', 'inactive_logout_dynamic_wakeup_text', esc_html( $replaced_content ) );
