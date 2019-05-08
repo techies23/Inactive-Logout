@@ -41,7 +41,6 @@
             ina_logout_helpers_dom.multiRoleTable = $('.ina-multi-role-table');
 
             //Glboals
-            ina_logout_helpers_dom.cover = $('#ina-cover-loading');
             ina_logout_helpers_dom.message = $('#message');
 
             if (ina_logout_helpers_dom.select2.length > 0) {
@@ -103,9 +102,7 @@
             var msg = confirm($(this).data('msg'));
             if (msg) {
                 var send_data = {security: ina_other_ajax.ina_security, action: 'ina_reset_adv_settings'};
-                ina_logout_helpers_dom.cover.show();
                 $.post(ina_other_ajax.ajaxurl, send_data).done(function (response) {
-                    ina_logout_helpers_dom.cover.fadeOut("slow");
                     ina_logout_helpers_dom.message.fadeIn().html('<p>' + response.msg + '</p>');
                     setTimeout(function () {
                         location.reload();
