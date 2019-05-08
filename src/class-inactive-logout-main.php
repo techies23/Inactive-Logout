@@ -183,12 +183,11 @@ final class Inactive_Logout_Main {
 	 * Define Constant Values
 	 */
 	public function ina_define_them_constants() {
-		$ina_helpers = Inactive_Logout_Helpers::instance();
-		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_VERSION', self::INA_VERSION );
-		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_SLUG', 'inactive-logout' );
-		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_VIEWS', $this->plugin_path . 'views' );
-		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_ASSETS_URL', $this->plugin_url . 'assets/' );
-		$ina_helpers->ina_define( 'INACTIVE_LOGOUT_VENDOR_URL', $this->plugin_url . 'vendor/' );
+		ina_helpers()->ina_define( 'INACTIVE_LOGOUT_VERSION', self::INA_VERSION );
+		ina_helpers()->ina_define( 'INACTIVE_LOGOUT_SLUG', 'inactive-logout' );
+		ina_helpers()->ina_define( 'INACTIVE_LOGOUT_VIEWS', $this->plugin_path . 'views' );
+		ina_helpers()->ina_define( 'INACTIVE_LOGOUT_ASSETS_URL', $this->plugin_url . 'assets/' );
+		ina_helpers()->ina_define( 'INACTIVE_LOGOUT_VENDOR_URL', $this->plugin_url . 'assets/vendor/' );
 	}
 
 	/**
@@ -208,8 +207,7 @@ final class Inactive_Logout_Main {
 		// @added from 1.6.0.
 		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
 		if ( ! empty( $ina_multiuser_timeout_enabled ) ) {
-			$helper                   = Inactive_Logout_Helpers::instance();
-			$disable_concurrent_login = $helper->ina_check_user_role_concurrent_login();
+			$disable_concurrent_login = ina_helpers()->ina_check_user_role_concurrent_login();
 			if ( $disable_concurrent_login ) {
 				require_once $this->plugin_path . 'src/class-inactive-concurrent-login-functions.php';
 			}
@@ -264,8 +262,7 @@ final class Inactive_Logout_Main {
 			$ina_meta_data['ina_disable_countdown']    = ( isset( $idle_disable_countdown ) && 1 === intval( $idle_disable_countdown ) ) ? $idle_disable_countdown : false;
 			$ina_meta_data['ina_warn_message_enabled'] = ( isset( $ina_warn_message_enabled ) && 1 === intval( $ina_warn_message_enabled ) ) ? $ina_warn_message_enabled : false;
 
-			$helper            = Inactive_Logout_Helpers::instance();
-			$disable_timeoutjs = $helper->ina_check_user_role();
+			$disable_timeoutjs = ina_helpers()->ina_check_user_role();
 			if ( ! $disable_timeoutjs ) {
 				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts.min.js', array( 'jquery' ), time(), true );
 				wp_localize_script( 'ina-logout-js', 'ina_meta_data', $ina_meta_data );

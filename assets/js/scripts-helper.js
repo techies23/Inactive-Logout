@@ -17,8 +17,7 @@
             this.addEventListeners();
         },
         setupDOM: function () {
-            ina_logout_helpers_dom.select2 = $('.ina-hacking-select');
-            ina_logout_helpers_dom.multiselect2 = $(".ina-hacking-multi-select");
+            ina_logout_helpers_dom.select2 = $('.ina-hacking-select, .ina-hacking-multi-select');
 
             //For Warning Section
             ina_logout_helpers_dom.warn_message_enabled = $('.show_on_warn_message_enabled');
@@ -49,10 +48,6 @@
                 ina_logout_helpers_dom.select2.select2();
             }
 
-            if (ina_logout_helpers_dom.multiselect2.length > 0) {
-                ina_logout_helpers_dom.multiselect2.select2();
-            }
-
             if (ina_logout_helpers_dom.colorpicker.length > 0) {
                 ina_logout_helpers_dom.colorpicker.wpColorPicker();
             }
@@ -66,6 +61,8 @@
             // Reset all Advanced Data
             ina_logout_helpers_dom.resetAdvdata.on('click', this.resetAdvManagementSection);
             ina_logout_helpers_dom.role_timeout.on('click', this.enableDifferentRoleTimeout);
+
+            ina_logout_helpers_dom.redirect_page.on('change', this.showCustomURLInput);
         },
 
         showWarnMsgEnabled: function () {
@@ -89,7 +86,6 @@
             if ($(this).prop("checked")) {
                 ina_logout_helpers_dom.show_on_enable_redirect_link.show();
                 ina_logout_helpers_dom.hide_message_content.hide();
-
                 if (ina_logout_helpers_dom.redirect_page.val() === "custom-page-redirect") {
                     ina_logout_helpers_dom.show_cutom_redirect_textfield.show();
                 } else {
@@ -125,6 +121,14 @@
                 ina_logout_helpers_dom.multiRoleTable.show();
             } else {
                 ina_logout_helpers_dom.multiRoleTable.hide();
+            }
+        },
+
+        showCustomURLInput: function (e) {
+            if ($(this).val() === "custom-page-redirect") {
+                ina_logout_helpers_dom.show_cutom_redirect_textfield.show();
+            } else {
+                ina_logout_helpers_dom.show_cutom_redirect_textfield.hide();
             }
         }
     };

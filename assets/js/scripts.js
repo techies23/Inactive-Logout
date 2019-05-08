@@ -44,6 +44,7 @@
             $(document).on("mousewheel", this.resetTimer);
             $(document).on("touchmove", this.resetTimer);
             $(document).on("MSPointerMove", this.resetTimer);
+            $(window).on("load", this.resetTimer);
 
             ina_dom.stayLoggedIn.on("click", this.stayLoggedInWarnMsg);
         },
@@ -68,8 +69,8 @@
 
         //Starting timeout timer to go into inactive state after 11 seconds if any event like mousemove is not triggered
         startTimer: function () {
-            inactive_logout_timeoutID = window.setTimeout(this.goInactive, 11000);
-            // inactive_logout_timeoutID = window.setTimeout(this.goInactive, 1000);
+            // inactive_logout_timeoutID = window.setTimeout(this.goInactive, 11000);
+            inactive_logout_timeoutID = window.setTimeout(this.goInactive, 1000);
         },
 
         goActive: function () {

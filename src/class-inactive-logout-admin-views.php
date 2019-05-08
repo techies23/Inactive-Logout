@@ -92,8 +92,6 @@ class Inactive_Logout_Admin_Views {
 		wp_enqueue_script( "ina-logout-inactive-select-js" );
 		wp_enqueue_style( "ina-logout-inactive-select" );
 
-		$saved = false;
-
 		$submit = filter_input( INPUT_POST, 'submit', FILTER_SANITIZE_STRING );
 
 		if ( isset( $submit ) ) {
@@ -135,6 +133,8 @@ class Inactive_Logout_Admin_Views {
 			}
 
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-basic.php';
+		} else if('ina-addon' === $active_tab) {
+			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-addon.php';
 		} else {
 			// ADVANCED.
 			$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );

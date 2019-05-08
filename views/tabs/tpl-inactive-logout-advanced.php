@@ -7,7 +7,7 @@
 
 ?>
 
-<?php $result_roles = $this->helper->ina_get_all_roles(); ?>
+<?php $result_roles = ina_helpers()->ina_get_all_roles(); ?>
 <div id="message" class="updated notice is-dismissible" style="display: none;"></div>
 
 <form method="post" class="ina-form" action="?page=inactive-logout&tab=ina-advanced">
@@ -27,7 +27,7 @@
                 <select class="ina-hacking-multi-select" id="ina_definetime_specific_userroles" multiple="multiple" name="ina_multiuser_roles[]">
 					<?php
 					foreach ( $result_roles as $k => $role ) {
-						$selected = $this->helper->ina_check_role_enabledfor_multiuser( $k );
+						$selected = ina_helpers()->ina_check_role_enabledfor_multiuser( $k );
 						?>
                         <option value="<?php echo esc_attr( $k ); ?>" <?php echo ! empty( $selected ) ? 'selected' : false; ?>><?php echo esc_html( $role ); ?></option>
 						<?php
@@ -46,7 +46,7 @@
             <th class="manage-column" width="15%"><?php esc_html_e( 'Timeout (In Minutes)', 'inactive-logout' ); ?></th>
             <th class="manage-column" width="40%"><?php esc_html_e( 'Redirect Page', 'inactive-logout' ); ?></th>
             <th class="manage-column" width="10%"><?php esc_html_e( 'Disable', 'inactive-logout' ); ?></th>
-            <th class="manage-column" width="20%"><?php esc_html_e( 'Disable Concurrent Login', 'inactive-logout' ); ?></th>
+            <th class="manage-column" width="20%"><?php esc_html_e( 'Prevent Multiple Login', 'inactive-logout' ); ?></th>
             </thead>
             <tbody>
 			<?php
@@ -57,11 +57,10 @@
                     <td><?php echo esc_html( $result_roles[ $role ] ); ?></td>
                     <td><input type="number" min="1" value="<?php echo ( ! empty( $ina_multiuser_setting['timeout'] ) ) ? esc_attr( $ina_multiuser_setting['timeout'] ) : 15; ?>" name="ina_individual_user_timeout[]"></td>
                     <td>
-                        <select name="ina_redirect_page_individual_user[]" class="regular-text ina-hacking-select">
+                        <select name="ina_redirect_page_individual_user[]" class="regular-text">
                             <option value="0"><?php esc_html_e( 'Set Global Redirect Page', 'inactive-logout' ); ?></option>
 							<?php
-							$ina_helpers = Inactive_Logout_Helpers::instance();
-							$posts       = $ina_helpers->ina_get_all_pages_posts();
+							$posts       = ina_helpers()->ina_get_all_pages_posts();
 							if ( $posts ) {
 								?>
                                 <optgroup label="Posts">
@@ -118,5 +117,8 @@
             </tfoot>
         </table>
 	<?php } ?>
+
+	<?php do_action( 'ina__after_advanced_form_elements' ); ?>
+
     <p class="ina_adv_submit"><input type="submit" name="adv_submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>"> <a id="ina-reset-adv-data" class="button button-primary button-reset-ina" data-msg="<?php esc_html_e( 'Are you sure you want to erase all advanced settings. This cannot be undone !', 'inactive-logout' ); ?>"><?php esc_html_e( 'Reset Advanced Settings !', 'inactive-logout' ); ?></a></p>
 </form>
