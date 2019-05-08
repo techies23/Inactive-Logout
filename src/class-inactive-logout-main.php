@@ -18,8 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Inactive_Logout_Main {
 
-	const INA_VERSION = '1.8.4';
-
 	/**
 	 * Directory of plugin.
 	 *
@@ -183,7 +181,6 @@ final class Inactive_Logout_Main {
 	 * Define Constant Values
 	 */
 	public function ina_define_them_constants() {
-		ina_helpers()->ina_define( 'INACTIVE_LOGOUT_VERSION', self::INA_VERSION );
 		ina_helpers()->ina_define( 'INACTIVE_LOGOUT_SLUG', 'inactive-logout' );
 		ina_helpers()->ina_define( 'INACTIVE_LOGOUT_VIEWS', $this->plugin_path . 'views' );
 		ina_helpers()->ina_define( 'INACTIVE_LOGOUT_ASSETS_URL', $this->plugin_url . 'assets/' );

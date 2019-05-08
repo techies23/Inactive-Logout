@@ -3,8 +3,8 @@ Contributors: j__3rk
 Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologout, inactive, inactive, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
-Tested up to: 5.1
-Stable tag: 1.8.4
+Tested up to: 5.2
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,7 +33,8 @@ Please refer to FAQ section if you have trouble activating plugin from version 1
 9. Simple to use
 10. Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
 11. Multisite Support: Override all sites with one setting.
-12. Auto browser close logout after 2 minute of active session. ( in beta download from [here](https://deepenbajracharya.com.np/plugins/inactive-logout-182-bundled.zip "Download Inactive Logout") )
+12. Auto browser close logout after 2 minute of active session. **Coming Soon**
+13. Override Multiple Login priority **Coming Soon**
 
 In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
 
@@ -62,7 +63,7 @@ Upload the plugin to your blog, Activate it, Load...and You're done!
 
 = Auto logut when browser close version ( in beta ) =
 
-If you need auto logout when browser tab is closed after 2 minutes - Download from [here](https://deepenbajracharya.com.np/plugins/inactive-logout-182-bundled.zip "Plugin version 1.5."). This is still in beta as users are facing trouble. Please report on the issue if found any.
+This feature has been moved to PRO version of the plugin.
 
 = Plugin Conflicts =
 
@@ -81,6 +82,16 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.9.0 =
+* Changed: Javascript methods changed to modular.
+* Added: Pro Tab added in settings page
+* Added: Hook priorities for ending conflicts
+* Changed: Helper function now into singleton
+* Added: SASS compilation
+* Removed: INA_VERSION constant
+* Bug Fix: Multi-Role fixes
+* Bug Fixes
 
 = 1.8.0/1.8.2 =
 * Added: Auto logout when browser is closed - follow link in the description to download beta plugin.
