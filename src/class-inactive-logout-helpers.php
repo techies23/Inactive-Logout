@@ -100,14 +100,14 @@ class Inactive_Logout_Helpers {
 	public function ina_get_all_pages_posts() {
 		$result = array();
 		$pages  = get_posts( array(
-				'order'          => 'ASC',
-				'posts_per_page' => - 1,
-				'post_type'      => array(
-					'post',
-					'page',
-				),
-				'post_status'    => 'publish',
-			) );
+			'order'          => 'ASC',
+			'posts_per_page' => - 1,
+			'post_type'      => array(
+				'post',
+				'page',
+			),
+			'post_status'    => 'publish',
+		) );
 
 		if ( ! empty( $pages ) ) {
 			foreach ( $pages as $page ) {

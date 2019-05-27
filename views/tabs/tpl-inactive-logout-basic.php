@@ -15,7 +15,7 @@
                 <tr>
                     <th scope="row"><label for="idle_overrideby_multisite_setting"><?php esc_html_e( 'Override for all sites', 'inactive-logout' ); ?></label></th>
                     <td>
-                        <input name="idle_overrideby_multisite_setting" type="checkbox" id="idle_overrideby_multisite_setting" <?php echo ! empty( $idle_overrideby_multisite_setting ) ? 'checked' : false; ?> value="1">
+                        <input class="regular-text" name="idle_overrideby_multisite_setting" type="checkbox" id="idle_overrideby_multisite_setting" <?php echo ! empty( $idle_overrideby_multisite_setting ) ? 'checked' : false; ?> value="1">
                         <p class="description"><?php esc_html_e( 'When checked below settings will be effective and used for all sites in the network.', 'inactive-logout' ); ?></p>
                     </td>
                 </tr>
@@ -23,7 +23,7 @@
             <tr>
                 <th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Idle Timeout', 'inactive-logout' ); ?></label></th>
                 <td>
-                    <input name="idle_timeout" min="1" type="number" id="idle_timeout" value="<?php echo ( isset( $time ) ) ? esc_attr( $time / 60 ) : 30; ?>">
+                    <input class="regular-text" name="idle_timeout" min="1" type="number" id="idle_timeout" value="<?php echo ( isset( $time ) ) ? esc_attr( $time / 60 ) : 30; ?>">
                     <i><?php esc_html_e( 'Minute(s)', 'inactive-logout' ); ?></i>
                 </td>
             </tr>

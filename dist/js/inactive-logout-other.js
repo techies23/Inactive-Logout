@@ -84,7 +84,6 @@
         redirect: function () {
             if ($(this).prop("checked")) {
                 ina_logout_helpers_dom.show_on_enable_redirect_link.show();
-                ina_logout_helpers_dom.hide_message_content.hide();
                 if (ina_logout_helpers_dom.redirect_page.val() === "custom-page-redirect") {
                     ina_logout_helpers_dom.show_cutom_redirect_textfield.show();
                 } else {
@@ -92,7 +91,6 @@
                 }
             } else {
                 ina_logout_helpers_dom.show_on_enable_redirect_link.hide();
-                ina_logout_helpers_dom.hide_message_content.show();
                 ina_logout_helpers_dom.show_cutom_redirect_textfield.hide();
             }
         },

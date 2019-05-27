@@ -51,22 +51,10 @@ class Inactive_Logout_Admin_Views {
 		if ( is_multisite() ) {
 			$idle_overrideby_multisite_setting = get_site_option( '__ina_overrideby_multisite_setting' );
 			if ( empty( $idle_overrideby_multisite_setting ) ) {
-				add_options_page(
-					__( 'Inactive User Logout Settings', 'inactive-logout' ),
-					__( 'Inactive Logout', 'inactive-logout' ),
-					'manage_options',
-					'inactive-logout',
-					array( $this, 'ina__render_options' )
-				);
+				add_options_page( __( 'Inactive User Logout Settings', 'inactive-logout' ), __( 'Inactive Logout', 'inactive-logout' ), 'manage_options', 'inactive-logout', array( $this, 'ina__render_options' ) );
 			}
 		} else {
-			add_options_page(
-				__( 'Inactive User Logout Settings', 'inactive-logout' ),
-				__( 'Inactive Logout', 'inactive-logout' ),
-				'manage_options',
-				'inactive-logout',
-				array( $this, 'ina__render_options' )
-			);
+			add_options_page( __( 'Inactive User Logout Settings', 'inactive-logout' ), __( 'Inactive Logout', 'inactive-logout' ), 'manage_options', 'inactive-logout', array( $this, 'ina__render_options' ) );
 		}
 	}
 
@@ -74,13 +62,7 @@ class Inactive_Logout_Admin_Views {
 	 * Add menu page.
 	 */
 	function ina_menu_multisite_network() {
-		add_menu_page(
-			__( 'Inactive User Logout Settings', 'inactive-logout' ),
-			__( 'Inactive Logout', 'inactive-logout' ),
-			'manage_options',
-			'inactive-logout',
-			array( $this, 'ina__render_options' )
-		);
+		add_menu_page( __( 'Inactive User Logout Settings', 'inactive-logout' ), __( 'Inactive Logout', 'inactive-logout' ), 'manage_options', 'inactive-logout', array( $this, 'ina__render_options' ) );
 	}
 
 	/**
@@ -133,9 +115,9 @@ class Inactive_Logout_Admin_Views {
 			}
 
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-basic.php';
-		} else if('ina-addon' === $active_tab) {
+		} else if ( 'ina-addon' === $active_tab ) {
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-addon.php';
-		} else {
+		} else if ( 'ina-advanced' === $active_tab ) {
 			// ADVANCED.
 			$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
 			if ( $ina_multiuser_timeout_enabled ) {
@@ -145,7 +127,7 @@ class Inactive_Logout_Admin_Views {
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-advanced.php';
 		}
 
-		do_action( 'ina_after_settings_wrapper' );
+		do_action( 'ina_after_settings_wrapper', $active_tab );
 	}
 
 	/**

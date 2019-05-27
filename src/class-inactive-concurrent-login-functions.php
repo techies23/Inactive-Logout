@@ -58,6 +58,7 @@ class Inactive_Concurrent_Login_Functions {
 		if ( ! $this->user_has_multiple_sessions() ) {
 			return;
 		}
+
 		$user_id = get_current_user_id();
 
 		/**
