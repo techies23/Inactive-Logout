@@ -2,11 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-11 17:19+0000\n"
+"POT-Creation-Date: 2019-06-06 14:59+0000\n"
 "POT-Revision-Date: Sun Jan 29 2017 16:00:11 GMT+0545 (NPT)\n"
-"PO-Revision-Date: 2018-01-11 17:19+0000\n"
+"PO-Revision-Date: 2019-06-06 15:00+0000\n"
 "Language-Team: Finnish\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,105 +18,82 @@ msgstr ""
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Loco-Target-Locale: en_US\n"
-"X-Generator: Loco - https://localise.biz/\n"
+"X-Generator: Loco https://localise.biz/\n"
 "Last-Translator: admin <dpen.connectify@gmail.com>\n"
 "Language: fi\n"
-"X-Poedit-SearchPath-0: .."
+"X-Poedit-SearchPath-0: ..\n"
+"X-Loco-Version: 2.3.0; wp-5.2.1"
 
-#: src/class-inactive-logout-functions.php:124
+#: views/tpl-inactive-logout-settings.php:10
+#: src/class-inactive-logout-admin-views.php:54
+#: src/class-inactive-logout-admin-views.php:57
+#: src/class-inactive-logout-admin-views.php:65
+msgid "Inactive User Logout Settings"
+msgstr "Inactive User Logout -asetukset"
+
+#: views/tpl-inactive-logout-settings.php:16
+msgid "Like this plugin ?"
+msgstr "Pidätkö tästä lisäosasta?"
+
+#: views/tpl-inactive-logout-settings.php:20
+#, php-format
+msgid "Please consider giving a %s if you found this useful at wordpress.org."
+msgstr "Harkitsethan %s jos pidit tätä hyödyllisenä."
+
+#: views/tpl-inactive-logout-settings.php:39
+msgid "Basic Management"
+msgstr "Perusasetukset"
+
+#: views/tpl-inactive-logout-settings.php:42
+msgid "Role Based Timeout"
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:45
+msgid "Support"
+msgstr "Tuki"
+
+#: views/tpl-inactive-logout-settings.php:47
+msgid "Donate !"
+msgstr ""
+
+#: views/tpl-inactive-logout-settings.php:49
+msgid "PRO"
+msgstr ""
+
+#: views/tpl-inactive-logout-dialog.php:63
+#: views/tpl-inactive-logout-dialog.php:88
+msgid "Continue"
+msgstr "Jatka sisäänkirjautuneena"
+
+#: views/tpl-inactive-logout-dialog.php:71
+msgid "Session Timeout"
+msgstr "Fillarillasta loppui vauhti kesken"
+
+#: src/class-inactive-logout-functions.php:119
 msgid ""
 "You have been logged out because of inactivity. Please wait while we "
 "redirect you to a certain page..."
 msgstr ""
 
-#: src/class-inactive-logout-functions.php:196
-msgid "Reset advanced settings successful."
-msgstr ""
-
-#: views/tabs/tpl-inactive-logout-basic.php:16
-msgid "Override for all sites"
-msgstr ""
-
-#: views/tabs/tpl-inactive-logout-basic.php:19
-msgid ""
-"When checked below settings will be effective and used for all sites in the "
-"network."
-msgstr ""
-
-#: src/class-inactive-logout-admin-views.php:55
-#: src/class-inactive-logout-admin-views.php:64
-#: src/class-inactive-logout-admin-views.php:78
-#: views/tpl-inactive-logout-settings.php:10
-msgid "Inactive User Logout Settings"
-msgstr "Inactive User Logout -asetukset"
-
-#. Name of the plugin
-#: src/class-inactive-logout-admin-views.php:56
-#: src/class-inactive-logout-admin-views.php:65
-#: src/class-inactive-logout-admin-views.php:79
-msgid "Inactive Logout"
-msgstr "Inactive Logout"
-
-#: src/class-inactive-logout-functions.php:126
+#: src/class-inactive-logout-functions.php:121
 msgid "You have been logged out because of inactivity."
 msgstr "Sinut on kirjattu ulos koska et ollut aktiivinen."
+
+#: src/class-inactive-logout-functions.php:156
+msgid "Reset advanced settings successful."
+msgstr ""
 
 #: src/class-inactive-logout-helpers.php:66
 #: views/tabs/tpl-inactive-logout-basic.php:27
 msgid "Minute(s)"
 msgstr "Minuutti(a)"
 
-#: src/class-inactive-logout-main.php:339
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires WordPress %s or higher. Please upgrade "
-"your WordPress install."
-msgstr ""
-"Pahoitteluni, Inactive User Logout vaatii WordPress-version %s tai sitä "
-"suuremman. Päivitä WordPress-asennuksesi."
-
-#: src/class-inactive-logout-main.php:344
-#, php-format
-msgid ""
-"Sorry, Inactive User Logout requires PHP %s or higher. Talk to your Web host "
-"about moving you to a newer version of PHP."
-msgstr ""
-"Pahoitteluni, Inactive User Logout vaatii PHP-version %s tai sitä suuremman. "
-"Juttele palveluntarjoajallesi PHP:n päivittämisestä uudempaan versioon."
-
-#: views/tpl-inactive-logout-dialog.php:58
-#: views/tpl-inactive-logout-dialog.php:77
-msgid "Continue"
-msgstr "Jatka sisäänkirjautuneena"
-
-#: views/tpl-inactive-logout-dialog.php:66
-msgid "Session Timeout"
-msgstr "Fillarillasta loppui vauhti kesken"
-
-#: views/tpl-inactive-logout-settings.php:13
-msgid "Like this plugin ?"
-msgstr "Pidätkö tästä lisäosasta?"
-
-#: views/tpl-inactive-logout-settings.php:17
-#, php-format
-msgid "Please consider giving a %s if you found this useful at wordpress.org."
-msgstr "Harkitsethan %s jos pidit tätä hyödyllisenä."
-
-#: views/tpl-inactive-logout-settings.php:33
-msgid "Basic Management"
-msgstr "Perusasetukset"
-
-#: views/tpl-inactive-logout-settings.php:36
-msgid "Advanced Management"
-msgstr "Lisäasetukset"
-
-#: views/tpl-inactive-logout-settings.php:38
-msgid "Support"
-msgstr "Tuki"
-
-#: views/tpl-inactive-logout-settings.php:39
-msgid "Contribute !"
-msgstr "Osallistu lisäosan kehitykseen!"
+#. Name of the plugin
+#: src/class-inactive-logout-admin-views.php:54
+#: src/class-inactive-logout-admin-views.php:57
+#: src/class-inactive-logout-admin-views.php:65
+msgid "Inactive Logout"
+msgstr "Inactive Logout"
 
 #: views/tabs/tpl-inactive-logout-advanced.php:18
 msgid "Multi-Role Timeout"
@@ -147,29 +124,29 @@ msgid "Timeout (In Minutes)"
 msgstr "Aikakatkaisu (minuutteina)"
 
 #: views/tabs/tpl-inactive-logout-advanced.php:47
-#: views/tabs/tpl-inactive-logout-basic.php:106
+#: views/tabs/tpl-inactive-logout-basic.php:107
 msgid "Redirect Page"
 msgstr "Uudelleenohjaussivu"
 
 #: views/tabs/tpl-inactive-logout-advanced.php:48
-#: views/tabs/tpl-inactive-logout-advanced.php:109
+#: views/tabs/tpl-inactive-logout-advanced.php:111
 msgid "Disable"
 msgstr "Poista käytöstä"
 
 #: views/tabs/tpl-inactive-logout-advanced.php:49
-msgid "Disable Concurrent Login"
-msgstr "Estä samanaikainen sisäänkirjautuminen"
+msgid "Prevent Multiple Login"
+msgstr ""
 
 #: views/tabs/tpl-inactive-logout-advanced.php:61
 msgid "Set Global Redirect Page"
 msgstr "Aseta globaali uudelleenohjaussivu"
 
 #: views/tabs/tpl-inactive-logout-advanced.php:97
-#: views/tabs/tpl-inactive-logout-basic.php:145
+#: views/tabs/tpl-inactive-logout-basic.php:146
 msgid "No Posts Found."
 msgstr "Artikkeleita ei löytynyt."
 
-#: views/tabs/tpl-inactive-logout-advanced.php:114
+#: views/tabs/tpl-inactive-logout-advanced.php:113
 #, php-format
 msgid ""
 "Note: %s is used for disabling inactive logout functionality to that "
@@ -178,21 +155,31 @@ msgstr ""
 "Huom: %s käytetään aikakatkaisutoiminnon disablointiin kyseiselle "
 "käyttäjälle."
 
-#: views/tabs/tpl-inactive-logout-advanced.php:118
-#: views/tabs/tpl-inactive-logout-basic.php:167
+#: views/tabs/tpl-inactive-logout-advanced.php:123
+#: views/tabs/tpl-inactive-logout-basic.php:168
 msgid "Save Changes"
 msgstr "Tallenna muutokset"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:118
+#: views/tabs/tpl-inactive-logout-advanced.php:123
 msgid ""
 "Are you sure you want to erase all advanced settings. This cannot be undone !"
 msgstr ""
 "Oletko varma, että haluat nollata kaikki lisäasetukset? Toimintoa ei voi "
 "peruuttaa!"
 
-#: views/tabs/tpl-inactive-logout-advanced.php:118
+#: views/tabs/tpl-inactive-logout-advanced.php:123
 msgid "Reset Advanced Settings !"
 msgstr "Nollaa lisäasetukset!"
+
+#: views/tabs/tpl-inactive-logout-basic.php:16
+msgid "Override for all sites"
+msgstr ""
+
+#: views/tabs/tpl-inactive-logout-basic.php:19
+msgid ""
+"When checked below settings will be effective and used for all sites in the "
+"network."
+msgstr ""
 
 #: views/tabs/tpl-inactive-logout-basic.php:24
 msgid "Idle Timeout"
@@ -231,22 +218,21 @@ msgstr "Poista aikakatkaisun varoaika."
 
 #: views/tabs/tpl-inactive-logout-basic.php:64
 msgid ""
-"When timeout popup is shown user is not logged out instantly. It gives user "
-"a chance to keep using or logout for 10 seconds. Remove this feature and "
-"directly log out after inactive."
+"When the timeout popup appears, the user is not logged out instantly. It "
+"allows the user the chance to continue, or a logout will occur within 10 "
+"seconds. Uncheck this feature to immediately logout the user after the "
+"chosen time of inactivity."
 msgstr ""
-"Kun käyttäjälle näytetään ilmoitus aikakatkaisusta, häntä ei kirjata ulos "
-"välittömästi. Tämä antaa 10 sekunnin ajan vielä mahdollisuuden pysyä "
-"sisäänkirjautuneena tai kirjautua ulos. Poista tämä toiminto jos haluat että "
-"käyttäjä kirjataan ulos välittömästi ajan umpeuduttua."
 
 #: views/tabs/tpl-inactive-logout-basic.php:68
 msgid "Show Warn Message Only"
 msgstr "Näytä vain varoitusviesti."
 
 #: views/tabs/tpl-inactive-logout-basic.php:71
-msgid "Will show warn message without logout url but user will not log out."
-msgstr "Näytetään varoitusviesti mutta käyttäjää ei kirjata ulos."
+msgid ""
+"This will show the warning message without the logout URL, but the user will "
+"not be logged out."
+msgstr ""
 
 #: views/tabs/tpl-inactive-logout-basic.php:72
 msgid ""
@@ -274,33 +260,35 @@ msgid "Disable Concurrent Logins"
 msgstr "Estä samanaikainen kirjautuminen"
 
 #: views/tabs/tpl-inactive-logout-basic.php:95
-msgid "This will unable user to login using same account in different places."
-msgstr "Tämä estää käyttäjän kirjautumisen samalle tilille monesta paikasta."
+msgid ""
+"This will disable the user from logging in using the same account at "
+"different locations."
+msgstr ""
 
-#: views/tabs/tpl-inactive-logout-basic.php:99
+#: views/tabs/tpl-inactive-logout-basic.php:100
 msgid "Enable Redirect"
 msgstr "Ota käyttöön uudelleenohjaus"
 
-#: views/tabs/tpl-inactive-logout-basic.php:102
+#: views/tabs/tpl-inactive-logout-basic.php:103
 msgid ""
 "If not checked then user will be logged out to login screen after timeout."
 msgstr ""
 "Oletusarvoisesti käyttäjä ohjataan sisäänkirjautumisnäkymään aikakatkaisun "
 "jälkeen."
 
-#: views/tabs/tpl-inactive-logout-basic.php:109
+#: views/tabs/tpl-inactive-logout-basic.php:110
 msgid "External Page Redirect"
 msgstr "Ulkoinen uudelleenohjaus"
 
-#: views/tabs/tpl-inactive-logout-basic.php:150
+#: views/tabs/tpl-inactive-logout-basic.php:151
 msgid "Select a page to redirect to after session timeout and clicking OK."
 msgstr "Valitse sivu, johon käyttäjä ohjataan uloskirjaamisen jälkeen."
 
-#: views/tabs/tpl-inactive-logout-basic.php:154
+#: views/tabs/tpl-inactive-logout-basic.php:155
 msgid "Custom URL Redirect"
 msgstr "Oma URL-osoite"
 
-#: views/tabs/tpl-inactive-logout-basic.php:160
+#: views/tabs/tpl-inactive-logout-basic.php:161
 #, php-format
 msgid "Link to custom url redirect. Ex: %s"
 msgstr "Mukautettu URL-ohjaus. Esim: %s"
