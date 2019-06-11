@@ -81,6 +81,9 @@ final class Inactive_Logout_Main {
 
 		//Load Finally
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ), 9999 );
+
+		add_filter( 'plugin_action_links', array( $this, 'action_link' ), 10, 2 );
+
 		$this->ina_plugins_loaded();
 	}
 
@@ -290,5 +293,22 @@ final class Inactive_Logout_Main {
 		$domain = 'inactive-logout';
 		apply_filters( 'plugin_locale', get_locale(), $domain );
 		load_plugin_textdomain( $domain, false, $this->plugin_dir . 'lang/' );
+	}
+
+
+	function action_link( $actions, $plugin_file ) {
+		static $plugin;
+
+		if ( ! isset( $plugin ) ) {
+			$plugin = INA_PLUGIN_ABS_NAME;
+		}
+
+		if ( $plugin == $plugin_file ) {
+			$settings  = array( 'settings' => '<a href="options-general.php?page=inactive-logout">' . __( 'Configure', 'inactive-logout' ) . '</a>' );
+
+			$actions = array_merge( $settings, $actions );
+		}
+
+		return $actions;
 	}
 }

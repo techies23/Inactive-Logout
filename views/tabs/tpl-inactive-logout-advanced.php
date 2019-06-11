@@ -122,4 +122,6 @@
 
         <p class="ina_adv_submit"><input type="submit" name="adv_submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>"> <a id="ina-reset-adv-data" class="button button-primary button-reset-ina" data-msg="<?php esc_html_e( 'Are you sure you want to erase all advanced settings. This cannot be undone !', 'inactive-logout' ); ?>"><?php esc_html_e( 'Reset Advanced Settings !', 'inactive-logout' ); ?></a></p>
     </form>
+
+	<?php ina_helpers()->show_plugin_like(); ?>
 </div>

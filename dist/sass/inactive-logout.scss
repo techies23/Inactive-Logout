@@ -84,6 +84,8 @@
 
 /* The Admin Panel */
 .ina-settings-admin-wrap {
+  padding: 10px;
+
   .ina_colorpicker_show {
     display: none;
   }
@@ -110,5 +112,29 @@
   .ina-hacking-multi-select {
     width: 500px;
   }
+
+  .ina-admin-notice {
+    background: #fff;
+    border-left: 4px solid #fff;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    margin: 5px 0 15px;
+    padding: 1px 12px;
+  }
+
+  .ina-admin-notice-warning {
+    border-left-color: #ffb900;
+  }
 }
 
+.ina-settings-admin-support {
+  p {
+    font-size: 14px;
+  }
+
+  .ina-settings-admin-support-bg {
+    background: #fff;
+    padding: 10px 15px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+  }
+}

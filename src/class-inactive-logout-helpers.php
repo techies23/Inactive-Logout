@@ -192,6 +192,38 @@ class Inactive_Logout_Helpers {
 
 		return $result;
 	}
+
+	public function show_plugin_like() {
+		if ( ! in_array( 'inactive-logout-addon/inactive-logout-addon.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+			?>
+            <div class="ina-admin-notice ina-admin-notice-warning">
+                <h3><?php esc_html_e( 'Like this plugin ?', 'inactive-logout' ); ?></h3>
+                <p>
+					<?php
+					// translators: anchor tag.
+					printf( esc_html__( 'Please consider giving a %s if you found this useful at wordpress.org.', 'inactive-logout' ), '<a href="https://wordpress.org/support/plugin/inactive-logout/reviews/#new-post">5 star thumbs up</a>' );
+					?>
+                </p>
+            </div>
+			<?php
+		}
+	}
+
+	public function show_plugin_referrals() {
+		if ( ! in_array( 'inactive-logout-addon/inactive-logout-addon.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+			?>
+            <div id="message" class="notice notice-warning">
+                <h4><?php esc_html_e( 'Do you know what your logged in users are doing?', 'inactive-logout' ); ?></h4>
+                <p>
+					<?php
+					// translators: anchor tag.
+					printf( esc_html__( 'We recommend you to install the %s plugin to also keep a log of what users are doing when logged in to your WordPress website.', 'inactive-logout' ), '<a href="https://en-gb.wordpress.org/plugins/wp-security-audit-log/">WP Security Audit Log</a>' );
+					?>
+                </p>
+            </div>
+			<?php
+		}
+	}
 }
 
 function ina_helpers() {

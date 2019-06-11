@@ -12,9 +12,11 @@ Logs out users within defined time when inactive. Modify to show only wake up me
 
 == Description ==
 
-Make your WP account secure from snoopers, friends to protect your data by assuring auto log out system within a certain defined time. This will help you keep safe from any users using same machine to access your account in case you are away and forgot to logout and kept your site logged open.
+Protect your WordPress users' sessions from shoulder surfers and snoopers!
 
-Simple but works efficiently. Nothing much to explain on plugin use. As its simple to use. You can find inactive settings under settings menu in admin dashboard.
+Use the Inactive Logout plugin to automatically terminate idle user sessions, thus protecting the site if the users leave unattended sessions.
+
+The plugin is very easy to configure and use. Once you install and activate the plugin simply configure the idle timeout from the plugin settings. So now any unattended idle WordPress user sessions will be terminated automatically. You can also display a custom message to idle user sessions, alerting them that the session is about to end.
 
 Please refer to FAQ section if you have trouble activating plugin from version 1.6.0
 

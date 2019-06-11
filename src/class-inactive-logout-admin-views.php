@@ -115,8 +115,8 @@ class Inactive_Logout_Admin_Views {
 			}
 
 			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-basic.php';
-		} else if ( 'ina-addon' === $active_tab ) {
-			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-addon.php';
+		} else if ( 'ina-support' === $active_tab ) {
+			require_once INACTIVE_LOGOUT_VIEWS . '/tabs/tpl-inactive-logout-support.php';
 		} else if ( 'ina-advanced' === $active_tab ) {
 			// ADVANCED.
 			$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );

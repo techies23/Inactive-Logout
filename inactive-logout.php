@@ -6,7 +6,7 @@
  *
  * Plugin Name:       Inactive Logout
  * Plugin URI:        https://www.deepenbajracharya.com.np
- * Description:       Inactive logout provides functionality to log out any idle users defined specified time showing a message. Works for frontend as well.
+ * Description:       Automatically logout idle user sessions, even if they are on the front end! Fully configurable & easy to use.
  * Version:           1.9.0
  * Author:            Deepen Bajracharya
  * Author URI:        https://www.deepenbajracharya.com.np
@@ -20,6 +20,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
+
+define( 'INA_PLUGIN_ABS_NAME', plugin_basename( __FILE__ ) );
 
 // The main plugin class.
 require_once dirname( __FILE__ ) . '/src/class-inactive-logout-main.php';
