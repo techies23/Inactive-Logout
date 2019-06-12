@@ -25,8 +25,13 @@
     </div>
 
     <div class="ina-settings-admin-support-bg">
+        <h3>Developer</h3>
+        <p>Feel free to reach me from <a href="https://deepenbajracharya.com.np/say-hello/" target="_blank">Here</a>, if you have any questions or queries.</p>
+    </div>
+
+    <!--<div class="ina-settings-admin-support-bg">
         <h3>Upgrading to Inactive Logout PRO!</h3>
         <p>Among many other features/enhancements, inactive logout pro comes with a few additional features if you feel like you need it. This feature is coming soon !</p>
-    </div>
+    </div>-->
 
 </div>

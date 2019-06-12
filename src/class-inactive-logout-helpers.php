@@ -213,11 +213,11 @@ class Inactive_Logout_Helpers {
 		if ( ! in_array( 'inactive-logout-addon/inactive-logout-addon.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 			?>
             <div id="message" class="notice notice-warning">
-                <h4><?php esc_html_e( 'Do you know what your logged in users are doing?', 'inactive-logout' ); ?></h4>
+                <h4><?php esc_html_e( 'Do you know what your users are doing when logged in to your WordPress site?', 'inactive-logout' ); ?></h4>
                 <p>
 					<?php
 					// translators: anchor tag.
-					printf( esc_html__( 'We recommend you to install the %s plugin to also keep a log of what users are doing when logged in to your WordPress website.', 'inactive-logout' ), '<a href="https://en-gb.wordpress.org/plugins/wp-security-audit-log/">WP Security Audit Log</a>' );
+					printf( esc_html__( 'We recommend you to install the %s plugin to keep a log of what users do when they are logged in to your WordPress website.', 'inactive-logout' ), '<a href="https://en-gb.wordpress.org/plugins/wp-security-audit-log/">WP Security Audit Log</a>' );
 					?>
                 </p>
             </div>
