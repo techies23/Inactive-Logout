@@ -11,7 +11,6 @@
     var inactive_logout_timeoutMessage;
     var ina_timeout = ina_meta_data.ina_timeout;
     var ina_timeout_defined = ina_timeout * 1000; //Minutes
-    // var ina_timeout_defined = 1000; //Minutes
     var ina_messageBox = 0;
     var ina_dom = {};
     var countdown = 10;
@@ -70,7 +69,6 @@
         //Starting timeout timer to go into inactive state after 11 seconds if any event like mousemove is not triggered
         startTimer: function () {
             inactive_logout_timeoutID = window.setTimeout(this.goInactive, 11000);
-            // inactive_logout_timeoutID = window.setTimeout(this.goInactive, 1000);
         },
 
         goActive: function () {
