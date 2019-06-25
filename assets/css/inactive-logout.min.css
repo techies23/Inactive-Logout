@@ -1,4 +1,4 @@
-.ina-dp-noflict-modal{display:none;position:fixed;z-index:99999;padding-top:100px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.4)}
+.ina-dp-noflict-modal{display:none;position:fixed;z-index:999999999;padding-top:100px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.4)}
 .ina-dp-noflict-modal .ina-dp-noflict-modal-content{position:relative;background-color:#fefefe;margin:auto;padding:0;border:1px solid #888;width:50%;box-shadow:0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)}
 .ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-wakeup h3{margin:0;padding-bottom:10px;border-bottom:1px solid #eee;padding-top:26px}
 .ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-modal-header{padding:22px 22px 0 16px}

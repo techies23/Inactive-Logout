@@ -1,6 +1,6 @@
 /**
  * @author Deepen
- * @updated 1.7.2
+ * @updated 1.9.0
  * @since 1.0.0
  *
  * This file contains core JS files for the plugin. Do not edit for you will be consumed by the dark side.
@@ -13,8 +13,8 @@
     var ina_timeout_defined = ina_timeout * 1000; //Minutes
     var ina_messageBox = 0;
     var ina_dom = {};
-    var countdown = 10;
-    var setting_countdown;
+    var ina_setting_countdown;
+    var ina_countdown = 10;
 
     var inactiveLogout = {
 
@@ -36,44 +36,41 @@
         },
 
         eventListeners: function () {
-            $(document).on("mousemove", this.resetTimer);
-            $(document).on("mousedown", this.resetTimer);
-            $(document).on("keypress", this.resetTimer);
-            $(document).on("DOMMouseScroll", this.resetTimer);
-            $(document).on("mousewheel", this.resetTimer);
-            $(document).on("touchmove", this.resetTimer);
-            $(document).on("MSPointerMove", this.resetTimer);
-            $(window).on("load", this.resetTimer);
+            $(document).on("mousemove", inactiveLogout.resetTimer);
+            $(document).on("mousedown", inactiveLogout.resetTimer);
+            $(document).on("keydown", inactiveLogout.resetTimer);
+            $(document).on("DOMMouseScroll", inactiveLogout.resetTimer);
+            $(document).on("mousewheel", inactiveLogout.resetTimer);
+            $(document).on("touchmove", inactiveLogout.resetTimer);
+            $(document).on("MSPointerMove", inactiveLogout.resetTimer);
+            $(window).on("load", inactiveLogout.resetTimer);
 
-            ina_dom.stayLoggedIn.on("click", this.stayLoggedInWarnMsg);
-        },
+            ina_dom.stayLoggedIn.on("click", inactiveLogout.stayLoggedInWarnMsg);
 
-        //Resetting the timer
-        resetTimer: function () {
-            window.clearTimeout(inactive_logout_timeoutID);
-            window.clearTimeout(inactive_logout_timeoutMessage);
+            //First get the broswer id
+            inactive_logout_tabID = sessionStorage.inactive_logout_tabID && sessionStorage.closedLastTab !== '2' ? sessionStorage.inactive_logout_tabID : sessionStorage.inactive_logout_tabID = Math.random();
+            sessionStorage.closedLastTab = '2';
+            $(window).on('unload beforeunload', function () {
+                sessionStorage.closedLastTab = '1';
+            });
             localStorage.setItem("ina__browserTabID", inactive_logout_tabID);
 
-            try {
-                inactiveLogout.goActive();
-            } catch (e) {
-                if (e instanceof TypeError) {
-                    console.log(e, true);
-                } else {
-                    console.log(e, true);
-                }
-            }
-
+            this.startTimer();
         },
 
         //Starting timeout timer to go into inactive state after 11 seconds if any event like mousemove is not triggered
         startTimer: function () {
-            inactive_logout_timeoutID = window.setTimeout(this.goInactive, 11000);
+            inactive_logout_timeoutID = setTimeout(inactiveLogout.goInactive, 11000);
         },
 
-        goActive: function () {
+        //Resetting the timer
+        resetTimer: function () {
+            clearTimeout(inactive_logout_timeoutID);
+            clearTimeout(inactive_logout_timeoutMessage);
+            localStorage.setItem("ina__browserTabID", inactive_logout_tabID);
+
             try {
-                this.startTimer();
+                inactiveLogout.startTimer();
             } catch (e) {
                 if (e instanceof TypeError) {
                     console.log(e, true);
@@ -81,6 +78,7 @@
                     console.log(e, true);
                 }
             }
+
         },
 
         /**
@@ -95,11 +93,16 @@
                 var postData = {action: 'ina_checklastSession', do: 'ina_updateLastSession', security: ina_ajax.ina_security, timestamp: timestamp};
                 $.post(ina_ajax.ajaxurl, postData).done(function (response) {
                     var elem = document.activeElement;
-                    if (elem && elem.tagName === 'IFRAME') {
-                        this.resetTimer();
+                    //If active element is in iframe or media uploader
+                    if (elem && (elem.tagName === 'IFRAME' || elem.classList.contains('media-modal'))) {
+                        inactiveLogout.resetTimer();
+                        return false;
                     }
 
-                    window.setTimeout(inactiveLogout.showTimeoutMessage, ina_timeout_defined);
+                    var browserTabID = localStorage.getItem("ina__browserTabID");
+                    if (browserTabID === inactive_logout_tabID) {
+                        inactive_logout_timeoutMessage = setTimeout(inactiveLogout.showTimeoutMessage, ina_timeout_defined);
+                    }
                 });
             }
         },
@@ -151,15 +154,16 @@
                     return false;
                 });
             } else {
+                ina_countdown = 10;
                 ina_dom.msg_box.show();
-                setting_countdown = setInterval(function () {
-                    if (countdown >= 0) {
-                        t = countdown--;
+                ina_setting_countdown = setInterval(function () {
+                    if (ina_countdown >= 0) {
+                        t = ina_countdown--;
                         ina_dom.countdown.html('(' + t + ')');
                     }
 
                     if (t === 0) {
-                        clearTimeout(setting_countdown);
+                        clearTimeout(ina_setting_countdown);
                         var postData = {action: 'ina_checklastSession', do: 'ina_logout', security: ina_ajax.ina_security};
                         $.post(ina_ajax.ajaxurl, postData).done(function (op) {
                             if (op.redirect_url) {
@@ -186,8 +190,8 @@
             };
 
             window.oncontextmenu = null;
-            clearTimeout(setting_countdown);
-            countdown = 10;
+            clearTimeout(ina_setting_countdown);
+            ina_countdown = 10;
             ina_messageBox = 0;
             ina_dom.msg_box.hide();
             ina_dom.countdown.text('');
@@ -201,6 +205,7 @@
             var logoutData = {action: 'ina_logout_session', security: ina_ajax.ina_security};
             $.post(ina_ajax.ajaxurl, logoutData).done(function () {
                 if (redirect_url) {
+                    localStorage.removeItem('ina__browserTabID');
                     window.location = redirect_url;
                 }
 

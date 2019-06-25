@@ -153,10 +153,11 @@ class Inactive_Logout_Helpers {
 	 * @return BOOL
 	 */
 	public function ina_check_user_role() {
-		$user      = wp_get_current_user();
-		$ina_roles = get_option( '__ina_multiusers_settings' );
-		$result    = false;
-		if ( $ina_roles ) {
+		$user                          = wp_get_current_user();
+		$ina_roles                     = get_option( '__ina_multiusers_settings' );
+		$result                        = false;
+		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+		if ( $ina_roles && ! empty( $ina_multiuser_timeout_enabled ) ) {
 			foreach ( $ina_roles as $role ) {
 				if ( 1 === intval( $role['disabled_feature'] ) ) {
 					if ( in_array( $role['role'], (array) $user->roles, true ) ) {

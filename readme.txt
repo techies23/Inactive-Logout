@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
 Tested up to: 5.2
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,14 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.9.1 =
+* Fixed: issue with multiple browser tab
+* Fixed: JS frontend builder issue for Divi - Not tracking when on frontend builder
+* Fixed: resetTimer method not being found and js crash
+* Fixed: (Active element) When editing in wp editor or iframe countdown is not implemented.
+* Changed: Javascript code refactored
+* Removed: goActive method which was unnecessary
 
 = 1.9.0 =
 * Changed: Javascript methods changed to modular.
