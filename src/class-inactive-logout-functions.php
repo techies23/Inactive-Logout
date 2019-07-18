@@ -162,7 +162,10 @@ class Inactive_Logout_Functions {
 	 * Adding Dialog in footer
 	 */
 	public function dialog_modal() {
-		require_once INACTIVE_LOGOUT_VIEWS . '/tpl-inactive-logout-dialog.php';
+		$disable_timeoutjs = ina_helpers()->ina_check_user_role();
+		if ( ! $disable_timeoutjs ) {
+			require_once INACTIVE_LOGOUT_VIEWS . '/tpl-inactive-logout-dialog.php';
+		}
 	}
 }
 

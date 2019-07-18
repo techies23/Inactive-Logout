@@ -85,6 +85,9 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 
 == Changelog ==
 
+= 1.9.2 =
+* Fixed: Condition check for modal popup if inactive logout feature is disabled.
+
 = 1.9.1 =
 * Fixed: issue with multiple browser tab
 * Fixed: JS frontend builder issue for Divi - Not tracking when on frontend builder
