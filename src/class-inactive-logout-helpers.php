@@ -175,10 +175,16 @@ class Inactive_Logout_Helpers {
 	 *
 	 * @author  Deepen
 	 * @since   1.6.0
-	 * @return BOOL
+	 *
+	 * @param $user
+	 *
+	 * @return bool
 	 */
-	public function ina_check_user_role_concurrent_login() {
-		$user      = wp_get_current_user();
+	public function ina_check_user_role_concurrent_login( $user = false ) {
+		if ( empty( $user ) ) {
+			$user = wp_get_current_user();
+		}
+
 		$ina_roles = get_option( '__ina_multiusers_settings' );
 		$result    = false;
 		if ( $ina_roles ) {
@@ -221,6 +227,17 @@ class Inactive_Logout_Helpers {
 					printf( esc_html__( 'We recommend you to install the %s plugin to keep a log of what users do when they are logged in to your WordPress website.', 'inactive-logout' ), '<a href="https://en-gb.wordpress.org/plugins/wp-security-audit-log/">WP Security Audit Log</a>' );
 					?>
                 </p>
+            </div>
+			<?php
+		}
+	}
+
+	public function show_advanced_enable_notification() {
+		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+		if ( ! empty( $ina_multiuser_timeout_enabled ) ) {
+			?>
+            <div id="message" class="notice notice-warning">
+                <p><?php esc_html_e( 'Is inactive logout or few functionalities not working for you ? Might be because you have added this user role in Role Based tab ?', 'inactive-logout' ); ?></p>
             </div>
 			<?php
 		}

@@ -23,6 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'INA_PLUGIN_ABS_NAME', plugin_basename( __FILE__ ) );
 
+//Helper Load
+require_once dirname( __FILE__ ) . '/src/class-inactive-logout-helpers.php';
+
 // The main plugin class.
 require_once dirname( __FILE__ ) . '/src/class-inactive-logout-main.php';
 

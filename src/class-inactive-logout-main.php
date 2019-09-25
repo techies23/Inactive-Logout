@@ -195,7 +195,7 @@ final class Inactive_Logout_Main {
 	 */
 	protected function ina_load_dependencies() {
 		// Loading Helpers.
-		require_once $this->plugin_path . 'src/class-inactive-logout-helpers.php';
+		#require_once $this->plugin_path . 'src/class-inactive-logout-helpers.php';
 		require_once $this->plugin_path . 'src/class-inactive-logout-pointers.php';
 
 		// Loading Admin Views.

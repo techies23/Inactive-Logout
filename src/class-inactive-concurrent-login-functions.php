@@ -21,7 +21,7 @@ class Inactive_Concurrent_Login_Functions {
 	 * Inactive_Concurrent_Login_Functions constructor.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'concurrent_logins' ), 20 );
+		add_action( 'init', array( $this, 'concurrent_logins' ) );
 	}
 
 	/**
@@ -70,6 +70,13 @@ class Inactive_Concurrent_Login_Functions {
 		 * @return bool
 		 */
 		if ( false === (bool) apply_filters( 'ina_allow_multiple_sessions', true, $user_id ) ) {
+			return;
+		}
+
+		/**
+		 * Filter to limit number of concurrent users
+		 */
+		if ( false === (bool) apply_filters( 'ina_limit_logins_by_count', $user_id ) ) {
 			return;
 		}
 

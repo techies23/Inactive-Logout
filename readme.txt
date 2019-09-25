@@ -87,6 +87,9 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 
 = 1.9.2 =
 * Fixed: Condition check for modal popup if inactive logout feature is disabled.
+* Fixed: Error https://wordpress.org/support/topic/fatal-error-uncaught-error-34/
+* Added: Hooks
+* Changes: Minor bug fixes
 
 = 1.9.1 =
 * Fixed: issue with multiple browser tab
