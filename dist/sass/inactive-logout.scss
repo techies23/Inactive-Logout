@@ -136,5 +136,9 @@
     padding: 10px 15px;
     margin: 15px 0;
     border: 1px solid #ccc;
+
+    &.red {
+      background: #efd0d0;
+    }
   }
 }

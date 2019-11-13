@@ -3,8 +3,8 @@ Contributors: j__3rk
 Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologout, inactive, inactive, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
-Tested up to: 5.2
-Stable tag: 1.9.1
+Tested up to: 5.3
+Stable tag: 1.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,29 +18,35 @@ Use the Inactive Logout plugin to automatically terminate idle user sessions, th
 
 The plugin is very easy to configure and use. Once you install and activate the plugin simply configure the idle timeout from the plugin settings. So now any unattended idle WordPress user sessions will be terminated automatically. You can also display a custom message to idle user sessions, alerting them that the session is about to end.
 
-Please refer to FAQ section if you have trouble activating plugin from version 1.6.0
-
 **Please check [changelog](https://wordpress.org/plugins/inactive-logout/#developers "Change Log") to see what is added from version 1.3.0**
 
-**Some Feature Highlights**.
+**FEATURES:**.
 
-1. Change idle timeout time.
-2. Count down of 10 seconds before actual logout. You can remove this feature if you dont want it.
-3. Add only **Wake Up!** message where user will not logout but instead a wakeup message will be shown upon inactive.
-4. Custom Popup Message.
-5. Choose to use concurrent logout functionality derived from [prevent concurrent logins](https://wordpress.org/plugins/prevent-concurrent-logins/ "Prevent Concurrent Logins") by Frankie Jarrett. Thumbs up here too !
-6. Redirect to a Different Page instead of Popup box. Create a page such as timeout page and add your content there by creating a blank template or style it as you wish according to your theme.
-7. Multiple User Role Configurations for individual timeout and redirects.
-8. Clean UI
-9. Simple to use
-10. Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
-11. Multisite Support: Override all sites with one setting.
-12. Auto browser close logout after 2 minute of active session. **Coming Soon**
-13. Override Multiple Login priority **Coming Soon**
+* Change idle timeout time.
+* Count down of 10 seconds before actual logout. You can remove this feature if you dont want it.
+* Add only **Wake Up!** message where user will not logout but instead a wakeup message will be shown upon inactive.
+* Custom Popup Message.
+* Choose to use concurrent logout functionality derived from [prevent concurrent logins](https://wordpress.org/plugins/prevent-concurrent-logins/ "Prevent Concurrent Logins") by Frankie Jarrett. Thumbs up here too !
+* Redirect to a Different Page instead of Popup box. Create a page such as timeout page and add your content there by creating a blank template or style it as you wish according to your theme.
+* Multiple User Role Configurations for individual timeout and redirects.
+* Clean UI
+* Simple to use
+* Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
+* Multisite Support: Override all sites with one setting.
 
-In order to style dialog boxes you can use css classes. Also, works in **frontend view as well**.
 
-**Filter Hooks**
+**EXTEND OTHER FEATURES:**
+
+Upgrade to **[Inactive Logout Pro](https://www.codemanas.com/downloads/inactive-logout-pro/ "Inactive Logout Pro")** for:
+
+* Auto browser close logout after 2 minute of active session.
+* Override Multiple Login priority
+* Multi-User configurations ( Coming Soon )
+
+> NOTE: Premium plan users will always be given highest priority over free plan users.
+
+**FILTER HOOKS:**
+
 1. add_filter('ina__redirect_message', 'callback' );
 - For changing "You have been logged out because of inactivity. Please wait while we redirect you to a certain page..." this message.
 Reference: [GIST FILE](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "Check how to use this")
@@ -48,8 +54,6 @@ Reference: [GIST FILE](https://gist.github.com/techies23/9046a82671b994c20237a17
 2. add_filter('ina__logout_message', 'callback' );
 - For changing "You have been logged out because of inactivity."
 Reference: [GIST FILE](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "Check how to use this")
-
-Lemme know if there are any bugs and problems or enhancements you want to make..
 
 **See the [Inactive Logout](https://deepenbajracharya.com.np/wp-inactive-logout/ "Inactive Logout") homepage for further information. Contact Developer for those who need to write plugins.**
 
@@ -59,7 +63,9 @@ Lemme know if there are any bugs and problems or enhancements you want to make..
 
 == Installation ==
 
-Upload the plugin to your blog, Activate it, Load...and You're done!
+1. Upload Inactive logout or download inactive logout
+2. Activate the inactive logout from the plugins menu in WordPress
+3. Goto "Inactive Logout" settings menu inside settings menu to configure.
 
 == Frequently Asked Questions ==
 

@@ -228,6 +228,16 @@ class Inactive_Logout_Helpers {
 					?>
                 </p>
             </div>
+
+            <div id="message" class="notice notice-warning">
+                <h4><?php esc_html_e( 'Need more features ?', 'inactive-logout' ); ?></h4>
+                <p>
+					<?php
+					// translators: anchor tag.
+					printf( esc_html__( 'If you feel like you need auto browser logout then %s to download.', 'inactive-logout' ), '<a href="https://www.codemanas.com/downloads/inactive-logout-pro/">check out the pro version here</a>' );
+					?>
+                </p>
+            </div>
 			<?php
 		}
 	}
