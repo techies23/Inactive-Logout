@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
 Tested up to: 5.3
-Stable tag: 1.9.2
+Stable tag: 1.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,10 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.9.3 =
+* Admin notice fix
+* Language Fix
 
 = 1.9.2 =
 * Fixed: Condition check for modal popup if inactive logout feature is disabled.
