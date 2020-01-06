@@ -92,6 +92,7 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 == Changelog ==
 
 = 1.9.3 =
+* Fixed: Minor JS bug fixes
 * Admin notice fix
 * Language Fix
 

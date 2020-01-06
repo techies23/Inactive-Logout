@@ -146,7 +146,7 @@
                         inactiveLogout.logout_now(op.redirect_url);
                     } else {
                         ina_dom.msg_box.show();
-                        ina_dom.msg_boxBody.html('<p>' + op.msg + '<p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>');
+                        ina_dom.msg_boxBody.html('<p>' + op.msg + '</p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>');
 
                         //Logout Now
                         inactiveLogout.logout_now(false);
@@ -172,7 +172,7 @@
                                 //Logout Now
                                 inactiveLogout.logout_now(op.redirect_url);
                             } else {
-                                ina_dom.msg_boxBody.html('<p>' + op.msg + '<p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>');
+                                ina_dom.msg_boxBody.html('<p>' + op.msg + '</p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">OK</a></p>');
 
                                 //Logout Now
                                 inactiveLogout.logout_now(false);
@@ -204,6 +204,8 @@
         logout_now: function (redirect_url) {
             var logoutData = {action: 'ina_logout_session', security: ina_ajax.ina_security};
             $.post(ina_ajax.ajaxurl, logoutData).done(function () {
+                clearTimeout(inactive_logout_timeoutID);
+
                 if (redirect_url) {
                     localStorage.removeItem('ina__browserTabID');
                     window.location = redirect_url;
