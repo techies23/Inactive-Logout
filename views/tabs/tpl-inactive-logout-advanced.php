@@ -57,41 +57,23 @@
                         <td><?php echo esc_html( $result_roles[ $role ] ); ?></td>
                         <td><input type="number" min="1" value="<?php echo ( ! empty( $ina_multiuser_setting['timeout'] ) ) ? esc_attr( $ina_multiuser_setting['timeout'] ) : 15; ?>" name="ina_individual_user_timeout[]"></td>
                         <td>
-                            <select name="ina_redirect_page_individual_user[]" class="regular-text">
+                            <select name="ina_redirect_page_individual_user[]" class="regular-text ina-hacking-select">
                                 <option value="0"><?php esc_html_e( 'Set Global Redirect Page', 'inactive-logout' ); ?></option>
 								<?php
 								$posts = ina_helpers()->ina_get_all_pages_posts();
-								if ( $posts ) {
-									?>
-                                    <optgroup label="Posts">
-										<?php
-										foreach ( $posts as $post ) {
-											if ( 'post' === $post['post_type'] ) {
-												?>
-                                                <option <?php echo ( intval( $ina_multiuser_setting['redirect_page'] ) === $post['ID'] ) ? esc_attr( 'selected' ) : ''; ?>
-                                                        value="<?php echo esc_attr( $post['ID'] ); ?>">
-													<?php echo esc_html( $post['title'] ); ?>
-                                                </option>
-												<?php
-											}
-										}
+								if ( ! empty( $posts ) ) {
+									foreach ( $posts as $k => $post_types ) {
 										?>
-                                    </optgroup>
-                                    <optgroup label="Pages">
-										<?php
-										foreach ( $posts as $post ) {
-											if ( 'page' === $post['post_type'] ) {
-												?>
-                                                <option <?php echo ( intval( $ina_multiuser_setting['redirect_page'] ) === $post['ID'] ) ? esc_attr( 'selected' ) : ''; ?>
-                                                        value="<?php echo esc_attr( $post['ID'] ); ?>">
-													<?php echo esc_html( $post['title'] ); ?>
+                                        <optgroup label="<?php echo ucfirst( $k ); ?>">
+											<?php foreach ( $post_types as $post_type ) { ?>
+                                                <option <?php echo ( intval( $ina_multiuser_setting['redirect_page'] ) === $post_type['ID'] ) ? esc_attr( 'selected' ) : ''; ?>
+                                                        value="<?php echo esc_attr( $post_type['ID'] ); ?>">
+													<?php echo esc_html( $post_type['title'] ); ?>
                                                 </option>
-												<?php
-											}
-										}
-										?>
-                                    </optgroup>
-									<?php
+											<?php } ?>
+                                        </optgroup>
+										<?php
+									}
 								} else {
 									?>
                                     <option value=""><?php esc_html_e( 'No Posts Found.', 'inactive-logout' ); ?></option>

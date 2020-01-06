@@ -102,16 +102,13 @@ class Inactive_Logout_Helpers {
 		$pages  = get_posts( array(
 			'order'          => 'ASC',
 			'posts_per_page' => - 1,
-			'post_type'      => array(
-				'post',
-				'page',
-			),
+			'post_type'      => apply_filters( 'ina_free_get_custom_post_types', array( 'post', 'page' ) ),
 			'post_status'    => 'publish',
 		) );
 
 		if ( ! empty( $pages ) ) {
 			foreach ( $pages as $page ) {
-				$result[] = array(
+				$result[$page->post_type][] = array(
 					'ID'        => $page->ID,
 					'title'     => $page->post_title,
 					'permalink' => get_the_permalink( $page->ID ),

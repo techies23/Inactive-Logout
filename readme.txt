@@ -34,13 +34,13 @@ The plugin is very easy to configure and use. Once you install and activate the 
 * Multi browser tab support: Means that logout will not happen even if the user has multiple browser tabs opened and is active in certain browser tab.
 * Multisite Support: Override all sites with one setting.
 
-
 **EXTEND OTHER FEATURES:**
 
 Upgrade to **[Inactive Logout Pro](https://www.codemanas.com/downloads/inactive-logout-pro/ "Inactive Logout Pro")** for:
 
 * Auto browser close logout after 2 minute of active session.
 * Override Multiple Login priority
+* Disable inactive logout for specified pages according to your need. Check this **[Documentation](https://gist.github.com/techies23/6d2852eedd6ae56c486056e021e4ee48 "documentation")** for additional post type support.
 * Multi-User configurations ( Coming Soon )
 
 > NOTE: Premium plan users will always be given highest priority over free plan users.
@@ -49,11 +49,15 @@ Upgrade to **[Inactive Logout Pro](https://www.codemanas.com/downloads/inactive-
 
 1. add_filter('ina__redirect_message', 'callback' );
 - For changing "You have been logged out because of inactivity. Please wait while we redirect you to a certain page..." this message.
-Reference: [GIST FILE](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "Check how to use this")
+Reference: [See here](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "See here")
 
 2. add_filter('ina__logout_message', 'callback' );
 - For changing "You have been logged out because of inactivity."
-Reference: [GIST FILE](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "Check how to use this")
+Reference: [See here](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "See here")
+
+3. External Page Redirect For Custom post type pages.
+- For allow of support of custom post type in page redirections use.
+Reference: [See here](https://gist.github.com/techies23/91c3144e5273ac00e51df292c4b434ac "See here")
 
 **See the [Inactive Logout](https://deepenbajracharya.com.np/wp-inactive-logout/ "Inactive Logout") homepage for further information. Contact Developer for those who need to write plugins.**
 
@@ -92,9 +96,11 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 == Changelog ==
 
 = 1.9.3 =
-* Fixed: Minor JS bug fixes
-* Admin notice fix
-* Language Fix
+* Fixed: Minor JS bug fixes.
+* Added: Filter for applying custom post type pages for redirection "ina_free_get_custom_post_types".
+* Admin notice fix.
+* Language Fix.
+* Updated: Select2 Library to 4.0.12
 
 = 1.9.2 =
 * Fixed: Condition check for modal popup if inactive logout feature is disabled.

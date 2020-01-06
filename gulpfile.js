@@ -44,7 +44,7 @@ gulp.task('vendor', function () {
     gulp.src([
         './node_modules/select2/dist/**/*',
     ])
-        .pipe(gulp.dest('./vendor/select2'));
+        .pipe(gulp.dest('./assets/vendor/select2'));
 });
 
 /**

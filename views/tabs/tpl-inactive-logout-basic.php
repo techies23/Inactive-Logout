@@ -106,41 +106,23 @@
             <tr class="show_on_enable_redirect_link" <?php echo ! empty( $ina_enable_redirect ) && (int) $ina_enable_redirect === 1 ? 'style="display:table-row;"' : 'style="display:none;"'; ?>>
                 <th scope="row"><label for="ina_redirect_page"><?php esc_html_e( 'Redirect Page', 'inactive-logout' ); ?></label></th>
                 <td>
-                    <select name="ina_redirect_page" class="ina_redirect_page regular-text">
+                    <select name="ina_redirect_page" class="ina_redirect_page regular-text ina-hacking-select">
                         <option value="custom-page-redirect"><?php esc_html_e( 'External Page Redirect', 'inactive-logout' ); ?></option>
 						<?php
 						$posts = ina_helpers()->ina_get_all_pages_posts();
 						if ( ! empty( $posts ) ) {
-							?>
-                            <optgroup label="Posts">
-								<?php
-								foreach ( $posts as $post ) {
-									if ( 'post' === $post['post_type'] ) {
-										?>
-                                        <option <?php echo ( intval( $ina_redirect_page_link ) === $post['ID'] ) ? esc_attr( 'selected' ) : ''; ?>
-                                                value="<?php echo esc_attr( $post['ID'] ); ?>">
-											<?php echo esc_html( $post['title'] ); ?>
-                                        </option>
-										<?php
-									}
-								}
+							foreach ( $posts as $k => $post_types ) {
 								?>
-                            </optgroup>
-                            <optgroup label="Pages">
-								<?php
-								foreach ( $posts as $post ) {
-									if ( 'page' === $post['post_type'] ) {
-										?>
-                                        <option <?php echo ( intval( $ina_redirect_page_link ) === $post['ID'] ) ? esc_attr( 'selected' ) : ''; ?>
-                                                value="<?php echo esc_attr( $post['ID'] ); ?>">
-											<?php echo esc_html( $post['title'] ); ?>
+                                <optgroup label="<?php echo ucfirst( $k ); ?>">
+									<?php foreach ( $post_types as $post_type ) { ?>
+                                        <option <?php echo ( intval( $ina_redirect_page_link ) === $post_type['ID'] ) ? esc_attr( 'selected' ) : ''; ?>
+                                                value="<?php echo esc_attr( $post_type['ID'] ); ?>">
+											<?php echo esc_html( $post_type['title'] ); ?>
                                         </option>
-										<?php
-									}
-								}
-								?>
-                            </optgroup>
-							<?php
+									<?php } ?>
+                                </optgroup>
+								<?php
+							}
 						} else {
 							?>
                             <option value=""><?php esc_html_e( 'No Posts Found.', 'inactive-logout' ); ?></option>

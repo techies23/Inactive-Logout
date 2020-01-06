@@ -1,7 +1,7 @@
 {
   "title": "Inactive Logout",
   "name": "inactive-logout",
-  "version": "1.9.1",
+  "version": "1.9.3",
   "description": "Inactive logout provides functionality to log out any idle users defined specified time showing a message. Works for frontend as well.",
   "keywords": [
     "logout",
@@ -18,7 +18,7 @@
   ],
   "author": "Deepen Bajracharya",
   "dependencies": {
-    "select2": "^4.0.6-rc.1"
+    "select2": "^4.0.12"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
