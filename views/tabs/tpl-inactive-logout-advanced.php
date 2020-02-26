@@ -15,7 +15,8 @@
         <table class="ina-form-tbl form-table">
             <tbody>
             <tr>
-                <th scope="row"><label for="ina_enable_different_role_timeout"><?php esc_html_e( 'Multi-Role Timeout', 'inactive-logout' ); ?></label></th>
+                <th scope="row"><label for="ina_enable_different_role_timeout"><?php esc_html_e( 'Multi-Role Timeout', 'inactive-logout' ); ?></label>
+                </th>
                 <td>
                     <input name="ina_enable_different_role_timeout" type="checkbox" id="ina_enable_different_role_timeout" <?php echo ! empty( $ina_multiuser_timeout_enabled ) ? 'checked' : false; ?> value="1">
                     <p class="description"><?php esc_html_e( 'This will enable multi-user role timeout functionality.', 'inactive-logout' ); ?></p>
@@ -34,7 +35,9 @@
 						}
 						?>
                     </select>
-                    <p class="description"><i><?php esc_html_e( 'This will allow you to define different timeout constraint according to different selected user roles.', 'inactive-logout' ); ?></i></p>
+                    <p class="description">
+                        <i><?php esc_html_e( 'This will allow you to define different timeout constraint according to different selected user roles.', 'inactive-logout' ); ?></i>
+                    </p>
                 </td>
             </tr>
             </tbody>
@@ -45,8 +48,9 @@
                 <th class="manage-column" width="10%"><?php esc_html_e( 'User Role', 'inactive-logout' ); ?></th>
                 <th class="manage-column" width="15%"><?php esc_html_e( 'Timeout (In Minutes)', 'inactive-logout' ); ?></th>
                 <th class="manage-column" width="40%"><?php esc_html_e( 'Redirect Page', 'inactive-logout' ); ?></th>
-                <th class="manage-column" width="10%"><?php esc_html_e( 'Disable', 'inactive-logout' ); ?></th>
-                <th class="manage-column" width="20%"><?php esc_html_e( 'Prevent Multiple Login', 'inactive-logout' ); ?></th>
+                <th class="manage-column"><?php esc_html_e( 'Disable Inactive Logout', 'inactive-logout' ); ?></th>
+                <th class="manage-column"><?php esc_html_e( 'Prevent Multiple Login', 'inactive-logout' ); ?></th>
+				<?php do_action( 'ina__addon_role_based_elements_table_head' ); ?>
                 </thead>
                 <tbody>
 				<?php
@@ -55,7 +59,9 @@
 					?>
                     <tr>
                         <td><?php echo esc_html( $result_roles[ $role ] ); ?></td>
-                        <td><input type="number" min="1" value="<?php echo ( ! empty( $ina_multiuser_setting['timeout'] ) ) ? esc_attr( $ina_multiuser_setting['timeout'] ) : 15; ?>" name="ina_individual_user_timeout[]"></td>
+                        <td>
+                            <input type="number" min="1" value="<?php echo ( ! empty( $ina_multiuser_setting['timeout'] ) ) ? esc_attr( $ina_multiuser_setting['timeout'] ) : 15; ?>" name="ina_individual_user_timeout[]">
+                        </td>
                         <td>
                             <select name="ina_redirect_page_individual_user[]" class="regular-text ina-hacking-select">
                                 <option value="0"><?php esc_html_e( 'Set Global Redirect Page', 'inactive-logout' ); ?></option>
@@ -82,14 +88,20 @@
 								?>
                             </select>
                         </td>
-                        <td><input type="checkbox" name="ina_disable_inactive_logout[<?php echo esc_attr( $role ); ?>]" <?php echo ( ! empty( $ina_multiuser_setting['disabled_feature'] ) ) ? esc_attr( 'checked' ) : false; ?> value="1"></td>
-                        <td><input type="checkbox" name="ina_disable_inactive_concurrent_login[<?php echo esc_attr( $role ); ?>]" <?php echo ( ! empty( $ina_multiuser_setting['disabled_concurrent_login'] ) ) ? esc_attr( 'checked' ) : false; ?> value="1"></td>
+                        <td>
+                            <input type="checkbox" name="ina_disable_inactive_logout[<?php echo esc_attr( $role ); ?>]" <?php echo ( ! empty( $ina_multiuser_setting['disabled_feature'] ) ) ? esc_attr( 'checked' ) : false; ?> value="1">
+                        </td>
+                        <td>
+                            <input type="checkbox" name="ina_disable_inactive_concurrent_login[<?php echo esc_attr( $role ); ?>]" <?php echo ( ! empty( $ina_multiuser_setting['disabled_concurrent_login'] ) ) ? esc_attr( 'checked' ) : false; ?> value="1">
+                        </td>
+
+						<?php do_action( 'ina__addon_role_based_elements_table_body', $role, $ina_multiuser_setting ); ?>
                     </tr>
 				<?php } ?>
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan="5">
+                    <th colspan="<?php echo apply_filters( 'ina__addon_colspan_count', 5 ) ?>">
 						<?php $bold_string = '<span class="ina-highlight"><strong>"' . esc_html__( 'Disable', 'inactive-logout' ) . '"</strong></span>'; ?>
                         <p class="description ina-warn-info" style="float:right;">
 							<?php printf( __( 'Note: %s is used for disabling inactive logout functionality to that specific user.', 'inactive-logout' ), $bold_string ); ?>
@@ -102,7 +114,10 @@
 
 		<?php do_action( 'ina__after_advanced_form_elements' ); ?>
 
-        <p class="ina_adv_submit"><input type="submit" name="adv_submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>"> <a id="ina-reset-adv-data" class="button button-primary button-reset-ina" data-msg="<?php esc_html_e( 'Are you sure you want to erase all advanced settings. This cannot be undone !', 'inactive-logout' ); ?>"><?php esc_html_e( 'Reset Advanced Settings !', 'inactive-logout' ); ?></a></p>
+        <p class="ina_adv_submit">
+            <input type="submit" name="adv_submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>">
+            <a id="ina-reset-adv-data" class="button button-primary button-reset-ina" data-msg="<?php esc_html_e( 'Are you sure you want to erase all advanced settings. This cannot be undone !', 'inactive-logout' ); ?>"><?php esc_html_e( 'Reset Advanced Settings !', 'inactive-logout' ); ?></a>
+        </p>
     </form>
 
 	<?php ina_helpers()->show_plugin_like(); ?>

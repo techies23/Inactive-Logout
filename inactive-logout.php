@@ -7,7 +7,7 @@
  * Plugin Name:       Inactive Logout
  * Plugin URI:        https://www.deepenbajracharya.com.np
  * Description:       Automatically logout idle user sessions, even if they are on the front end! Fully configurable & easy to use.
- * Version:           1.9.3
+ * Version:           1.9.4
  * Author:            Deepen Bajracharya
  * Author URI:        https://www.deepenbajracharya.com.np
  * License:           GPL-2.0+
@@ -22,6 +22,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'INA_PLUGIN_ABS_NAME', plugin_basename( __FILE__ ) );
+define( 'INACTIVE_LOGOUT_SLUG', 'inactive-logout' );
+define( 'INACTIVE_LOGOUT_DIR_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+define( 'INACTIVE_LOGOUT_DIR_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
+define( 'INACTIVE_LOGOUT_VIEWS', INACTIVE_LOGOUT_DIR_PATH . 'views' );
+define( 'INACTIVE_LOGOUT_ASSETS_URL', INACTIVE_LOGOUT_DIR_URI . 'assets/' );
+define( 'INACTIVE_LOGOUT_VENDOR_URL', INACTIVE_LOGOUT_DIR_URI . 'assets/vendor/' );
 
 //Helper Load
 require_once dirname( __FILE__ ) . '/src/class-inactive-logout-helpers.php';

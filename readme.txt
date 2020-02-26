@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
 Tested up to: 5.3
-Stable tag: 1.9.3
+Stable tag: 1.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,15 +48,15 @@ Upgrade to **[Inactive Logout Pro](https://www.codemanas.com/downloads/inactive-
 **FILTER HOOKS:**
 
 1. add_filter('ina__redirect_message', 'callback' );
-- For changing "You have been logged out because of inactivity. Please wait while we redirect you to a certain page..." this message.
+For changing "You have been logged out because of inactivity. Please wait while we redirect you to a certain page..." this message.
 Reference: [See here](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "See here")
 
 2. add_filter('ina__logout_message', 'callback' );
-- For changing "You have been logged out because of inactivity."
+For changing "You have been logged out because of inactivity."
 Reference: [See here](https://gist.github.com/techies23/9046a82671b994c20237a177838b70a2 "See here")
 
 3. External Page Redirect For Custom post type pages.
-- For allow of support of custom post type in page redirections use.
+For allow of support of custom post type in page redirections use.
 Reference: [See here](https://gist.github.com/techies23/91c3144e5273ac00e51df292c4b434ac "See here")
 
 **See the [Inactive Logout](https://deepenbajracharya.com.np/wp-inactive-logout/ "Inactive Logout") homepage for further information. Contact Developer for those who need to write plugins.**
@@ -94,6 +94,9 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.9.4 =
+* Fixed: Constant issue where defined constant is showing errors.
 
 = 1.9.3 =
 * Fixed: Minor JS bug fixes.

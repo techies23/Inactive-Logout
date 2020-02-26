@@ -51,10 +51,16 @@ class Inactive_Logout_Admin_Views {
 		if ( is_multisite() ) {
 			$idle_overrideby_multisite_setting = get_site_option( '__ina_overrideby_multisite_setting' );
 			if ( empty( $idle_overrideby_multisite_setting ) ) {
-				add_options_page( __( 'Inactive User Logout Settings', 'inactive-logout' ), __( 'Inactive Logout', 'inactive-logout' ), 'manage_options', 'inactive-logout', array( $this, 'ina__render_options' ) );
+				add_options_page( __( 'Inactive User Logout Settings', 'inactive-logout' ), __( 'Inactive Logout', 'inactive-logout' ), 'manage_options', 'inactive-logout', array(
+					$this,
+					'ina__render_options'
+				) );
 			}
 		} else {
-			add_options_page( __( 'Inactive User Logout Settings', 'inactive-logout' ), __( 'Inactive Logout', 'inactive-logout' ), 'manage_options', 'inactive-logout', array( $this, 'ina__render_options' ) );
+			add_options_page( __( 'Inactive User Logout Settings', 'inactive-logout' ), __( 'Inactive Logout', 'inactive-logout' ), 'manage_options', 'inactive-logout', array(
+				$this,
+				'ina__render_options'
+			) );
 		}
 	}
 
@@ -62,7 +68,10 @@ class Inactive_Logout_Admin_Views {
 	 * Add menu page.
 	 */
 	function ina_menu_multisite_network() {
-		add_menu_page( __( 'Inactive User Logout Settings', 'inactive-logout' ), __( 'Inactive Logout', 'inactive-logout' ), 'manage_options', 'inactive-logout', array( $this, 'ina__render_options' ) );
+		add_menu_page( __( 'Inactive User Logout Settings', 'inactive-logout' ), __( 'Inactive Logout', 'inactive-logout' ), 'manage_options', 'inactive-logout', array(
+			$this,
+			'ina__render_options'
+		) );
 	}
 
 	/**
@@ -269,7 +278,7 @@ class Inactive_Logout_Admin_Views {
 			update_option( '__ina_multiusers_settings', $container_multi_user_arr );
 		}
 
-		do_action( 'ina_after_update_adv_settings' );
+		do_action( 'ina_after_update_adv_settings', $container_multi_user_arr );
 
 		self::set_message( 'updated', 'Settings Saved !' );
 	}
