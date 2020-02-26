@@ -218,12 +218,7 @@ class Inactive_Logout_Helpers {
 			?>
             <div id="message" class="notice notice-warning">
                 <h3><?php esc_html_e( 'Need more features ?', 'inactive-logout' ); ?></h3>
-                <p>
-					<?php
-					// translators: anchor tag.
-					printf( esc_html__( 'Among many other features/enhancements, inactive logout pro comes with a few additional features if you feel like you need it. %s to download.', 'inactive-logout' ), '<a href="https://www.codemanas.com/downloads/inactive-logout-pro/">check out the pro version here</a>' );
-					?>
-                </p>
+                <p>Among many other features/enhancements, Inactive Logout pro comes with a additional features. <a href="https://www.codemanas.com/downloads/inactive-logout-pro/">Check out here</a> to learn more.</p>
             </div>
 			<?php
 		}

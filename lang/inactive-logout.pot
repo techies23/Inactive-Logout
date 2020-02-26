@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-26 08:15+0000\n"
+"POT-Creation-Date: 2020-02-26 08:37+0000\n"
 "POT-Revision-Date: Sun Jan 29 2017 16:00:11 GMT+0545 (NPT)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
@@ -88,15 +88,7 @@ msgstr ""
 msgid "Need more features ?"
 msgstr ""
 
-#. anchor tag.
-#: src/class-inactive-logout-helpers.php:224
-#, php-format
-msgid ""
-"Among many other features/enhancements, inactive logout pro comes with a few "
-"additional features if you feel like you need it. %s to download."
-msgstr ""
-
-#: src/class-inactive-logout-helpers.php:237
+#: src/class-inactive-logout-helpers.php:232
 msgid ""
 "Is inactive logout or few functionalities not working for you ? Might be "
 "because you have added this user role in Role Based tab ?"

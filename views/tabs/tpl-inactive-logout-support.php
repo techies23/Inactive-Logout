@@ -4,13 +4,20 @@
  *
  * @package inactive-logout
  */
-
 ?>
 
 <div class="ina-settings-admin-wrap ina-settings-admin-support">
     <div class="ina-settings-admin-support-bg red">
         <h3>Need more features ?</h3>
-        <p>Among many other features/enhancements, inactive logout pro comes with a few additional features if you feel like you need it. <a href="https://www.codemanas.com/downloads/inactive-logout-pro/">Check out the pro version here</a> to download. Will keep adding extra features in the future.</p>
+        <p>Among many other features/enhancements, inactive logout pro comes with a few additional features if you feel like you need it. <a href="https://www.codemanas.com/downloads/inactive-logout-pro/">Check out the pro version here</a> to download.</p>
+        <ol>
+            <li>Auto browser close logout.</li>
+            <li>Individual role browser close logout enable/disable option.</li>
+            <li>Override Multiple Login priority</li>
+            <li>Disable inactive logout for specified pages according to your need. Check this Documentation for additional post type support.</li>
+            <li>Multi-User configurations ( Coming Soon )</li>
+            <li>And more..</li>
+        </ol>
     </div>
 
 	<?php if ( ! in_array( 'inactive-logout-addon/inactive-logout-addon.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) { ?>
