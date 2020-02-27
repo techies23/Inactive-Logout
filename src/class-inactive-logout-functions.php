@@ -37,6 +37,9 @@ class Inactive_Logout_Functions {
 		// Ajax for User Roles only.
 		add_action( 'wp_ajax_ina_save_disabled_roles', array( $this, 'ina_save_disabled_roles' ) );
 		add_action( 'wp_ajax_ina_get_enabled_roles', array( $this, 'ina_get_enabled_roles' ) );
+
+		//Mailpoet conflict resolve whitelist
+		add_filter( 'mailpoet_conflict_resolver_whitelist_style', array( $this, 'conflict_resolver' ) );
 	}
 
 	public function logout_this_session() {
@@ -166,6 +169,24 @@ class Inactive_Logout_Functions {
 		if ( ! $disable_timeoutjs ) {
 			require_once INACTIVE_LOGOUT_VIEWS . '/tpl-inactive-logout-dialog.php';
 		}
+	}
+
+	/**
+	 * Whitelist inactive logout script in mailpoet pages.
+	 *
+	 * @TODO TESTING FROM THE DARK SIDE.
+	 *
+	 * @param $list
+	 *
+	 * @return array
+	 */
+	public function conflict_resolver( $list ) {
+		$turnoff = apply_filters( 'ina_logout_mailpoet_conflict_fix', true );
+		if ( $turnoff && ! in_array( 'inactive-logout', $list ) ) {
+			$list[] = 'inactive-logout';
+		}
+
+		return $list;
 	}
 }
 

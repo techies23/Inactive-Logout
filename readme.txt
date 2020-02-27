@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
 Tested up to: 5.3
-Stable tag: 1.9.4
+Stable tag: 1.9.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,15 @@ Reference: [See here](https://gist.github.com/techies23/91c3144e5273ac00e51df292
 
 This feature has been moved to PRO version of the plugin.
 
+= Mailpoet page not loading in wp-admin mailpoet pages after inactive logout install =
+
+Filter "ina_logout_mailpoet_conflict_fix" incase conflict happens because of inactive logout scripts on mailpoet page use this filter to disable and avoid conflict. Add filter to your functions.php file and return false.
+
+**Tested on:**
+**From file:** plugins/mailpoet/lib/Util/ConflictResolver.php version 3.46.1
+**Function:** scope public resolveStylesConflict()
+**Line: 83**
+
 = Plugin Conflicts =
 
 Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 might find conflict issue with colorpicker javascript library. This conflict was identified by [psn](https://wordpress.org/support/users/psn/ "PSN") and has been fixed in later versions of slim stat analytics.
@@ -94,6 +103,10 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.9.5 =
+* Fixed: Mailpoet conflict resolver issue fixed. Inactive logout scripts and css not loading in mailpoet edit page backend.
+* Added: Filter "ina_logout_mailpoet_conflict_fix" incase conflict happens because of inactive logout scripts on mailpoet page use this filter to disable and avoid conflict.
 
 = 1.9.4 =
 * Fixed: Constant issue where defined constant is showing errors.
