@@ -222,7 +222,7 @@ final class Inactive_Logout_Main {
 
 			$disable_timeoutjs = ina_helpers()->ina_check_user_role();
 			if ( ! $disable_timeoutjs ) {
-				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts.min.js', array( 'jquery' ), time(), true );
+				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts.min.js', array( 'jquery' ), INACTIVE_LOGOUT_VERSION, true );
 				wp_localize_script( 'ina-logout-js', 'ina_meta_data', $ina_meta_data );
 
 				wp_localize_script( 'ina-logout-js', 'ina_ajax', array(
@@ -234,16 +234,16 @@ final class Inactive_Logout_Main {
 			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-helper.min.js', array(
 				'jquery',
 				'wp-color-picker'
-			), time(), true );
-			wp_register_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_VENDOR_URL . 'select2/js/select2.min.js', array( 'jquery' ), time(), true );
+			), INACTIVE_LOGOUT_VERSION, true );
+			wp_register_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_VENDOR_URL . 'select2/js/select2.min.js', array( 'jquery' ), INACTIVE_LOGOUT_VERSION, true );
 
-			wp_register_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_VENDOR_URL . 'select2/css/select2.min.css', false, time() );
+			wp_register_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_VENDOR_URL . 'select2/css/select2.min.css', false, INACTIVE_LOGOUT_VERSION );
 			wp_localize_script( 'ina-logout-inactive-logoutonly-js', 'ina_other_ajax', array(
 				'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 				'ina_security' => wp_create_nonce( '_ina_nonce_security' ),
 			) );
 
-			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.min.css', false, time() );
+			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.min.css', false, INACTIVE_LOGOUT_VERSION );
 		}
 	}
 
