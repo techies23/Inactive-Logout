@@ -28,6 +28,7 @@ define( 'INACTIVE_LOGOUT_DIR_URI', trailingslashit( plugin_dir_url( __FILE__ ) )
 define( 'INACTIVE_LOGOUT_VIEWS', INACTIVE_LOGOUT_DIR_PATH . 'views' );
 define( 'INACTIVE_LOGOUT_ASSETS_URL', INACTIVE_LOGOUT_DIR_URI . 'assets/' );
 define( 'INACTIVE_LOGOUT_VENDOR_URL', INACTIVE_LOGOUT_DIR_URI . 'assets/vendor/' );
+define( 'INACTIVE_LOGOUT_VERSION', '1.9.5' );
 
 //Helper Load
 require_once dirname( __FILE__ ) . '/src/class-inactive-logout-helpers.php';
