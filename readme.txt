@@ -3,7 +3,7 @@ Contributors: j__3rk
 Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologout, inactive, inactive, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
-Tested up to: 5.3
+Tested up to: 5.5
 Stable tag: 1.9.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,10 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.9.6 =
+* WP 5.5 support
+* Updated: Static resources to be cache friendly.
 
 = 1.9.5 =
 * Fixed: Mailpoet conflict resolver issue fixed. Inactive logout scripts and css not loading in mailpoet edit page backend.
