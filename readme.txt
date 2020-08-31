@@ -107,6 +107,7 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 = 1.9.6 =
 * WP 5.5 support
 * Updated: Static resources to be cache friendly.
+* Updated: Select2 JS library.
 
 = 1.9.5 =
 * Fixed: Mailpoet conflict resolver issue fixed. Inactive logout scripts and css not loading in mailpoet edit page backend.
