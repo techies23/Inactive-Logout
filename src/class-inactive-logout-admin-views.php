@@ -145,7 +145,6 @@ class Inactive_Logout_Admin_Views {
 	 * @return bool|void
 	 */
 	public function ina__process_basic_settings() {
-
 		$sm_nonce = filter_input( INPUT_POST, '_save_timeout_settings', FILTER_SANITIZE_STRING );
 		$nonce    = isset( $sm_nonce ) ? $sm_nonce : '';
 		$submit   = filter_input( INPUT_POST, 'submit', FILTER_SANITIZE_STRING );

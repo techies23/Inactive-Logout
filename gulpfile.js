@@ -1,138 +1,132 @@
-/**
- * Load Plugins.
- *
- * Load gulp plugins and assing them semantic names.
- */
-var gulp = require('gulp');
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
+const cleanCSS = require('gulp-clean-css');
+const sourcemaps = require('gulp-sourcemaps');
+const sass = require('gulp-sass');
+const autoprefixer = require('autoprefixer');
+const postcss = require('gulp-postcss');
+const del = require('del');
 
-// CSS related plugins.
-var sass = require('gulp-sass'); // Gulp pluign for Sass compilation
-var autoprefixer = require('gulp-autoprefixer'); // Autoprefixing magic
-var minifycss = require('gulp-uglifycss'); // Minifies CSS files
-
-// JS related plugins.
-var concat = require('gulp-concat'); // Concatenates JS files
-var plumber = require('gulp-plumber');
-var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify'); // Minifies CSS files
-
-// Utility related plugins.
-var rename = require('gulp-rename');
-var sourcemaps = require('gulp-sourcemaps');
-var notify = require('gulp-notify');
-
-/**
- * Configuration.
- *
- * Project Configuration for gulp tasks.
- *
- * Edit the variables as per your project requirements.
- */
-var styleSRC = './dist/sass/**/*.scss'; // Path to main .scss file
-var styleDestination = './assets/css/'; // Path to place the compiled CSS file
-
-var inactiveLogoutSrc = './dist/js/inactive-logout.js'; // Path to JS custom scripts folder
-var inactiveLogoutSrcDestination = './assets/js/'; // Path to place the compiled JS custom scripts file
-
-var inactiveLogoutOtherSrc = './dist/js/inactive-logout-other.js';
-var inactiveLogoutOtherDestination = './assets/js/';
-
-// Copy third party libraries from /node_modules into /vendor
-gulp.task('vendor', function () {
-
-    //Select2
-    gulp.src([
-        './node_modules/select2/dist/**/*',
-    ])
-        .pipe(gulp.dest('./assets/vendor/select2'));
-});
+const paths = {
+    styles: {
+        src: 'dist/sass/**/*.scss',
+        dest: 'assets/css/'
+    },
+    scripts: {
+        dest: 'assets/js/',
+        main: {
+            src: 'dist/js/scripts.js',
+        },
+        additional: {
+            src: 'dist/js/scripts-helper.js'
+        }
+    },
+    vendors: {
+        src: './node_modules',
+        dest: 'assets/vendor'
+    }
+};
 
 /**
- * Task: vendorJS
- *
- * Concatenate and uglify vendor JS scripts.
- *
- * This task does the following:
- *    1. Gets the source folder for JS vendor files
- *    2. Concatenates all the files and generates vendors.js
- *    3. Renames the JS file with suffix .min.js
- *    4. Uglifes/Minifies the JS file and generates vendors.min.js
+ * Copy Vendor Files
+ * @returns {*}
  */
-gulp.task('styles', function () {
-    return gulp.src(styleSRC)
-        .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(sourcemaps.init())
+function copyVendors() {
+    return gulp.src(
+        [
+            paths.vendors.src + '/select2/dist/**/*',
+        ]
+    ).pipe(gulp.dest(paths.vendors.dest + '/select2/'))
+}
+
+/* Not all tasks need to use streams, a gulpfile is just another node program
+ * and you can use all packages available on npm, but it must return either a
+ * Promise, a Stream or take a callback and call it
+ */
+function clean() {
+    // You can use multiple globbing patterns as you would with `gulp.src`,
+    // for example if you are using del 2.0 or above, return its promise
+    return del(['assets/css', 'assets/js']);
+}
+
+/*
+ * Define our tasks using plain functions
+ */
+function styles() {
+    return gulp.src(paths.styles.src)
+    // .pipe(sourcemaps.init())
         .pipe(sass({
             errLogToConsole: true,
             outputStyle: 'compact',
             precision: 10
         }))
-        .pipe(sourcemaps.write({includeContent: false}))
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(autoprefixer(
-            'last 2 version',
-            '> 1%',
-            'safari 5',
-            'ie 8',
-            'ie 9',
-            'opera 12.1',
-            'ios 6',
-            'android 4'))
-        .pipe(sourcemaps.write('./maps'))
-        .pipe(gulp.dest(styleDestination))
-        .pipe(minifycss({
-            "maxLineLen": 80,
-            "uglyComments": true
+        .pipe(postcss([autoprefixer]))
+        .pipe(gulp.dest(paths.styles.dest))
+        .pipe(cleanCSS({
+            level: {
+                1: {
+                    cleanupCharsets: true,
+                    removeEmpty: true,
+                    removeWhitespace: true,
+                    specialComments: 0
+                }
+            }
         }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest(styleDestination))
-    // .pipe( notify( { message: 'TASK: "styles" Completed! 💯', onLast: true } ) );
-});
+        // pass in options to the stream
+        .pipe(rename({
+            basename: 'style',
+            suffix: '.min'
+        }))
+        // .pipe(sourcemaps.write('./maps'))
+        .pipe(gulp.dest(paths.styles.dest));
+}
 
-/**
- * Task: customJS
- *
- * Concatenate and uglify custom JS scripts.
- *
- * This task does the following:
- *    1. Gets the source folder for JS custom files
- *    2. Concatenates all the files and generates custom.js
- *    3. Renames the JS file with suffix .min.js
- *    4. Uglifes/Minifies the JS file and generates custom.min.js
+function main_script() {
+    return gulp.src(paths.scripts.main.src, {sourcemaps: true})
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(gulp.dest(paths.scripts.dest))
+        .pipe(uglify())
+        .pipe(concat('scripts.min.js'))
+        .pipe(gulp.dest(paths.scripts.dest));
+}
+
+function additional_script() {
+    return gulp.src(paths.scripts.additional.src, {sourcemaps: true})
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(gulp.dest(paths.scripts.dest))
+        .pipe(uglify())
+        .pipe(concat('scripts-helper.min.js'))
+        .pipe(gulp.dest(paths.scripts.dest));
+}
+
+function watchFiles() {
+    gulp.watch(paths.scripts.main.src, main_script);
+    gulp.watch(paths.scripts.additional.src, additional_script);
+    gulp.watch(paths.styles.src, styles);
+}
+
+/*
+ * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
  */
-gulp.task('mainJS', function () {
-    gulp.src(inactiveLogoutSrc)
-        .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(concat('scripts.js'))
-        .pipe(gulp.dest(inactiveLogoutSrcDestination))
-        .pipe(rename({
-            basename: 'scripts',
-            suffix: '.min'
-        }))
-        .pipe(uglify())
-        .pipe(gulp.dest(inactiveLogoutSrcDestination))
-    // .pipe( notify( { message: 'TASK: "customJs" Completed!', onLast: true } ) );
-});
+const build = gulp.series(clean, gulp.parallel(styles, main_script, additional_script, copyVendors));
+// const build = gulp.series(modules, gulp.parallel(styles, scripts));
+const watch = gulp.series(build, gulp.parallel(watchFiles));
 
-gulp.task('helperJS', function () {
-    gulp.src(inactiveLogoutOtherSrc)
-        .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(concat('scripts-helper.js'))
-        .pipe(gulp.dest(inactiveLogoutOtherDestination))
-        .pipe(rename({
-            basename: 'scripts-helper',
-            suffix: '.min'
-        }))
-        .pipe(uglify())
-        .pipe(gulp.dest(inactiveLogoutOtherDestination))
-});
-
-// Default task
-gulp.task('default', ['styles', 'mainJS', 'helperJS', 'vendor'], function () {
-    gulp.watch('./dist/sass/*.scss', ['styles']);
-    gulp.watch('./dist/js/*.js', ['mainJS', 'helperJS']);
-});
+/*
+ * You can use CommonJS `exports` module notation to declare tasks
+ */
+exports.clean = clean;
+exports.styles = styles;
+exports.watch = watch;
+exports.build = build;
+/*
+ * Define default task that can be called by just running `gulp` from cli
+ */
+exports.default = build;

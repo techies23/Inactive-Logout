@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
 Tested up to: 5.5
-Stable tag: 1.9.5
+Stable tag: 1.9.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,14 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 1.9.7 =
+* Removed: HTML output for popup modal in all pages.
+* Added: Ajax implementation for timeout popup.
+* Bug Fix: Multiple Browser tab support sometimes not working.
+* Bug Fix: 400 ajax call request after user has been logged out.
+* Refactored: JS scripts
+* Major bug fixes.
 
 = 1.9.6 =
 * WP 5.5 support

@@ -145,6 +145,8 @@ final class Inactive_Logout_Main {
 			$this->ina_load_dependencies();
 		}
 
+		//Load this because it does not need logged in check.
+		require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-functions.php';
 	}
 
 	/**
@@ -152,12 +154,10 @@ final class Inactive_Logout_Main {
 	 */
 	protected function ina_load_dependencies() {
 		// Loading Helpers.
-		#require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-helpers.php';
 		require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-pointers.php';
 
 		// Loading Admin Views.
 		require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-admin-views.php';
-		require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-functions.php';
 
 		$concurrent = get_option( '__ina_concurrent_login' );
 
@@ -215,35 +215,38 @@ final class Inactive_Logout_Main {
 				}
 			}
 
-			$ina_meta_data                             = array();
-			$ina_meta_data['ina_timeout']              = ( isset( $ina_logout_time ) ) ? $ina_logout_time : 15 * 60;
-			$ina_meta_data['ina_disable_countdown']    = ( isset( $idle_disable_countdown ) && 1 === intval( $idle_disable_countdown ) ) ? $idle_disable_countdown : false;
-			$ina_meta_data['ina_warn_message_enabled'] = ( isset( $ina_warn_message_enabled ) && 1 === intval( $ina_warn_message_enabled ) ) ? $ina_warn_message_enabled : false;
-
+			$min               = ( SCRIPT_DEBUG == true ) ? '' : '.min';
 			$disable_timeoutjs = ina_helpers()->ina_check_user_role();
 			if ( ! $disable_timeoutjs ) {
-				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts.min.js', array( 'jquery' ), INACTIVE_LOGOUT_VERSION, true );
-				wp_localize_script( 'ina-logout-js', 'ina_meta_data', $ina_meta_data );
-
+				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts' . $min . '.js', array( 'jquery' ), INACTIVE_LOGOUT_VERSION, true );
 				wp_localize_script( 'ina-logout-js', 'ina_ajax', array(
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 					'ina_security' => wp_create_nonce( '_checklastSession' ),
+					'i10n'         => [
+						'ok'    => __( 'OK', 'inactive-logout' ),
+						'close' => __( 'Close without Reloading', 'inactive-logout' ),
+					],
+					'settings'     => [
+						'timeout'              => ( isset( $ina_logout_time ) ) ? $ina_logout_time : 15 * 60,
+						'disable_countdown'    => ( isset( $idle_disable_countdown ) && 1 === intval( $idle_disable_countdown ) ) ? $idle_disable_countdown : false,
+						'warn_message_enabled' => ( isset( $ina_warn_message_enabled ) && 1 === intval( $ina_warn_message_enabled ) ) ? $ina_warn_message_enabled : false
+					],
+					'is_admin'     => is_admin() ? true : false
 				) );
 			}
 
-			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-helper.min.js', array(
+			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-helper' . $min . '.js', array(
 				'jquery',
 				'wp-color-picker'
 			), INACTIVE_LOGOUT_VERSION, true );
-			wp_register_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_VENDOR_URL . 'select2/js/select2.min.js', array( 'jquery' ), INACTIVE_LOGOUT_VERSION, true );
-
-			wp_register_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_VENDOR_URL . 'select2/css/select2.min.css', false, INACTIVE_LOGOUT_VERSION );
+			wp_register_script( 'ina-logout-inactive-select-js', INACTIVE_LOGOUT_VENDOR_URL . 'select2/js/select2' . $min . '.js', array( 'jquery' ), INACTIVE_LOGOUT_VERSION, true );
+			wp_register_style( 'ina-logout-inactive-select', INACTIVE_LOGOUT_VENDOR_URL . 'select2/css/select2' . $min . '.css', false, INACTIVE_LOGOUT_VERSION );
 			wp_localize_script( 'ina-logout-inactive-logoutonly-js', 'ina_other_ajax', array(
 				'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 				'ina_security' => wp_create_nonce( '_ina_nonce_security' ),
 			) );
 
-			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/inactive-logout.min.css', false, INACTIVE_LOGOUT_VERSION );
+			wp_enqueue_style( 'ina-logout', INACTIVE_LOGOUT_ASSETS_URL . 'css/style' . $min . '.css', false, INACTIVE_LOGOUT_VERSION );
 		}
 	}
 
