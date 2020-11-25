@@ -29,7 +29,6 @@
       inactive_logout_tabID = sessionStorage.inactive_logout_tabID && sessionStorage.closedLastTab !== '2' ? sessionStorage.inactive_logout_tabID : sessionStorage.inactive_logout_tabID = Math.random();
       sessionStorage.closedLastTab = '2';
       window.addEventListener('beforeunload', function (e) {
-        e.preventDefault();
         sessionStorage.closedLastTab = '1';
       });
       localStorage.setItem("ina__browserTabID", inactive_logout_tabID);

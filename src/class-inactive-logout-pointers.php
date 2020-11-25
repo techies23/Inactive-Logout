@@ -45,7 +45,7 @@ class Inactive_Logout_Pointers {
 
 		wp_enqueue_style( 'wp-pointer' );//Needed to style the pointers.
 		wp_enqueue_script( 'wp-pointer' );//Has the actual pointer logic
-		wp_enqueue_script( 'inactive-pointer-admin-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/admin-pointers.js', array( 'jquery' ), '1.0.0' );
+		wp_enqueue_script( 'inactive-pointer-admin-js', INACTIVE_LOGOUT_ASSETS_URL . 'admin/admin-pointers.js', array( 'jquery' ), '1.0.0' );
 
 		$tour_pointer_messages['inactive_logout_intro_tour'] = $pointers;
 		wp_localize_script( 'inactive-pointer-admin-js', 'inactive_pointer', array(

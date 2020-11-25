@@ -154,7 +154,9 @@ final class Inactive_Logout_Main {
 	 */
 	protected function ina_load_dependencies() {
 		// Loading Helpers.
-		require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-pointers.php';
+		if ( empty( get_option( 'ina_tour_dismissed' ) ) && "yes" != get_option( 'ina_tour_dismissed' ) ) {
+			require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-pointers.php';
+		}
 
 		// Loading Admin Views.
 		require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-admin-views.php';

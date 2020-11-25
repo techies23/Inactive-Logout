@@ -32,7 +32,6 @@
             sessionStorage.closedLastTab = '2';
 
             window.addEventListener('beforeunload', function (e) {
-                e.preventDefault();
                 sessionStorage.closedLastTab = '1';
             });
             localStorage.setItem("ina__browserTabID", inactive_logout_tabID);
