@@ -1,6 +1,6 @@
 /**
  * @author Deepen
- * @updated 1.9.0
+ * @updated 1.9.7
  * @since 1.0.0
  *
  * This file contains core JS files for the plugin. Do not edit for you will be consumed by the dark side.
@@ -53,7 +53,7 @@
 
         //Starting timeout timer to go into inactive state after 11 seconds if any event like mousemove is not triggered
         startTimer: function () {
-            inactive_logout_timeoutID = setTimeout(inactiveLogout.goInactive, 11000);
+            inactive_logout_timeoutID = setTimeout(inactiveLogout.goInactive.bind(this), 11000);
         },
 
         //Resetting the timer
@@ -80,8 +80,6 @@
             var that = this;
             if (ina_messageBox === 0) {
                 var browserTabID = localStorage.getItem("ina__browserTabID");
-                console.log(browserTabID);
-                console.log(inactive_logout_tabID);
                 if (parseFloat(browserTabID) === parseFloat(inactive_logout_tabID)) {
                     var dateTime = Date.now();
                     var timestamp = Math.floor(dateTime / 1000);
@@ -101,7 +99,7 @@
                         }
 
                         inactive_logout_timeoutMessage = setTimeout(function () {
-                            that.showTimeoutMessage(response);
+                            inactiveLogout.showTimeoutMessage(response);
                         }, ina_timeout_defined);
                     });
                 }

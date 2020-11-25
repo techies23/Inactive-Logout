@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-26 08:37+0000\n"
+"POT-Creation-Date: 2020-11-12 11:49+0000\n"
 "POT-Revision-Date: Sun Jan 29 2017 16:00:11 GMT+0545 (NPT)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
@@ -43,30 +43,42 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: views/tpl-inactive-logout-dialog.php:63
-#: views/tpl-inactive-logout-dialog.php:88
-msgid "Continue"
+#: src/class-inactive-logout-main.php:226
+msgid "OK"
 msgstr ""
 
-#: views/tpl-inactive-logout-dialog.php:71
-msgid "Session Timeout"
+#: src/class-inactive-logout-main.php:227
+msgid "Close without Reloading"
 msgstr ""
 
-#: src/class-inactive-logout-main.php:275
+#: src/class-inactive-logout-main.php:278
 msgid "Configure"
 msgstr ""
 
-#: src/class-inactive-logout-functions.php:119
+#: src/class-inactive-logout-functions.php:69
+msgid "Session is already logged out."
+msgstr ""
+
+#: src/class-inactive-logout-functions.php:139
 msgid ""
 "You have been logged out because of inactivity. Please wait while we "
 "redirect you to a certain page..."
 msgstr ""
 
-#: src/class-inactive-logout-functions.php:121
+#: src/class-inactive-logout-functions.php:141
 msgid "You have been logged out because of inactivity."
 msgstr ""
 
-#: src/class-inactive-logout-functions.php:156
+#: src/class-inactive-logout-functions.php:210
+#: src/class-inactive-logout-functions.php:233
+msgid "Continue"
+msgstr ""
+
+#: src/class-inactive-logout-functions.php:216
+msgid "Session Timeout"
+msgstr ""
+
+#: src/class-inactive-logout-functions.php:262
 msgid "Reset advanced settings successful."
 msgstr ""
 
@@ -79,6 +91,7 @@ msgstr ""
 msgid "Like this plugin ?"
 msgstr ""
 
+#. anchor tag.
 #: src/class-inactive-logout-helpers.php:208
 #, php-format
 msgid "Please consider giving a %s if you found this useful at wordpress.org."
@@ -295,21 +308,8 @@ msgstr ""
 msgid "Custom URL Redirect"
 msgstr ""
 
+#. Url.
 #: views/tabs/tpl-inactive-logout-basic.php:143
 #, php-format
 msgid "Link to custom url redirect. Ex: %s"
-msgstr ""
-
-#. Description of the plugin
-msgid ""
-"Automatically logout idle user sessions, even if they are on the front end! "
-"Fully configurable & easy to use."
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://www.deepenbajracharya.com.np"
-msgstr ""
-
-#. Author of the plugin
-msgid "Deepen Bajracharya"
 msgstr ""

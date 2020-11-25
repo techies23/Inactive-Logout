@@ -110,6 +110,7 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 * Bug Fix: Multiple Browser tab support sometimes not working.
 * Bug Fix: 400 ajax call request after user has been logged out.
 * Refactored: JS scripts
+* Added: Continue without refresh button after logout to login again if users were logged out in the middle of editing a page or something. Only works in wp-admin section since adding this to frontend does not make sense.
 * Major bug fixes.
 
 = 1.9.6 =
