@@ -200,9 +200,8 @@
             var logoutData = {action: 'ina_logout_session', security: ina_ajax.ina_security};
             $.post(ina_ajax_url, logoutData).done(function () {
                 clearTimeout(inactive_logout_timeoutID);
-
+                localStorage.removeItem('ina__browserTabID');
                 if (redirect_url) {
-                    localStorage.removeItem('ina__browserTabID');
                     window.location = redirect_url;
                 }
 

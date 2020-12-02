@@ -58,6 +58,11 @@ class Inactive_Logout_Functions {
 	public function logout_this_session() {
 		//Logout Now
 		wp_logout();
+
+		$message = apply_filters( 'ina__logout_message', esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' ) );
+		wp_send_json( array(
+			'msg' => $message
+		) );
 		wp_die();
 	}
 
@@ -157,7 +162,7 @@ class Inactive_Logout_Functions {
 
 	/**
 	 * OUTPUT HTML for Dialog
-     *
+	 *
 	 * @return false|string
 	 */
 	public function trigger_logout_dialog() {
