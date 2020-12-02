@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inactive Logout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-12 11:49+0000\n"
+"POT-Creation-Date: 2020-11-25 10:36+0000\n"
 "POT-Revision-Date: Sun Jan 29 2017 16:00:11 GMT+0545 (NPT)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Deepen Bajracharya <dpen.connectify@gmail.com>\n"
@@ -43,15 +43,15 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: src/class-inactive-logout-main.php:226
+#: src/class-inactive-logout-main.php:228
 msgid "OK"
 msgstr ""
 
-#: src/class-inactive-logout-main.php:227
+#: src/class-inactive-logout-main.php:229
 msgid "Close without Reloading"
 msgstr ""
 
-#: src/class-inactive-logout-main.php:278
+#: src/class-inactive-logout-main.php:280
 msgid "Configure"
 msgstr ""
 
@@ -312,4 +312,10 @@ msgstr ""
 #: views/tabs/tpl-inactive-logout-basic.php:143
 #, php-format
 msgid "Link to custom url redirect. Ex: %s"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Automatically logout idle user sessions, even if they are on the front end! "
+"Fully configurable & easy to use."
 msgstr ""

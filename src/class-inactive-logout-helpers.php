@@ -40,8 +40,8 @@ class Inactive_Logout_Helpers {
 	/**
 	 * Define constant if not already set.
 	 *
-	 * @param  string $name Constant name.
-	 * @param  string|bool $value Constant value.
+	 * @param string $name Constant name.
+	 * @param string|bool $value Constant value.
 	 *
 	 * @since   2.0.0
 	 *
@@ -94,8 +94,8 @@ class Inactive_Logout_Helpers {
 	/**
 	 * Get All Pages and Posts
 	 *
-	 * @since  1.2.0
 	 * @return array
+	 * @since  1.2.0
 	 */
 	public function ina_get_all_pages_posts() {
 		$result = array();
@@ -108,7 +108,7 @@ class Inactive_Logout_Helpers {
 
 		if ( ! empty( $pages ) ) {
 			foreach ( $pages as $page ) {
-				$result[$page->post_type][] = array(
+				$result[ $page->post_type ][] = array(
 					'ID'        => $page->ID,
 					'title'     => $page->post_title,
 					'permalink' => get_the_permalink( $page->ID ),
@@ -146,8 +146,8 @@ class Inactive_Logout_Helpers {
 	/**
 	 * Check to disable the Inactive for certain user role
 	 *
-	 * @author  Deepen
 	 * @return BOOL
+	 * @author  Deepen
 	 */
 	public function ina_check_user_role() {
 		$user                          = wp_get_current_user();
@@ -170,12 +170,12 @@ class Inactive_Logout_Helpers {
 	/**
 	 * Check to disable the Inactive for certain user role
 	 *
-	 * @author  Deepen
-	 * @since   1.6.0
-	 *
 	 * @param $user
 	 *
 	 * @return bool
+	 * @author  Deepen
+	 * @since   1.6.0
+	 *
 	 */
 	public function ina_check_user_role_concurrent_login( $user = false ) {
 		if ( empty( $user ) ) {
@@ -197,31 +197,40 @@ class Inactive_Logout_Helpers {
 		return $result;
 	}
 
-	public function show_plugin_like() {
-		if ( ! in_array( 'inactive-logout-addon/inactive-logout-addon.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-			?>
-            <div class="ina-admin-notice ina-admin-notice-warning">
-                <h3><?php esc_html_e( 'Like this plugin ?', 'inactive-logout' ); ?></h3>
-                <p>
-					<?php
-					// translators: anchor tag.
-					printf( esc_html__( 'Please consider giving a %s if you found this useful at wordpress.org.', 'inactive-logout' ), '<a href="https://wordpress.org/support/plugin/inactive-logout/reviews/#new-post">5 star thumbs up</a>' );
-					?>
-                </p>
-            </div>
-			<?php
-		}
+	public static function show_plugin_like() {
+		?>
+        <div class="notice notice-warning is-dismissible">
+            <h3><?php esc_html_e( 'Like this plugin ?', 'inactive-logout' ); ?></h3>
+            <p>
+				<?php
+				// translators: anchor tag.
+				printf( esc_html__( 'Please consider giving a %s if you found this useful at wordpress.org.', 'inactive-logout' ), '<a href="https://wordpress.org/support/plugin/inactive-logout/reviews/#new-post">5 star thumbs up</a>' );
+				?>
+            </p>
+        </div>
+		<?php
 	}
 
-	public function show_plugin_referrals() {
-		if ( ! in_array( 'inactive-logout-addon/inactive-logout-addon.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-			?>
-            <div id="message" class="notice notice-warning">
-                <h3><?php esc_html_e( 'Need more features ?', 'inactive-logout' ); ?></h3>
-                <p>Among many other features/enhancements, Inactive Logout pro comes with a additional features. <a href="https://www.codemanas.com/downloads/inactive-logout-pro/">Check out here</a> to learn more.</p>
-            </div>
-			<?php
-		}
+	/**
+     * Check if pro version is active
+     *
+	 * @return bool
+	 */
+	public function is_pro_version_active() {
+		if ( is_plugin_active( 'inactive-logout-addon/inactive-logout-addon.php' ) ) {
+			return true;
+		} else {
+		    return false;
+        }
+	}
+
+	public static function show_plugin_referrals() {
+		?>
+        <div id="message" class="notice notice-warning is-dismissible">
+            <h3><?php esc_html_e( 'Need more features ?', 'inactive-logout' ); ?></h3>
+            <p>Among many other features/enhancements, Inactive Logout pro comes with a additional features. <a href="https://www.codemanas.com/downloads/inactive-logout-pro/">Check out here</a> to learn more.</p>
+        </div>
+		<?php
 	}
 
 	public function show_advanced_enable_notification() {

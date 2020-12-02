@@ -9,8 +9,6 @@
 
 <h1><?php esc_html_e( 'Inactive User Logout Settings', 'inactive-logout' ); ?></h1>
 
-<?php ina_helpers()->show_plugin_referrals(); ?>
-
 <?php ina_helpers()->show_advanced_enable_notification(); ?>
 
 <div class="message">

@@ -149,6 +149,4 @@
         </table>
         <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>"></p>
     </form>
-
-	<?php ina_helpers()->show_plugin_like(); ?>
 </div>
