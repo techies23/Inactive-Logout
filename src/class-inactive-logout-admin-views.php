@@ -42,7 +42,7 @@ class Inactive_Logout_Admin_Views {
 		add_action( 'ina_after_settings_wrapper', array( $this, 'ina_after_settings_wrap' ) );
 
 		if ( ! ina_helpers()->is_pro_version_active() ) {
-			add_action( 'ina_after_settings_wrapper', [ 'Inactive_Logout_Helpers', 'show_plugin_like' ] );
+			#add_action( 'ina_after_settings_wrapper', [ 'Inactive_Logout_Helpers', 'show_plugin_like' ] );
 			add_action( 'ina_before_settings_wrapper', [ 'Inactive_Logout_Helpers', 'show_plugin_referrals' ] );
 		}
 
