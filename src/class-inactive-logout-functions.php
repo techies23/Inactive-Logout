@@ -87,17 +87,17 @@ class Inactive_Logout_Functions {
 					) );
 					break;
 				case 'ina_logout':
-					$override = is_multisite() ? get_site_option( '__ina_overrideby_multisite_setting' ) : false;
+					$override = is_multisite() && ina_helpers()->get_network_option( '__ina_overrideby_multisite_setting' ) ? true : false;
 					// Check in case of Multisite Active.
 					if ( ! empty( $override ) ) {
-						$ina_enable_redirect    = get_site_option( '__ina_enable_redirect' );
-						$ina_redirect_page_link = get_site_option( '__ina_redirect_page_link' );
+						$ina_enable_redirect    = ina_helpers()->get_network_option( '__ina_enable_redirect' );
+						$ina_redirect_page_link = ina_helpers()->get_network_option( '__ina_redirect_page_link' );
 						// Enabled Multi user Timeout.
-						$ina_multiuser_timeout_enabled = get_site_option( '__ina_enable_timeout_multiusers' );
+						$ina_multiuser_timeout_enabled = ina_helpers()->get_network_option( '__ina_enable_timeout_multiusers' );
 
 						if ( ! empty( $ina_enable_redirect ) ) {
 							if ( 'custom-page-redirect' === $ina_redirect_page_link ) {
-								$ina_redirect_page_link = get_site_option( '__ina_custom_redirect_text_field' );
+								$ina_redirect_page_link = ina_helpers()->get_network_option( '__ina_custom_redirect_text_field' );
 								$redirect_link          = $ina_redirect_page_link;
 							} else {
 								$redirect_link = get_the_permalink( $ina_redirect_page_link );
@@ -106,7 +106,7 @@ class Inactive_Logout_Functions {
 
 						if ( $ina_multiuser_timeout_enabled ) {
 							global $current_user;
-							$ina_multiuser_settings = get_site_option( '__ina_multiusers_settings' );
+							$ina_multiuser_settings = ina_helpers()->get_network_option( '__ina_multiusers_settings' );
 							foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
 								if ( in_array( $ina_multiuser_setting['role'], $current_user->roles, true ) ) {
 									$redirect_link = get_the_permalink( $ina_multiuser_setting['redirect_page'] );
@@ -114,14 +114,14 @@ class Inactive_Logout_Functions {
 							}
 						}
 					} else {
-						$ina_enable_redirect    = get_option( '__ina_enable_redirect' );
-						$ina_redirect_page_link = get_option( '__ina_redirect_page_link' );
+						$ina_enable_redirect    = ina_helpers()->get_option( '__ina_enable_redirect' );
+						$ina_redirect_page_link = ina_helpers()->get_option( '__ina_redirect_page_link' );
 						// Enabled Multi user Timeout.
-						$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+						$ina_multiuser_timeout_enabled = ina_helpers()->get_option( '__ina_enable_timeout_multiusers' );
 
 						if ( ! empty( $ina_enable_redirect ) ) {
 							if ( 'custom-page-redirect' === $ina_redirect_page_link ) {
-								$ina_redirect_page_link = get_option( '__ina_custom_redirect_text_field' );
+								$ina_redirect_page_link = ina_helpers()->get_option( '__ina_custom_redirect_text_field' );
 								$redirect_link          = $ina_redirect_page_link;
 							} else {
 								$redirect_link = get_the_permalink( $ina_redirect_page_link );
@@ -130,7 +130,7 @@ class Inactive_Logout_Functions {
 
 						if ( $ina_multiuser_timeout_enabled ) {
 							global $current_user;
-							$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+							$ina_multiuser_settings = ina_helpers()->get_option( '__ina_multiusers_settings' );
 							foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
 								if ( in_array( $ina_multiuser_setting['role'], $current_user->roles, true ) ) {
 									$redirect_link = get_the_permalink( $ina_multiuser_setting['redirect_page'] );
@@ -167,7 +167,7 @@ class Inactive_Logout_Functions {
 	 */
 	public function trigger_logout_dialog() {
 		ob_start();
-		$override                 = is_multisite() ? get_site_option( '__ina_overrideby_multisite_setting' ) : false;
+		$override                 = is_multisite() && ina_helpers()->get_network_option( '__ina_overrideby_multisite_setting' ) ? true : false;
 		$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' );
 		?>
         <!--START INACTIVE LOGOUT MODAL CONTENT-->
@@ -176,12 +176,12 @@ class Inactive_Logout_Functions {
                 <div class="ina-dp-noflict-modal-body ina-dp-noflict-wakeup">
 					<?php
 					if ( ! empty( $override ) ) {
-						$message_content               = get_site_option( '__ina_warn_message' );
-						$time                          = get_site_option( '__ina_logout_time' );
-						$ina_multiuser_timeout_enabled = get_site_option( '__ina_enable_timeout_multiusers' );
+						$message_content               = ina_helpers()->get_network_option( '__ina_warn_message' );
+						$time                          = ina_helpers()->get_network_option( '__ina_logout_time' );
+						$ina_multiuser_timeout_enabled = ina_helpers()->get_network_option( '__ina_enable_timeout_multiusers' );
 						if ( $ina_multiuser_timeout_enabled ) {
 							global $current_user;
-							$ina_multiuser_settings = get_site_option( '__ina_multiusers_settings' );
+							$ina_multiuser_settings = ina_helpers()->get_network_option( '__ina_multiusers_settings' );
 							foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
 								if ( in_array( $ina_multiuser_setting['role'], $current_user->roles, true ) ) {
 									$time = $ina_multiuser_setting['timeout'] * 60;
@@ -189,12 +189,12 @@ class Inactive_Logout_Functions {
 							}
 						}
 					} else {
-						$message_content               = get_option( '__ina_warn_message' );
-						$time                          = get_option( '__ina_logout_time' );
-						$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+						$message_content               = ina_helpers()->get_option( '__ina_warn_message' );
+						$time                          = ina_helpers()->get_option( '__ina_logout_time' );
+						$ina_multiuser_timeout_enabled = ina_helpers()->get_option( '__ina_enable_timeout_multiusers' );
 						if ( $ina_multiuser_timeout_enabled ) {
 							global $current_user;
-							$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+							$ina_multiuser_settings = ina_helpers()->get_option( '__ina_multiusers_settings' );
 							foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
 								if ( in_array( $ina_multiuser_setting['role'], $current_user->roles, true ) ) {
 									$time = $ina_multiuser_setting['timeout'] * 60;
@@ -223,9 +223,9 @@ class Inactive_Logout_Functions {
                 <div class="ina-dp-noflict-modal-body">
 					<?php
 					if ( ! empty( $override ) ) {
-						$message_content = get_site_option( '__ina_logout_message' );
+						$message_content = ina_helpers()->get_network_option( '__ina_logout_message' );
 					} else {
-						$message_content = get_option( '__ina_logout_message' );
+						$message_content = ina_helpers()->get_option( '__ina_logout_message' );
 					}
 
 					if ( function_exists( 'icl_register_string' ) ) {
@@ -275,9 +275,16 @@ class Inactive_Logout_Functions {
 	public function dialog_modal() {
 		$disable_timeoutjs = ina_helpers()->ina_check_user_role();
 		if ( ! $disable_timeoutjs ) {
-			$ina_full_overlay        = get_option( '__ina_full_overlay' );
-			$ina_popup_overlay_color = get_option( '__ina_popup_overlay_color' );
-			$bg                      = false;
+			$override = is_multisite() && ina_helpers()->get_network_option( '__ina_overrideby_multisite_setting' ) ? true : false;
+			if ( $override ) {
+				$ina_full_overlay        = ina_helpers()->get_network_option( '__ina_full_overlay' );
+				$ina_popup_overlay_color = ina_helpers()->get_network_option( '__ina_popup_overlay_color' );
+			} else {
+				$ina_full_overlay        = ina_helpers()->get_option( '__ina_full_overlay' );
+				$ina_popup_overlay_color = ina_helpers()->get_option( '__ina_popup_overlay_color' );
+			}
+
+			$bg = false;
 			if ( ! empty( $ina_full_overlay ) ) {
 				$bg = isset( $ina_popup_overlay_color ) ? 'style="background-color:' . $ina_popup_overlay_color . '"' : '#000000';
 			}

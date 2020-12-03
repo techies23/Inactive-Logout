@@ -130,7 +130,7 @@ class Inactive_Logout_Helpers {
 	public function ina_check_role_enabledfor_multiuser( $role = null ) {
 		$selected = false;
 		if ( ! empty( $role ) ) {
-			$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+			$ina_multiuser_settings = $this->get_option( '__ina_multiusers_settings' );
 			if ( ! empty( $ina_multiuser_settings ) ) {
 				foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
 					if ( in_array( $role, $ina_multiuser_setting, true ) ) {
@@ -151,9 +151,9 @@ class Inactive_Logout_Helpers {
 	 */
 	public function ina_check_user_role() {
 		$user                          = wp_get_current_user();
-		$ina_roles                     = get_option( '__ina_multiusers_settings' );
+		$ina_roles                     = $this->get_option( '__ina_multiusers_settings' );
 		$result                        = false;
-		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+		$ina_multiuser_timeout_enabled = $this->get_option( '__ina_enable_timeout_multiusers' );
 		if ( $ina_roles && ! empty( $ina_multiuser_timeout_enabled ) ) {
 			foreach ( $ina_roles as $role ) {
 				if ( 1 === intval( $role['disabled_feature'] ) ) {
@@ -182,7 +182,7 @@ class Inactive_Logout_Helpers {
 			$user = wp_get_current_user();
 		}
 
-		$ina_roles = get_option( '__ina_multiusers_settings' );
+		$ina_roles = $this->get_option( '__ina_multiusers_settings' );
 		$result    = false;
 		if ( $ina_roles ) {
 			foreach ( $ina_roles as $role ) {
@@ -212,16 +212,17 @@ class Inactive_Logout_Helpers {
 	}
 
 	/**
-     * Check if pro version is active
-     *
+	 * Check if pro version is active
+	 *
 	 * @return bool
 	 */
 	public function is_pro_version_active() {
+		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		if ( is_plugin_active( 'inactive-logout-addon/inactive-logout-addon.php' ) ) {
 			return true;
 		} else {
-		    return false;
-        }
+			return false;
+		}
 	}
 
 	public static function show_plugin_referrals() {
@@ -234,13 +235,55 @@ class Inactive_Logout_Helpers {
 	}
 
 	public function show_advanced_enable_notification() {
-		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+		$ina_multiuser_timeout_enabled = $this->get_option( '__ina_enable_timeout_multiusers' );
 		if ( ! empty( $ina_multiuser_timeout_enabled ) ) {
 			?>
             <div id="message" class="notice notice-warning">
                 <p><?php esc_html_e( 'Is inactive logout or few functionalities not working for you ? Might be because you have added this user role in Role Based tab ?', 'inactive-logout' ); ?></p>
             </div>
 			<?php
+		}
+	}
+
+	/**
+	 * Get Option based on multisite or only one site
+	 *
+	 * @param $key
+	 *
+	 * @return mixed|void
+	 */
+	public function get_option( $key ) {
+		if ( is_multisite() && is_network_admin() ) {
+			$result = get_site_option( $key );
+		} else {
+			$result = get_option( $key );
+		}
+
+		return $result;
+	}
+
+	public function get_network_option( $key, $network_id = false ) {
+		if ( ! empty( $network_id ) ) {
+			$result = get_network_option( $network_id, $key );
+		} else {
+			$network_id = get_main_network_id();
+			$result     = get_network_option( $network_id, $key );
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Update option
+	 *
+	 * @param $key
+	 * @param $value
+	 */
+	public function update_option( $key, $value ) {
+		if ( is_network_admin() && is_multisite() ) {
+			update_site_option( $key, $value );
+		} else {
+			update_option( $key, $value );
 		}
 	}
 }

@@ -97,7 +97,6 @@ final class Inactive_Logout_Main {
 	 * Managing things when plugin is deactivated.
 	 */
 	public static function ina_deactivate() {
-
 		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 			global $wpdb;
 			$old_blog = $wpdb->blogid;
@@ -136,11 +135,6 @@ final class Inactive_Logout_Main {
 	 * Manging things when plugin is loaded.
 	 */
 	protected function ina_plugins_loaded() {
-		$popup_overlay = get_option( '__ina_popup_overlay_color' );
-		if ( ! $popup_overlay ) {
-			update_option( '__ina_popup_overlay_color', '#000000' );
-		}
-
 		if ( is_user_logged_in() ) {
 			$this->ina_load_dependencies();
 		}
@@ -153,19 +147,21 @@ final class Inactive_Logout_Main {
 	 * Require Dependencies files.
 	 */
 	protected function ina_load_dependencies() {
-		// Loading Helpers.
-		if ( empty( get_option( 'ina_tour_dismissed' ) ) && "yes" != get_option( 'ina_tour_dismissed' ) ) {
-			require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-pointers.php';
+		// Loading Admin Views.
+		if ( is_admin() ) {
+			// Loading Helpers.
+			if ( empty( get_option( 'ina_tour_dismissed' ) ) && "yes" != get_option( 'ina_tour_dismissed' ) ) {
+				require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-pointers.php';
+			}
+
+			require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-admin-views.php';
 		}
 
-		// Loading Admin Views.
-		require_once INACTIVE_LOGOUT_DIR_PATH . 'src/class-inactive-logout-admin-views.php';
-
-		$concurrent = get_option( '__ina_concurrent_login' );
+		$concurrent = ina_helpers()->get_option( '__ina_concurrent_login' );
 
 		// Checking if advanced settings are enabled
 		// @added from 1.6.0.
-		$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+		$ina_multiuser_timeout_enabled = ina_helpers()->get_option( '__ina_enable_timeout_multiusers' );
 		if ( ! empty( $ina_multiuser_timeout_enabled ) ) {
 			$disable_concurrent_login = ina_helpers()->ina_check_user_role_concurrent_login();
 			if ( $disable_concurrent_login ) {
@@ -186,15 +182,15 @@ final class Inactive_Logout_Main {
 
 		if ( is_user_logged_in() ) {
 			// Check if multisite.
-			$override = is_multisite() ? get_site_option( '__ina_overrideby_multisite_setting' ) : false;
+			$override = is_multisite() && ina_helpers()->get_network_option( '__ina_overrideby_multisite_setting' ) ? true : false;
 			if ( ! empty( $override ) ) {
-				$ina_logout_time          = get_site_option( '__ina_logout_time' ) ? get_site_option( '__ina_logout_time' ) : null;
-				$idle_disable_countdown   = get_site_option( '__ina_disable_countdown' ) ? get_site_option( '__ina_disable_countdown' ) : null;
-				$ina_warn_message_enabled = get_site_option( '__ina_warn_message_enabled' ) ? get_site_option( '__ina_warn_message_enabled' ) : null;
+				$ina_logout_time          = ina_helpers()->get_network_option( '__ina_logout_time' ) ? ina_helpers()->get_network_option( '__ina_logout_time' ) : null;
+				$idle_disable_countdown   = ina_helpers()->get_network_option( '__ina_disable_countdown' ) ? ina_helpers()->get_network_option( '__ina_disable_countdown' ) : null;
+				$ina_warn_message_enabled = ina_helpers()->get_network_option( '__ina_warn_message_enabled' ) ? ina_helpers()->get_network_option( '__ina_warn_message_enabled' ) : null;
 
-				$ina_multiuser_timeout_enabled = get_site_option( '__ina_enable_timeout_multiusers' );
+				$ina_multiuser_timeout_enabled = ina_helpers()->get_network_option( '__ina_enable_timeout_multiusers' );
 				if ( $ina_multiuser_timeout_enabled ) {
-					$ina_multiuser_settings = get_site_option( '__ina_multiusers_settings' );
+					$ina_multiuser_settings = ina_helpers()->get_network_option( '__ina_multiusers_settings' );
 					foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
 						if ( in_array( $ina_multiuser_setting['role'], $current_user->roles, true ) ) {
 							$ina_logout_time = $ina_multiuser_setting['timeout'] * 60; // Seconds.
@@ -202,13 +198,13 @@ final class Inactive_Logout_Main {
 					}
 				}
 			} else {
-				$ina_logout_time          = get_option( '__ina_logout_time' ) ? get_option( '__ina_logout_time' ) : null;
-				$idle_disable_countdown   = get_option( '__ina_disable_countdown' ) ? get_option( '__ina_disable_countdown' ) : null;
-				$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' ) ? get_option( '__ina_warn_message_enabled' ) : null;
+				$ina_logout_time          = ina_helpers()->get_option( '__ina_logout_time' ) ? ina_helpers()->get_option( '__ina_logout_time' ) : null;
+				$idle_disable_countdown   = ina_helpers()->get_option( '__ina_disable_countdown' ) ? ina_helpers()->get_option( '__ina_disable_countdown' ) : null;
+				$ina_warn_message_enabled = ina_helpers()->get_option( '__ina_warn_message_enabled' ) ? ina_helpers()->get_option( '__ina_warn_message_enabled' ) : null;
 
-				$ina_multiuser_timeout_enabled = get_option( '__ina_enable_timeout_multiusers' );
+				$ina_multiuser_timeout_enabled = ina_helpers()->get_option( '__ina_enable_timeout_multiusers' );
 				if ( $ina_multiuser_timeout_enabled ) {
-					$ina_multiuser_settings = get_option( '__ina_multiusers_settings' );
+					$ina_multiuser_settings = ina_helpers()->get_option( '__ina_multiusers_settings' );
 					foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
 						if ( in_array( $ina_multiuser_setting['role'], $current_user->roles, true ) ) {
 							$ina_logout_time = $ina_multiuser_setting['timeout'] * 60; // Seconds.

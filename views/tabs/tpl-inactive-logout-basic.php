@@ -23,7 +23,7 @@
             <tr>
                 <th scope="row"><label for="idle_timeout"><?php esc_html_e( 'Idle Timeout', 'inactive-logout' ); ?></label></th>
                 <td>
-                    <input class="regular-text" name="idle_timeout" min="1" type="number" id="idle_timeout" value="<?php echo ( isset( $time ) ) ? esc_attr( $time / 60 ) : 30; ?>">
+                    <input class="regular-text" name="idle_timeout" min="1" type="number" id="idle_timeout" value="<?php echo ! empty( $time ) ? esc_attr( $time / 60 ) : 15; ?>">
                     <i><?php esc_html_e( 'Minute(s)', 'inactive-logout' ); ?></i>
                 </td>
             </tr>
@@ -37,7 +37,7 @@
 						'textarea_rows' => 15,
 					);
 					$message_content = get_option( '__ina_logout_message' );
-					$content         = $message_content ? $message_content : null;
+					$content         = $message_content ? $message_content : '<p>You are being timed-out out due to inactivity. Please choose to stay signed in or to logoff.</p><p>Otherwise, you will be logged off automatically.</p>';
 					wp_editor( $content, 'idle_message_text', $settings );
 					?>
                     <p class="description"><?php esc_html_e( 'Message to be shown when idle timeout screen shows.', 'inactive-logout' ); ?></p>
@@ -82,7 +82,7 @@
 						'textarea_rows' => 15,
 					);
 					$__ina_warn_message   = get_option( '__ina_warn_message' );
-					$content_warn_message = $__ina_warn_message ? $__ina_warn_message : null;
+					$content_warn_message = $__ina_warn_message ? $__ina_warn_message : '<h3>Wakeup !</h3><p>You have been inactive for {wakup_timout}. Press continue to continue browsing.</p>';
 					wp_editor( $content_warn_message, 'ina_show_warn_message', $settings_warn );
 					?>
                     <p class="description"><?php esc_html_e( 'Use {wakup_timout} to show minutes. This is message that will be shown when inactive.', 'inactive-logout' ); ?></p>
