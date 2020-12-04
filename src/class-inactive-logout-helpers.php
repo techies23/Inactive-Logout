@@ -130,7 +130,7 @@ class Inactive_Logout_Helpers {
 	public function ina_check_role_enabledfor_multiuser( $role = null ) {
 		$selected = false;
 		if ( ! empty( $role ) ) {
-			$ina_multiuser_settings = $this->get_option( '__ina_multiusers_settings' );
+			$ina_multiuser_settings = $this->get_overrided_option( '__ina_multiusers_settings' );
 			if ( ! empty( $ina_multiuser_settings ) ) {
 				foreach ( $ina_multiuser_settings as $ina_multiuser_setting ) {
 					if ( in_array( $role, $ina_multiuser_setting, true ) ) {
@@ -151,9 +151,9 @@ class Inactive_Logout_Helpers {
 	 */
 	public function ina_check_user_role() {
 		$user                          = wp_get_current_user();
-		$ina_roles                     = $this->get_option( '__ina_multiusers_settings' );
+		$ina_roles                     = $this->get_overrided_option( '__ina_multiusers_settings' );
 		$result                        = false;
-		$ina_multiuser_timeout_enabled = $this->get_option( '__ina_enable_timeout_multiusers' );
+		$ina_multiuser_timeout_enabled = $this->get_overrided_option( '__ina_enable_timeout_multiusers' );
 		if ( $ina_roles && ! empty( $ina_multiuser_timeout_enabled ) ) {
 			foreach ( $ina_roles as $role ) {
 				if ( 1 === intval( $role['disabled_feature'] ) ) {
@@ -182,7 +182,7 @@ class Inactive_Logout_Helpers {
 			$user = wp_get_current_user();
 		}
 
-		$ina_roles = $this->get_option( '__ina_multiusers_settings' );
+		$ina_roles = $this->get_overrided_option( '__ina_multiusers_settings' );
 		$result    = false;
 		if ( $ina_roles ) {
 			foreach ( $ina_roles as $role ) {
@@ -235,7 +235,7 @@ class Inactive_Logout_Helpers {
 	}
 
 	public function show_advanced_enable_notification() {
-		$ina_multiuser_timeout_enabled = $this->get_option( '__ina_enable_timeout_multiusers' );
+		$ina_multiuser_timeout_enabled = $this->get_overrided_option( '__ina_enable_timeout_multiusers' );
 		if ( ! empty( $ina_multiuser_timeout_enabled ) ) {
 			?>
             <div id="message" class="notice notice-warning">
@@ -262,12 +262,24 @@ class Inactive_Logout_Helpers {
 		return $result;
 	}
 
-	public function get_network_option( $key, $network_id = false ) {
-		if ( ! empty( $network_id ) ) {
-			$result = get_network_option( $network_id, $key );
-		} else {
+	/**
+	 * Get Overridden multisite setting
+	 *
+	 * @param $key
+	 *
+	 * @return mixed|void
+	 */
+	public function get_overrided_option( $key ) {
+		if ( is_multisite() ) {
 			$network_id = get_main_network_id();
-			$result     = get_network_option( $network_id, $key );
+			$override   = get_network_option( $network_id, '__ina_overrideby_multisite_setting' ) ? true : false;
+			if ( $override ) {
+				$result = get_network_option( $network_id, $key );
+			} else {
+				$result = $this->get_option( $key );
+			}
+		} else {
+			$result = $this->get_option( $key );
 		}
 
 		return $result;

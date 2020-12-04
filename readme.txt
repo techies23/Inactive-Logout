@@ -106,6 +106,7 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 
 = 1.9.8 =
 * Fixed: Inactive logout helper functions modified and made compatible for multisite when used alongside addon version.
+* Fixed: Major Bug Fixes
 
 = 1.9.7 =
 * Removed: HTML output for popup modal in all pages.
