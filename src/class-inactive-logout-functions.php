@@ -168,7 +168,7 @@ class Inactive_Logout_Functions {
 	public function trigger_logout_dialog() {
 		ob_start();
 		$override                 = is_multisite() && ina_helpers()->get_network_option( '__ina_overrideby_multisite_setting' ) ? true : false;
-		$ina_warn_message_enabled = get_option( '__ina_warn_message_enabled' );
+		$ina_warn_message_enabled = ina_helpers()->get_option( '__ina_warn_message_enabled' );
 		?>
         <!--START INACTIVE LOGOUT MODAL CONTENT-->
 		<?php if ( absint( 1 ) == $ina_warn_message_enabled ) { ?>

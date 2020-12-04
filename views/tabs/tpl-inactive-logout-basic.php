@@ -36,7 +36,7 @@
 						'teeny'         => true,
 						'textarea_rows' => 15,
 					);
-					$message_content = get_option( '__ina_logout_message' );
+					$message_content = ina_helpers()->get_option( '__ina_logout_message' );
 					$content         = $message_content ? $message_content : '<p>You are being timed-out out due to inactivity. Please choose to stay signed in or to logoff.</p><p>Otherwise, you will be logged off automatically.</p>';
 					wp_editor( $content, 'idle_message_text', $settings );
 					?>
@@ -81,7 +81,7 @@
 						'teeny'         => true,
 						'textarea_rows' => 15,
 					);
-					$__ina_warn_message   = get_option( '__ina_warn_message' );
+					$__ina_warn_message   = ina_helpers()->get_option( '__ina_warn_message' );
 					$content_warn_message = $__ina_warn_message ? $__ina_warn_message : '<h3>Wakeup !</h3><p>You have been inactive for {wakup_timout}. Press continue to continue browsing.</p>';
 					wp_editor( $content_warn_message, 'ina_show_warn_message', $settings_warn );
 					?>
@@ -110,7 +110,7 @@
                         <option value="custom-page-redirect"><?php esc_html_e( 'External Page Redirect', 'inactive-logout' ); ?></option>
 						<?php
 						$posts = ina_helpers()->ina_get_all_pages_posts();
-						if ( ! empty( $posts ) ) {
+						if ( ! empty( $posts ) && ! empty( $ina_redirect_page_link ) ) {
 							foreach ( $posts as $k => $post_types ) {
 								?>
                                 <optgroup label="<?php echo ucfirst( $k ); ?>">

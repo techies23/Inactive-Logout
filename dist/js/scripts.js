@@ -10,7 +10,7 @@
     var inactive_logout_tabID;
     var inactive_logout_timeoutMessage;
     var ina_timeout = ina_ajax.settings.timeout;
-    var ina_timeout_defined = ina_timeout * 1000; //Minutes
+    var ina_timeout_defined = ina_timeout * 1000;
     var ina_messageBox = 0;
     var ina_setting_countdown;
     var ina_countdown = 10;
