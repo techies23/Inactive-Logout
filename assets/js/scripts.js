@@ -38,7 +38,7 @@
       $(document).on("mousewheel", this.resetTimer.bind(this));
       $(document).on("touchmove", this.resetTimer.bind(this));
       $(document).on("MSPointerMove", this.resetTimer.bind(this));
-      $(document).on("ready", this.resetTimer.bind(this));
+      $(document).ready(this.resetTimer.bind(this));
       $(document).on("click", '.ina_stay_logged_in', this.stayLoggedInWarnMsg);
       $(document).on('click', '.btn-close-without-reload', this.stayLoggedInWarnMsg);
       this.startTimer();
