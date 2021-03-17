@@ -15,7 +15,6 @@
     var ina_setting_countdown;
     var ina_countdown = 10;
     var ina_ajax_url = ina_ajax.ajaxurl;
-
     var inactiveLogout = {
 
         onReady: function () {
@@ -44,7 +43,7 @@
             $(document).on("touchmove", this.resetTimer.bind(this));
             $(document).on("MSPointerMove", this.resetTimer.bind(this));
             $(document).ready(this.resetTimer.bind(this));
-            $(document).on("click", '.ina_stay_logged_in', this.stayLoggedInWaarnMsg);
+            $(document).on("click", '.ina_stay_logged_in', this.stayLoggedInWarnMsg);
             $(document).on('click', '.btn-close-without-reload', this.stayLoggedInWarnMsg);
 
             this.startTimer();
