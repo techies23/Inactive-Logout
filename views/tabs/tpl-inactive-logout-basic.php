@@ -58,6 +58,13 @@
                 </td>
             </tr>
             <tr>
+                <th scope="row"><label for="idle_countdown_timeout"><?php esc_html_e( 'Timeout Countdown Period', 'inactive-logout' ); ?></label></th>
+                <td>
+                    <input name="idle_countdown_timeout" type="number" id="idle_countdown_timeout" value = "<?php echo ( ! empty( $countdown_timeout ) ) ? $countdown_timeout : ''; ?>">
+                    <p class="description"><?php esc_html_e( 'Timeout of when should the Countdown pop up appear before really logging out', 'inactive-logout' ); ?></p>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row"><label for="idle_disable_countdown"><?php esc_html_e( 'Disable Timeout Countdown', 'inactive-logout' ); ?></label></th>
                 <td>
                     <input name="idle_disable_countdown" type="checkbox" id="idle_disable_countdown" <?php echo ! empty( $countdown_enable ) ? 'checked' : false; ?> value="1">

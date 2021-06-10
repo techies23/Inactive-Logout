@@ -15,7 +15,8 @@
   var ina_timeout_defined = ina_timeout * 1000;
   var ina_messageBox = 0;
   var ina_setting_countdown;
-  var ina_countdown = 10;
+  var ina_countdown = ina_ajax.settings.countdown_timeout;
+  // var ina_countdown = 50;
   var ina_ajax_url = ina_ajax.ajaxurl;
   var inactiveLogout = {
     onReady: function onReady() {
@@ -148,7 +149,7 @@
           return false;
         });
       } else {
-        ina_countdown = 10;
+        ina_countdown =  ina_ajax.settings.countdown_timeout;;
         $('#ina__dp_logout_message_box').show().html(response.html);
         ina_setting_countdown = setInterval(function () {
           if (ina_countdown >= 0) {
@@ -188,7 +189,7 @@
 
       window.oncontextmenu = null;
       clearTimeout(ina_setting_countdown);
-      ina_countdown = 10;
+      ina_countdown =  ina_ajax.settings.countdown_timeout;;
       ina_messageBox = 0;
       $('#ina__dp_logout_message_box').hide();
       $(".ina_countdown").text('');
