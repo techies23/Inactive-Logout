@@ -15,7 +15,7 @@
 
 .ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-modal-body .ina-dp-noflict-btn-container { padding: 10px 0; }
 
-.ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-modal-body .ina-dp-noflict-btn-container .ina_stay_logged_in { background: #008ec2; border-color: #006799; color: #fff; }
+.ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-modal-body .ina-dp-noflict-btn-container .ina_stay_logged_in { background: #008ec2; border-color: #006799; color: #fff; border-radius: 20px }
 
 .ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-modal-body .ina-dp-noflict-btn-container .ina_stay_logged_in:hover { color: #fff; }
 

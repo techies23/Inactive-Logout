@@ -104,6 +104,12 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 
 == Changelog ==
 
+= 2.0.1 =
+* Added : Filters for OK (ina_timeout_ok_text) and cancel (ina_timeout_cancel_text) button
+
+= 2.0.0 =
+* Added : Countdown timer by ODES
+
 = 1.9.9 =
 * Fixed: Deprecated "onReady" event warning.
 

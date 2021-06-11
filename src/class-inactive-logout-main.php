@@ -202,12 +202,15 @@ final class Inactive_Logout_Main {
 			if ( ! $disable_timeoutjs ) {
                 wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts' . $min . '.js', array( 'jquery' ), INACTIVE_LOGOUT_VERSION, true );
 //				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts.js', array( 'jquery' ), INACTIVE_LOGOUT_VERSION, true );
+                $ok = apply_filters('ina_timeout_ok_text', 'OKEY');
+                $cancel = apply_filters('ina_timeout_cancel_text', 'Close without Reloading');
+
 				wp_localize_script( 'ina-logout-js', 'ina_ajax', array(
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 					'ina_security' => wp_create_nonce( '_checklastSession' ),
 					'i10n'         => [
-						'ok'    => __( 'OK', 'inactive-logout' ),
-						'close' => __( 'Close without Reloading', 'inactive-logout' ),
+						'ok'    => __( $ok, 'inactive-logout' ),
+						'close' => __( $cancel, 'inactive-logout' ),
 					],
 					'settings'     => [
 						'timeout'              => ( isset( $ina_logout_time ) ) ? $ina_logout_time : 15 * 60,

@@ -7,7 +7,7 @@
  * Plugin Name:       Inactive Logout
  * Plugin URI:        https://www.deepenbajracharya.com.np
  * Description:       Automatically logout idle user sessions, even if they are on the front end! Fully configurable & easy to use.
- * Version:           1.9.9
+ * Version:           2.0.1
  * Author:            Deepen Bajracharya
  * Author URI:        https://www.deepenbajracharya.com.np
  * License:           GPL-2.0+
