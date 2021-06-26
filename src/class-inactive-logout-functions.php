@@ -50,6 +50,9 @@ class Inactive_Logout_Functions {
 		// Ajax for checking last session.
 		add_action( 'wp_ajax_ina_checklastSession', array( $this, 'last_session' ) );
 		add_action( 'wp_ajax_nopriv_ina_checklastSession', array( $this, 'last_session' ) );
+
+         add_action( 'wp_ajax_nopriv_inaajaxlogin', array( $this, 'ina_ajax_login' ) );
+
 	}
 
 	/**
@@ -61,7 +64,9 @@ class Inactive_Logout_Functions {
 
 		$message = apply_filters( 'ina__logout_message', esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' ) );
 		wp_send_json( array(
-			'msg' => $message
+			'msg' => $message,
+                'nonce' => wp_create_nonce('_inaajaxlogin'),
+            'is_logged_in' => is_user_logged_in() ? 'true': 'false',
 		) );
 		wp_die();
 	}
@@ -258,6 +263,37 @@ class Inactive_Logout_Functions {
 
 		return $list;
 	}
+
+
+
+    function ina_ajax_login(){
+//    check_ajax_referer( '_inaajaxlogin',  );
+
+        // By default, check_ajax_referer dies if nonce can not been verified
+        if(  check_ajax_referer( '_inaajaxlogin', 'nonce', false ) || true ) {
+            $info = array();
+            $info['user_login'] = $_POST['username'];
+            $info['user_password'] = $_POST['password'];
+            $info['remember'] = true;
+
+            $user_signon = wp_signon( $info, false );
+            if ( !is_wp_error($user_signon) ){
+                wp_set_current_user($user_signon->ID);
+                wp_set_auth_cookie($user_signon->ID);
+                echo json_encode(array('loggedin'=>true, 'message'=>__('*Login successful')));
+            }
+            else
+            {
+                echo json_encode(array('loggedin'=>false, 'message'=>__('*' . $user_signon->get_error_message())));
+            }
+        } else {
+            echo json_encode(array('loggedin'=>false, 'message'=>__('*' . 'Nonce error')));
+        }
+
+
+
+        die();
+    }
 }
 
 new Inactive_Logout_Functions();

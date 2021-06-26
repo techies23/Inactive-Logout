@@ -11,7 +11,8 @@
   var inactive_logout_timeoutID;
   var inactive_logout_tabID;
   var inactive_logout_timeoutMessage;
-  var ina_timeout = ina_ajax.settings.timeout;
+  //todo: remove 0.1 from here.
+  var ina_timeout =  ina_ajax.settings.timeout;
   var ina_timeout_defined = ina_timeout * 1000;
   var ina_messageBox = 0;
   var ina_setting_countdown;
@@ -204,7 +205,7 @@
         action: 'ina_logout_session',
         security: ina_ajax.ina_security
       };
-      $.post(ina_ajax_url, logoutData).done(function () {
+      $.post(ina_ajax_url, logoutData).done(function (logout_response) {
         clearTimeout(inactive_logout_timeoutID);
         localStorage.removeItem('ina__browserTabID');
 
@@ -219,6 +220,42 @@
           }]);
         } //Logged Out
 
+        document.onkeydown = function (evt) {
+          return true;
+        };
+        // console.log(logout_response.is_logged_in);
+        // console.log(logout_response.nonce);
+        //js for ajax form
+        // Perform AJAX login on form submit
+        $('form#ina_ajax_login').on('submit', function(e){
+          // console.log(logout_response.nonce);
+          $('form#ina_ajax_login p.status').show().text("*Logging in. Please wait...");
+          $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: ina_ajax.ajaxurl,
+            data: {
+              'action': 'inaajaxlogin', //calls wp_ajax_nopriv_ajaxlogin
+              'username': $('form#ina_ajax_login #username').val(),
+              'password': $('form#ina_ajax_login #password').val(),
+              'nonce' : logout_response.nonce
+            },
+            success: function(data){
+              $('form#ina_ajax_login p.status').html(data.message);
+              if (data.loggedin == true){
+                // this.stayLoggedInWarnMsg;
+                clearTimeout(ina_setting_countdown);
+                ina_countdown =  ina_ajax.settings.countdown_timeout;
+                ina_messageBox = 0;
+                $('#ina__dp_logout_message_box').hide();
+                $(".ina_countdown").text('');
+                // console.log("logged in");
+                // document.location.href = ajax_login_object.redirecturl;
+              }
+            }
+          });
+          e.preventDefault();
+        });
 
         console.log("Session Logged Out !!");
       });
