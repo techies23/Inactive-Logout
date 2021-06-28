@@ -134,6 +134,17 @@ add_filter('ina_timeout_ok_text', function(){
 add_filter('ina_timeout_cancel_text', function(){
 	return "Login Again"; //let me see the page. I'll login later
 });
+and to hide ok and cancel button 
+
+/*******To hide ok button inactive logout ****/
+.ina-dp-noflict-btn-container{
+display:none;
+}
+/*******To make continue countdown button beautiful ****/
+ .ina_stay_logged_in
+{
+	padding: 10px;
+}
 
 = 2.0.0 =
 * Added : Countdown timer by ODES
