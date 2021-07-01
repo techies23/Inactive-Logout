@@ -22,6 +22,9 @@ const paths = {
         },
         additional: {
             src: 'dist/js/scripts-helper.js'
+        },
+        debugger_script: {
+            src: 'dist/js/scripts-debugger.js'
         }
     },
     vendors: {
@@ -106,16 +109,28 @@ function additional_script() {
         .pipe(gulp.dest(paths.scripts.dest));
 }
 
+function debugger_script() {
+    return gulp.src(paths.scripts.debugger_script.src)
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(gulp.dest(paths.scripts.dest))
+        .pipe(uglify())
+        .pipe(concat('scripts-debugger.min.js'))
+        .pipe(gulp.dest(paths.scripts.dest));
+}
+
 function watchFiles() {
     gulp.watch(paths.scripts.main.src, main_script);
     gulp.watch(paths.scripts.additional.src, additional_script);
+    gulp.watch(paths.scripts.debugger_script.src, debugger_script);
     gulp.watch(paths.styles.src, styles);
 }
 
 /*
  * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
  */
-const build = gulp.series(clean, gulp.parallel(styles, main_script, additional_script, copyVendors));
+const build = gulp.series(clean, gulp.parallel(styles, main_script, additional_script, debugger_script, copyVendors));
 // const build = gulp.series(modules, gulp.parallel(styles, scripts));
 const watch = gulp.series(build, gulp.parallel(watchFiles));
 

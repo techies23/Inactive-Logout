@@ -50,6 +50,25 @@ class Inactive_Logout_Functions {
 		// Ajax for checking last session.
 		add_action( 'wp_ajax_ina_checklastSession', array( $this, 'last_session' ) );
 		add_action( 'wp_ajax_nopriv_ina_checklastSession', array( $this, 'last_session' ) );
+
+		add_filter( 'auth_cookie_expiration', [ $this, 'auth_expiration' ], 10, 3 );
+	}
+
+	/**
+	 * Set Default WordPress authencation Cookie Time
+	 *
+	 * @param $expiration
+	 * @param $user_id
+	 * @param $remember
+	 *
+	 * @return int
+	 */
+	public function auth_expiration( $expiration, $user_id, $remember ) {
+		if ( ! $remember ) {
+			$expiration = apply_filters( 'ina_change_login_exp_time', 2592000 ); //30 days
+		}
+
+		return $expiration;
 	}
 
 	/**
@@ -239,6 +258,9 @@ class Inactive_Logout_Functions {
             <!--END INACTIVE LOGOUT MODAL CONTENT-->
 			<?php
 		}
+
+		//Debug Bar
+		require INACTIVE_LOGOUT_VIEWS . '/tpl-debugger.php';
 	}
 
 	/**

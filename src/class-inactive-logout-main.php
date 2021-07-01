@@ -216,6 +216,9 @@ final class Inactive_Logout_Main {
 				) );
 			}
 
+			//Debugging Script
+			wp_enqueue_script( 'ina-logout-debugger-script', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-debugger' . $min . '.js', array( 'jquery', ), INACTIVE_LOGOUT_VERSION, true );
+
 			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-helper' . $min . '.js', array(
 				'jquery',
 				'wp-color-picker'

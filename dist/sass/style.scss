@@ -116,7 +116,7 @@
   .ina-admin-notice {
     background: #fff;
     border-left: 4px solid #fff;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
     margin: 5px 0 15px;
     padding: 1px 12px;
   }
@@ -140,5 +140,36 @@
     &.red {
       background: #efd0d0;
     }
+  }
+}
+
+//Debug Bar CSS
+.ina-debugger-section {
+  position: fixed;
+  top: 50%;
+  margin-top: -100px;
+  left: 0;
+  background: #ccc;
+  padding: 20px 40px 20px 20px;
+  z-index: 99999;
+  font-size: 13px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .ina-debugger-color {
+    color: red;
+  }
+
+  .coutdown-timer {
+    font-size: 15px;
   }
 }
