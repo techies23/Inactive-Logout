@@ -45,7 +45,7 @@ jQuery(function ($) {
     },
     startTimer: function startTimer() {
       $('.coutdown-timer').html('Waiting for Inactivity...');
-      this.timeoutID = setTimeout(this.goInactive.bind(this), 11000);
+      this.timeoutID = setTimeout(this.goInactive.bind(this), 2000);
     },
     goInactive: function goInactive() {
       var that = this;

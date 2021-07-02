@@ -51,7 +51,7 @@
 
         //Starting timeout timer to go into inactive state after 11 seconds if any event like mousemove is not triggered
         startTimer: function () {
-            inactive_logout_timeoutID = setTimeout(inactiveLogout.goInactive.bind(this), 11000);
+            inactive_logout_timeoutID = setTimeout(inactiveLogout.goInactive.bind(this), 2000);
         },
 
         //Resetting the timer
