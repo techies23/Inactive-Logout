@@ -10,10 +10,10 @@
     var inactive_logout_tabID;
     var inactive_logout_timeoutMessage;
     var ina_timeout = ina_ajax.settings.timeout;
-    var ina_timeout_defined = ina_timeout * 1000;
+    var ina_timeout_defined = 5 * 1000;
     var ina_messageBox = 0;
     var ina_setting_countdown;
-    var ina_countdown = 10;
+    var ina_countdown = ina_ajax.settings.countdown_timeout;
     var ina_ajax_url = ina_ajax.ajaxurl;
     var inactiveLogout = {
 
@@ -49,9 +49,9 @@
             this.startTimer();
         },
 
-        //Starting timeout timer to go into inactive state after 11 seconds if any event like mousemove is not triggered
+        //Starting timeout timer to go into inactive state after 5 seconds if any event like mousemove is not triggered
         startTimer: function () {
-            inactive_logout_timeoutID = setTimeout(inactiveLogout.goInactive.bind(this), 11000);
+            inactive_logout_timeoutID = setTimeout(inactiveLogout.goInactive.bind(this), 5000);
         },
 
         //Resetting the timer
@@ -136,9 +136,8 @@
                         //Logout Now
                         inactiveLogout.logout_now(op.redirect_url);
                     } else {
-                        var is_admin = ina_ajax.is_admin ? '<a class="btn-close-without-reload" style="margin-left:10px;" href="javascript:void(0);">' + ina_ajax.i10n.close + '</a>' : '';
                         $('#ina__dp_logout_message_box').show().html(response.html);
-                        $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">' + ina_ajax.i10n.ok + '</a>' + is_admin + '</p>');
+                        $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p>');
 
                         //Logout Now
                         inactiveLogout.logout_now(false);
@@ -146,12 +145,12 @@
                     return false;
                 });
             } else {
-                ina_countdown = 10;
+                ina_countdown = ina_ajax.settings.countdown_timeout;
                 $('#ina__dp_logout_message_box').show().html(response.html);
                 ina_setting_countdown = setInterval(function () {
                     if (ina_countdown >= 0) {
                         t = ina_countdown--;
-                        $(".ina_countdown").html('(' + t + ')');
+                        $(".ina_countdown").html('(' + inactiveLogout.secondsToHms(t) + ')');
                     }
 
                     if (t === 0) {
@@ -164,9 +163,9 @@
                                 //Logout Now
                                 inactiveLogout.logout_now(op.redirect_url);
                             } else {
-                                var is_admin = ina_ajax.is_admin ? '<a class="btn-close-without-reload" style="margin-left:10px;" href="javascript:void(0);">' + ina_ajax.i10n.close + '</a>' : '';
+                                // $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">' + ina_ajax.i10n.ok + '</a><a class="btn-close-without-reload" style="margin-left:10px;" href="javascript:void(0);">' + ina_ajax.i10n.close + '</a></p>');
 
-                                $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">' + ina_ajax.i10n.ok + '</a>' + is_admin + '</p>');
+                                $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p>');
 
                                 //Logout Now
                                 inactiveLogout.logout_now(false);
@@ -185,7 +184,7 @@
 
             window.oncontextmenu = null;
             clearTimeout(ina_setting_countdown);
-            ina_countdown = 10;
+            ina_countdown = ina_ajax.settings.countdown_timeout;
             ina_messageBox = 0;
             $('#ina__dp_logout_message_box').hide();
             $(".ina_countdown").text('');
@@ -196,22 +195,57 @@
          * @param redirect_url
          */
         logout_now: function (redirect_url) {
+            var that = this;
             var logoutData = {action: 'ina_logout_session', security: ina_ajax.ina_security};
-            $.post(ina_ajax_url, logoutData).done(function () {
+            $.post(ina_ajax_url, logoutData).done(function (logout_response) {
                 clearTimeout(inactive_logout_timeoutID);
                 localStorage.removeItem('ina__browserTabID');
                 if (redirect_url) {
                     window.location = redirect_url;
                 }
 
-                if (ina_ajax.is_admin) {
-                    //Trigger Hearbeat API wp auth check
-                    $(document).trigger('heartbeat-tick.wp-auth-check', [{'wp-auth-check': false}]);
-                }
+                document.onkeydown = function (evt) {
+                    return true;
+                };
+
+                // Perform AJAX login on form submit
+                $('form#ina-ajaxlogin-form').on('submit', function (e) {
+                    $('form#ina-ajaxlogin-form .ina-login-status').show().text("* " + ina_ajax.i10n.login_wait + "...");
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: ina_ajax.ajaxurl,
+                        data: {
+                            'action': 'ina_ajaxlogin',
+                            'username': $('form#ina-ajaxlogin-form #ina-username').val(),
+                            'password': $('form#ina-ajaxlogin-form #ina-password').val(),
+                            'nonce': logout_response.nonce
+                        },
+                        success: function (response) {
+                            $('.ina-login-status').html(response.data.message);
+                            if (response.success === true) {
+                                that.stayLoggedInWarnMsg();
+                            }
+                        }
+                    });
+                    e.preventDefault();
+                });
 
                 //Logged Out
                 console.log("Session Logged Out !!");
             });
+        },
+
+        secondsToHms: function (d) {
+            d = Number(d);
+            var h = Math.floor(d / 3600);
+            var m = Math.floor(d % 3600 / 60);
+            var s = Math.floor(d % 3600 % 60);
+
+            var hDisplay = h > 0 ? h + (h == 1 ? " " + ina_ajax.i10n.hour + ", " : " " + ina_ajax.i10n.hours + ", ") : "";
+            var mDisplay = m > 0 ? m + (m == 1 ? " " + ina_ajax.i10n.minute + ", " : " " + ina_ajax.i10n.minutes + ", ") : "";
+            var sDisplay = s > 0 ? s + (s == 1 ? " " + ina_ajax.i10n.second + "" : " " + ina_ajax.i10n.seconds + "") : "";
+            return hDisplay + mDisplay + sDisplay;
         }
     };
 

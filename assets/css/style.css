@@ -15,22 +15,12 @@
 
 .ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-modal-body .ina-dp-noflict-btn-container { padding: 10px 0; }
 
-.ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-modal-body .ina-dp-noflict-btn-container .ina_stay_logged_in { background: #008ec2; border-color: #006799; color: #fff; border-radius: 20px }
+.ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-modal-body .ina-dp-noflict-btn-container .ina_stay_logged_in { background: #008ec2; border-color: #006799; color: #fff; }
 
 .ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-modal-body .ina-dp-noflict-btn-container .ina_stay_logged_in:hover { color: #fff; }
 
 .ina-dp-noflict-modal .ina-dp-noflict-modal-content .ina-dp-noflict-modal-body .ina-dp-noflict-btn-container .btn-timeout { padding: 10px; background: #008ec2; border-color: #006799; color: #fff; }
 
-/* The Close Button */
-/*.close {
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 16px;
-}*/
 /* The Admin Panel */
 .ina-settings-admin-wrap { padding: 10px; }
 
@@ -55,3 +45,31 @@
 .ina-settings-admin-support .ina-settings-admin-support-bg { background: #fff; padding: 10px 15px; margin: 15px 0; border: 1px solid #ccc; }
 
 .ina-settings-admin-support .ina-settings-admin-support-bg.red { background: #efd0d0; }
+
+.ina-loginform-wrapper { display: flex; flex-direction: column; }
+
+.ina-loginform-wrapper .ina-login-status { color: #c70303; }
+
+.ina-loginform-wrapper .content { text-align: center; }
+
+.ina-loginform-wrapper .input-field { padding: 10px 0; }
+
+.ina-loginform-wrapper .input-field input { display: block; width: 100%; padding: 10px; border: 0; border-bottom: 1px solid #747474; outline: none; transition: all .2s; background: #fff; color: #000; border-radius: 0; }
+
+.ina-loginform-wrapper .input-field input::-moz-placeholder { text-transform: uppercase; }
+
+.ina-loginform-wrapper .input-field input:-ms-input-placeholder { text-transform: uppercase; }
+
+.ina-loginform-wrapper .input-field input::placeholder { text-transform: uppercase; }
+
+.ina-loginform-wrapper .input-field input:focus { outline: none; }
+
+.ina-loginform-wrapper a.lost-password-link { text-decoration: none; color: #747474; text-transform: uppercase; display: inline-block; margin: 10px 0; }
+
+.ina-loginform-wrapper .action { display: flex; flex-direction: row; }
+
+.ina-loginform-wrapper .action input, .ina-loginform-wrapper .action a { width: 100%; border: none; padding: 10px; cursor: pointer; text-transform: uppercase; background: #008ec2; color: #fff; outline: 0; transition: all .3s; text-align: center; }
+
+.ina-loginform-wrapper .action input:hover, .ina-loginform-wrapper .action a:hover { background: #d8d8d8; color: #000; }
+
+.ina-loginform-wrapper .action a { margin-left: 10px; }

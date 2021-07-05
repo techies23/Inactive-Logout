@@ -71,17 +71,6 @@
   }
 }
 
-/* The Close Button */
-/*.close {
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 16px;
-}*/
-
 /* The Admin Panel */
 .ina-settings-admin-wrap {
   padding: 10px;
@@ -116,7 +105,7 @@
   .ina-admin-notice {
     background: #fff;
     border-left: 4px solid #fff;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
     margin: 5px 0 15px;
     padding: 1px 12px;
   }
@@ -139,6 +128,79 @@
 
     &.red {
       background: #efd0d0;
+    }
+  }
+}
+
+.ina-loginform-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .ina-login-status {
+    color: #c70303;
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .input-field {
+    padding: 10px 0;
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: 0;
+      border-bottom: 1px solid #747474;
+      outline: none;
+      transition: all .2s;
+      background: #fff;
+      color: #000;
+      border-radius: 0;
+
+      &::placeholder {
+        text-transform: uppercase;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  a.lost-password-link {
+    text-decoration: none;
+    color: #747474;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 10px 0;
+  }
+
+  .action {
+    display: flex;
+    flex-direction: row;
+
+    input, a {
+      width: 100%;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+      background: #008ec2;
+      color: #fff;
+      outline: 0;
+      transition: all .3s;
+      text-align: center;
+
+      &:hover {
+        background: #d8d8d8;
+        color: #000;
+      }
+    }
+
+    a {
+      margin-left: 10px;
     }
   }
 }

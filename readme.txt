@@ -4,7 +4,7 @@ Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologo
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
 Tested up to: 5.7
-Stable tag: 1.9.9
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,50 +104,12 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 
 == Changelog ==
 
-= 2.0.2 =
-* Added support for login form pop up
-* To add an ajax login form after logout, put this code
-add_filter('ina__logout_message', function(){ 
-	 return '<p>You are logged out of trea due to inactivity. Login here to continue...</p>
-	 <form id="ina_ajax_login" action="#" method="post">
-    <h1>Trea Login</h1>
-    
-    <label for="username">Username</label>
-    <input id="username" type="text" name="username" required>
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" required>
-	<p class="status"></p>
-	<br>
-    <input class="submit_button" type="submit" value="Login" name="submit">
-	<a class="lost" href="'. wp_lostpassword_url().'">Lost your password?</a>
-	</form>';
-	//reference : https://gist.github.com/cristianstan/10273612
-
-});
-
-= 2.0.1 =
-* Added : Filters for OK (ina_timeout_ok_text) and cancel (ina_timeout_cancel_text) button
-Examples:
-add_filter('ina_timeout_ok_text', function(){
-	return 'Reload Page';
-});
-add_filter('ina_timeout_cancel_text', function(){
-	return "Login Again"; //let me see the page. I'll login later
-});
-and to hide ok and cancel button 
-
-/*******To hide ok button inactive logout ****/
-.ina-dp-noflict-btn-container{
-display:none;
-}
-/*******To make continue countdown button beautiful ****/
- .ina_stay_logged_in
-{
-	padding: 10px;
-}
-
 = 2.0.0 =
-* Added : Countdown timer by ODES
+* Added: Support for login form pop up ( contributed by MuhammadShabbarAbbas )
+* Changed: Main script for the countdown of idle activity to be non cachable for more robust results.
+* Added: Ability to change countdown timer after the intial time for idle threshold has reached.
+* Changed: Inactive idle time tracker is now set to 5 seconds.
+* Fixes: Minor bug fixes.
 
 = 1.9.9 =
 * Fixed: Deprecated "onReady" event warning.
