@@ -6,6 +6,9 @@ $ina_concurrent           = ina_helpers()->get_option( '__ina_concurrent_login' 
 $ina_enable_redirect      = ina_helpers()->get_option( '__ina_enable_redirect' );
 ?>
 <div class="ina-debugger-section">
+    <div class="ina-debugger-section-btn">
+        <span class="ina-debugger-section-btn-close" data-state="close"></span>
+    </div>
     <ul>
         <li><span class="coutdown-timer">Waiting for Inactivity...</span></li>
         <li><strong>Logout Timeout Duration:</strong> <span class="ina-debugger-color"><?php echo ina_helpers()->ina_convert_to_minutes( $time ); ?></span></li>

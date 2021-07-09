@@ -71,17 +71,6 @@
   }
 }
 
-/* The Close Button */
-/*.close {
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 16px;
-}*/
-
 /* The Admin Panel */
 .ina-settings-admin-wrap {
   padding: 10px;
@@ -149,10 +138,47 @@
   top: 50%;
   margin-top: -100px;
   left: 0;
-  background: #ccc;
-  padding: 20px 40px 20px 20px;
+  background: #ddd;
+  padding: 20px 80px 20px 20px;
   z-index: 99999;
   font-size: 13px;
+  cursor: pointer;
+
+  &-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 14px;
+
+    &-close {
+      top: 45%;
+      position: relative;
+      display: block;
+
+      &::after {
+        content: url('https://woocommerce.local/wp-content/plugins/inactive-logout/assets/img/left-arrow.svg');
+        width: 24px;
+        height: 24px;
+        display: block;
+        transition: 0.5s;
+      }
+    }
+
+    &-open {
+      top: 45%;
+      position: relative;
+      display: block;
+
+      &::after {
+        content: url('https://woocommerce.local/wp-content/plugins/inactive-logout/assets/img/next.svg');
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+    }
+  }
+
 
   ul {
     list-style: none;
@@ -161,7 +187,7 @@
 
     li {
       padding: 0;
-      margin: 0;
+      margin: 10px 0;
     }
   }
 
@@ -171,5 +197,78 @@
 
   .coutdown-timer {
     font-size: 15px;
+  }
+}
+
+.ina-loginform-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .ina-login-status {
+    color: #c70303;
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .input-field {
+    padding: 10px 0;
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: 0;
+      border-bottom: 1px solid #747474;
+      outline: none;
+      transition: all .2s;
+      background: #fff;
+      color: #000;
+      border-radius: 0;
+
+      &::placeholder {
+        text-transform: uppercase;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  a.lost-password-link {
+    text-decoration: none;
+    color: #747474;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 10px 0;
+  }
+
+  .action {
+    display: flex;
+    flex-direction: row;
+
+    input, a {
+      width: 100%;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+      background: #008ec2;
+      color: #fff;
+      outline: 0;
+      transition: all .3s;
+      text-align: center;
+
+      &:hover {
+        background: #d8d8d8;
+        color: #000;
+      }
+    }
+
+    a {
+      margin-left: 10px;
+    }
   }
 }

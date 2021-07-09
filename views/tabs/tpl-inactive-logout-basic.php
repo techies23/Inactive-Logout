@@ -58,6 +58,13 @@
                 </td>
             </tr>
             <tr>
+                <th scope="row"><label for="idle_countdown_timeout"><?php esc_html_e( 'Timeout Countdown Period', 'inactive-logout' ); ?></label></th>
+                <td>
+                    <input name="idle_countdown_timeout" type="number" id="idle_countdown_timeout" value="<?php echo ( ! empty( $countdown_timeout ) ) ? $countdown_timeout : ''; ?>">
+                    <p class="description"><?php esc_html_e( 'Countdown before the actual logout displayed to the user in a popup (in seconds). If you set this to 0, automatically counter will be set to 10 seconds.', 'inactive-logout' ); ?></p>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row"><label for="idle_disable_countdown"><?php esc_html_e( 'Disable Timeout Countdown', 'inactive-logout' ); ?></label></th>
                 <td>
                     <input name="idle_disable_countdown" type="checkbox" id="idle_disable_countdown" <?php echo ! empty( $countdown_enable ) ? 'checked' : false; ?> value="1">
@@ -147,6 +154,7 @@
             </tr>
             </tbody>
         </table>
-        <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>"></p>
+        <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>"> <span class="description" style="font-style: italic; margin-left:10px; color:red;"><?php esc_html_e( 'Please refresh this page properly after saving in order to reflect changes in the settings.', 'inactive-logout' ); ?></span></p>
+
     </form>
 </div>

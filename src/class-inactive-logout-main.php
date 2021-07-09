@@ -185,6 +185,7 @@ final class Inactive_Logout_Main {
 			$ina_logout_time          = ina_helpers()->get_overrided_option( '__ina_logout_time' ) ? ina_helpers()->get_overrided_option( '__ina_logout_time' ) : null;
 			$idle_disable_countdown   = ina_helpers()->get_overrided_option( '__ina_disable_countdown' ) ? ina_helpers()->get_overrided_option( '__ina_disable_countdown' ) : null;
 			$ina_warn_message_enabled = ina_helpers()->get_overrided_option( '__ina_warn_message_enabled' ) ? ina_helpers()->get_overrided_option( '__ina_warn_message_enabled' ) : null;
+			$ina_countdown_timer      = ina_helpers()->get_overrided_option( '__ina_countdown_timeout' ) ? ina_helpers()->get_overrided_option( '__ina_countdown_timeout' ) : null;
 
 			$ina_multiuser_timeout_enabled = ina_helpers()->get_overrided_option( '__ina_enable_timeout_multiusers' );
 			if ( $ina_multiuser_timeout_enabled ) {
@@ -199,25 +200,34 @@ final class Inactive_Logout_Main {
 			$min               = ( SCRIPT_DEBUG == true ) ? '' : '.min';
 			$disable_timeoutjs = ina_helpers()->ina_check_user_role();
 			if ( ! $disable_timeoutjs ) {
-				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts' . $min . '.js', array( 'jquery' ), INACTIVE_LOGOUT_VERSION, true );
+				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts' . $min . '.js', array( 'jquery' ), time(), true ); //Calling time here because if this script is cached may cause issues.
+
 				wp_localize_script( 'ina-logout-js', 'ina_ajax', array(
 					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
 					'ina_security' => wp_create_nonce( '_checklastSession' ),
 					'i10n'         => [
-						'ok'    => __( 'OK', 'inactive-logout' ),
-						'close' => __( 'Close without Reloading', 'inactive-logout' ),
+						'ok'         => __( 'Ok', 'inactive-logout' ), //Reverted back to default because dynamic variables cant be translated
+						'close'      => __( 'Close without Reloading', 'inactive-logout' ), //Reverted back to default because dynamic variables cant be translated
+						'login_wait' => __( 'Logging in. Please wait', 'inactive-logout' ),
+						'hour'       => __( 'hour', 'inactive-logout' ),
+						'hours'      => __( 'hours', 'inactive-logout' ),
+						'minute'     => __( 'minute', 'inactive-logout' ),
+						'minutes'    => __( 'minutes', 'inactive-logout' ),
+						'second'     => __( 'second', 'inactive-logout' ),
+						'seconds'    => __( 'seconds', 'inactive-logout' ),
 					],
 					'settings'     => [
 						'timeout'              => ( isset( $ina_logout_time ) ) ? $ina_logout_time : 15 * 60,
 						'disable_countdown'    => ( isset( $idle_disable_countdown ) && 1 === intval( $idle_disable_countdown ) ) ? $idle_disable_countdown : false,
-						'warn_message_enabled' => ( isset( $ina_warn_message_enabled ) && 1 === intval( $ina_warn_message_enabled ) ) ? $ina_warn_message_enabled : false
+						'warn_message_enabled' => ( isset( $ina_warn_message_enabled ) && 1 === intval( $ina_warn_message_enabled ) ) ? $ina_warn_message_enabled : false,
+						'countdown_timeout'    => ( isset( $ina_countdown_timer ) ) ? $ina_countdown_timer : 10,
 					],
 					'is_admin'     => is_admin() ? true : false
 				) );
 			}
 
 			//Debugging Script
-			wp_enqueue_script( 'ina-logout-debugger-script', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-debugger' . $min . '.js', array( 'jquery', ), INACTIVE_LOGOUT_VERSION, true );
+			#wp_enqueue_script( 'ina-logout-debugger-script', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-debugger' . $min . '.js', array( 'jquery', ), time(), true );
 
 			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-helper' . $min . '.js', array(
 				'jquery',

@@ -3,8 +3,8 @@ Contributors: j__3rk
 Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologout, inactive, inactive, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
 Donate link: https://deepenbajracharya.com.np/donate/
 Requires at least: 4.6.0
-Tested up to: 5.7
-Stable tag: 1.9.9
+Tested up to: 5.8
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,14 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 4. Multi User Role Screen
 
 == Changelog ==
+
+= 2.0.0 =
+* Added: Support for login form pop up ( contributed by MuhammadShabbarAbbas )
+* Changed: Main script for the countdown of idle activity to be non cachable for more robust results.
+* Added: Ability to change countdown timer after the intial time for idle threshold has reached.
+* Changed: Inactive idle time tracker is now set to 5 seconds.
+* Added: Debugger functionality added in settings page.
+* Fixes: Minor bug fixes.
 
 = 1.9.9 =
 * Fixed: Deprecated "onReady" event warning.

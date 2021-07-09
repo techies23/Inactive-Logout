@@ -52,6 +52,8 @@ class Inactive_Logout_Functions {
 		add_action( 'wp_ajax_nopriv_ina_checklastSession', array( $this, 'last_session' ) );
 
 		add_filter( 'auth_cookie_expiration', [ $this, 'auth_expiration' ], 10, 3 );
+		add_action( 'wp_ajax_nopriv_ina_ajaxlogin', array( $this, 'login' ) );
+		add_filter( 'ina__logout_message', [ $this, 'display_login_form' ], 10 );
 	}
 
 	/**
@@ -72,6 +74,37 @@ class Inactive_Logout_Functions {
 	}
 
 	/**
+	 * Remove this filter in order to just display the message.
+	 *
+	 * @since 2.0.0
+	 */
+	public function display_login_form() {
+		ob_start();
+		?>
+        <p><?php esc_html_e( 'You have been logged out because of inactivity. Please login again', 'inactive-logout' ); ?>:</p>
+        <div class="ina-loginform-wrapper">
+            <span class="ina-login-status"></span>
+            <form id="ina-ajaxlogin-form" class="ina-ajaxlogin-form" method="post" autocomplete="off">
+                <div class="content">
+                    <div class="input-field">
+                        <input id="ina-username" type="text" name="username" required placeholder="<?php esc_attr_e( 'Username', 'inactive-logout' ); ?>">
+                    </div>
+                    <div class="input-field">
+                        <input type="password" placeholder="<?php esc_attr_e( 'Password', 'inactive-logout' ); ?>" name="password" required id="ina-password" autocomplete="off">
+                    </div>
+                    <a class="lost-password-link" href="<?php echo wp_lostpassword_url(); ?>"><?php esc_html_e( 'Forgot Your Password ?', 'inactive-logout' ); ?></a>
+                </div>
+                <div class="action">
+                    <input class="submit_button" type="submit" value="<?php esc_attr_e( 'Login', 'inactive-logout' ); ?>" name="submit">
+                    <a href="javascript:void(0);" onclick="window.location.reload();"><?php esc_html_e( 'Cancel', 'inactive-logout' ); ?></a>
+                </div>
+            </form>
+        </div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
 	 * Logout Sessions
 	 */
 	public function logout_this_session() {
@@ -80,8 +113,11 @@ class Inactive_Logout_Functions {
 
 		$message = apply_filters( 'ina__logout_message', esc_html__( 'You have been logged out because of inactivity.', 'inactive-logout' ) );
 		wp_send_json( array(
-			'msg' => $message
+			'msg'          => $message,
+			'nonce'        => wp_create_nonce( '_inaajaxlogin' ),
+			'is_logged_in' => is_user_logged_in() ? true : false,
 		) );
+
 		wp_die();
 	}
 
@@ -112,7 +148,7 @@ class Inactive_Logout_Functions {
 					$ina_multiuser_timeout_enabled = ina_helpers()->get_overrided_option( '__ina_enable_timeout_multiusers' );
 
 					if ( ! empty( $ina_enable_redirect ) ) {
-						if ( 'custom-page-redirect' === $ina_redirect_page_link ) {
+						if ( 'custom-page-redirect' == $ina_redirect_page_link ) {
 							$ina_redirect_page_link = ina_helpers()->get_overrided_option( '__ina_custom_redirect_text_field' );
 							$redirect_link          = $ina_redirect_page_link;
 						} else {
@@ -279,6 +315,39 @@ class Inactive_Logout_Functions {
 		}
 
 		return $list;
+	}
+
+	/**
+	 * Try login in again if thats what the user wants
+	 *
+	 * This is for frontend, does not tigger for backend.
+	 *
+	 * @since 2.0.0
+	 * @author MuhammadShabbarAbbas
+	 * @modified Deepen on July 2nd, 2021
+	 */
+	function login() {
+		// By default, check_ajax_referer dies if nonce can not been verified
+		if ( check_ajax_referer( '_inaajaxlogin', 'nonce', false ) || true ) {
+			$info                  = array();
+			$info['user_login']    = filter_input( INPUT_POST, 'username' );
+			$info['user_password'] = filter_input( INPUT_POST, 'password' );
+			$info['remember']      = true;
+
+			$user_signon = wp_signon( $info, false );
+			if ( ! is_wp_error( $user_signon ) ) {
+				wp_set_current_user( $user_signon->ID );
+				wp_set_auth_cookie( $user_signon->ID );
+				wp_send_json_success( array( 'message' => '* ' . __( 'Login successful', 'inactive-logout' ) ) );
+			} else {
+				#wp_send_json_error( array( 'message' => '* ' . $user_signon->get_error_message() ) ); //Disabled because this shows error which allows hacker to know which field is exactly invalidated.
+				wp_send_json_error( array( 'message' => '* Invalid username or password.') );
+			}
+		} else {
+			wp_send_json_error( array( 'message' => '* ' . __( 'Oh no ! Please refresh your browser and try logging again.', 'inactive-logout' ) ) );
+		}
+
+		wp_die();
 	}
 }
 
