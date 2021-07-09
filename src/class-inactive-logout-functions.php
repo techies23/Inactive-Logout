@@ -296,7 +296,10 @@ class Inactive_Logout_Functions {
 		}
 
 		//Debug Bar
-		require INACTIVE_LOGOUT_VIEWS . '/tpl-debugger.php';
+		$ina_enable_debugger = ina_helpers()->get_option( '__ina_enable_debugger' );
+		if( $ina_enable_debugger ) {
+			require INACTIVE_LOGOUT_VIEWS . '/tpl-debugger.php';
+        }
 	}
 
 	/**

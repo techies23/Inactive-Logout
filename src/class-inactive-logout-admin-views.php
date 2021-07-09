@@ -120,6 +120,7 @@ class Inactive_Logout_Admin_Views {
 			$ina_popup_overlay_color           = ina_helpers()->get_option( '__ina_popup_overlay_color' );
 			$ina_enable_redirect               = ina_helpers()->get_option( '__ina_enable_redirect' );
 			$ina_redirect_page_link            = ina_helpers()->get_option( '__ina_redirect_page_link' );
+			$ina_enable_debugger               = ina_helpers()->get_option( '__ina_enable_debugger' );
 
 			// IF redirect is custom page link.
 			if ( 'custom-page-redirect' === $ina_redirect_page_link ) {
@@ -172,6 +173,7 @@ class Inactive_Logout_Admin_Views {
 		$ina_full_overlay               = filter_input( INPUT_POST, 'ina_full_overlay', FILTER_SANITIZE_NUMBER_INT );
 		$ina_enable_redirect_link       = filter_input( INPUT_POST, 'ina_enable_redirect_link', FILTER_SANITIZE_NUMBER_INT );
 		$ina_redirect_page              = filter_input( INPUT_POST, 'ina_redirect_page' );
+		$ina_enable_debugger            = filter_input( INPUT_POST, 'ina_enable_debugger' );
 		$ina_custom_redirect_text_field = ! empty( $ina_redirect_page ) && 'custom-page-redirect' === $ina_redirect_page ? filter_input( INPUT_POST, 'custom_redirect_text_field' ) : false;
 
 		do_action( 'ina_before_update_basic_settings' );
@@ -195,6 +197,7 @@ class Inactive_Logout_Admin_Views {
 			ina_helpers()->update_option( '__ina_popup_overlay_color', $ina_background_popup );
 			ina_helpers()->update_option( '__ina_enable_redirect', $ina_enable_redirect_link );
 			ina_helpers()->update_option( '__ina_redirect_page_link', $ina_redirect_page );
+			ina_helpers()->update_option( '__ina_enable_debugger', $ina_enable_debugger );
 
 			if ( 'custom-page-redirect' === $ina_redirect_page ) {
 				ina_helpers()->update_option( '__ina_custom_redirect_text_field', $ina_custom_redirect_text_field );

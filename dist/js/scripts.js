@@ -271,6 +271,8 @@
             this.timeout_defined = this.timeout;
             this.countdown = 0;
             this.ajax_url = ina_ajax.ajaxurl;
+            this.debuggerState = localStorage.getItem('ina__debuggerWindow');
+            this.mainDebuggerWrapper = $('.ina-debugger-section');
         },
 
         evntLoaders: function () {
@@ -282,11 +284,23 @@
             $(document).on("touchmove", this.resetTimer.bind(this));
             $(document).on("MSPointerMove", this.resetTimer.bind(this));
             $('.ina-debugger-section-btn-close').on('click', this.closeDebuggerWindow.bind(this));
+
+            //Stay closed on reload if debugger is closed by user action.
+            if (this.debuggerState === "closed") {
+                this.mainDebuggerWrapper.css({
+                    width: '10px',
+                    padding: '20px',
+                    height: '180px'
+                });
+
+                this.mainDebuggerWrapper.find('ul').hide();
+                $('.ina-debugger-section-btn-close').data('state', 'open').removeClass('ina-debugger-section-btn-close').addClass('ina-debugger-section-btn-open');
+            }
         },
 
         closeDebuggerWindow: function (e) {
             var state = $(e.currentTarget).data('state');
-            var mainWrapper = $('.ina-debugger-section');
+            var mainWrapper = this.mainDebuggerWrapper;
             if (state === "close") {
                 mainWrapper.css({
                     width: '10px',
@@ -296,6 +310,7 @@
 
                 mainWrapper.find('ul').hide();
                 $(e.currentTarget).data('state', 'open').removeClass('ina-debugger-section-btn-close').addClass('ina-debugger-section-btn-open');
+                localStorage.setItem("ina__debuggerWindow", 'closed');
             } else {
                 mainWrapper.css({
                     width: 'auto',
@@ -304,6 +319,7 @@
                 });
                 mainWrapper.find('ul').show();
                 $(e.currentTarget).data('state', 'close').removeClass('ina-debugger-section-btn-open').addClass('ina-debugger-section-btn-close');
+                localStorage.removeItem("ina__debuggerWindow");
             }
         },
 
@@ -359,6 +375,8 @@
 
     $(function () {
         inactiveLogout.onReady();
-        ina_debugger.init();
+        if( ina_ajax.settings.enable_debugger ) {
+            ina_debugger.init();
+        }
     });
 })(jQuery);

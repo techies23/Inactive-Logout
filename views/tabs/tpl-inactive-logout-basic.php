@@ -152,6 +152,13 @@
                     </p>
                 </td>
             </tr>
+            <tr>
+                <th scope="row"><label for="ina_enable_debugger"><?php esc_html_e( 'Enable Debugger ?', 'inactive-logout' ); ?></label></th>
+                <td>
+                    <input name="ina_enable_debugger" type="checkbox" <?php echo ! empty( $ina_enable_debugger ) ? 'checked' : false; ?> id="ina_enable_debugger" value="1">
+                    <p class="description"><?php esc_html_e( 'Enable debugger window for debugging logout issue.', 'inactive-logout' ); ?></p>
+                </td>
+            </tr>
             </tbody>
         </table>
         <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'inactive-logout' ); ?>"> <span class="description" style="font-style: italic; margin-left:10px; color:red;"><?php esc_html_e( 'Please refresh this page properly after saving in order to reflect changes in the settings.', 'inactive-logout' ); ?></span></p>
