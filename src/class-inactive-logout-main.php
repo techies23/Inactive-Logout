@@ -204,9 +204,9 @@ final class Inactive_Logout_Main {
 				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts' . $min . '.js', array( 'jquery' ), time(), true ); //Calling time here because if this script is cached may cause issues.
 
 				wp_localize_script( 'ina-logout-js', 'ina_ajax', array(
-					'ajaxurl'         => admin_url( 'admin-ajax.php' ),
-					'ina_security'    => wp_create_nonce( '_checklastSession' ),
-					'i10n'            => [
+					'ajaxurl'      => admin_url( 'admin-ajax.php' ),
+					'ina_security' => wp_create_nonce( '_checklastSession' ),
+					'i10n'         => [
 						'ok'         => __( 'Ok', 'inactive-logout' ), //Reverted back to default because dynamic variables cant be translated
 						'close'      => __( 'Close without Reloading', 'inactive-logout' ), //Reverted back to default because dynamic variables cant be translated
 						'login_wait' => __( 'Logging in. Please wait', 'inactive-logout' ),
@@ -217,20 +217,18 @@ final class Inactive_Logout_Main {
 						'second'     => __( 'second', 'inactive-logout' ),
 						'seconds'    => __( 'seconds', 'inactive-logout' ),
 					],
-					'settings'        => [
+					'settings'     => [
 						'timeout'              => ( isset( $ina_logout_time ) ) ? $ina_logout_time : 15 * 60,
 						'disable_countdown'    => ( isset( $idle_disable_countdown ) && 1 === intval( $idle_disable_countdown ) ) ? $idle_disable_countdown : false,
 						'warn_message_enabled' => ( isset( $ina_warn_message_enabled ) && 1 === intval( $ina_warn_message_enabled ) ) ? $ina_warn_message_enabled : false,
 						'countdown_timeout'    => ( isset( $ina_countdown_timer ) ) ? $ina_countdown_timer : 10,
-						'enable_debugger' => ! empty( $ina_enable_debugger ) ? 1 : 0
+						'enable_debugger'      => ! empty( $ina_enable_debugger ) ? 1 : 0
 					],
-					'is_admin'        => is_admin() ? true : false,
+					'is_admin'     => is_admin() ? true : false,
 				) );
 			}
 
 			//Debugging Script
-			#wp_enqueue_script( 'ina-logout-debugger-script', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-debugger' . $min . '.js', array( 'jquery', ), time(), true );
-
 			wp_register_script( 'ina-logout-inactive-logoutonly-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts-helper' . $min . '.js', array(
 				'jquery',
 				'wp-color-picker'
