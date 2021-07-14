@@ -197,7 +197,7 @@ class Inactive_Logout_Functions {
 		$ina_warn_message_enabled = ina_helpers()->get_overrided_option( '__ina_warn_message_enabled' );
 		?>
         <!--START INACTIVE LOGOUT MODAL CONTENT-->
-		<?php if ( absint( 1 ) == $ina_warn_message_enabled ) { ?>
+		<?php if ( 1 == $ina_warn_message_enabled ) { ?>
             <div class="ina-dp-noflict-modal-content">
                 <div class="ina-dp-noflict-modal-body ina-dp-noflict-wakeup">
 					<?php
@@ -297,9 +297,9 @@ class Inactive_Logout_Functions {
 
 		//Debug Bar
 		$ina_enable_debugger = ina_helpers()->get_option( '__ina_enable_debugger' );
-		if( $ina_enable_debugger ) {
+		if ( $ina_enable_debugger ) {
 			require INACTIVE_LOGOUT_VIEWS . '/tpl-debugger.php';
-        }
+		}
 	}
 
 	/**
@@ -344,7 +344,7 @@ class Inactive_Logout_Functions {
 				wp_send_json_success( array( 'message' => '* ' . __( 'Login successful', 'inactive-logout' ) ) );
 			} else {
 				#wp_send_json_error( array( 'message' => '* ' . $user_signon->get_error_message() ) ); //Disabled because this shows error which allows hacker to know which field is exactly invalidated.
-				wp_send_json_error( array( 'message' => '* Invalid username or password.') );
+				wp_send_json_error( array( 'message' => '* Invalid username or password.' ) );
 			}
 		} else {
 			wp_send_json_error( array( 'message' => '* ' . __( 'Oh no ! Please refresh your browser and try logging again.', 'inactive-logout' ) ) );

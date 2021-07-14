@@ -376,7 +376,7 @@
 
     $(function () {
         inactiveLogout.onReady();
-        if( ina_ajax.settings.enable_debugger ) {
+        if (ina_ajax.settings.enable_debugger) {
             ina_debugger.init();
         }
     });

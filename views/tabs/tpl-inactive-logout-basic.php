@@ -60,7 +60,7 @@
             <tr>
                 <th scope="row"><label for="idle_countdown_timeout"><?php esc_html_e( 'Timeout Countdown Period', 'inactive-logout' ); ?></label></th>
                 <td>
-                    <input name="idle_countdown_timeout" type="number" id="idle_countdown_timeout" value="<?php echo ( ! empty( $countdown_timeout ) ) ? $countdown_timeout : ''; ?>">
+                    <input name="idle_countdown_timeout" type="number" placeholder="10" id="idle_countdown_timeout" value="<?php echo ( ! empty( $countdown_timeout ) ) ? $countdown_timeout : ''; ?>">
                     <p class="description"><?php esc_html_e( 'Countdown before the actual logout displayed to the user in a popup (in seconds). If you set this to 0, automatically counter will be set to 10 seconds.', 'inactive-logout' ); ?></p>
                 </td>
             </tr>
@@ -156,7 +156,7 @@
                 <th scope="row"><label for="ina_enable_debugger"><?php esc_html_e( 'Enable Debugger ?', 'inactive-logout' ); ?></label></th>
                 <td>
                     <input name="ina_enable_debugger" type="checkbox" <?php echo ! empty( $ina_enable_debugger ) ? 'checked' : false; ?> id="ina_enable_debugger" value="1">
-                    <p class="description"><?php esc_html_e( 'Enable debugger window for debugging logout issue.', 'inactive-logout' ); ?></p>
+                    <p class="description"><?php esc_html_e( 'Enable debugger window for debugging logout issue. Note: Debugger will not work properly for multi tabs. Countdown timer will be based on last active tab.', 'inactive-logout' ); ?></p>
                 </td>
             </tr>
             </tbody>

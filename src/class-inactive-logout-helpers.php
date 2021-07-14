@@ -156,7 +156,7 @@ class Inactive_Logout_Helpers {
 		$ina_multiuser_timeout_enabled = $this->get_overrided_option( '__ina_enable_timeout_multiusers' );
 		if ( $ina_roles && ! empty( $ina_multiuser_timeout_enabled ) ) {
 			foreach ( $ina_roles as $role ) {
-				if ( 1 === intval( $role['disabled_feature'] ) ) {
+				if ( 1 == $role['disabled_feature'] ) {
 					if ( in_array( $role['role'], (array) $user->roles, true ) ) {
 						$result = true;
 					}

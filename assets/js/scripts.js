@@ -262,7 +262,8 @@
       var sDisplay = s > 0 ? s + (s == 1 ? " " + ina_ajax.i10n.second + "" : " " + ina_ajax.i10n.seconds + "") : "";
       return hDisplay + mDisplay + sDisplay;
     }
-  };
+  }; //Debugger JS
+
   var ina_debugger = {
     init: function init() {
       this.cacheElem();
