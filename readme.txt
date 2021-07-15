@@ -1,7 +1,7 @@
 === Inactive Logout ===
 Contributors: j__3rk
 Tags: logout, inactive user, idle, idle logout, idle user, auto logout, autologout, inactive, inactive, automatic logout, multisite autologout, multisite inactive logout, multisite inactive user, multisite, concurrent logout, multiple sessions, multiple user logout, concurrent login
-Donate link: https://deepenbajracharya.com.np/donate/
+Donate link: https://www.paypal.com/donate?hosted_button_id=2UCQKR868M9WE
 Requires at least: 4.6.0
 Tested up to: 5.8
 Stable tag: 2.0.0
