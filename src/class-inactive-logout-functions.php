@@ -53,7 +53,10 @@ class Inactive_Logout_Functions {
 
 		add_filter( 'auth_cookie_expiration', [ $this, 'auth_expiration' ], 10, 3 );
 		add_action( 'wp_ajax_nopriv_ina_ajaxlogin', array( $this, 'login' ) );
-		add_filter( 'ina__logout_message', [ $this, 'display_login_form' ], 10 );
+		$ina_disable_login_screen = ina_helpers()->get_overrided_option( '__ina_disable_login_screen' );
+		if ( empty( $ina_disable_login_screen ) ) {
+			add_filter( 'ina__logout_message', [ $this, 'display_login_form' ], 10 );
+		}
 	}
 
 	/**

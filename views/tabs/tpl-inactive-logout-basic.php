@@ -72,6 +72,13 @@
                 </td>
             </tr>
             <tr>
+                <th scope="row"><label for="ina_disable_login_screen"><?php esc_html_e( 'Disable Login Popup', 'inactive-logout' ); ?></label></th>
+                <td>
+                    <input name="ina_disable_login_screen" type="checkbox" id="ina_disable_login_screen" <?php echo ! empty( $ina_disable_login_screen ) ? 'checked' : false; ?> value="1">
+                    <p class="description"><?php esc_html_e( 'When checked this will disable login popup and show only text that the user has been logged out i.e after session/user is timed out.', 'inactive-logout' ); ?></p>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row"><label for="ina_show_warn_message_only"><?php esc_html_e( 'Show Warn Message Only', 'inactive-logout' ); ?></label></th>
                 <td>
                     <input name="ina_show_warn_message_only" type="checkbox" id="ina_show_warn_message_only" <?php echo ! empty( $ina_warn_message_enabled ) ? 'checked' : false; ?> value="1">

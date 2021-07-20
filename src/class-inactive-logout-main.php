@@ -197,9 +197,10 @@ final class Inactive_Logout_Main {
 				}
 			}
 
-			$min                 = ( SCRIPT_DEBUG == true ) ? '' : '.min';
-			$disable_timeoutjs   = ina_helpers()->ina_check_user_role();
-			$ina_enable_debugger = ina_helpers()->get_option( '__ina_enable_debugger' );
+			$min                      = ( SCRIPT_DEBUG == true ) ? '' : '.min';
+			$disable_timeoutjs        = ina_helpers()->ina_check_user_role();
+			$ina_enable_debugger      = ina_helpers()->get_overrided_option( '__ina_enable_debugger' );
+			$ina_disable_login_screen = ina_helpers()->get_overrided_option( '__ina_disable_login_screen' );
 			if ( ! $disable_timeoutjs ) {
 				wp_enqueue_script( 'ina-logout-js', INACTIVE_LOGOUT_ASSETS_URL . 'js/scripts' . $min . '.js', array( 'jquery' ), time(), true ); //Calling time here because if this script is cached may cause issues.
 
@@ -222,7 +223,8 @@ final class Inactive_Logout_Main {
 						'disable_countdown'    => ( isset( $idle_disable_countdown ) && 1 === intval( $idle_disable_countdown ) ) ? $idle_disable_countdown : false,
 						'warn_message_enabled' => ( isset( $ina_warn_message_enabled ) && 1 === intval( $ina_warn_message_enabled ) ) ? $ina_warn_message_enabled : false,
 						'countdown_timeout'    => ( isset( $ina_countdown_timer ) ) ? $ina_countdown_timer : 10,
-						'enable_debugger'      => ! empty( $ina_enable_debugger ) ? 1 : 0
+						'enable_debugger'      => ! empty( $ina_enable_debugger ) ? 1 : 0,
+						'disable_login'        => ! empty( $ina_disable_login_screen ) ? 1 : 0
 					],
 					'is_admin'     => is_admin() ? true : false,
 				) );

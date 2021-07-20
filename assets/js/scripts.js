@@ -138,7 +138,13 @@
             inactiveLogout.logout_now(op.redirect_url);
           } else {
             $('#ina__dp_logout_message_box').show().html(response.html);
-            $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p>'); //Logout Now
+
+            if (ina_ajax.settings.disable_login) {
+              $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">' + ina_ajax.i10n.ok + '</a><a class="btn-close-without-reload" style="margin-left:10px;" href="javascript:void(0);">' + ina_ajax.i10n.close + '</a></p>');
+            } else {
+              $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p>');
+            } //Logout Now
+
 
             inactiveLogout.logout_now(false);
           }
@@ -167,8 +173,12 @@
 
                 inactiveLogout.logout_now(op.redirect_url);
               } else {
-                // $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">' + ina_ajax.i10n.ok + '</a><a class="btn-close-without-reload" style="margin-left:10px;" href="javascript:void(0);">' + ina_ajax.i10n.close + '</a></p>');
-                $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p>'); //Logout Now
+                if (ina_ajax.settings.disable_login) {
+                  $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">' + ina_ajax.i10n.ok + '</a><a class="btn-close-without-reload" style="margin-left:10px;" href="javascript:void(0);">' + ina_ajax.i10n.close + '</a></p>');
+                } else {
+                  $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p>');
+                } //Logout Now
+
 
                 inactiveLogout.logout_now(false);
               }
@@ -207,7 +217,16 @@
         localStorage.removeItem('ina__browserTabID');
 
         if (redirect_url) {
-          window.location = redirect_url;
+          setTimeout(function () {
+            window.location = redirect_url;
+          }, 1000);
+        }
+
+        if (ina_ajax.is_admin && ina_ajax.settings.disable_login) {
+          //Trigger Hearbeat API wp auth check
+          $(document).trigger('heartbeat-tick.wp-auth-check', [{
+            'wp-auth-check': false
+          }]);
         }
 
         document.onkeydown = function (evt) {

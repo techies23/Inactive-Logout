@@ -121,6 +121,7 @@ class Inactive_Logout_Admin_Views {
 			$ina_enable_redirect               = ina_helpers()->get_option( '__ina_enable_redirect' );
 			$ina_redirect_page_link            = ina_helpers()->get_option( '__ina_redirect_page_link' );
 			$ina_enable_debugger               = ina_helpers()->get_option( '__ina_enable_debugger' );
+			$ina_disable_login_screen          = ina_helpers()->get_option( '__ina_disable_login_screen' );
 
 			// IF redirect is custom page link.
 			if ( 'custom-page-redirect' === $ina_redirect_page_link ) {
@@ -163,6 +164,7 @@ class Inactive_Logout_Admin_Views {
 		$idle_timeout_message       = wp_kses_post( filter_input( INPUT_POST, 'idle_message_text' ) );
 		$idle_disable_countdown     = filter_input( INPUT_POST, 'idle_disable_countdown', FILTER_SANITIZE_NUMBER_INT );
 		$countdown_timeout          = filter_input( INPUT_POST, 'idle_countdown_timeout', FILTER_SANITIZE_NUMBER_INT );
+		$ina_disable_login_screen   = filter_input( INPUT_POST, 'ina_disable_login_screen', FILTER_SANITIZE_NUMBER_INT );
 		$ina_show_warn_message_only = filter_input( INPUT_POST, 'ina_show_warn_message_only', FILTER_SANITIZE_NUMBER_INT );
 		$ina_show_warn_message      = wp_kses_post( filter_input( INPUT_POST, 'ina_show_warn_message' ) );
 		$ina_disable_multiple_login = filter_input( INPUT_POST, 'ina_disable_multiple_login', FILTER_SANITIZE_NUMBER_INT );
@@ -190,6 +192,7 @@ class Inactive_Logout_Admin_Views {
 			ina_helpers()->update_option( '__ina_logout_message', $idle_timeout_message );
 			ina_helpers()->update_option( '__ina_disable_countdown', $idle_disable_countdown );
 			ina_helpers()->update_option( '__ina_countdown_timeout', $countdown_timeout );
+			ina_helpers()->update_option( '__ina_disable_login_screen', $ina_disable_login_screen );
 			ina_helpers()->update_option( '__ina_warn_message_enabled', $ina_show_warn_message_only );
 			ina_helpers()->update_option( '__ina_warn_message', $ina_show_warn_message );
 			ina_helpers()->update_option( '__ina_concurrent_login', $ina_disable_multiple_login );
