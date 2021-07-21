@@ -87,6 +87,7 @@ class Inactive_Logout_Functions {
         <p><?php esc_html_e( 'You have been logged out because of inactivity. Please login again', 'inactive-logout' ); ?>:</p>
         <div class="ina-loginform-wrapper">
             <span class="ina-login-status"></span>
+			<?php do_action( 'ina_before_login_form' ); ?>
             <form id="ina-ajaxlogin-form" class="ina-ajaxlogin-form" method="post" autocomplete="off">
                 <div class="content">
                     <div class="input-field">
@@ -102,6 +103,7 @@ class Inactive_Logout_Functions {
                     <a href="javascript:void(0);" onclick="window.location.reload();"><?php esc_html_e( 'Cancel', 'inactive-logout' ); ?></a>
                 </div>
             </form>
+			<?php do_action( 'ina_after_login_form' ); ?>
         </div>
 		<?php
 		return ob_get_clean();
