@@ -125,6 +125,7 @@
         $('#ina__dp_logout_message_box').show().html(response.html);
       } else if (ina_disable_countdown) {
         //Disabled Countdown but directly logout
+        $('#ina__dp_logout_message_box').show().html(response.html);
         var postData = {
           action: 'ina_checklastSession',
           "do": 'ina_logout',
@@ -132,13 +133,10 @@
         };
         $.post(ina_ajax_url, postData).done(function (op) {
           if (op.redirect_url) {
-            $('#ina__dp_logout_message_box').show().html(response.html);
             $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '<p>'); //Logout Now
 
             inactiveLogout.logout_now(op.redirect_url);
           } else {
-            $('#ina__dp_logout_message_box').show().html(response.html);
-
             if (ina_ajax.settings.disable_login) {
               $('#ina__dp_logout_message_box .ina-dp-noflict-modal-body').html('<p>' + op.msg + '</p><p class="ina-dp-noflict-btn-container"><a class="btn-timeout" href="javascript:void(0);" onclick="window.location.reload();">' + ina_ajax.i10n.ok + '</a><a class="btn-close-without-reload" style="margin-left:10px;" href="javascript:void(0);">' + ina_ajax.i10n.close + '</a></p>');
             } else {
@@ -372,22 +370,12 @@
           that.timeout_defined--;
 
           if (that.timeout_defined > 0) {
-            $('.coutdown-timer').html('<strong>Countdown to Logout:</strong> ' + that.secondsToHms(that.timeout_defined));
+            $('.coutdown-timer').html('<strong>Countdown to Logout:</strong> ' + inactiveLogout.secondsToHms(that.timeout_defined));
           } else {
             $('.coutdown-timer').html('Initiating Logout !');
           }
         }, 1000);
       }
-    },
-    secondsToHms: function secondsToHms(d) {
-      d = Number(d);
-      var h = Math.floor(d / 3600);
-      var m = Math.floor(d % 3600 / 60);
-      var s = Math.floor(d % 3600 % 60);
-      var hDisplay = h > 0 ? h + (h == 1 ? " " + ina_ajax.i10n.hour + ", " : " " + ina_ajax.i10n.hours + ", ") : "";
-      var mDisplay = m > 0 ? m + (m == 1 ? " " + ina_ajax.i10n.minute + ", " : " " + ina_ajax.i10n.minutes + ", ") : "";
-      var sDisplay = s > 0 ? s + (s == 1 ? " " + ina_ajax.i10n.second + "" : " " + ina_ajax.i10n.seconds + "") : "";
-      return hDisplay + mDisplay + sDisplay;
     }
   };
   $(function () {

@@ -131,7 +131,10 @@ class Inactive_Logout_Functions {
 	 */
 	public function last_session() {
 		if ( ! is_user_logged_in() ) {
-			wp_send_json_error( __( 'Session is already logged out.', 'inactive-logout' ) );
+			wp_send_json( array(
+				'msg'     => __( 'Session is already logged out.', 'inactive-logout' ),
+				'success' => false
+			) );
 		} else {
 			$timestamp = filter_input( INPUT_POST, 'timestamp' );
 			$timestamp = ( isset( $timestamp ) ) ? $timestamp : null;
