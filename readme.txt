@@ -105,7 +105,7 @@ Slim Stat Analytics: Users using "Slimstat Analytics" plugin version upto 4.6.2 
 == Changelog ==
 
 = 2.0.2 =
-* Bug fixes
+* Bug fixes that relates with "Session Timeout" showing undefined message randomly.
 
 = 2.0.1 =
 * Added: Option to disable login fields on popup and revert back to old style.
