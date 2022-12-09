@@ -1,5 +1,7 @@
 ## Inactive Logout
 
+### THIS REPOSITORY IS NO LONGER MAINTAINED AS INACTIVE LOGOUT HAS SWITCHED TO REACT VERSION. REPOSITORY TO INACTIVE LOGOUT IS UNAVAILABLE AT THE MOMENT. THIS IS HERE FOR STUDY PURPOSE ONLY.
+
 Welcome to the **Inactive Logout WordPress plugin** repository on GitHub. Here you can browse the source, look at open issues and keep track of development. 
 
 If you are not a developer, please use the [Inactive Logout plugin page](https://wordpress.org/plugins/inactive-logout/) on WordPress.org.
